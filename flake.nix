@@ -1,35 +1,48 @@
 {
-  description = "NixOS configuration";
+  description = "Your new nix config";
 
   inputs = {
+    # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
-    # home-manager, used for managing user configuration
-    home-manager = {
-      url = "github:nix-community/home-manager/release-23.11";
-      # The `follows` keyword in inputs is used for inheritance.
-      # Here, `inputs.nixpkgs` of home-manager is kept consistent with
-      # the `inputs.nixpkgs` of the current flake,
-      # to avoid problems caused by different versions of nixpkgs.
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+
+    # Home manager
+    home-manager.url = "github:nix-community/home-manager/release-23.11";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    # TODO: Add any other flake you might need
+    # hardware.url = "github:nixos/nixos-hardware";
+
+    # Shameless plug: looking for a way to nixify your themes and make
+    # everything match nicely? Try nix-colors!
+    # nix-colors.url = "github:misterio77/nix-colors";
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, ... }: {
+  outputs = {
+    self,
+    nixpkgs,
+    home-manager,
+    ...
+  } @ inputs: let
+    inherit (self) outputs;
+  in {
+    # NixOS configuration entrypoint
+    # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
-      nixos = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+      nixos-vm = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        # > Our main nixos configuration file <
         modules = [
-          ./configuration.nix
-
-          # make home-manager as a module of nixos
-          # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
+          ./nixos/configuration.nix
           home-manager.nixosModules.home-manager
           {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.meenzens = import ./home.nix;
-
-            # Optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix
+            home-manager = {
+              extraSpecialArgs = { inherit inputs outputs; };
+              useUserPackages = true;
+              users = {
+                # Import your home-manager configuration
+                meenzens = import ./home-manager/home.nix;
+              };
+            };
           }
         ];
       };

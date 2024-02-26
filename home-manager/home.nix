@@ -1,9 +1,47 @@
-{ config, pkgs, ... }:
-
+# This is your home-manager configuration file
+# Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 {
-  # TODO please change the username & home directory to your own
-  home.username = "meenzens";
-  home.homeDirectory = "/home/meenzens";
+  inputs,
+  lib,
+  config,
+  pkgs,
+  ...
+}: {
+  # You can import other home-manager modules here
+  imports = [
+    # If you want to use home-manager modules from other flakes (such as nix-colors):
+    # inputs.nix-colors.homeManagerModule
+
+    # You can also split up your configuration and import pieces of it here:
+    # ./nvim.nix
+  ];
+
+  nixpkgs = {
+    # You can add overlays here
+    overlays = [
+      # If you want to use overlays exported from other flakes:
+      # neovim-nightly-overlay.overlays.default
+
+      # Or define it inline, for example:
+      # (final: prev: {
+      #   hi = final.hello.overrideAttrs (oldAttrs: {
+      #     patches = [ ./change-hello-to-hi.patch ];
+      #   });
+      # })
+    ];
+    # Configure your nixpkgs instance
+    config = {
+      # Disable if you don't want unfree packages
+      allowUnfree = true;
+      # Workaround for https://github.com/nix-community/home-manager/issues/2942
+      allowUnfreePredicate = _: true;
+    };
+  };
+
+  home = {
+    username = "meenzens";
+    homeDirectory = "/home/meenzens";
+  };
 
   # link the configuration file in current directory to the specified location in home directory
   # home.file.".config/i3/wallpaper.jpg".source = ./wallpaper.jpg;
@@ -91,7 +129,20 @@
     ethtool
     pciutils # lspci
     usbutils # lsusb
+
+    vscode
+
+    firefox
+    brave
+    microsoft-edge
+    kate
+    jetbrains.rider
   ];
+
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+  };
 
   # basic configuration of git, please change to your own
   programs.git = {
@@ -151,14 +202,10 @@
     };
   };
 
-  # This value determines the home Manager release that your
-  # configuration is compatible with. This helps avoid breakage
-  # when a new home Manager release introduces backwards
-  # incompatible changes.
-  #
-  # You can update home Manager without changing this value. See
-  # the home Manager release notes for a list of state version
-  # changes in each release.
+  # Nicely reload system units when changing configs
+  #systemd.user.startServices = "sd-switch";
+
+  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "23.11";
 
   # Let home Manager install and manage itself.
