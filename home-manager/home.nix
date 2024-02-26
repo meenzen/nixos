@@ -137,6 +137,7 @@
     microsoft-edge
     kate
     jetbrains.rider
+    rustup
   ];
 
   programs.neovim = {

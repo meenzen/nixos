@@ -70,8 +70,16 @@
     auto-optimise-store = true;
   };
 
+  # Automatic garbage collection
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 1w";
+  };
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.configurationLimit = 20; # Limit the number of generations to keep
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nixos-vm"; # Define your hostname.
@@ -160,12 +168,9 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    alejandra # nix formatter
     git
-    chezmoi
     vim
     wget
-    rustup
   ];
  
   # Some programs need SUID wrappers, can be configured further or are
