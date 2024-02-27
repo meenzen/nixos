@@ -292,7 +292,6 @@
     extraConfig = ''
       return {
         font = wezterm.font_with_fallback { 'Hack Nerd Font', 'Noto Color Emoji' },
-        font_size = 16.0,
         hide_tab_bar_if_only_one_tab = true,
       }
     '';
@@ -308,8 +307,6 @@
       export PATH=$PATH:$HOME/.dotnet/tools
       export DOTNET_ROOT=$HOME/dotnet
     '';
-
-    # set some aliases, feel free to add more or remove some
     shellAliases = {
       nano = "nvim";
       vi = "nvim";
