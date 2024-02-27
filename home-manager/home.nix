@@ -66,57 +66,11 @@
 
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
-    # here is some command line tools I use frequently
-    # feel free to add your own or remove some of them
-
-    neofetch
-    nnn # terminal file manager
-
-    # archives
-    zip
-    xz
-    unzip
-    p7zip
-
-    # utils
-    ripgrep # recursively searches directories for a regex pattern
-    jq # A lightweight and flexible command-line JSON processor
-    yq-go # yaml processer https://github.com/mikefarah/yq
-    eza # A modern replacement for ‘ls’
-    fzf # A command-line fuzzy finder
-
-    # networking tools
-    mtr # A network diagnostic tool
-    iperf3
-    dnsutils  # `dig` + `nslookup`
-    ldns # replacement of `dig`, it provide the command `drill`
-    aria2 # A lightweight multi-protocol & multi-source command-line download utility
-    socat # replacement of openbsd-netcat
-    nmap # A utility for network discovery and security auditing
-
-    # misc
-    cowsay
-    file
-    which
-    tree
-    gnused
-    gnutar
-    gawk
-    zstd
-    gnupg
-
     # nix related
     #
     # it provides the command `nom` works just like `nix`
     # with more details log output
     nix-output-monitor
-
-    # productivity
-    glow # markdown previewer in terminal
-
-    btop  # replacement of htop/nmon
-    iotop # io monitoring
-    iftop # network monitoring
 
     # system call monitoring
     strace # system call monitoring
@@ -129,15 +83,56 @@
     ethtool
     pciutils # lspci
     usbutils # lsusb
+    htop
+    btop  # replacement of htop/nmon
+    iotop # io monitoring
+    iftop # network monitoring
 
+    # archives
+    zip
+    xz
+    unzip
+    p7zip
+
+    # networking tools
+    mtr # A network diagnostic tool
+    iperf3
+    dnsutils # `dig` + `nslookup`
+    ldns # replacement of `dig`, it provide the command `drill`
+    aria2 # A lightweight multi-protocol & multi-source command-line download utility
+    socat # replacement of openbsd-netcat
+    nmap # A utility for network discovery and security auditing
+
+    # devtools
     vscode
-
-    firefox
-    brave
-    microsoft-edge
     kate
     jetbrains.rider
     rustup
+    
+    # webbrowser
+    firefox
+    brave
+    microsoft-edge
+
+    # misc
+    cowsay
+    file
+    which
+    tree
+    gnused
+    gnutar
+    gawk
+    zstd
+    gnupg
+    glow
+    bat
+    neofetch
+    nnn # terminal file manager
+    ripgrep # recursively searches directories for a regex pattern
+    jq # A lightweight and flexible command-line JSON processor
+    yq-go # yaml processer https://github.com/mikefarah/yq
+    eza # A modern replacement for ‘ls’
+    fzf # A command-line fuzzy finder
   ];
 
   programs.neovim = {
@@ -190,16 +185,27 @@
   programs.bash = {
     enable = true;
     enableCompletion = true;
-    # TODO add your cusotm bashrc here
     bashrcExtra = ''
       export PATH="$PATH:$HOME/bin:$HOME/.local/bin"
+      # dotnet
+      export PATH=$PATH:$HOME/dotnet
+      export PATH=$PATH:$HOME/.dotnet/tools
+      export DOTNET_ROOT=$HOME/dotnet
+      # GitLab CLI (glab)
+      export GITLAB_HOST=https://git.human.de
+      # misc
+      export ANSIBLE_NOCOWS=1
     '';
 
     # set some aliases, feel free to add more or remove some
     shellAliases = {
-      k = "kubectl";
-      urldecode = "python3 -c 'import sys, urllib.parse as ul; print(ul.unquote_plus(sys.stdin.read()))'";
-      urlencode = "python3 -c 'import sys, urllib.parse as ul; print(ul.quote_plus(sys.stdin.read()))'";
+      nano = "nvim";
+      vi = "nvim";
+      vim = "nvim";
+      ls = "exa";
+      top = "htop";
+      grep = "rg";
+      weather = "curl wttr.in/Wiesbaden";
     };
   };
 
