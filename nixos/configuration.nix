@@ -13,13 +13,12 @@
     # inputs.hardware.nixosModules.common-cpu-amd
     # inputs.hardware.nixosModules.common-ssd
 
-    # You can also split up your configuration and import pieces of it here:
-    # ./users.nix
+    ./locale.nix
+    ./fonts.nix
+    ./users.nix
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
-    ./locale.nix
-    ./fonts.nix
   ];
 
   nixpkgs = {
@@ -121,25 +120,6 @@
     #media-session.enable = true;
   };
 
-  users.users = {
-    meenzens = {
-      # TODO: You can set an initial password for your user.
-      # If you do, you can skip setting a root password by passing '--no-root-passwd' to nixos-install.
-      # Be sure to change it (using passwd) after rebooting!
-      initialPassword = "password123";
-      isNormalUser = true;
-      openssh.authorizedKeys.keys = [
-        # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
-      ];
-      description = "Samuel Meenzen";
-      extraGroups = [ "networkmanager" "wheel" ];
-    };
-  };
-
-  # Enable automatic login for the user.
-  services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "meenzens";
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -181,7 +161,6 @@
 
   # Docker
   virtualisation.docker.enable = true;
-  users.extraGroups.docker.members = [ "meenzens" ];
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
