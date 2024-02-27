@@ -18,6 +18,8 @@
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
+    ./locale.nix
+    ./fonts.nix
   ];
 
   nixpkgs = {
@@ -92,39 +94,12 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
-  # Set your time zone.
-  time.timeZone = "Europe/Berlin";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "de_DE.UTF-8";
-    LC_IDENTIFICATION = "de_DE.UTF-8";
-    LC_MEASUREMENT = "de_DE.UTF-8";
-    LC_MONETARY = "de_DE.UTF-8";
-    LC_NAME = "de_DE.UTF-8";
-    LC_NUMERIC = "de_DE.UTF-8";
-    LC_PAPER = "de_DE.UTF-8";
-    LC_TELEPHONE = "de_DE.UTF-8";
-    LC_TIME = "de_DE.UTF-8";
-  };
-
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "de";
-    variant = "nodeadkeys";
-  };
-
-  # Configure console keymap
-  console.keyMap = "de-latin1-nodeadkeys";
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -165,51 +140,6 @@
   services.xserver.displayManager.autoLogin.enable = true;
   services.xserver.displayManager.autoLogin.user = "meenzens";
 
-  # Fonts
-  system.fsPackages = [ pkgs.bindfs ];
-  fileSystems = let
-    mkRoSymBind = path: {
-      device = path;
-      fsType = "fuse.bindfs";
-      options = [ "ro" "resolve-symlinks" "x-gvfs-hide" ];
-    };
-    aggregatedIcons = pkgs.buildEnv {
-      name = "system-icons";
-      paths = with pkgs; [
-        libsForQt5.breeze-qt5  # for plasma
-        #gnome.gnome-themes-extra
-      ];
-      pathsToLink = [ "/share/icons" ];
-    };
-    aggregatedFonts = pkgs.buildEnv {
-      name = "system-fonts";
-      paths = config.fonts.packages;
-      pathsToLink = [ "/share/fonts" ];
-    };
-  in {
-    "/usr/share/icons" = mkRoSymBind "${aggregatedIcons}/share/icons";
-    "/usr/local/share/fonts" = mkRoSymBind "${aggregatedFonts}/share/fonts";
-  };
-
-  fonts = {
-    fontDir.enable = true;
-    packages = with pkgs; [
-      (nerdfonts.override { fonts = [ "FiraCode" "Hack" "JetBrainsMono" ]; })
-      noto-fonts
-      noto-fonts-cjk
-      noto-fonts-emoji
-      # microsoft fonts
-      corefonts
-      vistafonts
-    ];
-    fontconfig = {
-      antialias = true;
-      cache32Bit = true;
-      hinting.enable = true;
-      hinting.autohint = true;
-    };
-  };
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -222,7 +152,7 @@
   programs.zsh.enable = true;
   environment.pathsToLink = [ "/share/zsh" ];
   users.users.meenzens.shell = pkgs.zsh;
- 
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   programs.mtr.enable = true;
