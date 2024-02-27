@@ -202,6 +202,12 @@
       corefonts
       vistafonts
     ];
+    fontconfig = {
+      antialias = true;
+      cache32Bit = true;
+      hinting.enable = true;
+      hinting.autohint = true;
+    };
   };
 
   # List packages installed in system profile. To search, run:
