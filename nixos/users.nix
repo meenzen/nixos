@@ -1,3 +1,4 @@
+{ config, lib, pkgs, modulesPath, ... }:
 {
   users.users = {
     meenzens = {
@@ -11,6 +12,7 @@
       ];
       description = "Samuel Meenzen";
       extraGroups = [ "networkmanager" "wheel" "docker" ];
+      shell = pkgs.zsh;
     };
   };
 
