@@ -205,6 +205,27 @@
     };
   };
 
+  programs.zsh = {
+    enable = true;
+    enableAutosuggestions = true;
+    enableCompletion = true;
+    syntaxHighlighting = {
+      enable = true;
+    };
+    oh-my-zsh = {
+      plugins = ["git" "sudo" "docker"];
+    };
+    shellAliases = {
+      nano = "nvim";
+      vi = "nvim";
+      vim = "nvim";
+      ls = "exa";
+      top = "htop";
+      grep = "rg";
+      weather = "curl wttr.in/Wiesbaden";
+    };
+  };
+
   # Nicely reload system units when changing configs
   #systemd.user.startServices = "sd-switch";
 
