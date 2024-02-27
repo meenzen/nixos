@@ -16,6 +16,8 @@
     ./locale.nix
     ./fonts.nix
     ./users.nix
+    ./services.nix
+    ./programs.nix
     ./desktop.nix
     ./cleanup.nix
 
@@ -93,39 +95,6 @@
     vim
     wget
   ];
-
-  # ZSH
-  programs.zsh.enable = true;
-  environment.pathsToLink = [ "/share/zsh" ];
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  programs.mtr.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
-
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true;
-    dedicatedServer.openFirewall = true;
-  };
-
-  # This setups a SSH server. Very important if you're setting up a headless system.
-  # Feel free to remove if you don't need it.
-  services.openssh = {
-    enable = true;
-    settings = {
-      # Forbid root login through SSH.
-      PermitRootLogin = "no";
-      # Use keys only. Remove if you want to SSH using password (not recommended)
-      PasswordAuthentication = false;
-    };
-  };
-
-  # Docker
-  virtualisation.docker.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
