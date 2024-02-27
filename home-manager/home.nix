@@ -41,6 +41,12 @@
   home = {
     username = "meenzens";
     homeDirectory = "/home/meenzens";
+
+    # Environt Variables
+    sessionVariables = {
+      GITLAB_HOST = "https://git.human.de";
+      ANSIBLE_NOCOWS = "1";
+    };
   };
 
   # link the configuration file in current directory to the specified location in home directory
@@ -187,10 +193,6 @@
       export PATH=$PATH:$HOME/dotnet
       export PATH=$PATH:$HOME/.dotnet/tools
       export DOTNET_ROOT=$HOME/dotnet
-      # GitLab CLI (glab)
-      export GITLAB_HOST=https://git.human.de
-      # misc
-      export ANSIBLE_NOCOWS=1
     '';
 
     # set some aliases, feel free to add more or remove some
