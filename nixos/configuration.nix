@@ -157,7 +157,7 @@
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
       ];
       description = "Samuel Meenzen";
-      extraGroups = [ "networkmanager" "wheel" "docker" ];
+      extraGroups = [ "networkmanager" "wheel" ];
     };
   };
 
@@ -248,6 +248,10 @@
       PasswordAuthentication = false;
     };
   };
+
+  # Docker
+  virtualisation.docker.enable = true;
+  users.extraGroups.docker.members = [ "meenzens" ];
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
