@@ -2,4 +2,5 @@
 
 set -eo pipefail
 
-sudo nixos-rebuild switch --flake .#nixos-vm
+nix flake update
+sudo nixos-rebuild switch --upgrade --flake .#nixos-vm
