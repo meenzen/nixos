@@ -1,4 +1,4 @@
-{ config, lib, pkgs, modulesPath, ... }:
+{ inputs, lib, config, pkgs, ... }:
 {
   users.users = {
     meenzens = {

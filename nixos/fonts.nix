@@ -1,4 +1,4 @@
-{ config, lib, pkgs, modulesPath, ... }:
+{ inputs, lib, config, pkgs, ... }:
 {
   # Fonts
   system.fsPackages = [ pkgs.bindfs ];
