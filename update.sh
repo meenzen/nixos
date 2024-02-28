@@ -3,5 +3,5 @@
 set -eo pipefail
 
 git add .
-nix flake update
-sudo nixos-rebuild switch --upgrade --flake .#nixos-vm
+nix flake update --verbose
+sudo nixos-rebuild switch --upgrade --verbose --flake .#nixos-vm
