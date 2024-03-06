@@ -122,6 +122,10 @@
     brave
     microsoft-edge
 
+    # KeePass
+    keepass
+    keepass-keetraytotp
+
     # misc
     cowsay
     file
