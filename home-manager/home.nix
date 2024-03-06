@@ -126,6 +126,10 @@
     keepass
     keepass-keetraytotp
 
+    # KDE
+    kdePackages.kdeconnect-kde
+    xwaylandvideobridge
+
     # misc
     cowsay
     file
