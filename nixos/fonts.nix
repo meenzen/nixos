@@ -12,7 +12,7 @@
       name = "system-icons";
       paths = with pkgs; [
         libsForQt5.breeze-qt5  # for plasma
-        #gnome.gnome-themes-extra
+        gnome.gnome-themes-extra
       ];
       pathsToLink = [ "/share/icons" ];
     };
@@ -30,9 +30,18 @@
     fontDir.enable = true;
     packages = with pkgs; [
       (nerdfonts.override { fonts = [ "FiraCode" "Hack" "JetBrainsMono" ]; })
+
+      # default fonts
+      dejavu_fonts
+      freefont_ttf
+      gyre-fonts # TrueType substitutes for standard PostScript fonts
+      liberation_ttf
+      unifont
       noto-fonts
       noto-fonts-cjk
       noto-fonts-emoji
+      noto-fonts-color-emoji
+
       # microsoft fonts
       corefonts
       vistafonts
