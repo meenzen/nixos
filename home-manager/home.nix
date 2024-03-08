@@ -127,7 +127,6 @@
     keepass-keetraytotp
 
     # KDE
-    kdePackages.kdeconnect-kde
     xwaylandvideobridge
 
     # Gaming
