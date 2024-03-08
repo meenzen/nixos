@@ -36,7 +36,7 @@
         specialArgs = {inherit inputs outputs;};
         # > Our main nixos configuration file <
         modules = [
-          ./nixos/configuration.nix
+          ./nixos/systems/nixos-vm/configuration.nix
           home-manager.nixosModules.home-manager
           {
             home-manager = {

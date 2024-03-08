@@ -8,16 +8,16 @@
     # inputs.hardware.nixosModules.common-cpu-amd
     # inputs.hardware.nixosModules.common-ssd
 
-    ./workaround.nix
-    ./locale.nix
-    ./fonts.nix
-    ./users.nix
-    ./services.nix
-    ./programs.nix
-    ./desktop.nix
-    ./networking.nix
-    ./system-packages.nix
-    ./cleanup.nix
+    ../../shared/workaround.nix
+    ../../shared/locale.nix
+    ../../shared/fonts.nix
+    ../../shared/users.nix
+    ../../shared/services.nix
+    ../../shared/programs.nix
+    ../../shared/desktop.nix
+    ../../shared/networking.nix
+    ../../shared/system-packages.nix
+    ../../shared/cleanup.nix
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
