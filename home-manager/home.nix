@@ -128,6 +128,7 @@
 
     # KDE
     xwaylandvideobridge
+    kdePackages.kdeconnect-kde
 
     # Gaming
     discord
