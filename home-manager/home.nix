@@ -130,6 +130,9 @@
     kdePackages.kdeconnect-kde
     xwaylandvideobridge
 
+    # Gaming
+    discord
+
     # misc
     cowsay
     file
