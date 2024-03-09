@@ -9,7 +9,7 @@ print () {
     echo -e "${LIGHT_BLUE}$1${NO_COLOR}"
 }
 
-print "=> Starrting Update"
+print "=> Starting Update"
 
 print "==> Formatting Code"
 alejandra .
