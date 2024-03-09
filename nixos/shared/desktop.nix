@@ -26,4 +26,7 @@
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
+
+  # KDE Software
+  programs.partition-manager.enable = true;
 }
