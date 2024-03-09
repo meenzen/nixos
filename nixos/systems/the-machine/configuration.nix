@@ -4,10 +4,6 @@
 {
   # You can import other NixOS modules here
   imports = [
-    # If you want to use modules from other flakes (such as nixos-hardware):
-    # inputs.hardware.nixosModules.common-cpu-amd
-    # inputs.hardware.nixosModules.common-ssd
-
     ../../shared/workaround.nix
     ../../shared/locale.nix
     ../../shared/fonts.nix
@@ -18,6 +14,7 @@
     ../../shared/networking.nix
     ../../shared/system-packages.nix
     ../../shared/cleanup.nix
+    ../../shared/gaming.nix
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
@@ -45,10 +42,12 @@
   nix.settings = {
     substituters = [
       "https://nix-community.cachix.org"
+      "https://nix-gaming.cachix.org"
       "https://cache.nixos.org/"
     ];
     trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
     ];
   };
   # Enable Flakes
