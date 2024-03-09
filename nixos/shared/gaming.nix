@@ -6,6 +6,9 @@
     inputs.nix-gaming.nixosModules.steamCompat
   ];
 
+  # Gaming Kernel
+  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+
   # Low Latency
   services.pipewire.lowLatency = {
     enable = true;
