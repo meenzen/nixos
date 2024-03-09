@@ -82,7 +82,8 @@
     nix-output-monitor
     direnv
     nix-direnv
-    nil # language server
+    nil # nix language server
+    nixpkgs-fmt # nix formatter
 
     # system call monitoring
     strace # system call monitoring
