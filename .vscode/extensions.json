@@ -1,3 +1,6 @@
 {
-  "recommendations": ["bbenoist.Nix", "EditorConfig.EditorConfig"]
+  "recommendations": [
+    "EditorConfig.EditorConfig",
+    "pinage404.nix-extension-pack"
+  ]
 }

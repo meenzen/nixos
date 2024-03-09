@@ -80,6 +80,9 @@
     # it provides the command `nom` works just like `nix`
     # with more details log output
     nix-output-monitor
+    direnv
+    nix-direnv
+    nil # language server
 
     # system call monitoring
     strace # system call monitoring
