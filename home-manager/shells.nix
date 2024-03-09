@@ -41,11 +41,9 @@
     };
   };
 
-  programs.fish = {
-    enable = true;
-  };
+  programs.fish.enable = true;
+  programs.nushell.enable = true;
 
-  programs.nushell = {
-    enable = true;
-  };
+  # marter cd command
+  programs.zoxide.enable = true;
 }
