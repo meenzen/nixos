@@ -28,7 +28,7 @@
       enable = true;
     };
     oh-my-zsh = {
-      plugins = ["git" "sudo" "docker"];
+      plugins = [ "git" "sudo" "docker" ];
     };
     shellAliases = {
       nano = "nvim";
