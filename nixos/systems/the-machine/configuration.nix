@@ -96,6 +96,18 @@
   # ZRam
   zramSwap.enable = true;
 
+  # Mounts
+  fileSystems."/mnt/MEGA-SSD" = {
+    device = "/dev/disk/by-uuid/0f7c57b0-a681-4b2a-b89d-6940465b22d2";
+    fsType = "ext4";
+    options = [
+      "discard"
+      "noatime"
+      "users" # Allows any user to mount and unmount
+      "nofail" # Prevent system from failing if this drive doesn't mount
+    ];
+  };
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
