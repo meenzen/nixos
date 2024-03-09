@@ -21,6 +21,14 @@
     inputs.nix-gaming.packages.${pkgs.system}.star-citizen
   ];
 
+  # NixOS configuration for Star Citizen requirements
+  # https://github.com/fufexan/nix-gaming/tree/master/pkgs/star-citizen
+  boot.kernel.sysctl = {
+    "vm.max_map_count" = 16777216;
+    "fs.file-max" = 524288;
+  };
+  networking.extraHosts = "127.0.0.1 modules-cdn.eac-prod.on.epicgames.com";
+
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;
