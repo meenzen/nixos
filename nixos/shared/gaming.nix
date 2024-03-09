@@ -18,7 +18,7 @@
   security.rtkit.enable = true; # make pipewire realtime-capable
 
   environment.systemPackages = [
-    inputs.nix-gaming.packages.${pkgs.system}.star-citizen
+    inputs.nix-citizen.packages.${pkgs.system}.star-citizen
     pkgs.wineWowPackages.stable
     pkgs.winetricks
   ];

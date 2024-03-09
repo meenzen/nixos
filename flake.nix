@@ -12,8 +12,10 @@
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    # https://github.com/fufexan/nix-gaming
-    nix-gaming.url = "github:fufexan/nix-gaming";
+    # Gaming
+    nix-citizen.url = "github:LovingMelody/nix-citizen"; # https://github.com/LovingMelody/nix-citizen
+    nix-gaming.url = "github:fufexan/nix-gaming"; # https://github.com/fufexan/nix-gaming
+    nix-citizen.inputs.nix-gaming.follows = "nix-gaming";
 
     # TODO: Add any other flake you might need
     # hardware.url = "github:nixos/nixos-hardware";
