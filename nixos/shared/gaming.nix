@@ -19,6 +19,8 @@
 
   environment.systemPackages = [
     inputs.nix-gaming.packages.${pkgs.system}.star-citizen
+    pkgs.wineWowPackages.stable
+    pkgs.winetricks
   ];
 
   # NixOS configuration for Star Citizen requirements
