@@ -1,7 +1,12 @@
 # This is your system's configuration file.
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
-{ inputs, lib, config, pkgs, ... }:
 {
+  inputs,
+  lib,
+  config,
+  pkgs,
+  ...
+}: {
   # You can import other NixOS modules here
   imports = [
     ../../shared/workaround.nix
@@ -51,7 +56,7 @@
     ];
   };
   # Enable Flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # System Hostname
   networking.hostName = "the-machine";
@@ -72,12 +77,12 @@
   };
 
   # Load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = [ "nvidia" ];
-  boot.kernelParams = [ "nvidia_drm.modeset=1" ];
+  services.xserver.videoDrivers = ["nvidia"];
+  boot.kernelParams = ["nvidia_drm.modeset=1"];
 
   # might be required
-  boot.initrd.kernelModules = [ "nvidia" ];
-  boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
+  boot.initrd.kernelModules = ["nvidia"];
+  boot.extraModulePackages = [config.boot.kernelPackages.nvidia_x11];
 
   hardware.nvidia = {
     modesetting.enable = true;

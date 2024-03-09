@@ -1,7 +1,7 @@
 {
   # ZSH
   programs.zsh.enable = true;
-  environment.pathsToLink = [ "/share/zsh" ];
+  environment.pathsToLink = ["/share/zsh"];
 
   programs.mtr.enable = true;
   programs.gnupg.agent = {

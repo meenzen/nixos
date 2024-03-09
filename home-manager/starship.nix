@@ -34,9 +34,18 @@
       battery = {
         format = "[ $symbol$percentage ]($style)[](fg:#696969 bg:#33658A)";
         display = [
-          { threshold = 10; style = "bold red bg:#696969"; }
-          { threshold = 30; style = "bold yellow bg:#696969"; }
-          { threshold = 80; style = "bg:#696969"; }
+          {
+            threshold = 10;
+            style = "bold red bg:#696969";
+          }
+          {
+            threshold = 30;
+            style = "bold yellow bg:#696969";
+          }
+          {
+            threshold = 80;
+            style = "bg:#696969";
+          }
         ];
       };
 

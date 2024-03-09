@@ -1,5 +1,10 @@
-{ inputs, lib, config, pkgs, ... }:
 {
+  inputs,
+  lib,
+  config,
+  pkgs,
+  ...
+}: {
   users.users = {
     meenzens = {
       # You can set an initial password for your user.
@@ -12,7 +17,7 @@
         "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIDOHTWbt687mGfFsdxrgSyCtyrb547mw5+SL3FdAT5KeAAAABHNzaDo= YubiKey C"
       ];
       description = "Samuel Meenzen";
-      extraGroups = [ "networkmanager" "wheel" "docker" ];
+      extraGroups = ["networkmanager" "wheel" "docker"];
       shell = pkgs.zsh;
     };
   };
