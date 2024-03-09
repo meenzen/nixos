@@ -16,6 +16,7 @@
     ./starship.nix
     ./wezterm.nix
     ./shells.nix
+    ./browsers.nix
   ];
 
   nixpkgs = {
@@ -116,11 +117,6 @@
     kate
     jetbrains.rider
     rustup
-
-    # webbrowser
-    firefox
-    brave
-    microsoft-edge
 
     # KeePass
     keepass
