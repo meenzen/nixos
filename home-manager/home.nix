@@ -24,6 +24,7 @@
     ./modules/gaming.nix
     ./modules/keepass.nix
     ./modules/fun.nix
+    ./modules/media-player.nix
   ];
 
   nixpkgs = {
