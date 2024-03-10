@@ -1,5 +1,3 @@
-# This is your home-manager configuration file
-# Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 {
   inputs,
   lib,
@@ -11,13 +9,13 @@
   imports = [
     # If you want to use home-manager modules from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModule
-    ./git.nix
-    ./neovim.nix
-    ./starship.nix
-    ./wezterm.nix
-    ./shells.nix
-    ./browsers.nix
-    ./gaming.nix
+    ./modules/git.nix
+    ./modules/neovim.nix
+    ./modules/starship.nix
+    ./modules/wezterm.nix
+    ./modules/shells.nix
+    ./modules/browsers.nix
+    ./modules/gaming.nix
   ];
 
   nixpkgs = {
