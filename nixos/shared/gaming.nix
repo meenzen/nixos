@@ -13,7 +13,7 @@
   # Gaming Kernel (unstable)
   # boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
 
-  # Low Latency
+  # Low Latency Audio
   services.pipewire.lowLatency = {
     enable = true;
     quantum = 64;
