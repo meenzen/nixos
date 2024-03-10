@@ -9,6 +9,12 @@
   imports = [
     # If you want to use home-manager modules from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModule
+    ./common
+    ./modules/desktop.nix
+    ./modules/dev-tools.nix
+    ./modules/system-tools.nix
+    ./modules/nix-tools.nix
+    ./modules/networking-tools.nix
     ./modules/git.nix
     ./modules/neovim.nix
     ./modules/starship.nix
@@ -16,6 +22,8 @@
     ./modules/shells.nix
     ./modules/browsers.nix
     ./modules/gaming.nix
+    ./modules/keepass.nix
+    ./modules/fun.nix
   ];
 
   nixpkgs = {
@@ -40,17 +48,6 @@
     };
   };
 
-  home = {
-    username = "meenzens";
-    homeDirectory = "/home/meenzens";
-
-    # Environt Variables
-    sessionVariables = {
-      GITLAB_HOST = "https://git.human.de";
-      ANSIBLE_NOCOWS = "1";
-    };
-  };
-
   # link the configuration file in current directory to the specified location in home directory
   # home.file.".config/i3/wallpaper.jpg".source = ./wallpaper.jpg;
 
@@ -71,95 +68,4 @@
   #  "Xcursor.size" = 16;
   #  "Xft.dpi" = 172;
   #};
-
-  # Packages that should be installed to the user profile.
-  home.packages = with pkgs; [
-    # nix related
-    #
-    # it provides the command `nom` works just like `nix`
-    # with more details log output
-    nix-output-monitor
-    direnv
-    nix-direnv
-    nil # nix language server
-    alejandra # nix formatter
-
-    # system call monitoring
-    strace # system call monitoring
-    ltrace # library call monitoring
-    lsof # list open files
-
-    # system tools
-    sysstat
-    lm_sensors # for `sensors` command
-    ethtool
-    pciutils # lspci
-    usbutils # lsusb
-    htop
-    btop # replacement of htop/nmon
-    iotop # io monitoring
-    iftop # network monitoring
-    duf
-
-    # archives
-    zip
-    xz
-    unzip
-    p7zip
-
-    # networking tools
-    mtr # A network diagnostic tool
-    iperf3
-    dnsutils # `dig` + `nslookup`
-    ldns # replacement of `dig`, it provide the command `drill`
-    aria2 # A lightweight multi-protocol & multi-source command-line download utility
-    socat # replacement of openbsd-netcat
-    nmap # A utility for network discovery and security auditing
-
-    # devtools
-    vscode
-    kate
-    jetbrains.rider
-    rustup
-
-    # KeePass
-    keepass
-    keepass-keetraytotp
-
-    # KDE
-    xwaylandvideobridge
-    kdePackages.kdeconnect-kde
-
-    # misc
-    cowsay
-    file
-    which
-    tree
-    gnused
-    gnutar
-    gawk
-    zstd
-    gnupg
-    glow
-    bat
-    fastfetch
-    nnn # terminal file manager
-    ripgrep # recursively searches directories for a regex pattern
-    jq # A lightweight and flexible command-line JSON processor
-    yq-go # yaml processer https://github.com/mikefarah/yq
-    eza # A modern replacement for ‘ls’
-    fzf # A command-line fuzzy finder
-    tokei
-  ];
-
-  services.nextcloud-client.enable = true;
-
-  # Nicely reload system units when changing configs
-  systemd.user.startServices = "sd-switch";
-
-  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "23.11";
-
-  # Let home Manager install and manage itself.
-  programs.home-manager.enable = true;
 }
