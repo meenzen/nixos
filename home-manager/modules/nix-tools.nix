@@ -4,6 +4,7 @@
     nix-output-monitor
     direnv
     nix-direnv
+    nix-tree
     nil # nix language server
     alejandra # nix formatter
   ];

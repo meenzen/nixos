@@ -15,6 +15,7 @@
     iotop # io monitoring
     iftop # network monitoring
     duf
+    ncdu
 
     zip
     xz
