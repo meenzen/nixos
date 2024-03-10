@@ -97,13 +97,13 @@
   zramSwap.enable = true;
 
   # Mounts
-  fileSystems."/mnt/MEGA-SSD" = {
+  fileSystems."/games" = {
     device = "/dev/disk/by-uuid/0f7c57b0-a681-4b2a-b89d-6940465b22d2";
     fsType = "ext4";
     options = [
+      "defaults"
       "discard"
       "noatime"
-      "users" # Allows any user to mount and unmount
       "nofail" # Prevent system from failing if this drive doesn't mount
     ];
   };

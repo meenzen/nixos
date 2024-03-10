@@ -1,4 +1,4 @@
-{
+{pkgs, ...}: {
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
@@ -26,6 +26,17 @@
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-kde
+    ];
+  };
+
+  environment.systemPackages = with pkgs; [
+    xdg-desktop-portal-kde
+  ];
 
   # KDE Software
   programs.partition-manager.enable = true;
