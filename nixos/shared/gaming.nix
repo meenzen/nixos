@@ -8,7 +8,6 @@
   # https://github.com/fufexan/nix-gaming
   imports = [
     inputs.nix-gaming.nixosModules.pipewireLowLatency
-    inputs.nix-gaming.nixosModules.steamCompat
   ];
 
   # Gaming Kernel (unstable)
