@@ -1,4 +1,15 @@
-{
+let
+  aliases = {
+    nano = "nvim";
+    vi = "nvim";
+    vim = "nvim";
+    ls = "exa";
+    top = "htop";
+    grep = "rg";
+    weather = "curl wttr.in/Wiesbaden";
+    lolcat = "clolcat";
+  };
+in {
   programs.bash = {
     enable = true;
     enableCompletion = true;
@@ -9,15 +20,7 @@
       export PATH=$PATH:$HOME/.dotnet/tools
       export DOTNET_ROOT=$HOME/dotnet
     '';
-    shellAliases = {
-      nano = "nvim";
-      vi = "nvim";
-      vim = "nvim";
-      ls = "exa";
-      top = "htop";
-      grep = "rg";
-      weather = "curl wttr.in/Wiesbaden";
-    };
+    shellAliases = aliases;
   };
 
   programs.zsh = {
@@ -30,15 +33,7 @@
     oh-my-zsh = {
       plugins = ["git" "sudo" "docker"];
     };
-    shellAliases = {
-      nano = "nvim";
-      vi = "nvim";
-      vim = "nvim";
-      ls = "exa";
-      top = "htop";
-      grep = "rg";
-      weather = "curl wttr.in/Wiesbaden";
-    };
+    shellAliases = aliases;
   };
 
   programs.fish.enable = true;
