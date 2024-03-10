@@ -17,6 +17,7 @@
     ./wezterm.nix
     ./shells.nix
     ./browsers.nix
+    ./gaming.nix
   ];
 
   nixpkgs = {
@@ -131,9 +132,6 @@
     xwaylandvideobridge
     kdePackages.kdeconnect-kde
 
-    # Gaming
-    discord
-
     # misc
     cowsay
     file
@@ -146,7 +144,7 @@
     gnupg
     glow
     bat
-    neofetch
+    fastfetch
     nnn # terminal file manager
     ripgrep # recursively searches directories for a regex pattern
     jq # A lightweight and flexible command-line JSON processor
