@@ -9,17 +9,17 @@
 }: {
   # You can import other NixOS modules here
   imports = [
-    ../../shared/workaround.nix
-    ../../shared/locale.nix
-    ../../shared/fonts.nix
-    ../../shared/users.nix
-    ../../shared/services.nix
-    ../../shared/programs.nix
-    ../../shared/desktop.nix
-    ../../shared/networking.nix
-    ../../shared/system-packages.nix
-    ../../shared/cleanup.nix
-    ../../shared/gaming.nix
+    ../../modules/workaround.nix
+    ../../modules/locale.nix
+    ../../modules/fonts.nix
+    ../../modules/users.nix
+    ../../modules/services.nix
+    ../../modules/programs.nix
+    ../../modules/desktop.nix
+    ../../modules/networking.nix
+    ../../modules/system-packages.nix
+    ../../modules/cleanup.nix
+    ../../modules/gaming.nix
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
