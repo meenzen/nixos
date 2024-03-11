@@ -11,8 +11,8 @@ print () {
 
 print "=> Starting Storage Optimization"
 
-print "==> Running \"nix-store --gc\""
-nix-store --gc
+print "==> Running \"nix-collect-garbage --delete-older-than 7d\""
+nix-collect-garbage --delete-older-than 7d
 
 print "==> Running \"nix-store --optimise\""
 nix-store --optimise
