@@ -4,8 +4,8 @@
 
   # Enable the KDE Plasma Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma6.enable = true;
-  services.xserver.desktopManager.plasma6.enableQt5Integration = true;
+  services.desktopManager.plasma6.enable = true;
+  services.desktopManager.plasma6.enableQt5Integration = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
