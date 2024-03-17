@@ -146,19 +146,19 @@
       # hpimc01 (Pimcore Live)
       hpimc01 = {
         hostname = "213.216.20.131";
-        Port = "9901";
+        port = 9901;
       };
 
       # hpimc02 (Pimcore Test)
       hpimc02 = {
         hostname = "213.216.20.131";
-        Port = "9902";
+        port = 9902;
       };
 
       # hpimc03 (Pimcore Dev)
       hpimc03 = {
         hostname = "213.216.20.131";
-        Port = "9903";
+        port = 9903;
       };
 
       # marcomdev1 (Pimcore)

@@ -20,6 +20,7 @@
     ./modules/starship.nix
     ./modules/wezterm.nix
     ./modules/shells.nix
+    ./modules/ssh.nix
     ./modules/browsers.nix
     ./modules/gaming.nix
     ./modules/keepass.nix
