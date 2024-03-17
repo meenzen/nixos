@@ -52,31 +52,26 @@
 
       helium-conduit = lib.hm.dag.entryAfter ["helium-ssh.mnzn.dev"] {
         hostname = "10.10.10.102";
-        user = "ubuntu";
         proxyJump = "helium-ssh.mnzn.dev";
       };
 
       helium-matrix = lib.hm.dag.entryAfter ["helium-ssh.mnzn.dev"] {
         hostname = "10.10.10.103";
-        user = "ubuntu";
         proxyJump = "helium-ssh.mnzn.dev";
       };
 
       helium-sentry = lib.hm.dag.entryAfter ["helium-ssh.mnzn.dev"] {
         hostname = "10.10.10.113";
-        user = "ubuntu";
         proxyJump = "helium-ssh.mnzn.dev";
       };
 
       helium-authentik = lib.hm.dag.entryAfter ["helium-ssh.mnzn.dev"] {
         hostname = "10.10.10.110";
-        user = "ubuntu";
         proxyJump = "helium-ssh.mnzn.dev";
       };
 
       helium-gitlab = lib.hm.dag.entryAfter ["helium-ssh.mnzn.dev"] {
         hostname = "10.10.10.101";
-        user = "ubuntu";
         proxyJump = "helium-ssh.mnzn.dev";
       };
 
