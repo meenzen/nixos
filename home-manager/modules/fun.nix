@@ -5,4 +5,6 @@
     asciiquarium
     clolcat
   ];
+
+  programs.thefuck.enable = true;
 }
