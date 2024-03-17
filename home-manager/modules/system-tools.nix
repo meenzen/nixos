@@ -9,6 +9,7 @@
     ethtool
     pciutils # lspci
     usbutils # lsusb
+    smartmontools # SMART disk utilities (smartctl)
 
     htop
     btop # replacement of htop/nmon
