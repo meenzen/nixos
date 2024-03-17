@@ -32,6 +32,9 @@ in {
     vscode
     kate
     jetbrains.rider
+    jetbrains.rust-rover
+    jetbrains.idea-ultimate
+    jetbrains.webstorm
     rustup
     tokei
     glow
