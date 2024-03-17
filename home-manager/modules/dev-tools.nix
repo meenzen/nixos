@@ -29,15 +29,26 @@ in {
     DOTNET_ROOT = "${dotnet-combined}";
   };
   home.packages = with pkgs; [
+    glow
+    tokei
+
+    # Compilers
+    dotnet-combined
+    gcc
+
+    # Editors
     vscode
     kate
     jetbrains.rider
     jetbrains.rust-rover
     jetbrains.idea-ultimate
     jetbrains.webstorm
-    rustup
-    tokei
-    glow
-    dotnet-combined
+
+    # Rust
+    rustc
+    cargo
+    rust-analyzer
+    clippy
+    rustfmt
   ];
 }
