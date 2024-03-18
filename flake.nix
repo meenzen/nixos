@@ -17,8 +17,7 @@
     nix-gaming.url = "github:fufexan/nix-gaming"; # https://github.com/fufexan/nix-gaming
     nix-citizen.inputs.nix-gaming.follows = "nix-gaming";
 
-    # TODO: Add any other flake you might need
-    # hardware.url = "github:nixos/nixos-hardware";
+    nixos-hardware.url = "github:nixos/nixos-hardware";
 
     # Shameless plug: looking for a way to nixify your themes and make
     # everything match nicely? Try nix-colors!
@@ -30,6 +29,7 @@
     nixpkgs,
     nixpkgs-stable,
     home-manager,
+    nixos-hardware,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -80,6 +80,7 @@
         # > Our main nixos configuration file <
         modules = [
           ./nixos/systems/framework/configuration.nix
+          nixos-hardware.nixosModules.framework-11th-gen-intel
           home-manager.nixosModules.home-manager
           {
             home-manager = {

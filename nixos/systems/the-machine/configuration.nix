@@ -20,6 +20,7 @@
     ../../modules/system-packages.nix
     ../../modules/cleanup.nix
     ../../modules/gaming.nix
+    ../../modules/hardware/nvidia.nix
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
@@ -69,36 +70,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 20; # Limit the number of generations to keep
   boot.loader.efi.canTouchEfiVariables = true;
-
-  # Enable OpenGL
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
-    extraPackages = with pkgs; [
-      vaapiVdpau
-    ];
-  };
-
-  # Load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = ["nvidia"];
-  boot.kernelParams = ["nvidia_drm.modeset=1"];
-
-  # might be required
-  boot.initrd.kernelModules = ["nvidia"];
-  boot.extraModulePackages = [config.boot.kernelPackages.nvidia_x11];
-
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement.enable = false;
-    powerManagement.finegrained = false;
-    open = false;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.latest;
-  };
-
-  # ZRam
-  zramSwap.enable = true;
 
   # Mounts
   fileSystems."/games" = {

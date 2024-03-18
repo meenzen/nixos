@@ -19,9 +19,9 @@
     ../../modules/networking.nix
     ../../modules/system-packages.nix
     ../../modules/cleanup.nix
-    ../../modules/bluetooth.nix
     #../../modules/gaming.nix
     ../../modules/cloudflare-warp
+    ../../modules/hardware/bluetooth.nix
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
@@ -76,8 +76,8 @@
   boot.initrd.luks.devices."luks-d72b6916-393c-4db9-8194-6d48d1cf5189".device = "/dev/disk/by-uuid/d72b6916-393c-4db9-8194-6d48d1cf5189";
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  # ZRam
-  zramSwap.enable = true;
+  # enable firmware update manager
+  services.fwupd.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

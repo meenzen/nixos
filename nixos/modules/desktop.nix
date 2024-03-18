@@ -10,6 +10,9 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  # Enable Wayland support in Chromium based apps
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
