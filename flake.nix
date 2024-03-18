@@ -74,6 +74,25 @@
           }
         ];
       };
+
+      framework = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        # > Our main nixos configuration file <
+        modules = [
+          ./nixos/systems/framework/configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              extraSpecialArgs = {inherit inputs outputs;};
+              useUserPackages = true;
+              users = {
+                # Import your home-manager configuration
+                meenzens = import ./home-manager/home.nix;
+              };
+            };
+          }
+        ];
+      };
     };
   };
 }
