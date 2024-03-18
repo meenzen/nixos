@@ -61,6 +61,10 @@
         # > Our main nixos configuration file <
         modules = [
           ./nixos/systems/the-machine/configuration.nix
+          nixos-hardware.nixosModules.common-hidpi
+          nixos-hardware.nixosModules.common-pc-ssd
+          nixos-hardware.nixosModules.common-gpu-nvidia
+          nixos-hardware.nixosModules.common-cpu-intel-cpu-only
           home-manager.nixosModules.home-manager
           {
             home-manager = {
@@ -80,6 +84,7 @@
         # > Our main nixos configuration file <
         modules = [
           ./nixos/systems/framework/configuration.nix
+          nixos-hardware.nixosModules.common-pc-ssd
           nixos-hardware.nixosModules.framework-11th-gen-intel
           home-manager.nixosModules.home-manager
           {
