@@ -1,7 +1,8 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
     firefox
-    microsoft-edge
+    google-chrome
+    # microsoft-edge # edge is totally borked right now
   ];
 
   programs.chromium = {
