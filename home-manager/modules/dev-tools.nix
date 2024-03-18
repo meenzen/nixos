@@ -31,6 +31,7 @@ in {
   home.packages = with pkgs; [
     glow
     tokei
+    cloudflare-warp
 
     # Compilers
     dotnet-combined
