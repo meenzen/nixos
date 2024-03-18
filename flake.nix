@@ -63,8 +63,8 @@
           ./nixos/systems/the-machine/configuration.nix
           nixos-hardware.nixosModules.common-hidpi
           nixos-hardware.nixosModules.common-pc-ssd
-          nixos-hardware.nixosModules.common-gpu-nvidia
           nixos-hardware.nixosModules.common-cpu-intel-cpu-only
+          nixos-hardware.nixosModules.common-gpu-nvidia-nonprime
           home-manager.nixosModules.home-manager
           {
             home-manager = {
