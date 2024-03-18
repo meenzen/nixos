@@ -16,4 +16,4 @@ alejandra .
 
 print "==> Rebuilding NixOS"
 git add .
-sudo nixos-rebuild switch --upgrade --verbose --flake .
+sudo nixos-rebuild switch --upgrade --verbose --flake . $@
