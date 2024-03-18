@@ -19,6 +19,7 @@
     ../../modules/networking.nix
     ../../modules/system-packages.nix
     ../../modules/cleanup.nix
+    ../../modules/bluetooth.nix
     #../../modules/gaming.nix
 
     # Import your generated (nixos-generate-config) hardware configuration
