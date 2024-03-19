@@ -46,6 +46,7 @@
     kdePackages.xdg-desktop-portal-kde
     kdePackages.kdeconnect-kde
     xwaylandvideobridge
+    xdg-utils
   ];
 
   # KDE Partition Manager
