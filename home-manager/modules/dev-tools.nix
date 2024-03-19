@@ -39,10 +39,13 @@ in {
     # Editors
     vscode
     kdePackages.kate
-    jetbrains.rider
-    jetbrains.rust-rover
-    jetbrains.idea-ultimate
-    jetbrains.webstorm
+
+    # JetBrains IDEs don't work correctly, plugins are broken.
+    #jetbrains.rider
+    #jetbrains.rust-rover
+    #jetbrains.idea-ultimate
+    #jetbrains.webstorm
+    jetbrains-toolbox # install IDEs from toolbox manually for now
 
     # Rust
     rustc
