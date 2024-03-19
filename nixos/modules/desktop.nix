@@ -2,17 +2,6 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Enable the KDE Plasma Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
-  services.desktopManager.plasma6.enableQt5Integration = true;
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Enable Wayland support in Chromium based apps
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
-
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
@@ -29,6 +18,18 @@
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
+
+  # Enable Wayland support in Chromium based apps
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
+  # Enable CUPS to print documents.
+  services.printing.enable = true;
+
+  # Enable the KDE Plasma Desktop Environment.
+  services.xserver.displayManager.sddm.enable = true;
+  #services.xserver.displayManager.sddm.wayland.enable = true; # SDDM Wayland support is still a little unstable
+  services.desktopManager.plasma6.enable = true;
+  services.desktopManager.plasma6.enableQt5Integration = true;
 
   # Force KDE file picker
   environment.sessionVariables.XDG_CURRENT_DESKTOP = "KDE";
@@ -47,7 +48,7 @@
     xwaylandvideobridge
   ];
 
-  # KDE Software
+  # KDE Partition Manager
   programs.partition-manager.enable = true;
 
   # KDE Connect Firewall

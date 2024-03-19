@@ -38,7 +38,7 @@ in {
 
     # Editors
     vscode
-    kate
+    kdePackages.kate
     jetbrains.rider
     jetbrains.rust-rover
     jetbrains.idea-ultimate
