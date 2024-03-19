@@ -44,7 +44,7 @@
     extraCompatPackages = [
       # add the packages that you would like to have in Steam's extra compatibility packages list
       # pkgs.luxtorpeda
-      inputs.nix-gaming.packages.${pkgs.system}.proton-ge
+      pkgs.proton-ge-bin
     ];
   };
 }
