@@ -30,17 +30,39 @@
     #media-session.enable = true;
   };
 
+  # Force KDE file picker
+  environment.sessionVariables.XDG_CURRENT_DESKTOP = "KDE";
+  environment.sessionVariables.GTK_USE_PORTAL = "1";
+
   xdg.portal = {
     enable = true;
     extraPortals = with pkgs; [
-      xdg-desktop-portal-kde
+      kdePackages.xdg-desktop-portal-kde
     ];
   };
 
   environment.systemPackages = with pkgs; [
-    xdg-desktop-portal-kde
+    kdePackages.xdg-desktop-portal-kde
+    kdePackages.kdeconnect-kde
+    xwaylandvideobridge
   ];
 
   # KDE Software
   programs.partition-manager.enable = true;
+
+  # KDE Connect Firewall
+  networking.firewall = {
+    allowedTCPPortRanges = [
+      {
+        from = 1714;
+        to = 1764;
+      }
+    ];
+    allowedUDPPortRanges = [
+      {
+        from = 1714;
+        to = 1764;
+      }
+    ];
+  };
 }

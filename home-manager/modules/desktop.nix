@@ -1,8 +1,4 @@
 {pkgs, ...}: {
-  home.packages = with pkgs; [
-    xwaylandvideobridge
-    kdePackages.kdeconnect-kde
-  ];
-
+  home.packages = with pkgs; [];
   services.nextcloud-client.enable = true;
 }

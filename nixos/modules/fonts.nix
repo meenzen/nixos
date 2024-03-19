@@ -16,7 +16,7 @@
     aggregatedIcons = pkgs.buildEnv {
       name = "system-icons";
       paths = with pkgs; [
-        libsForQt5.breeze-qt5 # for plasma
+        kdePackages.breeze # for plasma
         gnome.gnome-themes-extra
       ];
       pathsToLink = ["/share/icons"];
