@@ -25,6 +25,7 @@
   programs.nix-ld.libraries = with pkgs; [
     # Add any missing dynamic libraries for unpackaged programs
     # here, NOT in environment.systemPackages
+    libsecret
 
     # Fix JetBrains IDEs: https://github.com/NixOS/nixpkgs/issues/240444#issuecomment-1988645885
     SDL
