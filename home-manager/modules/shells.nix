@@ -11,39 +11,56 @@ let
     lolcat = "clolcat";
     neofetch = "fastfetch";
   };
-in {
-  programs.bash = {
-    enable = true;
-    enableCompletion = true;
-    bashrcExtra = ''
-      export PATH="$PATH:$HOME/bin:$HOME/.local/bin"
-      # dotnet
-      export PATH=$PATH:$HOME/dotnet
-      export PATH=$PATH:$HOME/.dotnet/tools
-      export DOTNET_ROOT=$HOME/dotnet
-    '';
-    shellAliases = aliases;
-  };
-
-  programs.zsh = {
-    enable = true;
-    autosuggestion.enable = true;
-    enableCompletion = true;
-    syntaxHighlighting = {
+in
+  {pkgs, ...}: {
+    programs.bash = {
       enable = true;
+      enableCompletion = true;
+      bashrcExtra = ''
+        export PATH="$PATH:$HOME/bin:$HOME/.local/bin"
+        # dotnet
+        export PATH=$PATH:$HOME/dotnet
+        export PATH=$PATH:$HOME/.dotnet/tools
+        export DOTNET_ROOT=$HOME/dotnet
+      '';
+      shellAliases = aliases;
     };
-    oh-my-zsh = {
-      plugins = ["git" "sudo" "docker"];
+
+    programs.zsh = {
+      enable = true;
+      autosuggestion.enable = true;
+      enableCompletion = true;
+      syntaxHighlighting = {
+        enable = true;
+      };
+      oh-my-zsh = {
+        plugins = ["git" "sudo" "docker"];
+      };
+      shellAliases = aliases;
+      plugins = [
+        {
+          name = "vi-mode";
+          src = pkgs.zsh-vi-mode;
+          file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
+        }
+      ];
+      initExtra = ''
+        zstyle ':completion:*' menu select
+
+        bindkey "^[[1;5C" forward-word
+        bindkey "^[[1;5D" backward-word
+        bindkey "^H" backward-kill-word
+        bindkey "^[[OH" beginning-of-line
+        bindkey "^[[OF" end-of-line
+      '';
     };
-    shellAliases = aliases;
-  };
 
-  programs.fish.enable = true;
-  programs.nushell.enable = true;
+    programs.fish.enable = true;
+    programs.nushell.enable = true;
 
-  # marter cd command
-  programs.zoxide = {
-    enable = true;
-    options = ["--cmd cd"];
-  };
-}
+    # marter cd command
+    programs.zoxide = {
+      enable = true;
+      options = ["--cmd cd"];
+    };
+  }
