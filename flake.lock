@@ -195,6 +195,27 @@
         "type": "github"
       }
     },
+    "protontweaks": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1710890829,
+        "narHash": "sha256-1eJPyEXTdawmVNnnfCpvewAPqG6cuB98pomVbxpSxwI=",
+        "owner": "rain-cafe",
+        "repo": "protontweaks",
+        "rev": "46fd76e268370c07a1751fbac339ba8eb2f689e0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rain-cafe",
+        "ref": "main",
+        "repo": "protontweaks",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
@@ -202,7 +223,8 @@
         "nix-gaming": "nix-gaming",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_3",
-        "nixpkgs-stable": "nixpkgs-stable"
+        "nixpkgs-stable": "nixpkgs-stable",
+        "protontweaks": "protontweaks"
       }
     },
     "systems": {

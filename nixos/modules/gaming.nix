@@ -8,7 +8,16 @@
   # https://github.com/fufexan/nix-gaming
   imports = [
     inputs.nix-gaming.nixosModules.pipewireLowLatency
+    inputs.protontweaks.nixosModules.protontweaks
   ];
+
+  # https://github.com/rain-cafe/protontweakss
+  nixpkgs = {
+    overlays = [
+      inputs.protontweaks.overlay
+    ];
+  };
+  services.protontweaks.enable = true;
 
   # Gaming Kernel (unstable)
   # boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
