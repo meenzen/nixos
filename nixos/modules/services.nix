@@ -15,11 +15,8 @@
       "registry-mirrors" = ["https://mirror.gcr.io"];
 
       # custom address pools to avoid conflicts with the corporate network
+      "bip" = "192.168.180.1/24";
       "default-address-pools" = [
-        {
-          base = "192.168.180.0/24";
-          size = 24;
-        }
         {
           base = "192.168.181.0/24";
           size = 24;
