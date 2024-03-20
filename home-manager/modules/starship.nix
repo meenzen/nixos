@@ -8,6 +8,7 @@
       character = {
         success_symbol = "[](fg:#33658A)";
         error_symbol = "[](fg:#33658A bg:#8B0000)[ ! ](bg:#8B0000)[](fg:#8B0000)";
+        vimcmd_symbol = "[](fg:#33658A bg:#008080)[ VIM ](bg:#008080)[](fg:#008080)";
       };
       directory = {
         read_only = " 󰌾";
