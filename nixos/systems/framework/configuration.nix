@@ -20,6 +20,7 @@
     ../../modules/system-packages.nix
     ../../modules/cleanup.nix
     #../../modules/gaming.nix
+    ../../modules/certs
     ../../modules/cloudflare-warp
     ../../modules/hardware/bluetooth.nix
 
