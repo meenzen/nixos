@@ -63,4 +63,7 @@ in
       enable = true;
       options = ["--cmd cd"];
     };
+
+    programs.direnv.enable = true;
+    programs.direnv.nix-direnv.enable = true;
   }

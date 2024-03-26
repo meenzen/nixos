@@ -47,6 +47,7 @@
     kdePackages.kdeconnect-kde
     xwaylandvideobridge
     xdg-utils
+    qpwgraph
   ];
 
   # KDE Partition Manager
