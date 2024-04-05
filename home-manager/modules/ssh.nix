@@ -31,7 +31,6 @@
 
       "mail.meenzen.net" = {
         hostname = "mail.meenzen.net";
-        user = "root";
       };
 
       "helium-ssh.mnzn.dev" = {
