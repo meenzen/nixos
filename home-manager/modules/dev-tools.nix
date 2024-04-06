@@ -53,5 +53,8 @@ in {
     rust-analyzer
     clippy
     rustfmt
+
+    # Misc
+    hyperfine
   ];
 }
