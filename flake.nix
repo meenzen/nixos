@@ -2,11 +2,8 @@
   description = "NixOS Configuration of Samuel Meenzen";
 
   inputs = {
-    # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
-    # Nixpkgs Stable
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixos-hardware.url = "github:nixos/nixos-hardware";
 
     # Home manager
     home-manager.url = "github:nix-community/home-manager/master";
@@ -18,30 +15,20 @@
     nix-citizen.inputs.nix-gaming.follows = "nix-gaming";
     protontweaks.url = "github:rain-cafe/protontweaks/main";
     protontweaks.inputs.nixpkgs.follows = "nixpkgs";
-
-    nixos-hardware.url = "github:nixos/nixos-hardware";
-
-    # Shameless plug: looking for a way to nixify your themes and make
-    # everything match nicely? Try nix-colors!
-    # nix-colors.url = "github:misterio77/nix-colors";
   };
 
   outputs = {
     self,
     nixpkgs,
-    nixpkgs-stable,
     home-manager,
     nixos-hardware,
     ...
   } @ inputs: let
     inherit (self) outputs;
   in {
-    # NixOS configuration entrypoint
-    # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
       nixos-vm = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
-        # > Our main nixos configuration file <
         modules = [
           ./nixos/systems/nixos-vm/configuration.nix
           home-manager.nixosModules.home-manager
@@ -50,7 +37,6 @@
               extraSpecialArgs = {inherit inputs outputs;};
               useUserPackages = true;
               users = {
-                # Import your home-manager configuration
                 meenzens = import ./home-manager/home.nix;
               };
             };
@@ -60,7 +46,6 @@
 
       the-machine = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
-        # > Our main nixos configuration file <
         modules = [
           ./nixos/systems/the-machine/configuration.nix
           nixos-hardware.nixosModules.common-pc-ssd
@@ -72,7 +57,6 @@
               extraSpecialArgs = {inherit inputs outputs;};
               useUserPackages = true;
               users = {
-                # Import your home-manager configuration
                 meenzens = import ./home-manager/home.nix;
               };
             };
@@ -82,7 +66,6 @@
 
       framework = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
-        # > Our main nixos configuration file <
         modules = [
           ./nixos/systems/framework/configuration.nix
           nixos-hardware.nixosModules.common-pc-ssd
@@ -93,7 +76,6 @@
               extraSpecialArgs = {inherit inputs outputs;};
               useUserPackages = true;
               users = {
-                # Import your home-manager configuration
                 meenzens = import ./home-manager/home.nix;
               };
             };
@@ -101,5 +83,24 @@
         ];
       };
     };
+
+    devShells."x86_64-linux".default = let
+      pkgs = nixpkgs.legacyPackages.x86_64-linux;
+    in
+      pkgs.mkShell {
+        nativeBuildInputs = with pkgs; [
+          git
+          nixFlakes
+          nil
+          alejandra
+        ];
+        shellHook = ''
+          echo ""
+          echo "$(git --version)"
+          echo "$(nil --version)"
+          echo "$(alejandra --version)"
+          echo ""
+        '';
+      };
   };
 }
