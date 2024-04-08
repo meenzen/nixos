@@ -12,4 +12,4 @@ print () {
 print "Starting nix repl (press Ctrl+D to exit)..."
 echo ""
 
-nix --extra-experimental-features repl-flake repl ".#nixosConfigurations"
+nix --extra-experimental-features repl-flake repl .

@@ -5,6 +5,8 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
+    flake-utils.url = "github:numtide/flake-utils";
+
     # Home manager
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -20,12 +22,41 @@
   outputs = {
     self,
     nixpkgs,
-    home-manager,
     nixos-hardware,
+    flake-utils,
+    home-manager,
     ...
   } @ inputs: let
     inherit (self) outputs;
+
+    devShells =
+      flake-utils.lib.eachDefaultSystem
+      (
+        system: let
+          pkgs = import nixpkgs {
+            inherit system;
+          };
+        in {
+          devShells.default = pkgs.mkShell {
+            nativeBuildInputs = with pkgs; [
+              git
+              nixFlakes
+              nil
+              alejandra
+            ];
+            shellHook = ''
+              echo ""
+              echo "$(git --version)"
+              echo "$(nil --version)"
+              echo "$(alejandra --version)"
+              echo ""
+            '';
+          };
+        }
+      );
   in {
+    inherit (devShells) devShells;
+
     nixosConfigurations = {
       nixos-vm = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
@@ -83,24 +114,5 @@
         ];
       };
     };
-
-    devShells."x86_64-linux".default = let
-      pkgs = nixpkgs.legacyPackages.x86_64-linux;
-    in
-      pkgs.mkShell {
-        nativeBuildInputs = with pkgs; [
-          git
-          nixFlakes
-          nil
-          alejandra
-        ];
-        shellHook = ''
-          echo ""
-          echo "$(git --version)"
-          echo "$(nil --version)"
-          echo "$(alejandra --version)"
-          echo ""
-        '';
-      };
   };
 }
