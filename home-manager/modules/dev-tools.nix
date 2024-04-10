@@ -1,4 +1,14 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  inputs,
+  ...
+}: let
+  # own nixpkgs with some updated packages
+  meenzen = import inputs.nixpkgs-meenzen {
+    system = pkgs.system;
+    config.allowUnfree = true;
+  };
+
   dotnet-combined =
     (with pkgs.dotnetCorePackages;
       combinePackages [
@@ -43,10 +53,10 @@ in {
     kdePackages.kate
 
     # https://nixos.wiki/wiki/Jetbrains_Tools
-    (pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains.rider jetbrains-plugins)
-    (pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains.rust-rover jetbrains-plugins)
-    (pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains.idea-ultimate jetbrains-plugins)
-    (pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains.webstorm jetbrains-plugins)
+    (meenzen.jetbrains.plugins.addPlugins meenzen.jetbrains.rider jetbrains-plugins)
+    (meenzen.jetbrains.plugins.addPlugins meenzen.jetbrains.rust-rover jetbrains-plugins)
+    (meenzen.jetbrains.plugins.addPlugins meenzen.jetbrains.idea-ultimate jetbrains-plugins)
+    (meenzen.jetbrains.plugins.addPlugins meenzen.jetbrains.webstorm jetbrains-plugins)
     #jetbrains-toolbox
 
     # Rust

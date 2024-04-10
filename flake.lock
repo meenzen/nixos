@@ -171,6 +171,21 @@
         "type": "github"
       }
     },
+    "nixpkgs-meenzen": {
+      "locked": {
+        "lastModified": 1712747497,
+        "narHash": "sha256-h959PAuAiiyBwI7DAZpJLqUNfaQicKAiKnLPzuxSfu8=",
+        "owner": "meenzen",
+        "repo": "nixpkgs",
+        "rev": "da2a0c4573b2cb87769d0a7dc2c84b9991b9c230",
+        "type": "github"
+      },
+      "original": {
+        "owner": "meenzen",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1712420723,
@@ -248,6 +263,7 @@
         "nix-gaming": "nix-gaming",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_3",
+        "nixpkgs-meenzen": "nixpkgs-meenzen",
         "protontweaks": "protontweaks"
       }
     },
