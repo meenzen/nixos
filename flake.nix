@@ -81,9 +81,6 @@
         specialArgs = {inherit inputs outputs;};
         modules = [
           ./nixos/systems/the-machine/configuration.nix
-          nixos-hardware.nixosModules.common-pc-ssd
-          nixos-hardware.nixosModules.common-cpu-intel-cpu-only
-          nixos-hardware.nixosModules.common-gpu-nvidia-nonprime
           home-manager.nixosModules.home-manager
           {
             home-manager = {
@@ -101,8 +98,6 @@
         specialArgs = {inherit inputs outputs;};
         modules = [
           ./nixos/systems/framework/configuration.nix
-          nixos-hardware.nixosModules.common-pc-ssd
-          nixos-hardware.nixosModules.framework-11th-gen-intel
           home-manager.nixosModules.home-manager
           {
             home-manager = {
