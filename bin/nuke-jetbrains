@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+set -eo pipefail
+
+RED='\033[0;31m'
+NO_COLOR='\033[0m'
+
+print_warning () {
+    echo -e "Warning: ${RED}$1${NO_COLOR}"
+}
+
+print_warning "This script will remove all IDEs installed using JetBrains Toolbox."
+print_warning "It will also remove any configuration, cache and plugins."
+
+read -p "Press enter to continue or Ctrl+C to cancel" -n 1 -r
+
+echo "Removing JetBrains configuration files..."
+rm -rf ~/.config/JetBrains
+
+echo "Removing JetBrains cache files..."
+rm -rf ~/.cache/JetBrains
+
+echo "Removing JetBrains local files..."
+rm -rf ~/.local/share/JetBrains
