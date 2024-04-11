@@ -13,8 +13,8 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Gaming
-    nix-citizen.url = "github:LovingMelody/nix-citizen"; # https://github.com/LovingMelody/nix-citizen
-    nix-gaming.url = "github:fufexan/nix-gaming"; # https://github.com/fufexan/nix-gaming
+    nix-citizen.url = "github:LovingMelody/nix-citizen";
+    nix-gaming.url = "github:fufexan/nix-gaming";
     nix-citizen.inputs.nix-gaming.follows = "nix-gaming";
     protontweaks.url = "github:rain-cafe/protontweaks/main";
     protontweaks.inputs.nixpkgs.follows = "nixpkgs";
