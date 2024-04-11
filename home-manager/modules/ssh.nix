@@ -20,14 +20,10 @@
         port = 2222;
       };
 
-      ### Privat ###
-
       proxmox = {
         hostname = "192.168.1.4";
         user = "root";
       };
-
-      ### Hetzner Privat ###
 
       "mail.meenzen.net" = {
         hostname = "mail.meenzen.net";
@@ -80,38 +76,33 @@
         proxyJump = "helium-ssh.mnzn.dev";
       };
 
-      ### Arbeit Intern ###
-
-      # SSH Gateway (cloudflared smn-01)
       "ssh-gateway.human-dev.io" = {
         proxyCommand = "${pkgs.cloudflared}/bin/cloudflared access ssh --hostname %h";
       };
 
-      # postnotes01 (Document Library)
+      # Document Library
       postnotes01 = lib.hm.dag.entryAfter ["ssh-gateway.human-dev.io"] {
         hostname = "172.16.0.26";
         proxyJump = "ssh-gateway.human-dev.io";
       };
 
-      # smn-01 (GitLab Runner, cloudflared)
+      # GitLab Runner, cloudflared
       smn_01 = lib.hm.dag.entryAfter ["ssh-gateway.human-dev.io"] {
         hostname = "172.16.0.211";
         proxyJump = "ssh-gateway.human-dev.io";
       };
 
-      # smn-02 (osTicket)
+      # osTicket
       smn_02 = lib.hm.dag.entryAfter ["ssh-gateway.human-dev.io"] {
         hostname = "172.16.0.212";
         proxyJump = "ssh-gateway.human-dev.io";
       };
 
-      # hpcredux
       hpcredux = lib.hm.dag.entryAfter ["ssh-gateway.human-dev.io"] {
         hostname = "172.16.0.214";
         proxyJump = "ssh-gateway.human-dev.io";
       };
 
-      # hpcredux-dev
       hpcredux_dev = lib.hm.dag.entryAfter ["ssh-gateway.human-dev.io"] {
         hostname = "172.16.0.215";
         proxyJump = "ssh-gateway.human-dev.io";
@@ -127,37 +118,18 @@
         proxyJump = "ssh-gateway.human-dev.io";
       };
 
-      # nginx-static (doku.human2.de)
+      # doku.human2.de
       nginx_static = lib.hm.dag.entryAfter ["ssh-gateway.human-dev.io"] {
         hostname = "172.16.0.216";
         proxyJump = "ssh-gateway.human-dev.io";
       };
 
-      # nginx_pisa_01 (Nginx Proxy)
       nginx_pisa_01 = lib.hm.dag.entryAfter ["ssh-gateway.human-dev.io"] {
         hostname = "192.168.155.11";
         proxyJump = "ssh-gateway.human-dev.io";
       };
 
-      # hpimc01 (Pimcore Live)
-      hpimc01 = {
-        hostname = "213.216.20.131";
-        port = 9901;
-      };
-
-      # hpimc02 (Pimcore Test)
-      hpimc02 = {
-        hostname = "213.216.20.131";
-        port = 9902;
-      };
-
-      # hpimc03 (Pimcore Dev)
-      hpimc03 = {
-        hostname = "213.216.20.131";
-        port = 9903;
-      };
-
-      # marcomdev1 (Pimcore)
+      # Pimcore
       marcomdev1 = lib.hm.dag.entryAfter ["ssh-gateway.human-dev.io"] {
         hostname = "172.18.250.51";
         proxyJump = "ssh-gateway.human-dev.io";
@@ -169,7 +141,7 @@
         proxyJump = "ssh-gateway.human-dev.io";
       };
 
-      # docker01 (stirling-pdf)
+      # stirling-pdf
       docker01 = lib.hm.dag.entryAfter ["ssh-gateway.human-dev.io"] {
         hostname = "172.16.0.48";
         proxyJump = "ssh-gateway.human-dev.io";
@@ -180,14 +152,11 @@
         proxyJump = "ssh-gateway.human-dev.io";
       };
 
-      ### Arbeit Hetzner ###
-
       "git.human.de".hostname = "git.human.de";
       "sentry.human.de".hostname = "167.235.55.186";
       runner_hetzner_01.hostname = "195.201.16.71";
       grafana_stack.hostname = "128.140.83.161";
       docker_host.hostname = "docker-host.human-dev.io";
-      evilginx.hostname = "78.46.191.33";
     };
   };
 }
