@@ -1,0 +1,120 @@
+#!/usr/bin/env bash
+
+set -eo pipefail
+
+NIXPKGS="$HOME/dev/nixpkgs"
+NIXPKGS_URI="https://github.com/NixOS/nixpkgs.git"
+NIXPKGS_BRANCH=nixos-unstable
+
+DOTNET_VERSIONS=("6.0" "7.0" "8.0")
+DOTNET_DIRECTORY="$NIXPKGS/pkgs/development/compilers/dotnet"
+
+JETBRAINS_DIRECTORY="$NIXPKGS/pkgs/applications/editors/jetbrains"
+
+LIGHT_BLUE='\033[1;34m'
+RED='\033[0;31m'
+NO_COLOR='\033[0m'
+
+FORCE=false
+if [ "$1" == "--force" ]; then
+  FORCE=true
+fi
+
+git_ahead_of_origin () {
+  [ -n "$(git log origin/$NIXPKGS_BRANCH..$NIXPKGS_BRANCH)" ]
+}
+
+git_uncommitted_changes () {
+  [ -n "$(git status --porcelain)" ]
+}
+
+print () {
+  echo -e "${LIGHT_BLUE}$1${NO_COLOR}"
+}
+
+print_error () {
+  echo -e "${RED}Error:${NO_COLOR} $1"
+}
+
+print "=> Starting Nixpkgs fork update"
+
+echo "Nixpkgs: $NIXPKGS"
+echo "Nixpkgs Repo: $NIXPKGS_URI"
+echo "Nixpkgs Branch: $NIXPKGS_BRANCH"
+echo "Force Update: $FORCE (use --force to reset the fork to upstream before updating)"
+
+# Requirements
+print "==> Checking Requirements"
+
+if [ ! -d "$NIXPKGS" ]; then
+  print_error "Nixpkgs not found at $NIXPKGS"
+  exit 1
+fi
+
+cd $NIXPKGS
+
+if ! git remote | grep -q upstream; then
+  print_error "Upstream remote not found in $NIXPKGS"
+  exit 1
+fi
+
+if [ "$(git remote get-url upstream)" != "$NIXPKGS_URI" ]; then
+  print_error "Upstream remote is not set to $NIXPKGS_URI"
+  exit 1
+fi
+
+if git_uncommitted_changes; then
+  print_error "Uncommitted changes found in $NIXPKGS"
+  exit 1
+fi
+
+# Preparation
+print "==> Fetching upstream"
+git fetch upstream
+
+print "==> Checking out $NIXPKGS_BRANCH"
+git checkout $NIXPKGS_BRANCH
+
+if git_uncommitted_changes; then
+  print_error "Uncommitted changes found"
+  exit 1
+fi
+
+if [ "$FORCE" = true ]; then
+  print "==> Resetting to upstream/$NIXPKGS_BRANCH"
+  git reset --hard upstream/$NIXPKGS_BRANCH
+fi
+
+if git_ahead_of_origin; then
+  print_error "Local branch is ahead of origin"
+  exit 1
+fi
+
+# .NET SDKs
+print "==> Updating .NET"
+cd "$DOTNET_DIRECTORY"
+
+for version in "${DOTNET_VERSIONS[@]}"; do
+  print "==> Updating .NET $version"
+  ./update.sh "$version"
+
+  if git_uncommitted_changes; then
+    print "==> Changes detected, committing"
+    git add .
+    git commit -m "dotnet-sdk $version: update to latest version"
+  fi
+done
+
+# JetBrains IDEs
+print "==> Updating JetBrains"
+cd "$JETBRAINS_DIRECTORY"
+
+bin/update_bin.py
+
+# Cleanup
+if git_ahead_of_origin; then
+  print "==> Pushing changes"
+  git push origin $NIXPKGS_BRANCH --force
+fi
+
+print "=> Nixpkgs fork update complete"
