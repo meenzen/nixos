@@ -16,13 +16,6 @@ in
     programs.bash = {
       enable = true;
       enableCompletion = true;
-      bashrcExtra = ''
-        export PATH="$PATH:$HOME/bin:$HOME/.local/bin"
-        # dotnet
-        export PATH=$PATH:$HOME/dotnet
-        export PATH=$PATH:$HOME/.dotnet/tools
-        export DOTNET_ROOT=$HOME/dotnet
-      '';
       shellAliases = aliases;
     };
 
@@ -58,7 +51,7 @@ in
     programs.fish.enable = true;
     programs.nushell.enable = true;
 
-    # marter cd command
+    # smarter cd command
     programs.zoxide = {
       enable = true;
       options = ["--cmd cd"];
