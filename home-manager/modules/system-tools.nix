@@ -1,20 +1,20 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    strace # system call monitoring
-    ltrace # library call monitoring
-    lsof # list open files
+    strace
+    ltrace
+    lsof
 
     sysstat
-    lm_sensors # for `sensors` command
+    lm_sensors # sensors
     ethtool
     pciutils # lspci
     usbutils # lsusb
-    smartmontools # SMART disk utilities (smartctl)
+    smartmontools # smartctl
 
     htop
-    btop # replacement of htop/nmon
-    iotop # io monitoring
-    iftop # network monitoring
+    btop
+    iotop
+    iftop
     duf
     ncdu
 
@@ -22,6 +22,7 @@
     xz
     unzip
     p7zip
+    zstd
 
     file
     which
@@ -29,15 +30,14 @@
     gnused
     gnutar
     gawk
-    zstd
     gnupg
 
     nnn # terminal file manager
-    ripgrep # recursively searches directories for a regex pattern
-    jq # A lightweight and flexible command-line JSON processor
-    yq-go # yaml processer https://github.com/mikefarah/yq
-    eza # A modern replacement for ‘ls’
-    fzf # A command-line fuzzy finder
-    bat
+    ripgrep # grep alternative
+    jq # json processer
+    yq-go # yaml processer
+    eza # ls alternative
+    fzf # fuzzy finder
+    bat # cat alternative
   ];
 }

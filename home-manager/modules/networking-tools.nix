@@ -1,12 +1,12 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    mtr # A network diagnostic tool
+    mtr
     iperf3
-    dnsutils # `dig` + `nslookup`
-    ldns # replacement of `dig`, it provide the command `drill`
-    aria2 # A lightweight multi-protocol & multi-source command-line download utility
-    socat # replacement of openbsd-netcat
-    nmap # A utility for network discovery and security auditing
-    ookla-speedtest # provides the `speedtest` command
+    dnsutils # dig + nslookup
+    ldns # drill (dig alternative)
+    aria2 # download manager
+    socat
+    nmap
+    ookla-speedtest
   ];
 }

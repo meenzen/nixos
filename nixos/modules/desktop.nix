@@ -17,10 +17,10 @@
   # Enable Wayland support in Chromium based apps
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
-  # Enable CUPS to print documents.
+  # Enable CUPS
   services.printing.enable = true;
 
-  # Enable the KDE Plasma Desktop Environment.
+  # KDE Plasma Desktop
   services.displayManager.sddm.enable = true;
   #services.displayManager.sddm.wayland.enable = true; # SDDM Wayland support is still a little unstable
   services.desktopManager.plasma6.enable = true;

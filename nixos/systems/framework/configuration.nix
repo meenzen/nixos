@@ -47,7 +47,7 @@
   };
 
   # Enable Flakes
-  nix.settings.experimental-features = ["nix-command" "flakes"]; #
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # System Hostname
   networking.hostName = "framework";

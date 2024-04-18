@@ -13,9 +13,8 @@
     stateVersion = "23.11";
   };
 
-  # Let home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  # Nicely reload system units when changing configs
+  # automatically reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 }

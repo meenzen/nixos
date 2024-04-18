@@ -41,9 +41,6 @@ in {
     DOTNET_ROOT = "${dotnet-combined}";
   };
   home.packages = with pkgs; [
-    glow
-    tokei
-
     # Compilers
     dotnet-combined
     gcc
@@ -68,6 +65,8 @@ in {
 
     # Misc
     hyperfine
+    glow
+    tokei
   ];
 
   home.file.".ideavimrc".text = ''
