@@ -86,6 +86,9 @@ in {
     " J - Join things.
     set ideajoin
 
+    " Case-insensitive search.
+    set ignorecase smartcase
+
     " Don't use Ex mode, use Q for formatting.
     map Q gq
 
