@@ -54,6 +54,7 @@ in {
     (meenzen.jetbrains.plugins.addPlugins meenzen.jetbrains.rust-rover jetbrains-plugins)
     (meenzen.jetbrains.plugins.addPlugins meenzen.jetbrains.idea-ultimate jetbrains-plugins)
     (meenzen.jetbrains.plugins.addPlugins meenzen.jetbrains.webstorm jetbrains-plugins)
+    (meenzen.jetbrains.plugins.addPlugins meenzen.jetbrains.phpstorm jetbrains-plugins)
     #jetbrains-toolbox
 
     # Rust
