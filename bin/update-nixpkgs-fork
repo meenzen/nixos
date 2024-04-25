@@ -6,6 +6,7 @@ NIXPKGS="$HOME/dev/nixpkgs"
 NIXPKGS_URI="https://github.com/NixOS/nixpkgs.git"
 NIXPKGS_BRANCH=nixos-unstable
 
+DOTNET_SKIP=true
 DOTNET_VERSIONS=("6.0" "7.0" "8.0")
 DOTNET_DIRECTORY="$NIXPKGS/pkgs/development/compilers/dotnet"
 
@@ -91,19 +92,23 @@ if git_ahead_of_origin; then
 fi
 
 # .NET SDKs
-print "==> Updating .NET"
-cd "$DOTNET_DIRECTORY"
+if [ "$DOTNET_SKIP" = true ]; then
+  print "==> Skipping .NET SDKs"
+else
+  print "==> Updating .NET"
+  cd "$DOTNET_DIRECTORY"
 
-for version in "${DOTNET_VERSIONS[@]}"; do
+  for version in "${DOTNET_VERSIONS[@]}"; do
   print "==> Updating .NET $version"
   ./update.sh "$version"
 
   if git_uncommitted_changes; then
-    print "==> Changes detected, committing"
-    git add .
-    git commit -m "dotnet-sdk $version: update to latest version"
+      print "==> Changes detected, committing"
+      git add .
+      git commit -m "dotnet-sdk $version: update to latest version"
   fi
-done
+  done
+fi
 
 # JetBrains IDEs
 print "==> Updating JetBrains"
