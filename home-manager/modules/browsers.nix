@@ -1,13 +1,18 @@
-{pkgs, ...}: {
+{pkgs, ...}: let
+  args = [
+    "--enable-features=UseOzonePlatform"
+    "--ozone-platform=wayland"
+    "--ignore-gpu-blocklist"
+    "--enable-zero-copy"
+    "--enable-features=VaapiVideoDecodeLinuxGL"
+  ];
+in {
   home.packages = with pkgs; [
     firefox
 
     # https://discourse.nixos.org/t/google-chrome-not-working-after-recent-nixos-rebuild/43746/8
     (google-chrome.override {
-      commandLineArgs = [
-        "--enable-features=UseOzonePlatform"
-        "--ozone-platform=wayland"
-      ];
+      commandLineArgs = args;
     })
 
     # microsoft-edge # edge is totally borked right now
@@ -15,7 +20,9 @@
 
   programs.chromium = {
     enable = true;
-    package = pkgs.brave;
+    package = pkgs.brave.override {
+      commandLineArgs = args;
+    };
     extensions = [
       # Bypass Paywalls Chrome Clean
       {
