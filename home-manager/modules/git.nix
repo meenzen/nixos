@@ -11,7 +11,7 @@
     lfs.enable = true;
     extraConfig = {
       init.defaultBranch = "main";
-      core.autocrlf = true;
+      core.autocrlf = false;
       credential.helper = "libsecret";
       rerere.enabled = true;
       commit.gpgsign = true;

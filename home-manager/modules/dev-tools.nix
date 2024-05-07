@@ -68,6 +68,7 @@ in {
     hyperfine
     glow
     tokei
+    difftastic
   ];
 
   home.file.".ideavimrc".text = ''
