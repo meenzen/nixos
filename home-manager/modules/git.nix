@@ -18,5 +18,7 @@
       gpg.format = "ssh";
       user.signingkey = "/home/${config.home.username}/.ssh/id_ed25519_sk";
     };
+
+    difftastic.enable = true;
   };
 }
