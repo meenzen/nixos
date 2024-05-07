@@ -12,6 +12,7 @@
     enable = true;
     compression = true;
     addKeysToAgent = "yes";
+    controlMaster = "auto";
 
     # SSH hosts config
     matchBlocks = {
