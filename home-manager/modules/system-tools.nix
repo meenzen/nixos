@@ -31,6 +31,7 @@
     gnutar
     gawk
     gnupg
+    dos2unix
 
     nnn # terminal file manager
     ripgrep # grep alternative
