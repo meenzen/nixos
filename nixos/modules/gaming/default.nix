@@ -32,6 +32,8 @@
 
   environment.systemPackages = [
     inputs.nix-citizen.packages.${pkgs.system}.star-citizen
+    pkgs.heroic
+
     pkgs.wineWowPackages.stable
     pkgs.winetricks
     pkgs.mangohud
