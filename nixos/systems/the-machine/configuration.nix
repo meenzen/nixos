@@ -11,7 +11,7 @@
     inputs.nixos-hardware.nixosModules.common-gpu-nvidia-nonprime
 
     ../../modules
-    ../../hardware/nvidia.nix
+    ../../hardware/nvidia
 
     ./hardware-configuration.nix
   ];
