@@ -20,6 +20,9 @@
     })
     config.nix.registry;
 
+  # fix shebangs like '/bin/bash', see https://github.com/Mic92/envfs
+  services.envfs.enable = true;
+
   # https://nix.dev/guides/faq.html#how-to-run-non-nix-executables
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
