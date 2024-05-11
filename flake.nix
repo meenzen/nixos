@@ -56,6 +56,14 @@
           };
         }
       );
+
+    home-manager-config = {
+      extraSpecialArgs = {inherit inputs outputs;};
+      useUserPackages = true;
+      users = {
+        meenzens = import ./home-manager/home.nix;
+      };
+    };
   in {
     inherit (devShells) devShells;
 
@@ -66,13 +74,7 @@
           ./nixos/systems/nixos-vm/configuration.nix
           home-manager.nixosModules.home-manager
           {
-            home-manager = {
-              extraSpecialArgs = {inherit inputs outputs;};
-              useUserPackages = true;
-              users = {
-                meenzens = import ./home-manager/home.nix;
-              };
-            };
+            home-manager = home-manager-config;
           }
         ];
       };
@@ -83,13 +85,7 @@
           ./nixos/systems/the-machine/configuration.nix
           home-manager.nixosModules.home-manager
           {
-            home-manager = {
-              extraSpecialArgs = {inherit inputs outputs;};
-              useUserPackages = true;
-              users = {
-                meenzens = import ./home-manager/home.nix;
-              };
-            };
+            home-manager = home-manager-config;
           }
         ];
       };
@@ -100,13 +96,7 @@
           ./nixos/systems/framework/configuration.nix
           home-manager.nixosModules.home-manager
           {
-            home-manager = {
-              extraSpecialArgs = {inherit inputs outputs;};
-              useUserPackages = true;
-              users = {
-                meenzens = import ./home-manager/home.nix;
-              };
-            };
+            home-manager = home-manager-config;
           }
         ];
       };
