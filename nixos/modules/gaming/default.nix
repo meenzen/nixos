@@ -34,7 +34,10 @@
     inputs.nix-citizen.packages.${pkgs.system}.star-citizen
     pkgs.wineWowPackages.stable
     pkgs.winetricks
+    pkgs.mangohud
   ];
+
+  programs.gamemode.enable = true;
 
   # NixOS configuration for Star Citizen requirements
   # https://github.com/fufexan/nix-gaming/tree/master/pkgs/star-citizen
@@ -48,8 +51,14 @@
     enable = true;
     remotePlay.openFirewall = true;
     dedicatedServer.openFirewall = true;
+    gamescopeSession.enable = true;
     extraCompatPackages = [
       pkgs.proton-ge-bin
     ];
   };
+
+  # enable game tweaks by adjusting the game launch options:
+  # `gamemoderun %command%`
+  # `mangohud %command%`
+  # `gamescope %command%`
 }
