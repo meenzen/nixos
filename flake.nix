@@ -68,17 +68,6 @@
     inherit (devShells) devShells;
 
     nixosConfigurations = {
-      nixos-vm = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./nixos/systems/nixos-vm/configuration.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = home-manager-config;
-          }
-        ];
-      };
-
       the-machine = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [

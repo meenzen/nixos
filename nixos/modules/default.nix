@@ -1,0 +1,21 @@
+{
+  imports = [
+    ./bootloader
+    ./certs
+    ./cleanup
+    ./cloudflare-warp
+    ./desktop
+    ./firmware-update
+    ./fonts
+    ./gaming
+    ./locale
+    ./networking
+    ./nix
+    ./programs
+    ./services
+    ./state-version
+    ./system-packages
+    ./users
+    ./workarounds
+  ];
+}
