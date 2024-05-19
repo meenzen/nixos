@@ -14,6 +14,12 @@
 
     base16Scheme = "${pkgs.base16-schemes}/share/themes/materia.yaml";
 
+    cursor = {
+      name = "breeze_cursors";
+      package = pkgs.kdePackages.breeze;
+      size = 24;
+    };
+
     fonts = rec {
       monospace = {
         name = "JetBrainsMono Nerd Font";
@@ -26,8 +32,8 @@
       serif = sansSerif;
 
       sizes = {
-        applications = 12;
-        terminal = 14;
+        applications = 10;
+        terminal = 12;
         desktop = 10;
         popups = 10;
       };
@@ -35,7 +41,7 @@
 
     opacity = {
       applications = 1.0;
-      terminal = 0.94;
+      terminal = 0.9;
       desktop = 1.0;
       popups = 0.9;
     };

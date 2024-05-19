@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+set -eo pipefail
+
+rm -f ~/.gtkrc-2.0.backup ~/.gtkrc-2.0
