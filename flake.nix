@@ -12,6 +12,9 @@
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Customization
+    stylix.url = "github:danth/stylix";
+
     # Gaming
     nix-citizen.url = "github:LovingMelody/nix-citizen";
     nix-gaming.url = "github:fufexan/nix-gaming";
@@ -27,6 +30,7 @@
     nixos-hardware,
     flake-utils,
     home-manager,
+    stylix,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -60,6 +64,8 @@
     home-manager-config = {
       extraSpecialArgs = {inherit inputs outputs;};
       useUserPackages = true;
+      useGlobalPkgs = true;
+      backupFileExtension = "backup";
       users = {
         meenzens = import ./home-manager/home.nix;
       };
@@ -76,6 +82,7 @@
           {
             home-manager = home-manager-config;
           }
+          stylix.nixosModules.stylix
         ];
       };
 
@@ -87,6 +94,7 @@
           {
             home-manager = home-manager-config;
           }
+          stylix.nixosModules.stylix
         ];
       };
     };

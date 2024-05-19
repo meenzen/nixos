@@ -14,6 +14,7 @@
     ./programs
     ./services
     ./state-version
+    ./stylix
     ./system-packages
     ./users
     ./workarounds
