@@ -9,7 +9,7 @@ print () {
     echo -e "${LIGHT_BLUE}$1${NO_COLOR}"
 }
 
-print "=> Starting Update"
+print "=> Starting Install"
 
 print "==> Formatting Code"
 alejandra .

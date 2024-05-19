@@ -1,6 +1,7 @@
 {
   imports = [
     ./bootloader
+    ./build-vm
     ./certs
     ./cleanup
     ./cloudflare-warp

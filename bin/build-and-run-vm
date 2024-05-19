@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+set -eo pipefail
+
+LIGHT_BLUE='\033[1;34m'
+NO_COLOR='\033[0m'
+
+print () {
+    echo -e "${LIGHT_BLUE}$1${NO_COLOR}"
+}
+
+print "=> Starting VM Build"
+
+print "==> Formatting Code"
+alejandra .
+
+print "==> Building VM"
+git add .
+nixos-rebuild build-vm --upgrade --verbose --flake .#vm
+
+print "==> Starting VM"
+./result/bin/run-vm-vm
+
+echo "Do you want to delete the disk image? [y/N]"
+
+read -r response
+
+if [ "$response" != "y" ]; then
+    exit 0
+fi
+
+print "==> Deleting Disk Image"
+rm -f vm.qcow2

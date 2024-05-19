@@ -97,6 +97,18 @@
           stylix.nixosModules.stylix
         ];
       };
+
+      vm = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          ./nixos/systems/vm/configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = home-manager-config;
+          }
+          stylix.nixosModules.stylix
+        ];
+      };
     };
   };
 }
