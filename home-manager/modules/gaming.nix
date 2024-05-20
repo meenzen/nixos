@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
     discord
+    teamspeak5_client
   ];
 
   programs.obs-studio = {
