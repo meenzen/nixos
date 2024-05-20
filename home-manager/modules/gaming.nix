@@ -2,6 +2,7 @@
   home.packages = with pkgs; [
     discord
     teamspeak5_client
+    prismlauncher
   ];
 
   programs.obs-studio = {
