@@ -50,11 +50,16 @@ in {
     kdePackages.kate
 
     # https://nixos.wiki/wiki/Jetbrains_Tools
-    (meenzen.jetbrains.plugins.addPlugins meenzen.jetbrains.rider jetbrains-plugins)
-    (meenzen.jetbrains.plugins.addPlugins meenzen.jetbrains.rust-rover jetbrains-plugins)
-    (meenzen.jetbrains.plugins.addPlugins meenzen.jetbrains.idea-ultimate jetbrains-plugins)
-    (meenzen.jetbrains.plugins.addPlugins meenzen.jetbrains.webstorm jetbrains-plugins)
-    (meenzen.jetbrains.plugins.addPlugins meenzen.jetbrains.phpstorm jetbrains-plugins)
+    #(meenzen.jetbrains.plugins.addPlugins meenzen.jetbrains.rider jetbrains-plugins)
+    #(meenzen.jetbrains.plugins.addPlugins meenzen.jetbrains.rust-rover jetbrains-plugins)
+    #(meenzen.jetbrains.plugins.addPlugins meenzen.jetbrains.idea-ultimate jetbrains-plugins)
+    #(meenzen.jetbrains.plugins.addPlugins meenzen.jetbrains.webstorm jetbrains-plugins)
+    #(meenzen.jetbrains.plugins.addPlugins meenzen.jetbrains.phpstorm jetbrains-plugins)
+    (jetbrains.plugins.addPlugins jetbrains.rider jetbrains-plugins)
+    (jetbrains.plugins.addPlugins jetbrains.rust-rover jetbrains-plugins)
+    (jetbrains.plugins.addPlugins jetbrains.idea-ultimate jetbrains-plugins)
+    (jetbrains.plugins.addPlugins jetbrains.webstorm jetbrains-plugins)
+    (jetbrains.plugins.addPlugins jetbrains.phpstorm jetbrains-plugins)
     #jetbrains-toolbox
 
     # Rust
