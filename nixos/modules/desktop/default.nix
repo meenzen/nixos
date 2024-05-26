@@ -26,6 +26,11 @@
   services.desktopManager.plasma6.enable = true;
   services.desktopManager.plasma6.enableQt5Integration = true;
 
+  # disable baloo https://github.com/NixOS/nixpkgs/issues/63489#issuecomment-2046058993
+  environment.plasma6.excludePackages = [
+    pkgs.kdePackages.baloo
+  ];
+
   # Force KDE file picker
   environment.sessionVariables.XDG_CURRENT_DESKTOP = "KDE";
   environment.sessionVariables.GTK_USE_PORTAL = "1";
