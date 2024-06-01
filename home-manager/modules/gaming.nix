@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
     discord
-    teamspeak5_client
+    teamspeak_client
     prismlauncher
     lutris
   ];
