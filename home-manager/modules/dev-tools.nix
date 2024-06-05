@@ -64,11 +64,7 @@ in {
     #jetbrains-toolbox
 
     # Rust
-    rustc
-    cargo
-    rust-analyzer
-    clippy
-    rustfmt
+    rustup
 
     # Misc
     hyperfine
