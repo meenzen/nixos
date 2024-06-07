@@ -3,7 +3,6 @@
     discord
     teamspeak_client
     prismlauncher
-    lutris
   ];
 
   programs.obs-studio = {
