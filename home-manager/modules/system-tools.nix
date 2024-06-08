@@ -13,7 +13,7 @@
 
     htop
     btop
-    iotop
+    iotop-c
     iftop
     duf
     ncdu
