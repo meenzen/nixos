@@ -45,6 +45,7 @@
   environment.systemPackages = with pkgs; [
     kdePackages.xdg-desktop-portal-kde
     kdePackages.kdeconnect-kde
+    kdePackages.filelight
     xwaylandvideobridge
     xdg-utils
     qpwgraph
