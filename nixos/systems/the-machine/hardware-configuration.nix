@@ -12,9 +12,9 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = ["ahci" "xhci_pci" "ehci_pci" "nvme" "usbhid" "usb_storage" "sd_mod" "sr_mod"];
+  boot.initrd.availableKernelModules = ["xhci_pci" "nvme" "ahci" "usbhid" "sd_mod" "sr_mod"];
   boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-intel"];
+  boot.kernelModules = ["kvm-amd"];
   boot.extraModulePackages = [];
 
   fileSystems."/" = {
@@ -24,9 +24,16 @@
 
   boot.initrd.luks.devices."luks-fbe044ca-532b-44b7-9883-3e8d2455ca22".device = "/dev/disk/by-uuid/fbe044ca-532b-44b7-9883-3e8d2455ca22";
 
+  fileSystems."/bin" = {
+    device = "/usr/bin";
+    fsType = "none";
+    options = ["bind"];
+  };
+
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/7646-DB2F";
     fsType = "vfat";
+    options = ["fmask=0022" "dmask=0022"];
   };
 
   swapDevices = [];
@@ -36,8 +43,11 @@
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp6s0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.br-48f7dcd702bb.useDHCP = lib.mkDefault true;
+  # networking.interfaces.docker0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.enp13s0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.wlp14s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
