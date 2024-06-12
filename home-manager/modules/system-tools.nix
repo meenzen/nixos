@@ -18,6 +18,11 @@
     duf
     ncdu
 
+    # gpu related tools
+    glxinfo
+    vulkan-tools
+    gpu-viewer
+
     zip
     xz
     unzip

@@ -49,6 +49,9 @@
   };
   networking.extraHosts = "127.0.0.1 modules-cdn.eac-prod.on.epicgames.com";
 
+  # At least 40GB of ram is recommended for Star Citizen, so we need to enable zram
+  zramSwap.enable = true;
+
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;
