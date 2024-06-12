@@ -13,6 +13,7 @@
 
     ../../modules
     ../../hardware/nvidia
+    ../../hardware/bluetooth
 
     ./hardware-configuration.nix
   ];
