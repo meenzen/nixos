@@ -18,7 +18,8 @@
     stylix.url = "github:danth/stylix";
     nixvim = {
       url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # temporary workaround https://github.com/nix-community/nixvim/issues/1699
+      #inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Gaming
