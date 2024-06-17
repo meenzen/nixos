@@ -19,6 +19,5 @@
     ./system-packages
     ./users
     ./workarounds
-    ./workaround-system-name
   ];
 }
