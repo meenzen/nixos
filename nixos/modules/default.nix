@@ -18,6 +18,7 @@
     ./stylix
     ./system-packages
     ./users
+    ./vpn
     ./workarounds
   ];
 }
