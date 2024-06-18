@@ -7,7 +7,7 @@
     ./modules/nix-tools.nix
     ./modules/networking-tools.nix
     ./modules/git.nix
-    ./modules/neovim.nix
+    ./modules/neovim
     ./modules/starship.nix
     ./modules/wezterm.nix
     ./modules/shells.nix

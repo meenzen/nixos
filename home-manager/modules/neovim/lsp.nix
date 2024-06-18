@@ -1,0 +1,19 @@
+{
+  programs.nixvim.plugins = {
+    lsp = {
+      enable = true;
+      servers = {
+        marksman.enable = true; # markdown
+        nil-ls.enable = true; # nix
+        omnisharp.enable = true; # csharp
+        rust-analyzer = {
+          enable = true;
+          installCargo = false;
+          installRustc = false;
+        };
+      };
+    };
+    fidget.enable = true; # improved progress messages and notifications
+    lspkind.enable = true; # completion icons
+  };
+}
