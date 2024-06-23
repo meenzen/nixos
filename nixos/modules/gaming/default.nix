@@ -47,7 +47,7 @@
     "vm.max_map_count" = 16777216;
     "fs.file-max" = 524288;
   };
-  networking.extraHosts = "127.0.0.1 modules-cdn.eac-prod.on.epicgames.com";
+  #networking.extraHosts = "127.0.0.1 modules-cdn.eac-prod.on.epicgames.com";
 
   # At least 40GB of ram is recommended for Star Citizen, so we need to enable zram
   zramSwap.enable = true;
