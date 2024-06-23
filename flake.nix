@@ -21,6 +21,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    plasma-manager = {
+      url = "github:pjones/plasma-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
+
     # Gaming
     nix-gaming.url = "github:fufexan/nix-gaming";
     nix-citizen = {
@@ -40,6 +46,7 @@
     nixos-hardware,
     flake-utils,
     home-manager,
+    plasma-manager,
     stylix,
     ...
   } @ inputs: let
@@ -71,54 +78,34 @@
         }
       );
 
-    home-manager-config = {
-      extraSpecialArgs = {inherit inputs outputs;};
-      useUserPackages = true;
-      useGlobalPkgs = true;
-      backupFileExtension = "backup";
-      users = {
-        meenzens = import ./home-manager/home.nix;
+    mkSystem = systemModule:
+      nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          systemModule
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              extraSpecialArgs = {inherit inputs outputs;};
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              backupFileExtension = "backup";
+              users = {
+                meenzens = import ./home-manager/home.nix;
+              };
+              sharedModules = [plasma-manager.homeManagerModules.plasma-manager];
+            };
+          }
+          stylix.nixosModules.stylix
+        ];
       };
-    };
   in {
     inherit (devShells) devShells;
 
     nixosConfigurations = {
-      the-machine = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./nixos/systems/the-machine/configuration.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = home-manager-config;
-          }
-          stylix.nixosModules.stylix
-        ];
-      };
-
-      framework = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./nixos/systems/framework/configuration.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = home-manager-config;
-          }
-          stylix.nixosModules.stylix
-        ];
-      };
-
-      vm = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./nixos/systems/vm/configuration.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = home-manager-config;
-          }
-          stylix.nixosModules.stylix
-        ];
-      };
+      the-machine = mkSystem ./nixos/systems/the-machine/configuration.nix;
+      framework = mkSystem ./nixos/systems/framework/configuration.nix;
+      vm = mkSystem ./nixos/systems/vm/configuration.nix;
     };
   };
 }

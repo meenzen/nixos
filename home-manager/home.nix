@@ -1,13 +1,14 @@
 {
   imports = [
     ./common
+    ./modules/neovim
+    ./modules/plasma
     ./modules/desktop.nix
     ./modules/dev-tools.nix
     ./modules/system-tools.nix
     ./modules/nix-tools.nix
     ./modules/networking-tools.nix
     ./modules/git.nix
-    ./modules/neovim
     ./modules/starship.nix
     ./modules/wezterm.nix
     ./modules/shells.nix
