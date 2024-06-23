@@ -31,19 +31,25 @@
       };
       serif = sansSerif;
 
-      sizes = {
-        applications = 10;
-        terminal = 12;
-        desktop = 10;
-        popups = 10;
+      sizes = let
+        default = 10;
+        large = 12;
+      in {
+        applications = default;
+        terminal = large;
+        desktop = default;
+        popups = default;
       };
     };
 
-    opacity = {
-      applications = 1.0;
-      terminal = 0.9;
-      desktop = 1.0;
-      popups = 0.9;
+    opacity = let
+      default = 1.0;
+      transparent = 0.9;
+    in {
+      applications = default;
+      terminal = transparent;
+      desktop = default;
+      popups = transparent;
     };
   };
 }
