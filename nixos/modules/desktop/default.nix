@@ -51,6 +51,9 @@
     qpwgraph
   ];
 
+  # fix GTK apps in KDE
+  programs.dconf.enable = true;
+
   # KDE Partition Manager
   programs.partition-manager.enable = true;
 
