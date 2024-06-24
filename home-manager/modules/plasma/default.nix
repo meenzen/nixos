@@ -1,4 +1,4 @@
-{
+{systemConfig, ...}: {
   # reference: https://github.com/pjones/plasma-manager/tree/trunk/modules
   programs.plasma = {
     enable = true;
@@ -34,13 +34,14 @@
           {
             name = "org.kde.plasma.icontasks";
             config = {
-              General.launchers = [
-                "applications:org.kde.plasma-systemmonitor.desktop"
-                "applications:org.kde.dolphin.desktop"
-                "applications:org.wezfurlong.wezterm.desktop"
-                "applications:brave-browser.desktop"
-                "applications:rider.desktop"
-              ];
+              General.launchers =
+                [
+                  "applications:org.kde.plasma-systemmonitor.desktop"
+                  "applications:org.kde.dolphin.desktop"
+                  "applications:org.wezfurlong.wezterm.desktop"
+                  "applications:brave-browser.desktop"
+                ]
+                ++ systemConfig.additionalPinnedApps;
             };
           }
           "org.kde.plasma.marginsseparator"

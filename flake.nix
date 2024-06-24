@@ -92,6 +92,7 @@
         ];
         extraGroups = ["networkmanager" "wheel" "docker" "vboxusers" "input"];
       };
+      additionalPinnedApps = [];
     };
 
     mkSystem = systemConfig:
@@ -126,10 +127,18 @@
       the-machine = mkSystem (nixpkgs.lib.recursiveUpdate defaultConfig {
         systemModule = ./nixos/systems/the-machine/configuration.nix;
         hostName = "the-machine";
+        additionalPinnedApps = [
+          "applications:steam.desktop"
+          "applications:com.heroicgameslauncher.hgl.desktop"
+        ];
       });
       framework = mkSystem (nixpkgs.lib.recursiveUpdate defaultConfig {
         systemModule = ./nixos/systems/framework/configuration.nix;
         hostName = "framework";
+        additionalPinnedApps = [
+          "applications:google-chrome.desktop"
+          "applications:rider.desktop"
+        ];
       });
       vm = mkSystem (nixpkgs.lib.recursiveUpdate defaultConfig {
         hostName = "vm";
