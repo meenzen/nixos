@@ -9,6 +9,7 @@
     ./firmware-update
     ./fonts
     ./gaming
+    ./hostname
     ./locale
     ./networking
     ./nix

@@ -1,7 +1,7 @@
-{
+{systemConfig, ...}: {
   home = {
-    username = "meenzens";
-    homeDirectory = "/home/meenzens";
+    username = systemConfig.user.username;
+    homeDirectory = "/home/${systemConfig.user.username}";
 
     # Environt Variables
     sessionVariables = {

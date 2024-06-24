@@ -1,13 +1,14 @@
 {
   config,
   pkgs,
+  systemConfig,
   ...
 }: {
   programs.git = {
     enable = true;
     package = pkgs.gitFull;
-    userName = "Samuel Meenzen";
-    userEmail = "samuel@meenzen.net";
+    userName = systemConfig.user.fullName;
+    userEmail = systemConfig.user.email;
     lfs.enable = true;
     extraConfig = {
       init.defaultBranch = "main";
@@ -16,7 +17,7 @@
       rerere.enabled = true;
       commit.gpgsign = true;
       gpg.format = "ssh";
-      user.signingkey = "/home/${config.home.username}/.ssh/id_ed25519_sk";
+      user.signingkey = "/home/${systemConfig.user.username}/.ssh/id_ed25519_sk";
     };
 
     difftastic.enable = true;
