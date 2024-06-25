@@ -48,10 +48,12 @@
           "org.kde.plasma.pager"
           {
             systemTray.items = {
-              shown = [
-                "org.kde.plasma.networkmanagement"
-                "org.kde.plasma.volume"
-              ];
+              shown =
+                [
+                  "org.kde.plasma.networkmanagement"
+                  "org.kde.plasma.volume"
+                ]
+                ++ systemConfig.additionalShownSystemTrayItems;
             };
           }
           {

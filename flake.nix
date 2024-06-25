@@ -93,6 +93,7 @@
         extraGroups = ["networkmanager" "wheel" "docker" "vboxusers" "input"];
       };
       additionalPinnedApps = [];
+      additionalShownSystemTrayItems = [];
     };
 
     mkSystem = systemConfig:
@@ -138,6 +139,9 @@
         additionalPinnedApps = [
           "applications:google-chrome.desktop"
           "applications:rider.desktop"
+        ];
+        additionalShownSystemTrayItems = [
+          "org.kde.plasma.battery"
         ];
       });
       vm = mkSystem (nixpkgs.lib.recursiveUpdate defaultConfig {
