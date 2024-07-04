@@ -4,6 +4,8 @@
   ...
 }: {
   stylix = {
+    enable = true;
+
     image = pkgs.fetchurl {
       name = "PlasmaDark.jpg";
       url = "https://invent.kde.org/plasma/breeze/-/raw/master/wallpapers/Next/contents/images_dark/base_size.png?inline=false";
