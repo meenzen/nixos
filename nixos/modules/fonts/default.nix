@@ -17,7 +17,7 @@
       name = "system-icons";
       paths = with pkgs; [
         kdePackages.breeze # for plasma
-        gnome.gnome-themes-extra
+        gnome-themes-extra
       ];
       pathsToLink = ["/share/icons"];
     };
