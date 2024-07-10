@@ -11,5 +11,6 @@
     bb
   ];
 
-  programs.thefuck.enable = true;
+  # https://nixpk.gs/pr-tracker.html?pr=325875
+  #programs.thefuck.enable = true;
 }

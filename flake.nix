@@ -2,7 +2,9 @@
   description = "Personal NixOS configuration.";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # https://nixpk.gs/pr-tracker.html?pr=325196
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
+    #nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-meenzen.url = "github:meenzen/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
