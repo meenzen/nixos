@@ -82,6 +82,7 @@
 
     defaultConfig = {
       systemModule = ./nixos/systems/vm/configuration.nix;
+      extraModules = [];
       hostName = "nixos";
       user = {
         username = "meenzens";
@@ -103,25 +104,27 @@
         specialArgs = {
           inherit inputs outputs systemConfig;
         };
-        modules = [
-          systemConfig.systemModule
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              extraSpecialArgs = {
-                inherit inputs outputs systemConfig;
+        modules =
+          [
+            systemConfig.systemModule
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                extraSpecialArgs = {
+                  inherit inputs outputs systemConfig;
+                };
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                backupFileExtension = "backup";
+                users = {
+                  meenzens = import ./home-manager/home.nix;
+                };
+                sharedModules = [plasma-manager.homeManagerModules.plasma-manager];
               };
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              backupFileExtension = "backup";
-              users = {
-                meenzens = import ./home-manager/home.nix;
-              };
-              sharedModules = [plasma-manager.homeManagerModules.plasma-manager];
-            };
-          }
-          stylix.nixosModules.stylix
-        ];
+            }
+            stylix.nixosModules.stylix
+          ]
+          ++ systemConfig.extraModules;
       };
   in {
     inherit (devShells) devShells;
@@ -148,6 +151,13 @@
       });
       vm = mkSystem (nixpkgs.lib.recursiveUpdate defaultConfig {
         hostName = "vm";
+      });
+      install-iso = mkSystem (nixpkgs.lib.recursiveUpdate defaultConfig {
+        systemModule = ./nixos/systems/install-iso/configuration.nix;
+        extraModules = [
+          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-calamares-plasma6.nix"
+        ];
+        hostName = "install-iso";
       });
     };
   };

@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -eo pipefail
+
+LIGHT_BLUE='\033[1;34m'
+NO_COLOR='\033[0m'
+
+print () {
+    echo -e "${LIGHT_BLUE}$1${NO_COLOR}"
+}
+
+print "=> Starting ISO Build"
+
+print "==> Formatting Code"
+alejandra .
+
+print "==> Building ISO"
+git add .
+nix build --verbose .#nixosConfigurations.install-iso.config.system.build.isoImage
