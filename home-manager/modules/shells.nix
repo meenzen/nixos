@@ -1,4 +1,6 @@
 let
+  safeForcePush = "git push --force-if-includes";
+
   aliases = {
     nano = "nvim";
     vi = "nvim";
@@ -10,6 +12,11 @@ let
     weather = "curl wttr.in/Wiesbaden";
     lolcat = "clolcat";
     neofetch = "fastfetch";
+
+    # override insecure git commands
+    "git push --force" = safeForcePush;
+    "git push -f" = safeForcePush;
+    "git push --force-with-lease" = safeForcePush;
   };
 in
   {pkgs, ...}: {
