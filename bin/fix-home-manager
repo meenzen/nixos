@@ -8,6 +8,7 @@ files=(
   "$HOME/.config/gtk-4.0/gtk.css.backup"
   "$HOME/.config/gtk-3.0/settings.ini.backup"
   "$HOME/.config/gtk-3.0/gtk.css.backup"
+  "$HOME/.config/kdeglobals"
 )
 
 for file in "${files[@]}"; do
