@@ -24,4 +24,10 @@
   # VirtualBox
   virtualisation.virtualbox.host.enable = true;
   #virtualisation.virtualbox.host.enableExtensionPack = true;
+
+  # UHK Agent
+  hardware.keyboard.uhk.enable = true;
+  environment.systemPackages = [
+    pkgs.uhk-agent
+  ];
 }
