@@ -12,12 +12,13 @@
   ];
 
   # https://github.com/rain-cafe/protontweakss
-  nixpkgs = {
-    overlays = [
-      inputs.protontweaks.overlay
-    ];
-  };
-  services.protontweaks.enable = true;
+  # build issue on lated nixpkgs
+  #nixpkgs = {
+  #  overlays = [
+  #    inputs.protontweaks.overlay
+  #  ];
+  #};
+  #services.protontweaks.enable = true;
 
   # Gaming Kernel (unstable)
   # boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
