@@ -19,6 +19,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Customization
     stylix.url = "github:danth/stylix";
     nixvim = {
@@ -49,6 +54,7 @@
     nixpkgs,
     nixpkgs-meenzen,
     nixos-hardware,
+    nixos-wsl,
     flake-utils,
     home-manager,
     plasma-manager,
@@ -85,6 +91,7 @@
 
     defaultConfig = {
       systemModule = ./nixos/systems/vm/configuration.nix;
+      homeManagerModule = ./home-manager/home.nix;
       extraModules = [];
       hostName = "nixos";
       user = {
@@ -120,7 +127,7 @@
                 useUserPackages = true;
                 backupFileExtension = "backup";
                 users = {
-                  meenzens = import ./home-manager/home.nix;
+                  meenzens = import systemConfig.homeManagerModule;
                 };
                 sharedModules = [plasma-manager.homeManagerModules.plasma-manager];
               };
@@ -154,6 +161,11 @@
       });
       vm = mkSystem (nixpkgs.lib.recursiveUpdate defaultConfig {
         hostName = "vm";
+      });
+      wsl = mkSystem (nixpkgs.lib.recursiveUpdate defaultConfig {
+        systemModule = ./nixos/systems/wsl/configuration.nix;
+        homeManagerModule = ./home-manager/cli.nix;
+        hostName = "wsl";
       });
       install-iso = mkSystem (nixpkgs.lib.recursiveUpdate defaultConfig {
         systemModule = ./nixos/systems/install-iso/configuration.nix;

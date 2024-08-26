@@ -1,23 +1,16 @@
 {
+  # Only imports CLI tools
   imports = [
     ./common
     ./modules/neovim
-    ./modules/plasma
-    ./modules/desktop.nix
     ./modules/dev-tools.nix
     ./modules/system-tools.nix
     ./modules/nix-tools.nix
     ./modules/networking-tools.nix
     ./modules/git.nix
     ./modules/starship.nix
-    ./modules/wezterm.nix
     ./modules/shells.nix
     ./modules/ssh.nix
-    ./modules/browsers.nix
-    ./modules/gaming.nix
-    ./modules/keepass.nix
     ./modules/fun.nix
-    ./modules/media-player.nix
-    ./modules/code-editors.nix
   ];
 }
