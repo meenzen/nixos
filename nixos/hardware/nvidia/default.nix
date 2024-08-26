@@ -22,7 +22,6 @@
     powerManagement.finegrained = false;
     open = false;
     nvidiaSettings = true;
-    #package = config.boot.kernelPackages.nvidiaPackages.latest;
-    package = config.boot.kernelPackages.nvidiaPackages.beta; # 555 beta (explicit sync for proper wayland support)
+    package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
 }
