@@ -8,8 +8,8 @@
 
     image = pkgs.fetchurl {
       name = "PlasmaDark.jpg";
-      url = "https://invent.kde.org/plasma/breeze/-/raw/master/wallpapers/Next/contents/images_dark/base_size.png?inline=false";
-      sha256 = "sha256-iNh3/93Di/ygK0QKkIoNmfO3kn5tQqH+cUZUsTsb97g=";
+      url = "https://invent.kde.org/plasma/breeze/-/raw/Plasma/6.1/wallpapers/Next/contents/images_dark/base_size.png?ref_type=heads&inline=false";
+      sha256 = "sha256-sirjorAnLH4gvP94lXUtPL6iaVP/eaAxz0hIcvQKn+w=";
     };
 
     polarity = "dark";
