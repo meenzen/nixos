@@ -9,6 +9,7 @@
     ethtool
     pciutils # lspci
     usbutils # lsusb
+    cyme # better lsusb
     smartmontools # smartctl
 
     htop
