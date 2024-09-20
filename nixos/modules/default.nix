@@ -12,6 +12,7 @@
     ./fonts
     ./gaming
     ./hostname
+    ./keyboards
     ./locale
     ./networking
     ./nix

@@ -33,6 +33,5 @@
     ];
   };
 
-  # Wootility
-  hardware.wooting.enable = true;
+  custom.keyboards.wooting.enable = true;
 }

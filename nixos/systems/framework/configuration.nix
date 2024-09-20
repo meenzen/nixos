@@ -21,12 +21,6 @@
   boot.initrd.luks.devices."luks-d72b6916-393c-4db9-8194-6d48d1cf5189".device = "/dev/disk/by-uuid/d72b6916-393c-4db9-8194-6d48d1cf5189";
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  # VirtualBox
   custom.virtualbox.enable = true;
-
-  # UHK Agent
-  hardware.keyboard.uhk.enable = true;
-  environment.systemPackages = [
-    pkgs.uhk-agent
-  ];
+  custom.keyboards.uhk.enable = true;
 }
