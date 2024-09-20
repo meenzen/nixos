@@ -1,5 +1,6 @@
 {
   imports = [
+    ./adb
     ./bootloader
     ./build-vm
     ./certs
