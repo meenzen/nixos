@@ -1,13 +1,6 @@
-{pkgs, ...}: {
-  services.openssh = {
-    enable = true;
-    settings = {
-      PermitRootLogin = "no";
-      PasswordAuthentication = false;
-    };
-  };
+{systemConfig, ...}: {
+  users.users."${systemConfig.user.username}".extraGroups = ["docker"];
 
-  # Docker
   virtualisation.docker = {
     enable = true;
     daemon.settings = {
@@ -56,9 +49,4 @@
       ];
     };
   };
-
-  # udev rules
-  services.udev.packages = with pkgs; [
-    yubikey-personalization
-  ];
 }

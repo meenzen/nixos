@@ -7,6 +7,7 @@
     ./cleanup
     ./cloudflare-warp
     ./desktop
+    ./docker
     ./firmware-update
     ./fonts
     ./gaming
@@ -14,13 +15,15 @@
     ./locale
     ./networking
     ./nix
+    ./openssh
     ./programs
-    ./services
     ./state-version
     ./stylix
     ./system-packages
     ./users
+    ./virtualbox
     ./vpn
     ./workarounds
+    ./yubikey
   ];
 }

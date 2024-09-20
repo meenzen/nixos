@@ -22,8 +22,7 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # VirtualBox
-  virtualisation.virtualbox.host.enable = true;
-  #virtualisation.virtualbox.host.enableExtensionPack = true;
+  custom.virtualbox.enable = true;
 
   # UHK Agent
   hardware.keyboard.uhk.enable = true;
