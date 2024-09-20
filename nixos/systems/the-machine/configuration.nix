@@ -12,9 +12,6 @@
     inputs.nixos-hardware.nixosModules.common-gpu-nvidia-nonprime
 
     ../../modules
-    ../../hardware/nvidia
-    ../../hardware/bluetooth
-
     ./hardware-configuration.nix
   ];
 
@@ -30,5 +27,7 @@
     ];
   };
 
-  custom.keyboards.wooting.enable = true;
+  custom.hardware.nvidia.enable = true;
+  custom.hardware.bluetooth.enable = true;
+  custom.hardware.wooting.enable = true;
 }

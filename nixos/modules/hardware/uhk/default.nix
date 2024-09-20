@@ -4,13 +4,13 @@
   pkgs,
   ...
 }: let
-  cfg = config.custom.keyboards;
+  cfg = config.custom.hardware.uhk;
 in {
-  options.custom.keyboards.uhk = {
+  options.custom.hardware.uhk = {
     enable = lib.mkEnableOption "Ultimate Hacking Keyboard (UHK) support";
   };
 
-  config = lib.mkIf cfg.uhk.enable {
+  config = lib.mkIf cfg.enable {
     hardware.keyboard.uhk.enable = true;
     environment.systemPackages = with pkgs; [
       uhk-agent

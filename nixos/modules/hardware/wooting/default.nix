@@ -3,13 +3,13 @@
   lib,
   ...
 }: let
-  cfg = config.custom.keyboards;
+  cfg = config.custom.hardware.wooting;
 in {
-  options.custom.keyboards.wooting = {
+  options.custom.hardware.wooting = {
     enable = lib.mkEnableOption "Wooting / Wootility support";
   };
 
-  config = lib.mkIf cfg.wooting.enable {
+  config = lib.mkIf cfg.enable {
     hardware.wooting.enable = true;
   };
 }

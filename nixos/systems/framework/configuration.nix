@@ -10,8 +10,6 @@
     inputs.nixos-hardware.nixosModules.framework-11th-gen-intel
 
     ../../modules
-    ../../hardware/bluetooth
-
     ./hardware-configuration.nix
   ];
   disabledModules = [
@@ -22,6 +20,7 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   custom.virtualbox.enable = true;
-  custom.keyboards.uhk.enable = true;
   custom.certs.enable = true;
+  custom.hardware.bluetooth.enable = true;
+  custom.hardware.uhk.enable = true;
 }

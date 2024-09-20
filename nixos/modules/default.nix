@@ -11,8 +11,8 @@
     ./firmware-update
     ./fonts
     ./gaming
+    ./hardware
     ./hostname
-    ./keyboards
     ./locale
     ./networking
     ./nix
