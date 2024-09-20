@@ -12,7 +12,6 @@
   ];
   disabledModules = [
     ../../modules/bootloader
-    ../../modules/certs
     ../../modules/desktop
     ../../modules/cloudflare-warp
     ../../modules/firmware-update

@@ -23,4 +23,5 @@
 
   custom.virtualbox.enable = true;
   custom.keyboards.uhk.enable = true;
+  custom.certs.enable = true;
 }

@@ -17,9 +17,6 @@
 
     ./hardware-configuration.nix
   ];
-  disabledModules = [
-    ../../modules/certs
-  ];
 
   # Mounts
   fileSystems."/games" = {
