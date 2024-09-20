@@ -30,4 +30,5 @@
   custom.hardware.nvidia.enable = true;
   custom.hardware.bluetooth.enable = true;
   custom.hardware.wooting.enable = true;
+  custom.gaming.enable = true;
 }

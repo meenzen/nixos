@@ -15,7 +15,6 @@
     ../../modules/desktop
     ../../modules/cloudflare-warp
     ../../modules/firmware-update
-    ../../modules/gaming
     ../../modules/networking
     ../../modules/vpn
   ];
