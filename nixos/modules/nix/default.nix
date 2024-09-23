@@ -43,6 +43,19 @@
     ];
   };
 
+  nix.extraOptions = ''
+    # Make debugging easier
+    log-lines = 25
+
+    # Make sure we don't run out of disk space when building
+    min-free = 128000000
+    max-free = 1000000000
+
+    # Fall back to building from source if a binary cache is not available
+    fallback = true
+    connect-timeout = 5
+  '';
+
   # Enable Flakes
   nix.settings.experimental-features = ["nix-command" "flakes"];
 }
