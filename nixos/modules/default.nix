@@ -13,6 +13,7 @@
     ./gaming
     ./hardware
     ./hostname
+    ./kernel
     ./locale
     ./networking
     ./nix
