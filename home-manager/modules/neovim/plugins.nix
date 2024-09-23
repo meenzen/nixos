@@ -16,5 +16,8 @@
 
     # show keybindings when typing commands
     which-key.enable = true;
+
+    # icons needed for some plugins
+    web-devicons.enable = true;
   };
 }
