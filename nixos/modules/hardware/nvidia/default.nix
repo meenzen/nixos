@@ -11,25 +11,22 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    # Nvidia
+    # Video acceleration
     hardware.graphics.extraPackages = with pkgs; [vaapiVdpau];
 
     # Load nvidia driver for Xorg and Wayland
     services.xserver.videoDrivers = ["nvidia"];
-    boot.kernelParams = [
-      "nvidia-drm.modeset=1"
-      "nvidia-drm.fbdev=1"
-      # workaround for 555 stutters
-      "nvidia.NVreg_EnableGpuFirmware=0"
-    ];
 
     hardware.nvidia = {
       modesetting.enable = true;
       powerManagement.enable = false;
       powerManagement.finegrained = false;
-      open = false;
+      open = true;
       nvidiaSettings = true;
-      package = config.boot.kernelPackages.nvidiaPackages.latest;
+      package = config.boot.kernelPackages.nvidiaPackages.beta;
     };
+
+    # Temporary workaround for https://github.com/NixOS/nixpkgs/issues/344167
+    boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_10;
   };
 }
