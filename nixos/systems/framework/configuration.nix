@@ -18,6 +18,7 @@
 
   custom.virtualbox.enable = true;
   custom.certs.enable = true;
+  custom.cloudflare-warp.enable = true;
   custom.hardware.bluetooth.enable = true;
   custom.hardware.uhk.enable = true;
 }

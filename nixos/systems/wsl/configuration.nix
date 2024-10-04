@@ -13,7 +13,6 @@
   disabledModules = [
     ../../modules/bootloader
     ../../modules/desktop
-    ../../modules/cloudflare-warp
     ../../modules/firmware-update
     ../../modules/networking
     ../../modules/vpn
