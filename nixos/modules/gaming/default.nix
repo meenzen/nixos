@@ -20,13 +20,12 @@ in {
     # https://github.com/fufexan/nix-gaming
 
     # https://github.com/rain-cafe/protontweakss
-    # build issue on latest nixpkgs
-    #nixpkgs = {
-    #  overlays = [
-    #    inputs.protontweaks.overlay
-    #  ];
-    #};
-    #services.protontweaks.enable = true;
+    nixpkgs = {
+      overlays = [
+        inputs.protontweaks.overlay
+      ];
+    };
+    services.protontweaks.enable = true;
 
     # Gaming Kernel (unstable)
     # boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
