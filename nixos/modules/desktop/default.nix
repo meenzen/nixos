@@ -48,10 +48,6 @@
     kdePackages.kcolorchooser
     kdePackages.kdeconnect-kde
     kdePackages.neochat
-    kdePackages.kontact
-    kdePackages.kmail-account-wizard
-    kdePackages.kaccounts-integration
-    kdePackages.kaccounts-providers
     kdePackages.kolourpaint
     kdePackages.ghostwriter
     kdePackages.kdenlive
