@@ -23,6 +23,11 @@
       allowUnfree = true;
       # see https://github.com/nix-community/home-manager/issues/2942
       allowUnfreePredicate = _: true;
+
+      permittedInsecurePackages = [
+        # Required for matrix clients
+        "olm-3.2.16"
+      ];
     };
   };
 

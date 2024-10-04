@@ -43,8 +43,19 @@
 
   environment.systemPackages = with pkgs; [
     kdePackages.xdg-desktop-portal-kde
-    kdePackages.kdeconnect-kde
     kdePackages.filelight
+    kdePackages.kruler
+    kdePackages.kcolorchooser
+    kdePackages.kdeconnect-kde
+    kdePackages.neochat
+    kdePackages.kontact
+    kdePackages.kmail-account-wizard
+    kdePackages.kaccounts-integration
+    kdePackages.kaccounts-providers
+    kdePackages.kolourpaint
+    kdePackages.ghostwriter
+    kdePackages.kdenlive
+    krita
     xwaylandvideobridge
     xdg-utils
     qpwgraph
