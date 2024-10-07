@@ -29,8 +29,6 @@
           done
         '';
     });
-
-  jetbrains-plugins = ["github-copilot" "ideavim"];
 in {
   home.sessionVariables = {
     DOTNET_ROOT = "${dotnet-combined}";
