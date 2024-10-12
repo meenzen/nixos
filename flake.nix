@@ -114,27 +114,25 @@
         specialArgs = {
           inherit inputs outputs systemConfig;
         };
-        modules =
-          [
-            systemConfig.systemModule
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                extraSpecialArgs = {
-                  inherit inputs outputs systemConfig;
-                };
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                backupFileExtension = "backup";
-                users = {
-                  meenzens = import systemConfig.homeManagerModule;
-                };
-                sharedModules = [plasma-manager.homeManagerModules.plasma-manager];
+        modules = [
+          systemConfig.systemModule
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              extraSpecialArgs = {
+                inherit inputs outputs systemConfig;
               };
-            }
-            stylix.nixosModules.stylix
-          ]
-          ++ systemConfig.extraModules;
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              backupFileExtension = "backup";
+              users = {
+                meenzens = import systemConfig.homeManagerModule;
+              };
+              sharedModules = [plasma-manager.homeManagerModules.plasma-manager];
+            };
+          }
+          stylix.nixosModules.stylix
+        ];
       };
   in {
     inherit (devShells) devShells;
@@ -169,9 +167,6 @@
       });
       install-iso = mkSystem (nixpkgs.lib.recursiveUpdate defaultConfig {
         systemModule = ./nixos/systems/install-iso/configuration.nix;
-        extraModules = [
-          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-calamares-plasma6.nix"
-        ];
         hostName = "install-iso";
       });
     };
