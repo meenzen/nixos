@@ -24,4 +24,6 @@
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+
+  custom.home-manager.module = ../../../home-manager/cli.nix;
 }

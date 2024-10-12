@@ -91,7 +91,6 @@
 
     defaultConfig = {
       systemModule = ./nixos/systems/vm/configuration.nix;
-      homeManagerModule = ./home-manager/home.nix;
       hostName = "nixos";
       user = {
         username = "meenzens";
@@ -145,7 +144,6 @@
       });
       wsl = mkSystem (nixpkgs.lib.recursiveUpdate defaultConfig {
         systemModule = ./nixos/systems/wsl/configuration.nix;
-        homeManagerModule = ./home-manager/cli.nix;
         hostName = "wsl";
       });
       install-iso = mkSystem (nixpkgs.lib.recursiveUpdate defaultConfig {
