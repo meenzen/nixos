@@ -74,7 +74,6 @@
 
       helium-mastodon = lib.hm.dag.entryAfter ["helium-ssh.mnzn.dev"] {
         hostname = "10.10.10.104";
-        user = "root";
         proxyJump = "helium-ssh.mnzn.dev";
       };
 
