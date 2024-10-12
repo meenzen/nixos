@@ -12,23 +12,26 @@ in {
   };
 
   imports = [
+    # https://github.com/fufexan/nix-gaming
     inputs.nix-gaming.nixosModules.pipewireLowLatency
     inputs.protontweaks.nixosModules.protontweaks
+    ./star-citizen.nix
   ];
 
   config = lib.mkIf cfg.enable {
-    # https://github.com/fufexan/nix-gaming
+    custom.gaming.star-citizen.enable = lib.mkDefault true;
 
     # https://github.com/rain-cafe/protontweakss
-    nixpkgs = {
-      overlays = [
-        inputs.protontweaks.overlay
-      ];
-    };
+    nixpkgs.overlays = [inputs.protontweaks.overlay];
     services.protontweaks.enable = true;
 
-    # Gaming Kernel (unstable)
+    # Kernel Tweaks
     # boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+    boot.kernel.sysctl = {
+      "vm.max_map_count" = 16777216;
+      "fs.file-max" = 524288;
+    };
+    zramSwap.enable = true;
 
     # Low Latency Audio
     services.pipewire.lowLatency = {
@@ -39,26 +42,11 @@ in {
     security.rtkit.enable = true; # make pipewire realtime-capable
 
     environment.systemPackages = [
-      inputs.nix-citizen.packages.${pkgs.system}.star-citizen
       pkgs.heroic
-
       pkgs.wineWowPackages.stable
       pkgs.winetricks
       pkgs.mangohud
     ];
-
-    programs.gamemode.enable = true;
-
-    # NixOS configuration for Star Citizen requirements
-    # https://github.com/fufexan/nix-gaming/tree/master/pkgs/star-citizen
-    boot.kernel.sysctl = {
-      "vm.max_map_count" = 16777216;
-      "fs.file-max" = 524288;
-    };
-    #networking.extraHosts = "127.0.0.1 modules-cdn.eac-prod.on.epicgames.com";
-
-    # At least 40GB of ram is recommended for Star Citizen, so we need to enable zram
-    zramSwap.enable = true;
 
     programs.steam = {
       enable = true;
@@ -70,6 +58,7 @@ in {
       ];
     };
 
+    programs.gamemode.enable = true;
     # enable game tweaks by adjusting the game launch options:
     # `gamemoderun %command%`
     # `mangohud %command%`
