@@ -12,6 +12,7 @@
     ./fonts
     ./gaming
     ./hardware
+    ./home-manager
     ./hostname
     ./kernel
     ./locale

@@ -92,7 +92,6 @@
     defaultConfig = {
       systemModule = ./nixos/systems/vm/configuration.nix;
       homeManagerModule = ./home-manager/home.nix;
-      extraModules = [];
       hostName = "nixos";
       user = {
         username = "meenzens";
@@ -116,21 +115,6 @@
         };
         modules = [
           systemConfig.systemModule
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              extraSpecialArgs = {
-                inherit inputs outputs systemConfig;
-              };
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              backupFileExtension = "backup";
-              users = {
-                meenzens = import systemConfig.homeManagerModule;
-              };
-              sharedModules = [plasma-manager.homeManagerModules.plasma-manager];
-            };
-          }
         ];
       };
   in {
