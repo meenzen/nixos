@@ -52,13 +52,7 @@
   outputs = {
     self,
     nixpkgs,
-    nixpkgs-meenzen,
-    nixos-hardware,
-    nixos-wsl,
     flake-utils,
-    home-manager,
-    plasma-manager,
-    stylix,
     ...
   } @ inputs: let
     inherit (self) outputs;
