@@ -131,7 +131,6 @@
               sharedModules = [plasma-manager.homeManagerModules.plasma-manager];
             };
           }
-          stylix.nixosModules.stylix
         ];
       };
   in {
