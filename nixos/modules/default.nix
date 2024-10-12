@@ -18,6 +18,7 @@
     ./networking
     ./nix
     ./openssh
+    ./overlays
     ./programs
     ./state-version
     ./stylix
