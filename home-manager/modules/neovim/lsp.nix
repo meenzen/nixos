@@ -4,9 +4,9 @@
       enable = true;
       servers = {
         marksman.enable = true; # markdown
-        nil-ls.enable = true; # nix
+        nil_ls.enable = true; # nix
         omnisharp.enable = true; # csharp
-        rust-analyzer = {
+        rust_analyzer = {
           enable = true;
           installCargo = false;
           installRustc = false;
