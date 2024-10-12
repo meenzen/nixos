@@ -1,4 +1,4 @@
-{systemConfig, ...}: {
+{extraConfig, ...}: {
   # reference: https://github.com/pjones/plasma-manager/tree/trunk/modules
   programs.plasma = {
     enable = true;
@@ -41,7 +41,7 @@
                   "applications:org.wezfurlong.wezterm.desktop"
                   "applications:brave-browser.desktop"
                 ]
-                ++ systemConfig.additionalPinnedApps;
+                ++ extraConfig.additionalPinnedApps;
             };
           }
           "org.kde.plasma.marginsseparator"
@@ -53,7 +53,7 @@
                   "org.kde.plasma.networkmanagement"
                   "org.kde.plasma.volume"
                 ]
-                ++ systemConfig.additionalShownSystemTrayItems;
+                ++ extraConfig.additionalShownSystemTrayItems;
             };
           }
           {

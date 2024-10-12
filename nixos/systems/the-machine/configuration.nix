@@ -31,4 +31,10 @@
   custom.hardware.bluetooth.enable = true;
   custom.hardware.wooting.enable = true;
   custom.gaming.enable = true;
+  custom.home-manager.extraConfig = {
+    additionalPinnedApps = [
+      "applications:steam.desktop"
+      "applications:com.heroicgameslauncher.hgl.desktop"
+    ];
+  };
 }

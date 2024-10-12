@@ -21,4 +21,13 @@
   custom.cloudflare-warp.enable = true;
   custom.hardware.bluetooth.enable = true;
   custom.hardware.uhk.enable = true;
+  custom.home-manager.extraConfig = {
+    additionalPinnedApps = [
+      "applications:google-chrome.desktop"
+      "applications:rider.desktop"
+    ];
+    additionalShownSystemTrayItems = [
+      "org.kde.plasma.battery"
+    ];
+  };
 }

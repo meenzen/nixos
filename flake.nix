@@ -4,23 +4,18 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-meenzen.url = "github:meenzen/nixpkgs/nixos-unstable";
-    nixos-hardware.url = "github:nixos/nixos-hardware";
 
+    # Helper Libraries
+    nixos-hardware.url = "github:nixos/nixos-hardware";
     flake-utils.url = "github:numtide/flake-utils";
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Home manager
     home-manager = {
       url = "github:nix-community/home-manager/master";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    wezterm = {
-      url = "github:wez/wezterm/main?dir=nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nixos-wsl = {
-      url = "github:nix-community/NixOS-WSL/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -30,7 +25,6 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     plasma-manager = {
       url = "github:pjones/plasma-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -45,6 +39,12 @@
     };
     protontweaks = {
       url = "github:rain-cafe/protontweaks/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Applications
+    wezterm = {
+      url = "github:wez/wezterm/main?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -90,7 +90,6 @@
       );
 
     defaultConfig = {
-      systemModule = ./nixos/systems/vm/configuration.nix;
       hostName = "nixos";
       user = {
         username = "meenzens";
@@ -103,53 +102,28 @@
         ];
         extraGroups = ["networkmanager" "wheel" "input"];
       };
-      additionalPinnedApps = [];
-      additionalShownSystemTrayItems = [];
     };
 
-    mkSystem = systemConfig:
+    mkSystem = hostName: systemModule: let
+      systemConfig = defaultConfig // {hostName = hostName;};
+    in
       nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit inputs outputs systemConfig;
         };
         modules = [
-          systemConfig.systemModule
+          systemModule
         ];
       };
   in {
     inherit (devShells) devShells;
 
     nixosConfigurations = {
-      the-machine = mkSystem (nixpkgs.lib.recursiveUpdate defaultConfig {
-        systemModule = ./nixos/systems/the-machine/configuration.nix;
-        hostName = "the-machine";
-        additionalPinnedApps = [
-          "applications:steam.desktop"
-          "applications:com.heroicgameslauncher.hgl.desktop"
-        ];
-      });
-      framework = mkSystem (nixpkgs.lib.recursiveUpdate defaultConfig {
-        systemModule = ./nixos/systems/framework/configuration.nix;
-        hostName = "framework";
-        additionalPinnedApps = [
-          "applications:google-chrome.desktop"
-          "applications:rider.desktop"
-        ];
-        additionalShownSystemTrayItems = [
-          "org.kde.plasma.battery"
-        ];
-      });
-      vm = mkSystem (nixpkgs.lib.recursiveUpdate defaultConfig {
-        hostName = "vm";
-      });
-      wsl = mkSystem (nixpkgs.lib.recursiveUpdate defaultConfig {
-        systemModule = ./nixos/systems/wsl/configuration.nix;
-        hostName = "wsl";
-      });
-      install-iso = mkSystem (nixpkgs.lib.recursiveUpdate defaultConfig {
-        systemModule = ./nixos/systems/install-iso/configuration.nix;
-        hostName = "install-iso";
-      });
+      the-machine = mkSystem "the-machine" ./nixos/systems/the-machine/configuration.nix;
+      framework = mkSystem "framework" ./nixos/systems/framework/configuration.nix;
+      vm = mkSystem "vm" ./nixos/systems/vm/configuration.nix;
+      wsl = mkSystem "wsl" ./nixos/systems/wsl/configuration.nix;
+      install-iso = mkSystem "install-iso" ./nixos/systems/install-iso/configuration.nix;
     };
   };
 }
