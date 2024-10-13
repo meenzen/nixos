@@ -37,6 +37,6 @@ in {
     hardware.graphics.enable32Bit = true;
 
     # Temporary workaround for https://github.com/NixOS/nixpkgs/issues/344167
-    boot.kernelPackages = lib.mkForce pkgs.linuxPackages_xanmod_latest;
+    boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_10;
   };
 }
