@@ -47,5 +47,6 @@ in {
     glow
     tokei
     difftastic
+    terraform
   ];
 }
