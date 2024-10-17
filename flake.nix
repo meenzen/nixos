@@ -41,12 +41,6 @@
       url = "github:rain-cafe/protontweaks/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # Applications
-    wezterm = {
-      url = "github:wez/wezterm/main?dir=nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = {
