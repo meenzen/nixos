@@ -158,6 +158,7 @@
       runner_hetzner_01.hostname = "195.201.16.71";
       grafana_stack.hostname = "128.140.83.161";
       docker_host.hostname = "docker-host.human-dev.io";
+      "nix-01.human-dev.io".user = "root";
     };
   };
 }
