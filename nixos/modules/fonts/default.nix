@@ -43,9 +43,9 @@
       liberation_ttf
       unifont
       noto-fonts
-      noto-fonts-cjk
-      noto-fonts-emoji
+      noto-fonts-cjk-sans
       noto-fonts-color-emoji
+      noto-fonts-emoji
 
       # microsoft fonts
       corefonts

@@ -62,7 +62,7 @@
           devShells.default = pkgs.mkShell {
             nativeBuildInputs = with pkgs; [
               git
-              nixFlakes
+              nixVersions.stable
               nil
               alejandra
             ];
