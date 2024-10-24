@@ -25,6 +25,8 @@
     ];
   };
 
+  nix.trustedUsers = ["root" "@wheel"];
+
   nix.extraOptions = ''
     # Make debugging easier
     log-lines = 25
