@@ -23,9 +23,8 @@
       "crane.cachix.org-1:8Scfpmn9w+hGdXH/Q9tTLiYAE/2dnJYRJP7kl80GuRk="
       "conduit:ddcaWZiWm0l0IXZlO8FERRdWvEufwmd0Negl1P+c0Ns="
     ];
+    trusted-users = ["root" "@wheel"];
   };
-
-  nix.trustedUsers = ["root" "@wheel"];
 
   nix.extraOptions = ''
     # Make debugging easier
