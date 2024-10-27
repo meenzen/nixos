@@ -1,6 +1,7 @@
 {
   imports = [
     ./adb
+    ./agenix
     ./bootloader
     ./build-vm
     ./certs
@@ -12,14 +13,19 @@
     ./fonts
     ./gaming
     ./hardware
+    ./hetzner
     ./home-manager
     ./hostname
     ./kernel
     ./locale
     ./networking
+    ./nginx
     ./nix
+    ./oci-containers
     ./openssh
+    ./optimization
     ./overlays
+    ./postgresql
     ./programs
     ./state-version
     ./stylix

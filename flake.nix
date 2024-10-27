@@ -17,6 +17,13 @@
     colmena.url = "github:zhaofengli/colmena/direct-flake-eval";
     colmena.inputs.nixpkgs.follows = "nixpkgs";
 
+    arion.url = "github:hercules-ci/arion";
+    arion.inputs.nixpkgs.follows = "nixpkgs";
+
+    agenix.url = "github:ryantm/agenix";
+    agenix.inputs.nixpkgs.follows = "nixpkgs";
+    agenix.inputs.darwin.follows = "";
+
     # Home manager
     home-manager = {
       url = "github:nix-community/home-manager/master";
@@ -71,6 +78,7 @@
               nil
               alejandra
               colmena.packages."${system}".colmena
+              agenix.packages."${system}".default
             ];
             shellHook = ''
               echo ""
