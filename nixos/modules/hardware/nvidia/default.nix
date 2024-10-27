@@ -35,8 +35,5 @@ in {
 
     # On 64-bit systems, whether to also install 32-bit drivers for 32-bit applications (such as Wine).
     hardware.graphics.enable32Bit = true;
-
-    # Temporary workaround for https://github.com/NixOS/nixpkgs/issues/344167
-    boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_10;
   };
 }
