@@ -18,6 +18,7 @@
   networking.domain = "mnzn.dev";
   networking.hostId = "91312b0a";
 
+  networking.useNetworkd = true;
   systemd.network = {
     enable = true;
     networks.default = {
