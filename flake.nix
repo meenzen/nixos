@@ -59,6 +59,7 @@
     nixpkgs,
     flake-utils,
     colmena,
+    agenix,
     ...
   } @ inputs: let
     inherit (self) outputs;

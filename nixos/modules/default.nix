@@ -18,6 +18,7 @@
     ./hostname
     ./kernel
     ./locale
+    ./mastodon
     ./networking
     ./nginx
     ./nix

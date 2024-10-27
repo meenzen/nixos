@@ -4,6 +4,7 @@
     ./cleanup
     ./hetzner
     ./locale
+    ./mastodon
     ./nginx
     ./nix
     ./oci-containers

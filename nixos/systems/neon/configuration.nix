@@ -24,4 +24,5 @@
   };
   custom.postgresql.enable = true;
   custom.oci-containers.enable = true;
+  custom.mastodon.enable = true;
 }

@@ -95,7 +95,8 @@ in {
     services.fail2ban = {
       jails = {
         ngnix-url-probe.settings = {
-          enabled = true;
+          # causes false positives
+          enabled = false;
           filter = "nginx-url-probe";
           logpath = "/var/log/nginx/access.log";
           action = ''%(action_)s[blocktype=DROP]'';
