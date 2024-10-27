@@ -17,11 +17,6 @@
 
     # SSH hosts config
     matchBlocks = {
-      phone = {
-        hostname = "192.168.91.80";
-        port = 2222;
-      };
-
       proxmox = {
         hostname = "192.168.1.4";
         user = "root";
@@ -29,6 +24,11 @@
 
       "mail.meenzen.net" = {
         hostname = "mail.meenzen.net";
+      };
+
+      "neon.mnzn.dev" = {
+        hostname = "neon.mnzn.dev";
+        user = "root";
       };
 
       "helium-ssh.mnzn.dev" = {
