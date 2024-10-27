@@ -144,7 +144,7 @@
       };
 
       neon = {
-        deployment.targetHost = "95.217.150.38";
+        deployment.targetHost = "neon.mnzn.dev";
         deployment.buildOnTarget = true;
         imports = [
           ./nixos/systems/neon/configuration.nix

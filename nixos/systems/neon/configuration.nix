@@ -7,10 +7,8 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/locale
   ];
 
-  # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -18,18 +16,23 @@
   networking.domain = "mnzn.dev";
   networking.hostId = "91312b0a";
 
-  networking.useNetworkd = true;
   systemd.network = {
     enable = true;
-    networks.default = {
+    networks."30-wan" = {
       name = "enp6s0";
-      DHCP = "ipv4";
+      DHCP = "no";
       addresses = [
+        {
+          Address = "95.217.150.38/26";
+        }
         {
           Address = "2a01:4f9:3080:360e::bad:babe/64";
         }
       ];
-      gateway = ["fe80::1"];
+      gateway = [
+        "95.217.150.1"
+        "fe80::1"
+      ];
       linkConfig.RequiredForOnline = "routable";
     };
   };
