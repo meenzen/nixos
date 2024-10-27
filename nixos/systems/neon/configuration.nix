@@ -7,7 +7,7 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/locale.nix
+    ../../modules/locale
   ];
 
   # Use the systemd-boot EFI boot loader.
