@@ -112,6 +112,7 @@
       vm = mkSystem "vm" ./nixos/systems/vm/configuration.nix;
       wsl = mkSystem "wsl" ./nixos/systems/wsl/configuration.nix;
       install-iso = mkSystem "install-iso" ./nixos/systems/install-iso/configuration.nix;
+      neon = mkSystem "neon" ./nixos/systems/neon/configuration.nix;
     };
   };
 }
