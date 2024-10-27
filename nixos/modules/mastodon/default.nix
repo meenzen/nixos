@@ -67,9 +67,9 @@ in {
         SINGLE_USER_MODE = "false";
         DEFAULT_LOCALE = "de";
       };
-      webProcesses = 1;
-      streamingProcesses = 1;
-      sidekiqThreads = 5;
+      webProcesses = 2;
+      streamingProcesses = 3;
+      sidekiqThreads = 25;
       secretKeyBaseFile = config.age.secrets.mastodonSecretKeyBase.path;
       otpSecretFile = config.age.secrets.mastodonOtpSecret.path;
       vapidPublicKeyFile = config.age.secrets.mastodonVapidPublicKey.path;
