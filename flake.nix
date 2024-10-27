@@ -112,6 +112,8 @@
       vm = mkSystem "vm" ./nixos/systems/vm/configuration.nix;
       wsl = mkSystem "wsl" ./nixos/systems/wsl/configuration.nix;
       install-iso = mkSystem "install-iso" ./nixos/systems/install-iso/configuration.nix;
+
+      # nixos-install --flake github:meenzen/nixos#neon
       neon = mkSystem "neon" ./nixos/systems/neon/configuration.nix;
     };
   };

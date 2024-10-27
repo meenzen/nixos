@@ -16,6 +16,7 @@
 
   networking.hostName = "neon";
   networking.domain = "mnzn.dev";
+  networking.hostId = "91312b0a";
 
   systemd.network = {
     enable = true;
