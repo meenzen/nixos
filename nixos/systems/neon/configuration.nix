@@ -34,17 +34,6 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    vim
-    wget
-    duf
-    htop
-  ];
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-  users.users.root.openssh.authorizedKeys.keys = systemConfig.user.authorizedKeys;
-
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];

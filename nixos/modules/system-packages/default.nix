@@ -9,5 +9,7 @@
     git
     vim
     wget
+    duf
+    htop
   ];
 }

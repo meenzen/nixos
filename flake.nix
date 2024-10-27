@@ -13,6 +13,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Workaround for https://github.com/zhaofengli/colmena/pull/228
+    colmena.url = "github:zhaofengli/colmena/direct-flake-eval";
+    colmena.inputs.nixpkgs.follows = "nixpkgs";
+
     # Home manager
     home-manager = {
       url = "github:nix-community/home-manager/master";
@@ -47,6 +51,7 @@
     self,
     nixpkgs,
     flake-utils,
+    colmena,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -65,6 +70,7 @@
               nixVersions.stable
               nil
               alejandra
+              colmena.packages."${system}".colmena
             ];
             shellHook = ''
               echo ""
@@ -115,6 +121,35 @@
 
       # nixos-install --flake github:meenzen/nixos#neon
       neon = mkSystem "neon" ./nixos/systems/neon/configuration.nix;
+    };
+
+    # See https://github.com/zhaofengli/colmena/pull/228
+    colmenaHive = colmena.lib.makeHive self.outputs.colmena;
+
+    colmena = {
+      meta = {
+        nixpkgs = import nixpkgs {
+          system = "x86_64-linux";
+        };
+        specialArgs = {
+          inherit inputs outputs;
+          systemConfig = defaultConfig;
+        };
+      };
+
+      defaults = {pkgs, ...}: {
+        imports = [
+          ./nixos/modules/server.nix
+        ];
+      };
+
+      neon = {
+        deployment.targetHost = "95.217.150.38";
+        deployment.buildOnTarget = true;
+        imports = [
+          ./nixos/systems/neon/configuration.nix
+        ];
+      };
     };
   };
 }
