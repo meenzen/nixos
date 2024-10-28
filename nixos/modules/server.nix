@@ -5,6 +5,7 @@
     ./hetzner
     ./locale
     ./mastodon
+    ./networking-tools
     ./nginx
     ./nix
     ./oci-containers

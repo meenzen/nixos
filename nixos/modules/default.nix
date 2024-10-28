@@ -20,6 +20,7 @@
     ./locale
     ./mastodon
     ./networking
+    ./networking-tools
     ./nginx
     ./nix
     ./oci-containers
