@@ -5,6 +5,7 @@
     ./hetzner
     ./locale
     ./mastodon
+    ./matrix
     ./networking-tools
     ./nginx
     ./nix

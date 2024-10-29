@@ -7,6 +7,7 @@ let
   neon = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFsdZx97CPaUCYagHxZKuB9r9nfRjB2Rv4UWJtWyy+7e";
   systems = [neon];
   mastodon = [neon];
+  matrix = [neon];
 in {
   # Mastodon
   "mastodonEmailPassword.age".publicKeys = users ++ mastodon;
@@ -17,4 +18,7 @@ in {
   "mastodonOtpSecret.age".publicKeys = users ++ mastodon;
   "mastodonVapidPublicKey.age".publicKeys = users ++ mastodon;
   "mastodonVapidPrivateKey.age".publicKeys = users ++ mastodon;
+
+  # Matrix
+  "matrixSharedSecret.age".publicKeys = users ++ matrix;
 }

@@ -19,6 +19,7 @@
     ./kernel
     ./locale
     ./mastodon
+    ./matrix
     ./networking
     ./networking-tools
     ./nginx

@@ -11,7 +11,7 @@ in {
     domain = lib.mkOption {
       type = lib.types.str;
       default = "social.meenzen.net";
-      description = "Domain for profile-management";
+      description = "Domain for Mastodon";
     };
   };
 
