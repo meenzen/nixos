@@ -3,7 +3,7 @@
     # noice ui
     noice = {
       enable = false;
-      presets = {
+      settings.presets = {
         bottom_search = true;
         command_palette = true;
         long_message_to_split = true;
