@@ -57,6 +57,11 @@ in {
         owner = "mastodon";
         group = "mastodon";
       };
+      mastodonS3Config = {
+        file = ../../../secrets/mastodonS3Config.age;
+        owner = "mastodon";
+        group = "mastodon";
+      };
     };
 
     services.mastodon = {
@@ -77,6 +82,9 @@ in {
       activeRecordEncryptionPrimaryKeyFile = config.age.secrets.mastodonActiveRecordPrimaryKey.path;
       activeRecordEncryptionKeyDerivationSaltFile = config.age.secrets.mastodonActiveRecordSalt.path;
       activeRecordEncryptionDeterministicKeyFile = config.age.secrets.mastodonActiveRecordDeterministicKey.path;
+      extraEnvFiles = [
+        config.age.secrets.mastodonS3Config.path
+      ];
       smtp = {
         createLocally = false;
         fromAddress = "Mastodon <mastodon@meenzen.net>";

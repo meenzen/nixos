@@ -17,4 +17,5 @@ in {
   "mastodonOtpSecret.age".publicKeys = users ++ mastodon;
   "mastodonVapidPublicKey.age".publicKeys = users ++ mastodon;
   "mastodonVapidPrivateKey.age".publicKeys = users ++ mastodon;
+  "mastodonS3Config.age".publicKeys = users ++ mastodon;
 }
