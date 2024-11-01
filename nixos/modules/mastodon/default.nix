@@ -13,6 +13,21 @@ in {
       default = "social.meenzen.net";
       description = "Domain for profile-management";
     };
+    cdnDomain = lib.mkOption {
+      type = lib.types.str;
+      default = "cdn.social.meenzen.net";
+      description = "Domain for proxied media files";
+    };
+    cdnBucketDomain = lib.mkOption {
+      type = lib.types.str;
+      default = "fsn1.your-objectstorage.com";
+      description = "Domain for media files";
+    };
+    cdnBucketName = lib.mkOption {
+      type = lib.types.str;
+      default = "mastodon-cdn";
+      description = "Name of the bucket for media files";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -114,5 +129,64 @@ in {
         ''
       )
     ];
+
+    # Adapted from this excellent guide: https://stanislas.blog/2018/05/moving-mastodon-media-files-to-wasabi-object-storage/
+    services.nginx = {
+      proxyCachePath."mastodon" = {
+        enable = true;
+        levels = "1:2";
+        maxSize = "1g";
+        inactive = "24h";
+        keysZoneSize = "100m";
+        keysZoneName = "mastodon_media";
+      };
+      virtualHosts."${cfg.cdnDomain}" = {
+        enableACME = true;
+        forceSSL = true;
+        locations."/${cfg.cdnBucketName}/" = {
+          recommendedProxySettings = false;
+          proxyPass = "https://${cfg.cdnBucketDomain}/${cfg.cdnBucketName}/";
+          extraConfig = ''
+            limit_except GET {
+              deny all;
+            }
+
+            add_header Cache-Control public;
+            add_header "Access-Control-Allow-Origin" "*";
+            add_header X-Cached $upstream_cache_status;
+            add_header X-Content-Type-Options nosniff;
+            add_header Content-Security-Policy "default-src 'none'; form-action 'none'";
+
+            proxy_set_header Host ${cfg.cdnBucketDomain};
+            proxy_set_header Connection "";
+            proxy_set_header Authorization "";
+            proxy_hide_header Set-Cookie;
+            proxy_hide_header "Access-Control-Allow-Origin";
+            proxy_hide_header "Access-Control-Allow-Methods";
+            proxy_hide_header "Access-Control-Allow-Headers";
+            proxy_hide_header x-amz-id-2;
+            proxy_hide_header x-amz-request-id;
+            proxy_hide_header x-amz-meta-server-side-encryption;
+            proxy_hide_header x-amz-server-side-encryption;
+            proxy_hide_header x-amz-bucket-region;
+            proxy_hide_header x-amzn-requestid;
+            proxy_hide_header x-debug-backend;
+            proxy_hide_header x-debug-bucket;
+            proxy_hide_header x-rgw-object-type;
+            proxy_ignore_headers Set-Cookie;
+            proxy_intercept_errors off;
+            proxy_cache mastodon_media;
+            proxy_cache_revalidate on;
+            proxy_buffering on;
+            proxy_cache_use_stale error timeout updating http_500 http_502 http_503 http_504;
+            proxy_cache_background_update on;
+            proxy_cache_lock on;
+            proxy_cache_valid 1d;
+            proxy_cache_valid 404 1h;
+            proxy_ignore_headers Cache-Control;
+          '';
+        };
+      };
+    };
   };
 }
