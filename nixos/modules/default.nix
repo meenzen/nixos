@@ -9,6 +9,7 @@
     ./cloudflare-warp
     ./desktop
     ./docker
+    ./fedifetcher
     ./firmware-update
     ./fonts
     ./gaming

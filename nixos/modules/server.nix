@@ -2,6 +2,7 @@
   imports = [
     ./agenix
     ./cleanup
+    ./fedifetcher
     ./hetzner
     ./locale
     ./mastodon

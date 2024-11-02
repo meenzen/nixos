@@ -19,6 +19,7 @@ in {
   "mastodonVapidPublicKey.age".publicKeys = users ++ mastodon;
   "mastodonVapidPrivateKey.age".publicKeys = users ++ mastodon;
   "mastodonS3Config.age".publicKeys = users ++ mastodon;
+  "fedifetcherConfigJson.age".publicKeys = users ++ mastodon;
 
   # Matrix
   "matrixSharedSecret.age".publicKeys = users ++ matrix;
