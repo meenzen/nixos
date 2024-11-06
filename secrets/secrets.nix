@@ -8,6 +8,7 @@ let
   systems = [neon];
   mastodon = [neon];
   matrix = [neon];
+  authentik = [neon];
 in {
   # Mastodon
   "mastodonEmailPassword.age".publicKeys = users ++ mastodon;
@@ -23,4 +24,7 @@ in {
 
   # Matrix
   "matrixSharedSecret.age".publicKeys = users ++ matrix;
+
+  # Authentik
+  "authentikEnvironment.age".publicKeys = users ++ authentik;
 }

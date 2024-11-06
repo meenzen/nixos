@@ -1,6 +1,7 @@
 {
   imports = [
     ./agenix
+    ./authentik
     ./cleanup
     ./fedifetcher
     ./hetzner

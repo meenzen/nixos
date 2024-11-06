@@ -52,6 +52,9 @@
       url = "github:rain-cafe/protontweaks/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Other Programs
+    authentik-nix.url = "github:nix-community/authentik-nix";
   };
 
   outputs = {

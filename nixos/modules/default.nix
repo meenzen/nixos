@@ -2,6 +2,7 @@
   imports = [
     ./adb
     ./agenix
+    ./authentik
     ./bootloader
     ./build-vm
     ./certs
