@@ -13,8 +13,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Workaround for https://github.com/zhaofengli/colmena/pull/228
-    colmena.url = "github:zhaofengli/colmena/direct-flake-eval";
+    colmena.url = "github:zhaofengli/colmena";
     colmena.inputs.nixpkgs.follows = "nixpkgs";
 
     arion.url = "github:hercules-ci/arion";
