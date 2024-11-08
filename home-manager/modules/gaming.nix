@@ -4,6 +4,7 @@
     teamspeak_client
     mumble
     prismlauncher
+    chiaki-ng
   ];
 
   programs.obs-studio = {
