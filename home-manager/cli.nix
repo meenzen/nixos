@@ -6,7 +6,6 @@
     ./modules/dev-tools.nix
     ./modules/system-tools.nix
     ./modules/nix-tools.nix
-    ./modules/networking-tools.nix
     ./modules/git.nix
     ./modules/starship.nix
     ./modules/shells.nix
