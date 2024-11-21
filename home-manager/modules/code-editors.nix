@@ -9,7 +9,7 @@
     config.allowUnfree = true;
   };
 
-  jetbrains-plugins = ["github-copilot-intellij" "ideavim"];
+  jetbrains-plugins = ["github-copilot" "ideavim"];
 in {
   home.packages = with pkgs; [
     # Editors
@@ -28,7 +28,6 @@ in {
     (jetbrains.plugins.addPlugins jetbrains.webstorm jetbrains-plugins)
     (jetbrains.plugins.addPlugins jetbrains.phpstorm jetbrains-plugins)
     (jetbrains.plugins.addPlugins jetbrains.datagrip jetbrains-plugins)
-    #jetbrains-toolbox
   ];
 
   home.file.".ideavimrc".text = ''
