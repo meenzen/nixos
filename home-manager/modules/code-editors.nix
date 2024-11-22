@@ -28,6 +28,7 @@ in {
     (jetbrains.plugins.addPlugins jetbrains.webstorm jetbrains-plugins)
     (jetbrains.plugins.addPlugins jetbrains.phpstorm jetbrains-plugins)
     (jetbrains.plugins.addPlugins jetbrains.datagrip jetbrains-plugins)
+    jetbrains-toolbox
   ];
 
   home.file.".ideavimrc".text = ''
