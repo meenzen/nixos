@@ -11,9 +11,15 @@
     inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
     inputs.nixos-hardware.nixosModules.common-gpu-nvidia-nonprime
 
+    inputs.disko.nixosModules.disko
+    ./disko.nix
+
     ../../modules
     ./hardware-configuration.nix
   ];
+
+  # nixos-generate-config --root /tmp/config --no-filesystems
+  # sudo nix run 'github:nix-community/disko/latest#disko-install' -- --write-efi-boot-entries --flake '.#the-machine' --disk main /dev/nvme0n1
 
   # Mounts
   fileSystems."/games" = {
