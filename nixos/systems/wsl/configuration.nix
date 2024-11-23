@@ -18,6 +18,8 @@
     ../../modules/vpn
   ];
 
+  system.stateVersion = "23.11";
+
   wsl = {
     enable = true;
     defaultUser = systemConfig.user.username;
