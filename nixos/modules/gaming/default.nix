@@ -21,7 +21,7 @@ in {
   config = lib.mkIf cfg.enable {
     custom.gaming.star-citizen.enable = lib.mkDefault true;
 
-    # https://github.com/rain-cafe/protontweakss
+    # https://github.com/rain-cafe/protontweaks
     nixpkgs.overlays = [inputs.protontweaks.overlay];
     services.protontweaks.enable = true;
 
