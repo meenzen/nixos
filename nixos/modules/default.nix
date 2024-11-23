@@ -32,7 +32,6 @@
     ./overlays
     ./postgresql
     ./programs
-    ./state-version
     ./stylix
     ./system-packages
     ./users
