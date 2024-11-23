@@ -20,20 +20,30 @@ in {
       powerManagement.finegrained = false;
       open = true;
       nvidiaSettings = true;
-      package = config.boot.kernelPackages.nvidiaPackages.beta;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
     };
 
-    # Video acceleration support
-    hardware.graphics.extraPackages = with pkgs; [
-      vaapiVdpau
-      libvdpau-va-gl
-      nvidia-vaapi-driver
-    ];
+    hardware.graphics = {
+      # On 64-bit systems, whether to also install 32-bit drivers for 32-bit applications (such as Wine).
+      enable32Bit = true;
+      extraPackages = with pkgs; [
+        # Video acceleration support
+        nvidia-vaapi-driver
+      ];
+    };
     environment.sessionVariables = {
       LIBVA_DRIVER_NAME = "nvidia";
-    };
+      NVD_BACKEND = "direct";
 
-    # On 64-bit systems, whether to also install 32-bit drivers for 32-bit applications (such as Wine).
-    hardware.graphics.enable32Bit = true;
+      # required for Firefox
+      MOZ_DISABLE_RDD_SANDBOX = "1";
+    };
+    environment.systemPackages = with pkgs; [
+      libva
+      libva-utils
+    ];
+
+    # Use lts kernel, latest is broken
+    boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_6;
   };
 }
