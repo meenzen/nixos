@@ -1,7 +1,13 @@
 {
-  # Bootloader
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.systemd-boot.configurationLimit = 20;
-  boot.loader.systemd-boot.memtest86.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    efi.canTouchEfiVariables = true;
+    systemd-boot = {
+      enable = true;
+      editor = false;
+      configurationLimit = 20;
+      memtest86.enable = true;
+      netbootxyz.enable = true;
+      edk2-uefi-shell.enable = true;
+    };
+  };
 }

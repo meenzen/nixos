@@ -19,11 +19,17 @@
   ];
 
   # nixos-generate-config --root /tmp/config --no-filesystems
-  # sudo nix --extra-experimental-features "nix-command flakes" run 'github:nix-community/disko/latest#disko-install' -- --write-efi-boot-entries --flake '.#the-machine' --disk main /dev/nvme0n1
-  # sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy,format,mount disko.nix
+  # echo "<encryption-key>" > /tmp/secret.key
+  # sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode disko nixos/systems/the-machine/disko.nix
+  # sudo nixos-install --flake '.#the-machine'
 
   networking.hostId = "94822ea4";
   system.stateVersion = "24.05";
+
+  boot.loader.systemd-boot.windows."11" = {
+    title = "Micros~1 Spyware";
+    efiDeviceHandle = "HD1b65535a3";
+  };
 
   # Mounts
   fileSystems."/games" = {
