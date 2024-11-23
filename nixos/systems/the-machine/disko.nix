@@ -34,13 +34,13 @@
         rootFsOptions = {
           compression = "zstd";
           "com.sun:auto-snapshot" = "false";
+          encryption = "on";
+          keyformat = "passphrase";
+          keylocation = "file:///tmp/secret.key";
         };
         mountpoint = "/";
         options = {
           cachefile = "none";
-          encryption = "aes-256-gcm";
-          keyformat = "passphrase";
-          keylocation = "file:///tmp/secret.key";
         };
         postCreateHook = ''
           zfs set keylocation="prompt" "zroot";
