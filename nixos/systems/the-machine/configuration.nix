@@ -20,6 +20,7 @@
 
   # nixos-generate-config --root /tmp/config --no-filesystems
   # sudo nix --extra-experimental-features "nix-command flakes" run 'github:nix-community/disko/latest#disko-install' -- --write-efi-boot-entries --flake '.#the-machine' --disk main /dev/nvme0n1
+  # sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy,format,mount disko.nix
 
   networking.hostId = "94822ea4";
   system.stateVersion = "24.05";
