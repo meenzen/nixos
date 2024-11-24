@@ -16,6 +16,7 @@ in {
     meenzen.bootloader.enable = true;
     meenzen.docker.enable = true;
     meenzen.fonts.enable = true;
+    meenzen.home-manager.enable = true;
     meenzen.plasma.enable = true;
     meenzen.stylix.enable = true;
     meenzen.vpn.enable = true;

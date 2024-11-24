@@ -18,7 +18,7 @@
     ./hardware
     ./hetzner
     ./home-manager
-    ./kernel
+    ./latest-kernel
     ./locale
     ./mastodon
     ./matrix

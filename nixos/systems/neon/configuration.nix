@@ -1,11 +1,15 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   systemConfig,
   ...
 }: {
   imports = [
+    inputs.disko.nixosModules.disko
+    ./disko.nix
+
     ./hardware-configuration.nix
     ./networking.nix
   ];
