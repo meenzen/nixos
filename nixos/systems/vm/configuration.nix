@@ -10,6 +10,7 @@
   ];
 
   system.stateVersion = "23.11";
+  networking.hostName = "vm";
   networking.networkmanager.enable = true;
   networking.firewall.enable = true;
   networking.useDHCP = lib.mkDefault true;

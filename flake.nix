@@ -106,7 +106,6 @@
       );
 
     defaultConfig = {
-      hostName = "nixos";
       user = {
         username = "meenzens";
         fullName = "Samuel Meenzen";
@@ -120,8 +119,8 @@
       };
     };
 
-    mkSystem = hostName: systemModule: let
-      systemConfig = defaultConfig // {hostName = hostName;};
+    mkSystem = systemModule: let
+      systemConfig = defaultConfig;
     in
       nixpkgs.lib.nixosSystem {
         specialArgs = {
@@ -135,14 +134,14 @@
     inherit (devShells) devShells;
 
     nixosConfigurations = {
-      the-machine = mkSystem "the-machine" ./nixos/systems/the-machine/configuration.nix;
-      framework = mkSystem "framework" ./nixos/systems/framework/configuration.nix;
-      vm = mkSystem "vm" ./nixos/systems/vm/configuration.nix;
-      wsl = mkSystem "wsl" ./nixos/systems/wsl/configuration.nix;
-      install-iso = mkSystem "install-iso" ./nixos/systems/install-iso/configuration.nix;
+      the-machine = mkSystem ./nixos/systems/the-machine/configuration.nix;
+      framework = mkSystem ./nixos/systems/framework/configuration.nix;
+      vm = mkSystem ./nixos/systems/vm/configuration.nix;
+      wsl = mkSystem ./nixos/systems/wsl/configuration.nix;
+      install-iso = mkSystem ./nixos/systems/install-iso/configuration.nix;
 
       # nixos-install --flake github:meenzen/nixos#neon
-      neon = mkSystem "neon" ./nixos/systems/neon/configuration.nix;
+      neon = mkSystem ./nixos/systems/neon/configuration.nix;
     };
 
     # See https://github.com/zhaofengli/colmena/pull/228

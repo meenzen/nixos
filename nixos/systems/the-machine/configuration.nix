@@ -24,6 +24,7 @@
   # sudo nixos-install --flake '.#the-machine'
 
   system.stateVersion = "24.05";
+  networking.hostName = "the-machine";
   networking.hostId = "94822ea4";
   networking.networkmanager.enable = true;
   networking.firewall.enable = true;

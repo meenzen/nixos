@@ -3,6 +3,7 @@
     ./adb
     ./agenix
     ./authentik
+    ./basic-packages
     ./bootloader
     ./build-vm
     ./certs
@@ -17,7 +18,6 @@
     ./hardware
     ./hetzner
     ./home-manager
-    ./hostname
     ./kernel
     ./locale
     ./mastodon
@@ -31,14 +31,13 @@
     ./overlays
     ./plasma
     ./postgresql
-    ./programs
     ./security
     ./stylix
-    ./system-packages
     ./users
     ./virtualbox
     ./vpn
     ./workarounds
     ./yubikey
+    ./zsh
   ];
 }

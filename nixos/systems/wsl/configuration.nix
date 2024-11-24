@@ -12,6 +12,7 @@
   ];
 
   system.stateVersion = "23.11";
+  networking.hostName = "wsl";
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
   wsl = {

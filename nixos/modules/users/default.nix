@@ -13,7 +13,6 @@
       openssh.authorizedKeys.keys = systemConfig.user.authorizedKeys;
       description = systemConfig.user.fullName;
       extraGroups = systemConfig.user.extraGroups;
-      shell = pkgs.zsh;
     };
   };
 }

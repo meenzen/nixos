@@ -17,7 +17,6 @@ in {
     meenzen.docker.enable = true;
     meenzen.fonts.enable = true;
     meenzen.plasma.enable = true;
-    meenzen.programs.enable = true;
     meenzen.stylix.enable = true;
     meenzen.vpn.enable = true;
     meenzen.yubikey.enable = true;

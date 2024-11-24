@@ -12,6 +12,7 @@
   ];
 
   system.stateVersion = "23.11";
+  networking.hostName = "install-iso";
   networking.networkmanager.enable = true;
   networking.firewall.enable = true;
   networking.useDHCP = lib.mkDefault true;

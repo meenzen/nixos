@@ -14,6 +14,7 @@
   ];
 
   system.stateVersion = "23.11";
+  networking.hostName = "framework";
   networking.networkmanager.enable = true;
   networking.firewall.enable = true;
   boot.initrd.luks.devices."luks-d72b6916-393c-4db9-8194-6d48d1cf5189".device = "/dev/disk/by-uuid/d72b6916-393c-4db9-8194-6d48d1cf5189";
