@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }: let
   cfg = config.meenzen.matrix;
@@ -19,7 +20,7 @@ in {
   config = lib.mkIf cfg.enable {
     age.secrets = {
       matrixSharedSecret = {
-        file = ../../../secrets/matrixSharedSecret.age;
+        file = "${inputs.self}/secrets/matrixSharedSecret.age";
         owner = serviceName;
         group = serviceName;
       };

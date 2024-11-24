@@ -23,7 +23,7 @@ in {
   config = lib.mkIf cfg.enable {
     age.secrets = {
       authentikEnvironment = {
-        file = ../../../secrets/authentikEnvironment.age;
+        file = "${inputs.self}/secrets/authentikEnvironment.age";
       };
     };
 

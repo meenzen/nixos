@@ -27,5 +27,5 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
-  meenzen.home-manager.homeModule = ../../../home-manager/cli.nix;
+  meenzen.home-manager.homeModule = "${inputs.self}/home-manager/cli.nix";
 }

@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }: let
   cfg = config.meenzen.fedifetcher;
@@ -13,7 +14,7 @@ in {
   config = lib.mkIf cfg.enable {
     age.secrets = {
       fedifetcherConfigJson = {
-        file = ../../../secrets/fedifetcherConfigJson.age;
+        file = "${inputs.self}/secrets/fedifetcherConfigJson.age";
       };
     };
     systemd.services.fedifetcher = {

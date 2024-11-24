@@ -11,7 +11,7 @@ in {
   options.meenzen.home-manager = {
     homeModule = lib.mkOption {
       type = lib.types.path;
-      default = ../../../home-manager/home.nix;
+      default = "${inputs.self}/home-manager/home.nix";
       description = ''
         Path to the home-manager module of the main user.
       '';
