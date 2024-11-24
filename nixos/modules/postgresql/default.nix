@@ -4,9 +4,9 @@
   pkgs,
   ...
 }: let
-  cfg = config.custom.postgresql;
+  cfg = config.meenzen.postgresql;
 in {
-  options.custom.postgresql = {
+  options.meenzen.postgresql = {
     enable = lib.mkEnableOption "Enable PostgreSQL";
     enableMajorUpgrade = lib.mkEnableOption "Enable Major Upgrade";
     enableLocalNetwork = lib.mkEnableOption "Allow password-based authentication for private networks";

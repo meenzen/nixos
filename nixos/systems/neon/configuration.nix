@@ -17,15 +17,15 @@
   networking.hostId = "91312b0a";
   system.stateVersion = "24.11";
 
-  custom.hetzner.enable = true;
-  custom.nginx = {
+  meenzen.hetzner.enable = true;
+  meenzen.nginx = {
     enable = true;
     testPage = "neon.mnzn.dev";
   };
-  custom.postgresql.enable = true;
-  custom.oci-containers.enable = true;
-  custom.mastodon.enable = true;
-  custom.fedifetcher.enable = true;
-  custom.matrix.enable = true;
-  custom.authentik.enable = true;
+  meenzen.postgresql.enable = true;
+  meenzen.oci-containers.enable = true;
+  meenzen.mastodon.enable = true;
+  meenzen.fedifetcher.enable = true;
+  meenzen.matrix.enable = true;
+  meenzen.authentik.enable = true;
 }

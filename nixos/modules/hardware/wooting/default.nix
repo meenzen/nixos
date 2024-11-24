@@ -3,9 +3,9 @@
   lib,
   ...
 }: let
-  cfg = config.custom.hardware.wooting;
+  cfg = config.meenzen.hardware.wooting;
 in {
-  options.custom.hardware.wooting = {
+  options.meenzen.hardware.wooting = {
     enable = lib.mkEnableOption "Wooting / Wootility support";
   };
 

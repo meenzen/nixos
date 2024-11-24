@@ -3,9 +3,9 @@
   lib,
   ...
 }: let
-  cfg = config.custom.certs;
+  cfg = config.meenzen.certs;
 in {
-  options.custom.certs = {
+  options.meenzen.certs = {
     enable = lib.mkEnableOption "Install custom certificates";
   };
 

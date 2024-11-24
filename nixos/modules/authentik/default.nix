@@ -5,9 +5,9 @@
   inputs,
   ...
 }: let
-  cfg = config.custom.authentik;
+  cfg = config.meenzen.authentik;
 in {
-  options.custom.authentik = {
+  options.meenzen.authentik = {
     enable = lib.mkEnableOption "Enable authentik";
     domain = lib.mkOption {
       type = lib.types.str;

@@ -5,9 +5,9 @@
   ...
 }
 : let
-  cfg = config.custom.gaming.star-citizen;
+  cfg = config.meenzen.gaming.star-citizen;
 in {
-  options.custom.gaming.star-citizen = {
+  options.meenzen.gaming.star-citizen = {
     enable = lib.mkEnableOption "Enable Star Citizen";
   };
 

@@ -5,9 +5,9 @@
   inputs,
   ...
 }: let
-  cfg = config.custom.gaming;
+  cfg = config.meenzen.gaming;
 in {
-  options.custom.gaming = {
+  options.meenzen.gaming = {
     enable = lib.mkEnableOption "Enable everything required for gaming";
   };
 
@@ -19,7 +19,7 @@ in {
   ];
 
   config = lib.mkIf cfg.enable {
-    custom.gaming.star-citizen.enable = lib.mkDefault true;
+    meenzen.gaming.star-citizen.enable = lib.mkDefault true;
 
     # https://github.com/rain-cafe/protontweaks
     nixpkgs.overlays = [inputs.protontweaks.overlay];

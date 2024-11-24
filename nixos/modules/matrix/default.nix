@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.custom.matrix;
+  cfg = config.meenzen.matrix;
   serviceName = "matrix-synapse";
 in {
-  options.custom.matrix = {
+  options.meenzen.matrix = {
     enable = lib.mkEnableOption "Enable Matrix Server";
     domain = lib.mkOption {
       type = lib.types.str;

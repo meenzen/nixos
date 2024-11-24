@@ -4,9 +4,9 @@
   systemConfig,
   ...
 }: let
-  cfg = config.custom.virtualbox;
+  cfg = config.meenzen.virtualbox;
 in {
-  options.custom.virtualbox = {
+  options.meenzen.virtualbox = {
     enable = lib.mkEnableOption "VirtualBox";
     enableExtensionPack = lib.mkEnableOption "VirtualBox host extension pack";
   };

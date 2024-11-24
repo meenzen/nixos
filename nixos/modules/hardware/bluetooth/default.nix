@@ -4,9 +4,9 @@
   pkgs,
   ...
 }: let
-  cfg = config.custom.hardware.bluetooth;
+  cfg = config.meenzen.hardware.bluetooth;
 in {
-  options.custom.hardware.bluetooth = {
+  options.meenzen.hardware.bluetooth = {
     enable = lib.mkEnableOption "Enable bluetooth support";
   };
 

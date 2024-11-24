@@ -5,9 +5,9 @@
   inputs,
   ...
 }: let
-  cfg = config.custom.oci-containers;
+  cfg = config.meenzen.oci-containers;
 in {
-  options.custom.oci-containers = {
+  options.meenzen.oci-containers = {
     enable = lib.mkEnableOption "Enable OCI container support";
   };
 

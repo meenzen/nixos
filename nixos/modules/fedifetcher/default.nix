@@ -4,9 +4,9 @@
   pkgs,
   ...
 }: let
-  cfg = config.custom.fedifetcher;
+  cfg = config.meenzen.fedifetcher;
 in {
-  options.custom.fedifetcher = {
+  options.meenzen.fedifetcher = {
     enable = lib.mkEnableOption "Enable FediFetcher";
   };
 

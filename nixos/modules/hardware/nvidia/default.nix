@@ -4,9 +4,9 @@
   pkgs,
   ...
 }: let
-  cfg = config.custom.hardware.nvidia;
+  cfg = config.meenzen.hardware.nvidia;
 in {
-  options.custom.hardware.nvidia = {
+  options.meenzen.hardware.nvidia = {
     enable = lib.mkEnableOption "Enable Nvidia GPU support";
   };
 

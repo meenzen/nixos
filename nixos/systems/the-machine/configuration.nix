@@ -43,11 +43,11 @@
     ];
   };
 
-  custom.hardware.nvidia.enable = true;
-  custom.hardware.bluetooth.enable = true;
-  custom.hardware.wooting.enable = true;
-  custom.gaming.enable = true;
-  custom.home-manager.extraConfig = {
+  meenzen.hardware.nvidia.enable = true;
+  meenzen.hardware.bluetooth.enable = true;
+  meenzen.hardware.wooting.enable = true;
+  meenzen.gaming.enable = true;
+  meenzen.home-manager.extraConfig = {
     additionalPinnedApps = [
       "applications:steam.desktop"
       "applications:com.heroicgameslauncher.hgl.desktop"

@@ -4,9 +4,9 @@
   pkgs,
   ...
 }: let
-  cfg = config.custom.mastodon;
+  cfg = config.meenzen.mastodon;
 in {
-  options.custom.mastodon = {
+  options.meenzen.mastodon = {
     enable = lib.mkEnableOption "Enable Mastodon Server";
     domain = lib.mkOption {
       type = lib.types.str;

@@ -3,9 +3,9 @@
   lib,
   ...
 }: let
-  cfg = config.custom.hetzner;
+  cfg = config.meenzen.hetzner;
 in {
-  options.custom.hetzner = {
+  options.meenzen.hetzner = {
     enable = lib.mkEnableOption "Enable common Hetzner settings";
   };
 

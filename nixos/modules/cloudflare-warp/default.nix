@@ -4,9 +4,9 @@
   pkgs,
   ...
 }: let
-  cfg = config.custom.cloudflare-warp;
+  cfg = config.meenzen.cloudflare-warp;
 in {
-  options.custom.cloudflare-warp = {
+  options.meenzen.cloudflare-warp = {
     enable = lib.mkEnableOption "Enable Cloudflare Warp Client";
   };
 

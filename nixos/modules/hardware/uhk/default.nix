@@ -4,9 +4,9 @@
   pkgs,
   ...
 }: let
-  cfg = config.custom.hardware.uhk;
+  cfg = config.meenzen.hardware.uhk;
 in {
-  options.custom.hardware.uhk = {
+  options.meenzen.hardware.uhk = {
     enable = lib.mkEnableOption "Ultimate Hacking Keyboard (UHK) support";
   };
 

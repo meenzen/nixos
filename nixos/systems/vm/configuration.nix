@@ -15,7 +15,7 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   services.qemuGuest.enable = true;
 
-  custom.home-manager.extraConfig = {
+  meenzen.home-manager.extraConfig = {
     additionalPinnedApps = [
       "applications:google-chrome.desktop"
       "applications:rider.desktop"

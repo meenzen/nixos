@@ -5,7 +5,7 @@
   systemConfig,
   ...
 }: let
-  cfg = config.custom.nginx;
+  cfg = config.meenzen.nginx;
 
   nginxConfig =
     {
@@ -33,7 +33,7 @@
       };
     };
 in {
-  options.custom.nginx = {
+  options.meenzen.nginx = {
     enable = lib.mkEnableOption "Enable common Nginx settings";
     testPage = lib.mkOption {
       type = lib.types.str;

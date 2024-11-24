@@ -6,9 +6,9 @@
   systemConfig,
   ...
 }: let
-  cfg = config.custom.home-manager;
+  cfg = config.meenzen.home-manager;
 in {
-  options.custom.home-manager = {
+  options.meenzen.home-manager = {
     homeModule = lib.mkOption {
       type = lib.types.path;
       default = ../../../home-manager/home.nix;
