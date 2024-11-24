@@ -8,7 +8,6 @@
 }: {
   imports = [
     inputs.nixos-wsl.nixosModules.default
-    ../../modules
   ];
 
   system.stateVersion = "23.11";

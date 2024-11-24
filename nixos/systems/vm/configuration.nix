@@ -5,10 +5,6 @@
   pkgs,
   ...
 }: {
-  imports = [
-    ../../modules
-  ];
-
   system.stateVersion = "23.11";
   networking.hostName = "vm";
   networking.networkmanager.enable = true;

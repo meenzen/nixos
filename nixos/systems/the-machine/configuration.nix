@@ -14,7 +14,6 @@
     inputs.disko.nixosModules.disko
     ./disko.nix
 
-    ../../modules
     ./hardware-configuration.nix
   ];
 
