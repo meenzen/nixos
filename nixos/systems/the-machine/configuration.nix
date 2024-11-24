@@ -23,8 +23,10 @@
   # sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode disko nixos/systems/the-machine/disko.nix
   # sudo nixos-install --flake '.#the-machine'
 
-  networking.hostId = "94822ea4";
   system.stateVersion = "24.05";
+  networking.hostId = "94822ea4";
+  networking.networkmanager.enable = true;
+  networking.firewall.enable = true;
 
   boot.loader.systemd-boot.windows."11" = {
     title = "Micros~1 Spyware";
@@ -43,6 +45,7 @@
     ];
   };
 
+  meenzen.desktop.enable = true;
   meenzen.hardware.nvidia.enable = true;
   meenzen.hardware.bluetooth.enable = true;
   meenzen.hardware.wooting.enable = true;

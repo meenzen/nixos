@@ -22,7 +22,6 @@
     ./locale
     ./mastodon
     ./matrix
-    ./networking
     ./networking-tools
     ./nginx
     ./nix
@@ -30,8 +29,10 @@
     ./openssh
     ./optimization
     ./overlays
+    ./plasma
     ./postgresql
     ./programs
+    ./security
     ./stylix
     ./system-packages
     ./users

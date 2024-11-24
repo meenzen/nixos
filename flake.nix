@@ -161,7 +161,7 @@
 
       defaults = {pkgs, ...}: {
         imports = [
-          ./nixos/modules/server.nix
+          ./nixos/modules
         ];
       };
 

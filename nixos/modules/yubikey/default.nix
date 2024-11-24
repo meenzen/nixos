@@ -1,14 +1,27 @@
-{pkgs, ...}: {
-  # YubiKey support
-  services.udev.packages = with pkgs; [
-    yubikey-personalization
-  ];
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}: let
+  cfg = config.meenzen.yubikey;
+in {
+  options.meenzen.yubikey = {
+    enable = lib.mkEnableOption "Enable YubiKey Support";
+  };
 
-  # Smartcard support
-  services.pcscd.enable = true;
+  config = lib.mkIf cfg.enable {
+    services.udev.packages = with pkgs; [
+      yubikey-personalization
+    ];
 
-  # Management GUI
-  environment.systemPackages = with pkgs; [
-    yubioath-flutter
-  ];
+    # Smartcard support
+    services.pcscd.enable = true;
+
+    # Management GUI
+    environment.systemPackages = with pkgs; [
+      yubioath-flutter
+    ];
+  };
 }

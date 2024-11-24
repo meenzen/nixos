@@ -10,22 +10,14 @@
     inputs.nixos-wsl.nixosModules.default
     ../../modules
   ];
-  disabledModules = [
-    ../../modules/bootloader
-    ../../modules/desktop
-    ../../modules/firmware-update
-    ../../modules/networking
-    ../../modules/vpn
-  ];
 
   system.stateVersion = "23.11";
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
   wsl = {
     enable = true;
     defaultUser = systemConfig.user.username;
   };
-
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
   meenzen.home-manager.homeModule = "${inputs.self}/home-manager/cli.nix";
 }
