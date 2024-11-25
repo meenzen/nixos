@@ -47,6 +47,9 @@ in {
     " Don't use Ex mode, use Q for formatting.
     map Q gq
 
+    " Use relative line numbers.
+    set relativenumber number
+
     " --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
 
     " Highlight copied text
