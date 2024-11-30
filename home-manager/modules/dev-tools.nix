@@ -8,8 +8,6 @@
       combinePackages [
         sdk_9_0
         sdk_8_0
-        sdk_7_0
-        sdk_6_0
       ])
     .overrideAttrs (finalAttrs: previousAttrs: {
       # This is needed to install workload in $HOME

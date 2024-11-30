@@ -41,7 +41,9 @@ in {
     fonts = {
       fontDir.enable = true;
       packages = with pkgs; [
-        (nerdfonts.override {fonts = ["FiraCode" "Hack" "JetBrainsMono"];})
+        pkgs.nerd-fonts.fira-code
+        pkgs.nerd-fonts.hack
+        pkgs.nerd-fonts.jetbrains-mono
 
         # default fonts
         dejavu_fonts
