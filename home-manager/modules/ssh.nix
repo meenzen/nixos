@@ -47,33 +47,8 @@
         proxyJump = "helium-ssh.mnzn.dev";
       };
 
-      helium-conduit = lib.hm.dag.entryAfter ["helium-ssh.mnzn.dev"] {
-        hostname = "10.10.10.102";
-        proxyJump = "helium-ssh.mnzn.dev";
-      };
-
-      helium-matrix = lib.hm.dag.entryAfter ["helium-ssh.mnzn.dev"] {
-        hostname = "10.10.10.103";
-        proxyJump = "helium-ssh.mnzn.dev";
-      };
-
-      helium-sentry = lib.hm.dag.entryAfter ["helium-ssh.mnzn.dev"] {
-        hostname = "10.10.10.113";
-        proxyJump = "helium-ssh.mnzn.dev";
-      };
-
-      helium-authentik = lib.hm.dag.entryAfter ["helium-ssh.mnzn.dev"] {
-        hostname = "10.10.10.110";
-        proxyJump = "helium-ssh.mnzn.dev";
-      };
-
       helium-gitlab = lib.hm.dag.entryAfter ["helium-ssh.mnzn.dev"] {
         hostname = "10.10.10.101";
-        proxyJump = "helium-ssh.mnzn.dev";
-      };
-
-      helium-mastodon = lib.hm.dag.entryAfter ["helium-ssh.mnzn.dev"] {
-        hostname = "10.10.10.104";
         proxyJump = "helium-ssh.mnzn.dev";
       };
 
@@ -155,9 +130,6 @@
 
       "git.human.de".hostname = "git.human.de";
       "sentry.human.de".hostname = "167.235.55.186";
-      runner_hetzner_01.hostname = "195.201.16.71";
-      grafana_stack.hostname = "128.140.83.161";
-      docker_host.hostname = "docker-host.human-dev.io";
       "nix-01.human-dev.io".user = "root";
     };
   };
