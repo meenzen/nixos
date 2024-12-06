@@ -26,6 +26,8 @@ in {
       };
     };
 
+    meenzen.backup.paths = ["/var/lib/matrix-synapse"];
+
     services.matrix-synapse = {
       enable = true;
       withJemalloc = true;

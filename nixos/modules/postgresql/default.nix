@@ -55,6 +55,12 @@ in {
       };
     networking.firewall.allowedTCPPorts = lib.mkIf cfg.enableLocalNetwork [5432];
 
+    services.postgresqlBackup = {
+      enable = true;
+      backupAll = true;
+    };
+    meenzen.backup.paths = [config.services.postgresqlBackup.location];
+
     # Major Upgrade Docs: https://nixos.org/manual/nixos/stable/#module-services-postgres-upgrading
     environment.systemPackages = lib.mkIf cfg.enableMajorUpgrade [
       (let

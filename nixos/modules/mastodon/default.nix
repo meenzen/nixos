@@ -80,6 +80,8 @@ in {
       };
     };
 
+    meenzen.backup.paths = ["/var/lib/mastodon"];
+
     services.mastodon = {
       enable = true;
       localDomain = cfg.domain;

@@ -54,5 +54,8 @@ in {
       acceptTerms = true;
       defaults.email = systemConfig.user.email;
     };
+    meenzen.backup.paths = [
+      "/var/lib/acme"
+    ];
   };
 }

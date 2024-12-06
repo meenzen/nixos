@@ -27,6 +27,8 @@ in {
       };
     };
 
+    meenzen.backup.paths = ["/var/lib/private/authentik/media"];
+
     services.authentik = {
       enable = true;
       environmentFile = config.age.secrets.authentikEnvironment.path;

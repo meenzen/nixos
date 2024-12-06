@@ -3,6 +3,7 @@
     ./adb
     ./agenix
     ./authentik
+    ./backup
     ./basic-packages
     ./bootloader
     ./build-vm

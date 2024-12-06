@@ -9,6 +9,7 @@ let
   mastodon = [neon];
   matrix = [neon];
   authentik = [neon];
+  restic = [neon];
 in {
   # Mastodon
   "mastodonEmailPassword.age".publicKeys = users ++ mastodon;
@@ -27,4 +28,9 @@ in {
 
   # Authentik
   "authentikEnvironment.age".publicKeys = users ++ authentik;
+
+  # Restic
+  "resticEnv.age".publicKeys = users ++ restic;
+  "resticRepository.age".publicKeys = users ++ restic;
+  "resticPassword.age".publicKeys = users ++ restic;
 }
