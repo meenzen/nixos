@@ -124,6 +124,8 @@ in {
         pkgs.writeScriptBin "mastodon-cleanup" ''
           set -eux
 
+          cd /var/lib/mastodon
+
           mastodon-tootctl media remove --days 14
           mastodon-tootctl statuses remove --days 14
           mastodon-tootctl preview-cards remove --days 14
