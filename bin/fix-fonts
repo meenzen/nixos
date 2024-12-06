@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -eo pipefail
+
+print () {
+    echo -e "${LIGHT_BLUE}$1${NO_COLOR}"
+}
+
+print "=> Fixing Font Cache"
+
+fc-cache -r
