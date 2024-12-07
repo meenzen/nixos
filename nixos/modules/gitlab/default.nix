@@ -51,6 +51,8 @@ in {
       };
     };
 
+    meenzen.backup.paths = ["/var/gitlab/state"];
+
     services.gitlab = {
       enable = true;
       https = true;
