@@ -10,6 +10,7 @@ let
   matrix = [neon];
   authentik = [neon];
   restic = [neon];
+  gitlab = [neon];
 in {
   # Mastodon
   "mastodonEmailPassword.age".publicKeys = users ++ mastodon;
@@ -33,4 +34,12 @@ in {
   "resticEnv.age".publicKeys = users ++ restic;
   "resticRepository.age".publicKeys = users ++ restic;
   "resticPassword.age".publicKeys = users ++ restic;
+
+  # GitLab
+  "gitlabSecret.age".publicKeys = users ++ gitlab;
+  "gitlabOtpSecret.age".publicKeys = users ++ gitlab;
+  "gitlabDbSecret.age".publicKeys = users ++ gitlab;
+  "gitlabJwsSecret.age".publicKeys = users ++ gitlab;
+  "gitlabRootPassword.age".publicKeys = users ++ gitlab;
+  "gitlabDatabasePassword.age".publicKeys = users ++ gitlab;
 }

@@ -16,6 +16,7 @@
     ./firmware-update
     ./fonts
     ./gaming
+    ./gitlab
     ./hardware
     ./hetzner
     ./home-manager

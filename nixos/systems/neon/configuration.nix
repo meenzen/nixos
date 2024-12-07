@@ -33,4 +33,5 @@
   meenzen.fedifetcher.enable = true;
   meenzen.matrix.enable = true;
   meenzen.authentik.enable = true;
+  meenzen.gitlab.enable = true;
 }
