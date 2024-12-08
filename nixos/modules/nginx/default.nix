@@ -49,6 +49,8 @@ in {
   ];
 
   config = lib.mkIf cfg.enable {
+    meenzen.nginx-badbots.enable = true;
+
     networking.firewall.allowedTCPPorts = [80 443];
     networking.firewall.allowedUDPPorts = [443];
 
