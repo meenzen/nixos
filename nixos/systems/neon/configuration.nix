@@ -34,4 +34,5 @@
   meenzen.matrix.enable = true;
   meenzen.authentik.enable = true;
   meenzen.gitlab.enable = true;
+  meenzen.collabora.enable = true;
 }

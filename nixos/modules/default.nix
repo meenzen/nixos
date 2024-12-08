@@ -10,6 +10,7 @@
     ./certs
     ./cleanup
     ./cloudflare-warp
+    ./collabora
     ./desktop
     ./docker
     ./fedifetcher

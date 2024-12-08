@@ -11,6 +11,7 @@ let
   authentik = [neon];
   restic = [neon];
   gitlab = [neon];
+  collabora = [neon];
 in {
   # Mastodon
   "mastodonEmailPassword.age".publicKeys = users ++ mastodon;
@@ -42,4 +43,7 @@ in {
   "gitlabJwsSecret.age".publicKeys = users ++ gitlab;
   "gitlabRootPassword.age".publicKeys = users ++ gitlab;
   "gitlabDatabasePassword.age".publicKeys = users ++ gitlab;
+
+  # Collabora
+  "collaboraEnvironment.age".publicKeys = users ++ collabora;
 }
