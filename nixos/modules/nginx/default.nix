@@ -44,6 +44,10 @@ in {
     allowIndexing = lib.mkEnableOption "Allow search engines to crawl websites hosted on this server";
   };
 
+  imports = [
+    ./nginx-badbots.nix
+  ];
+
   config = lib.mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = [80 443];
     networking.firewall.allowedUDPPorts = [443];
