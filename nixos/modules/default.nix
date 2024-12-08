@@ -8,6 +8,7 @@
     ./bootloader
     ./build-vm
     ./certs
+    ./cheshbot
     ./cleanup
     ./cloudflare-warp
     ./collabora

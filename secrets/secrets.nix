@@ -12,6 +12,7 @@ let
   restic = [neon];
   gitlab = [neon];
   collabora = [neon];
+  cheshbot = [neon];
 in {
   # Mastodon
   "mastodonEmailPassword.age".publicKeys = users ++ mastodon;
@@ -46,4 +47,11 @@ in {
 
   # Collabora
   "collaboraEnvironment.age".publicKeys = users ++ collabora;
+
+  # CheshBot
+  "cheshbotEnvironment.age".publicKeys = users ++ cheshbot;
+  "cheshbotPostgresPassword.age".publicKeys = users ++ cheshbot;
+
+  # GitHub Registry
+  "githubRegistryPassword.age".publicKeys = users ++ systems;
 }
