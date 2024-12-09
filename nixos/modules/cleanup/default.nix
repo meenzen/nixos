@@ -14,9 +14,9 @@
       pkgs.writeScriptBin "cleanup-nix-store" ''
         set -eux
 
+        sudo nix-env -p /nix/var/nix/profiles/system --delete-generations +2
         sudo nix-collect-garbage --delete-older-than 7d
         sudo nix-store --optimise
-        sudo nix-env -p /nix/var/nix/profiles/system --delete-generations +2
       ''
     )
   ];
