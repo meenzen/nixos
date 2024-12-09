@@ -15,6 +15,11 @@ in {
       default = "mnzn.dev";
       description = "Domain for Matrix Server";
     };
+    port = lib.mkOption {
+      type = lib.types.int;
+      default = 8008;
+      description = "Local port for Matrix Server";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -44,7 +49,7 @@ in {
         enable_registration = false;
         listeners = [
           {
-            port = 8008;
+            port = cfg.port;
             bind_addresses = ["::1"];
             type = "http";
             tls = false;
@@ -77,8 +82,8 @@ in {
       locations."/".extraConfig = ''
         return 404;
       '';
-      locations."/_matrix".proxyPass = "http://[::1]:8008";
-      locations."/_synapse/client".proxyPass = "http://[::1]:8008";
+      locations."/_matrix".proxyPass = "http://[::1]:${toString cfg.port}";
+      locations."/_synapse/client".proxyPass = "http://[::1]:${toString cfg.port}";
     };
   };
 }
