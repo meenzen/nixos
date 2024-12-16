@@ -15,7 +15,8 @@
 
     colmena = {
       url = "github:zhaofengli/colmena";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # current nixpkgs is not compatible
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
 
     arion = {
