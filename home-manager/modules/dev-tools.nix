@@ -29,7 +29,7 @@
     });
 in {
   home.sessionVariables = {
-    DOTNET_ROOT = "${dotnet-combined}";
+    DOTNET_ROOT = "${dotnet-combined}/share/dotnet";
     MSBUILDTERMINALLOGGER = "auto";
   };
   home.packages = with pkgs; [
