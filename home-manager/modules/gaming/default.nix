@@ -1,8 +1,5 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    discord
-    teamspeak_client
-    mumble
     prismlauncher
     chiaki-ng
   ];

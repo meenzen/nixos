@@ -1,6 +1,8 @@
 {
   imports = [
     ./common
+    ./modules/communication
+    ./modules/gaming
     ./modules/neovim
     ./modules/plasma
     ./modules/desktop.nix
@@ -13,7 +15,6 @@
     ./modules/shells.nix
     ./modules/ssh.nix
     ./modules/browsers.nix
-    ./modules/gaming.nix
     ./modules/keepass.nix
     ./modules/fun.nix
     ./modules/media-player.nix
