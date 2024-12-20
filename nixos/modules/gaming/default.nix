@@ -58,6 +58,9 @@ in {
       ];
     };
 
+    # xbox controller driver
+    hardware.xone.enable = true;
+
     programs.gamemode.enable = true;
     # enable game tweaks by adjusting the game launch options:
     # `gamemoderun %command%`
