@@ -9,6 +9,7 @@
 in {
   options.meenzen.mastodon = {
     enable = lib.mkEnableOption "Enable Mastodon Server";
+    enableSearch = lib.mkEnableOption "Enable Search, run 'mastodon-tootctl search deploy' after enabling";
     domain = lib.mkOption {
       type = lib.types.str;
       default = "social.meenzen.net";
@@ -127,7 +128,14 @@ in {
         startAt = "daily";
         olderThanDays = 14;
       };
+
+      elasticsearch.host =
+        if cfg.enableSearch
+        then "172.0.0.1"
+        else null;
     };
+
+    services.opensearch.enable = cfg.enableSearch;
 
     environment.systemPackages = [
       (
