@@ -131,11 +131,12 @@ in {
 
       elasticsearch.host =
         if cfg.enableSearch
-        then "172.0.0.1"
+        then "localhost"
         else null;
     };
 
     services.opensearch.enable = cfg.enableSearch;
+    networking.firewall.allowedTCPPorts = lib.mkIf cfg.enableSearch [9200];
 
     environment.systemPackages = [
       (
