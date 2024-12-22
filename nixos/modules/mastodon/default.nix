@@ -89,8 +89,8 @@ in {
       extraConfig = {
         SINGLE_USER_MODE = "false";
         DEFAULT_LOCALE = "de";
-        S3_OPEN_TIMEOUT = 10;
-        S3_READ_TIMEOUT = 10;
+        S3_OPEN_TIMEOUT = "10";
+        S3_READ_TIMEOUT = "10";
       };
       webProcesses = 1;
       streamingProcesses = 1;
