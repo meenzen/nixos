@@ -21,12 +21,12 @@ in {
     };
     cdnBucketDomain = lib.mkOption {
       type = lib.types.str;
-      default = "fsn1.your-objectstorage.com";
+      default = "hel1.your-objectstorage.com";
       description = "Domain for media files";
     };
     cdnBucketName = lib.mkOption {
       type = lib.types.str;
-      default = "mastodon-cdn";
+      default = "meenzen-mastodon";
       description = "Name of the bucket for media files";
     };
   };
@@ -89,8 +89,16 @@ in {
       extraConfig = {
         SINGLE_USER_MODE = "false";
         DEFAULT_LOCALE = "de";
+
         S3_OPEN_TIMEOUT = "10";
         S3_READ_TIMEOUT = "10";
+        S3_ENABLED = "true";
+        S3_BUCKET = cfg.cdnBucketName;
+        S3_PROTOCOL = "https";
+        S3_ENDPOINT = "https://${cfg.cdnBucketDomain}/";
+        S3_HOSTNAME = cfg.cdnDomain;
+        S3_ALIAS_HOST = cfg.cdnDomain;
+        S3_SIGNATURE_VERSION = "v4";
       };
       webProcesses = 1;
       streamingProcesses = 1;
@@ -150,9 +158,9 @@ in {
       virtualHosts."${cfg.cdnDomain}" = {
         enableACME = true;
         forceSSL = true;
-        locations."/${cfg.cdnBucketName}/" = {
+        locations."/" = {
           recommendedProxySettings = false;
-          proxyPass = "https://${cfg.cdnBucketDomain}/${cfg.cdnBucketName}/";
+          proxyPass = "https://${cfg.cdnBucketName}.${cfg.cdnBucketDomain}/";
           extraConfig = ''
             limit_except GET {
               deny all;
@@ -164,7 +172,7 @@ in {
             add_header X-Content-Type-Options nosniff;
             add_header Content-Security-Policy "default-src 'none'; form-action 'none'";
 
-            proxy_set_header Host ${cfg.cdnBucketDomain};
+            proxy_set_header Host ${cfg.cdnBucketName}.${cfg.cdnBucketDomain};
             proxy_set_header Connection "";
             proxy_set_header Authorization "";
             proxy_hide_header Set-Cookie;
