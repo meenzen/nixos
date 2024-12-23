@@ -6,6 +6,22 @@
   ...
 }: let
   cfg = config.meenzen.mastodon;
+
+  tootctl = "/run/current-system/sw/bin/mastodon-tootctl";
+  cleanupScriptName = "mastodon-cleanup";
+
+  cleanupScript = (
+    pkgs.writeScriptBin cleanupScriptName ''
+      set -eux
+
+      cd /var/lib/mastodon
+
+      ${tootctl} media remove --days ${toString cfg.cleanupDays}
+      ${tootctl} media remove --prune-profiles --days ${toString cfg.cleanupDays}
+      ${tootctl} statuses remove --days ${toString cfg.cleanupDays}
+      ${tootctl} preview-cards remove --days ${toString cfg.cleanupDays}
+    ''
+  );
 in {
   options.meenzen.mastodon = {
     enable = lib.mkEnableOption "Enable Mastodon Server";
@@ -29,6 +45,11 @@ in {
       type = lib.types.str;
       default = "meenzen-mastodon";
       description = "Name of the bucket for media files";
+    };
+    cleanupDays = lib.mkOption {
+      type = lib.types.int;
+      default = 30;
+      description = "Days after which unnecessary data is removed";
     };
   };
 
@@ -124,9 +145,9 @@ in {
         passwordFile = config.age.secrets.mastodonEmailPassword.path;
       };
       mediaAutoRemove = {
-        enable = true;
+        enable = false; # This is already handled by the cleanup script
         startAt = "daily";
-        olderThanDays = 14;
+        olderThanDays = cfg.cleanupDays;
       };
 
       elasticsearch.host =
@@ -139,20 +160,25 @@ in {
     networking.firewall.allowedTCPPorts = lib.mkIf cfg.enableSearch [9200];
 
     environment.systemPackages = [
-      (
-        pkgs.writeScriptBin "mastodon-cleanup" ''
-          set -eux
-
-          cd /var/lib/mastodon
-
-          mastodon-tootctl media remove --days 14
-          mastodon-tootctl statuses remove --days 14
-          mastodon-tootctl preview-cards remove --days 14
-          mastodon-tootctl accounts prune
-          mastodon-tootctl media remove --prune-profiles --days 14
-        ''
-      )
+      cleanupScript
     ];
+    systemd.timers."${cleanupScriptName}" = {
+      wantedBy = ["timers.target"];
+      timerConfig = {
+        OnCalendar = "daily";
+        Persistent = true;
+      };
+    };
+    systemd.services."${cleanupScriptName}" = {
+      requires = ["mastodon-web.service"];
+      script = ''
+        ${cleanupScript}/bin/${cleanupScriptName}
+      '';
+      serviceConfig = {
+        Type = "oneshot";
+        User = "root";
+      };
+    };
 
     # Adapted from this excellent guide: https://stanislas.blog/2018/05/moving-mastodon-media-files-to-wasabi-object-storage/
     services.nginx = {
