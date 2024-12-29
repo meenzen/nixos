@@ -25,6 +25,10 @@ in {
     };
   };
 
+  imports = [
+    ./scripts.nix
+  ];
+
   config = lib.mkIf cfg.enable {
     age.secrets = {
       atticEnvironment = {
