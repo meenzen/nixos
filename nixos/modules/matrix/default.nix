@@ -85,5 +85,20 @@ in {
       locations."/_matrix".proxyPass = "http://[::1]:${toString cfg.port}";
       locations."/_synapse/client".proxyPass = "http://[::1]:${toString cfg.port}";
     };
+
+    environment.systemPackages = [
+      (
+        pkgs.writeScriptBin "matrix-synapse-run-synapse_auto_compressor" ''
+          set -eux
+          sudo -u matrix-synapse ${pkgs.matrix-synapse-tools.rust-synapse-compress-state}/bin/synapse_auto_compressor -p "user=matrix-synapse dbname=matrix-synapse host=/run/postgresql" -c 1000 -n 1000
+        ''
+      )
+      (
+        pkgs.writeScriptBin "matrix-synapse-vacuum-full" ''
+          set -eux
+          sudo -u matrix-synapse psql -U matrix-synapse -d matrix-synapse -c "VACUUM FULL VERBOSE"
+        ''
+      )
+    ];
   };
 }
