@@ -21,6 +21,11 @@ in {
   config = lib.mkIf cfg.enable {
     meenzen.gaming.star-citizen.enable = lib.mkDefault true;
 
+    nix.settings = {
+      substituters = ["https://nix-gaming.cachix.org"];
+      trusted-public-keys = ["nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="];
+    };
+
     # https://github.com/rain-cafe/protontweaks
     nixpkgs.overlays = [inputs.protontweaks.overlay];
     services.protontweaks.enable = true;

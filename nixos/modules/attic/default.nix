@@ -27,6 +27,7 @@ in {
 
   imports = [
     ./scripts.nix
+    ./substituters.nix
   ];
 
   config = lib.mkIf cfg.enable {
