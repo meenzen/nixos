@@ -12,6 +12,8 @@ in {
     enableLocalNetwork = lib.mkEnableOption "Allow password-based authentication for private networks";
   };
 
+  imports = [./scripts.nix];
+
   config = lib.mkIf cfg.enable {
     services.postgresql =
       {
@@ -68,7 +70,7 @@ in {
         # Do not forget to list the extensions you need.
         newPostgres = pkgs.postgresql_16;
       in
-        pkgs.writeScriptBin "upgrade-pg-cluster" ''
+        pkgs.writeScriptBin "postgres-upgrade-cluster" ''
           set -eux
           # It's perhaps advisable to stop all services that depend on postgresql
           systemctl stop postgresql
