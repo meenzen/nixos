@@ -1,5 +1,10 @@
-{pkgs, ...}: {
-  environment.systemPackages = [
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
+  environment.systemPackages = lib.mkIf config.services.postgresql.enable [
     (
       # https://wiki.postgresql.org/wiki/Disk_Usage
       pkgs.writeScriptBin "postgres-list-database-sizes" ''
