@@ -28,5 +28,11 @@
         attic push meenzen:main /run/current-system $@
       ''
     )
+    (
+      pkgs.writeScriptBin "attic-push-everything" ''
+        set -e
+        nix path-info --all | ${pkgs.gnugrep}/bin/grep --invert '\.drv$' | attic push meenzen:main --stdin $@
+      ''
+    )
   ];
 }
