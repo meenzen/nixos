@@ -1,6 +1,7 @@
 {
   imports = [
     ./common
+    ./modules/cleanup
     ./modules/communication
     ./modules/gaming
     ./modules/neovim

@@ -11,10 +11,13 @@ print () {
 
 print "=> Starting Storage Optimization"
 
-print "==> Running \"nix-collect-garbage --delete-older-than 7d\""
+print "==> Running \"nix-collect-garbage\""
+nix-collect-garbage --delete-older-than 7d
+
+print "==> Running \"nix-collect-garbage\" as root"
 sudo nix-collect-garbage --delete-older-than 7d
 
-print "==> Running \"nix-store --optimise\""
+print "==> Running \"sudo nix-store --optimise\""
 sudo nix-store --optimise
 
 print "=> Done!"
