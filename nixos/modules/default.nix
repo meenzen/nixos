@@ -2,6 +2,7 @@
   imports = [
     ./adb
     ./agenix
+    ./attic
     ./authentik
     ./backup
     ./basic-packages
