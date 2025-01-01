@@ -23,6 +23,28 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    nixpkgs.overlays = [
+      # stub out broken dependency, see: https://github.com/NixOS/nixpkgs/issues/367976#issuecomment-2565035465
+      (final: prev: {
+        python312 = prev.python312.override {
+          packageOverrides = final: prev: {
+            pysaml2 = final.toPythonModule pkgs.emptyDirectory;
+          };
+        };
+        matrix-synapse-unwrapped = prev.matrix-synapse-unwrapped.overrideAttrs (old: {
+          postPatch =
+            (old.postPatch or "")
+            + ''
+              substituteInPlace tests/storage/databases/main/test_events_worker.py --replace-fail \
+              $'    def test_recovery(' \
+              $'    from tests.unittest import skip_unless\n'\
+              $'    @skip_unless(False, "broken")\n'\
+              $'    def test_recovery('
+            '';
+        });
+      })
+    ];
+
     age.secrets = {
       matrixSharedSecret = {
         file = "${inputs.self}/secrets/matrixSharedSecret.age";
