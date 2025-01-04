@@ -26,6 +26,6 @@
   users.users.nixos.openssh.authorizedKeys.keys = systemConfig.user.authorizedKeys;
 
   # force conflicting options
-  hardware.pulseaudio.enable = lib.mkForce false;
+  services.pulseaudio.enable = lib.mkForce false;
   services.openssh.settings.PermitRootLogin = lib.mkForce "yes";
 }
