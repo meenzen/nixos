@@ -31,6 +31,7 @@
     ./nginx
     ./nix
     ./oci-containers
+    ./openfortivpn
     ./openssh
     ./optimization
     ./overlays
