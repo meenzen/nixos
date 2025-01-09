@@ -8,4 +8,5 @@ print () {
 
 print "=> Fixing Font Cache"
 
-fc-cache -r
+fc-cache -rf
+rm -rf ~/.cache/fontconfig
