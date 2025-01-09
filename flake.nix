@@ -131,7 +131,7 @@
           inherit inputs outputs systemConfig;
         };
         modules = [
-          ./nixos/modules
+          ./modules
           systemModule
         ];
       };
@@ -144,12 +144,12 @@
     inherit (devShells) devShells;
 
     nixosConfigurations = {
-      framework = mkSystem ./nixos/systems/framework/configuration.nix;
-      install-iso = mkSystem ./nixos/systems/install-iso/configuration.nix;
-      neon = mkSystem ./nixos/systems/neon/configuration.nix;
-      the-machine = mkSystem ./nixos/systems/the-machine/configuration.nix;
-      vm = mkSystem ./nixos/systems/vm/configuration.nix;
-      wsl = mkSystem ./nixos/systems/wsl/configuration.nix;
+      framework = mkSystem ./systems/framework/configuration.nix;
+      install-iso = mkSystem ./systems/install-iso/configuration.nix;
+      neon = mkSystem ./systems/neon/configuration.nix;
+      the-machine = mkSystem ./systems/the-machine/configuration.nix;
+      vm = mkSystem ./systems/vm/configuration.nix;
+      wsl = mkSystem ./systems/wsl/configuration.nix;
     };
 
     # See https://github.com/zhaofengli/colmena/pull/228
@@ -168,12 +168,12 @@
 
       defaults = {pkgs, ...}: {
         imports = [
-          ./nixos/modules
+          ./modules
         ];
         deployment.buildOnTarget = true;
       };
 
-      neon = mkServer "neon.mnzn.dev" ./nixos/systems/neon/configuration.nix;
+      neon = mkServer "neon.mnzn.dev" ./systems/neon/configuration.nix;
     };
   };
 }
