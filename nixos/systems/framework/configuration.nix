@@ -34,4 +34,6 @@
       "org.kde.plasma.battery"
     ];
   };
+
+  services.teamviewer.enable = true;
 }
