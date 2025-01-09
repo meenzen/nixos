@@ -38,7 +38,7 @@
 
       # copilot
       copilot-cmp.enable = true;
-      copilot-lua = {
+      copilot-lua.settings = {
         # required to make copilot-cmp work correctly
         panel.enabled = false;
         suggestion.enabled = false;
