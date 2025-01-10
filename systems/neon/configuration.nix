@@ -40,4 +40,5 @@
   meenzen.collabora.enable = true;
   meenzen.cheshbot.enable = true;
   meenzen.attic.enable = true;
+  meenzen.mudblazor-docs.enable = true;
 }
