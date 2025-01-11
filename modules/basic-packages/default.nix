@@ -11,5 +11,6 @@
     wget
     duf
     htop
+    ncdu
   ];
 }
