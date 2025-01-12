@@ -12,7 +12,7 @@ print () {
 print "=> Starting VM Build"
 
 print "==> Formatting Code"
-alejandra .
+alejandra . >/dev/null 2>&1
 
 print "==> Building VM"
 git add .

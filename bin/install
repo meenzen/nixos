@@ -12,7 +12,7 @@ print () {
 print "=> Starting Install"
 
 print "==> Formatting Code"
-alejandra .
+alejandra . >/dev/null 2>&1
 
 print "==> Rebuilding NixOS"
 git add .

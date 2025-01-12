@@ -12,7 +12,7 @@ print () {
 print "=> Starting Update"
 
 print "==> Formatting Code"
-alejandra .
+alejandra . >/dev/null 2>&1
 
 print "==> Updating Flake"
 git add .
