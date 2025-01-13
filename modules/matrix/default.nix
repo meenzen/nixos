@@ -28,12 +28,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    nixpkgs.overlays = [
-      (final: prev: {
-        matrix-synapse-unwrapped = nixpkgs-synapse.matrix-synapse-unwrapped;
-      })
-    ];
-
     age.secrets = {
       matrixSharedSecret = {
         file = "${inputs.self}/secrets/matrixSharedSecret.age";

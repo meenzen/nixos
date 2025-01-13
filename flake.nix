@@ -5,9 +5,6 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-meenzen.url = "github:meenzen/nixpkgs/nixos-unstable";
 
-    # See https://github.com/NixOS/nixpkgs/pull/371815
-    nixpkgs-synapse.url = "github:nixos/nixpkgs/7b2d7afbcc73cb0719e0bae137ad16a5e8b9f746";
-
     # Helper Libraries
     nixos-hardware.url = "github:nixos/nixos-hardware";
     flake-utils.url = "github:numtide/flake-utils";
