@@ -1104,11 +1104,11 @@
         "treefmt-nix": "treefmt-nix_3"
       },
       "locked": {
-        "lastModified": 1737357362,
-        "narHash": "sha256-lTJn6nvyNXyst0INwFc0b/ee3VJIYWV/1oFzWhRNQAY=",
+        "lastModified": 1737375933,
+        "narHash": "sha256-JBKKqza74YaLQeXEsK0wfgvDP9AVAFkXQIQzuXXMs2w=",
         "owner": "nix-community",
         "repo": "nixvim",
-        "rev": "1036b8f8b6c2983b03849f7ded79865eb457ddc7",
+        "rev": "2ec6218f87a7ddeaa1887424d5883b3d0d9b3a23",
         "type": "github"
       },
       "original": {
@@ -1514,20 +1514,20 @@
       },
       "locked": {
         "dir": "packaging/nix",
-        "lastModified": 1737161836,
-        "narHash": "sha256-v20q0DeglyrsIAbqwqOSxdzZ4JhEWtU9muWPlPz3Few=",
+        "lastModified": 1737345310,
+        "narHash": "sha256-DG6trkopsJf7qy7mLNw3AahjKPtnqHquCsS9iRF/b5o=",
         "ref": "refs/heads/main",
-        "rev": "3fd4ef90e8427cfc74d94914654a288912edb2cf",
-        "revCount": 901,
+        "rev": "16f6b7374e440f8d464522796217cd202f10b355",
+        "revCount": 905,
         "submodules": true,
         "type": "git",
-        "url": "https://github.com/Open-Wine-Components/umu-launcher/?dir=packaging/nix"
+        "url": "https://github.com/Open-Wine-Components/umu-launcher/"
       },
       "original": {
         "dir": "packaging/nix",
         "submodules": true,
         "type": "git",
-        "url": "https://github.com/Open-Wine-Components/umu-launcher/?dir=packaging/nix"
+        "url": "https://github.com/Open-Wine-Components/umu-launcher/"
       }
     }
   },
