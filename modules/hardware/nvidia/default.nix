@@ -42,8 +42,5 @@ in {
       libva
       libva-utils
     ];
-
-    # Use lts kernel, latest is broken
-    boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_6;
   };
 }

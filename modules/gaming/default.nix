@@ -31,7 +31,7 @@ in {
     services.protontweaks.enable = true;
 
     # Kernel Tweaks
-    # boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+    # boot.kernelPackages = pkgs.linuxPackages_xanmod;
     boot.kernel.sysctl = {
       "vm.max_map_count" = 16777216;
       "fs.file-max" = 524288;
