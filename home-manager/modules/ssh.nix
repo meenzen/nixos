@@ -24,32 +24,12 @@
 
       "mail.meenzen.net" = {
         hostname = "mail.meenzen.net";
+        user = "root";
       };
 
       "neon.mnzn.dev" = {
         hostname = "neon.mnzn.dev";
         user = "root";
-      };
-
-      "helium-ssh.mnzn.dev" = {
-        hostname = "helium-ssh.mnzn.dev";
-        user = "root";
-        proxyCommand = "${pkgs.cloudflared}/bin/cloudflared access ssh --hostname %h";
-      };
-
-      helium-docker = lib.hm.dag.entryAfter ["helium-ssh.mnzn.dev"] {
-        hostname = "10.10.10.112";
-        proxyJump = "helium-ssh.mnzn.dev";
-      };
-
-      helium-nginx-proxy = lib.hm.dag.entryAfter ["helium-ssh.mnzn.dev"] {
-        hostname = "10.10.10.100";
-        proxyJump = "helium-ssh.mnzn.dev";
-      };
-
-      helium-gitlab = lib.hm.dag.entryAfter ["helium-ssh.mnzn.dev"] {
-        hostname = "10.10.10.101";
-        proxyJump = "helium-ssh.mnzn.dev";
       };
 
       "ssh-gateway.human-dev.io" = {
@@ -102,12 +82,6 @@
 
       nginx_pisa_01 = lib.hm.dag.entryAfter ["ssh-gateway.human-dev.io"] {
         hostname = "192.168.155.11";
-        proxyJump = "ssh-gateway.human-dev.io";
-      };
-
-      # Pimcore
-      marcomdev1 = lib.hm.dag.entryAfter ["ssh-gateway.human-dev.io"] {
-        hostname = "172.18.250.51";
         proxyJump = "ssh-gateway.human-dev.io";
       };
 
