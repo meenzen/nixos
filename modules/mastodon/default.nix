@@ -52,8 +52,21 @@ in {
       description = "Days after which unnecessary data is removed";
     };
   };
-
   config = lib.mkIf cfg.enable {
+    nixpkgs.overlays = [
+      (
+        final: prev: {
+          mastodon = prev.mastodon.overrideAttrs (oldAttrs: {
+            patches =
+              (oldAttrs.patches or [])
+              ++ [
+                ./limits.patch
+              ];
+          });
+        }
+      )
+    ];
+
     age.secrets = {
       mastodonEmailPassword = {
         file = "${inputs.self}/secrets/mastodonEmailPassword.age";

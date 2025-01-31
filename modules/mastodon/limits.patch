@@ -1,0 +1,25 @@
+diff --git a/app/validators/poll_validator.rb b/app/validators/poll_validator.rb
+index a32727796..bd913188f 100644
+--- a/app/validators/poll_validator.rb
++++ b/app/validators/poll_validator.rb
+@@ -1,7 +1,7 @@
+ # frozen_string_literal: true
+
+ class PollValidator < ActiveModel::Validator
+-  MAX_OPTIONS      = 4
++  MAX_OPTIONS      = 8
+   MAX_OPTION_CHARS = 50
+   MAX_EXPIRATION   = 1.month.freeze
+   MIN_EXPIRATION   = 5.minutes.freeze
+diff --git a/app/validators/status_length_validator.rb b/app/validators/status_length_validator.rb
+index dc841ded3..9cb1ec94b 100644
+--- a/app/validators/status_length_validator.rb
++++ b/app/validators/status_length_validator.rb
+@@ -1,7 +1,7 @@
+ # frozen_string_literal: true
+
+ class StatusLengthValidator < ActiveModel::Validator
+-  MAX_CHARS = 500
++  MAX_CHARS = 5000
+   URL_PLACEHOLDER_CHARS = 23
+   URL_PLACEHOLDER = 'x' * 23
