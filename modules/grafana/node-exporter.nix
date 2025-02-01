@@ -12,6 +12,11 @@
     rev = "cad8539cc4c4ed043935e69b9c1ec23e551806f4";
     sha256 = "sha256-9BYujV2xXRRDvNI4sjimZEB4Z2TY/0WhwJRh5P122rs=";
   };
+
+  fullHostname =
+    if config.networking.domain == ""
+    then config.networking.hostName
+    else "${config.networking.hostName}.${config.networking.domain}";
 in {
   options.meenzen.node-exporter = {
     enable = lib.mkEnableOption "Enable Node Exporter";
@@ -38,7 +43,7 @@ in {
             {
               targets = ["127.0.0.1:${toString cfg.port}"];
               labels = {
-                instance = config.networking.hostName;
+                instance = fullHostname;
               };
             }
           ];

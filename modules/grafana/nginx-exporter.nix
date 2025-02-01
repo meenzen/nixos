@@ -12,6 +12,11 @@
     rev = "8d61758aa1bc4bcc27dfb76dcb79078c53703bb4";
     sha256 = "sha256-czkzXy0g6Hp0MF77fPojuojW5m7B1vxdYBMMcbMEqxc=";
   };
+
+  fullHostname =
+    if config.networking.domain == ""
+    then config.networking.hostName
+    else "${config.networking.hostName}.${config.networking.domain}";
 in {
   options.meenzen.nginx-exporter = {
     enable = lib.mkEnableOption "Enable Nginx Exporter";
@@ -38,7 +43,7 @@ in {
             {
               targets = ["127.0.0.1:${toString cfg.port}"];
               labels = {
-                instance = config.networking.hostName;
+                instance = fullHostname;
               };
             }
           ];

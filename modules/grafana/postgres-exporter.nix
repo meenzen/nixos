@@ -19,6 +19,11 @@
     rev = "68432fdac54781febcd4a05a8007463231ed8d17";
     sha256 = "sha256-sFjbwaLRPIdn/xLFyaFybV8FaaoSNRGyt8WdKfl3lhE=";
   };
+
+  fullHostname =
+    if config.networking.domain == ""
+    then config.networking.hostName
+    else "${config.networking.hostName}.${config.networking.domain}";
 in {
   options.meenzen.postgres-exporter = {
     enable = lib.mkEnableOption "Enable Postgres Exporter";
@@ -46,7 +51,7 @@ in {
             {
               targets = ["127.0.0.1:${toString cfg.port}"];
               labels = {
-                instance = config.networking.hostName;
+                instance = fullHostname;
               };
             }
           ];
