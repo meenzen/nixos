@@ -27,6 +27,8 @@
     enable = true;
     testPage = "neon.mnzn.dev";
   };
+  meenzen.grafana.enable = true;
+  meenzen.promtail.enable = true;
   meenzen.postgresql.enable = true;
   meenzen.oci-containers.enable = true;
   meenzen.mastodon = {

@@ -20,6 +20,7 @@
     ./fonts
     ./gaming
     ./gitlab
+    ./grafana
     ./hardware
     ./hetzner
     ./home-manager
@@ -38,6 +39,7 @@
     ./overlays
     ./plasma
     ./postgresql
+    ./promtail
     ./security
     ./stylix
     ./users

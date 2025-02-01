@@ -14,6 +14,7 @@ let
   collabora = [neon];
   cheshbot = [neon];
   attic = [neon];
+  grafana = [neon];
 in {
   # Mastodon
   "mastodonEmailPassword.age".publicKeys = users ++ mastodon;
@@ -58,4 +59,13 @@ in {
 
   # Attic
   "atticEnvironment.age".publicKeys = users ++ attic;
+
+  # Grafana
+  "grafanaAdminPassword.age".publicKeys = users ++ grafana;
+  "grafanaSecretKey.age".publicKeys = users ++ grafana;
+  "prometheusAdminPassword.age".publicKeys = users ++ grafana;
+  "lokiAdminPassword.age".publicKeys = users ++ grafana;
+
+  # Promtail
+  "promtailLokiAdminPassword.age".publicKeys = users ++ systems;
 }
