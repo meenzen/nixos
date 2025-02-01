@@ -8,9 +8,11 @@
   cfg = config.meenzen.matrix;
   serviceName = "matrix-synapse";
 
-  nixpkgs-synapse = import inputs.nixpkgs-synapse {
-    system = pkgs.system;
-    config.allowUnfree = true;
+  dashboards = pkgs.fetchFromGitHub {
+    owner = "element-hq";
+    repo = "synapse";
+    rev = "ac1bf682ff012ee8af5153318eec5d25ed786e90";
+    sha256 = "sha256-s6qbYUzxJ9ca3K2X5H0X2WwbwebmnH5wKG2Vj2rGjpg=";
   };
 in {
   options.meenzen.matrix = {
@@ -52,6 +54,7 @@ in {
         public_baseurl = "https://matrix.${cfg.domain}";
         allow_guest_access = false;
         enable_registration = false;
+        enable_metrics = true;
         listeners = [
           {
             port = cfg.port;
@@ -61,7 +64,7 @@ in {
             x_forwarded = true;
             resources = [
               {
-                names = ["client" "federation"];
+                names = ["client" "federation" "metrics"];
                 compress = true;
               }
             ];
@@ -80,6 +83,29 @@ in {
           LC_CTYPE = "C";
       '';
     };
+
+    services.prometheus.scrapeConfigs = [
+      {
+        job_name = "synapse";
+        scrape_interval = "15s";
+        metrics_path = "/_synapse/metrics";
+        static_configs = [
+          {
+            targets = ["[::1]:${toString cfg.port}"];
+            labels = {
+              instance = "matrix.${cfg.domain}";
+            };
+          }
+        ];
+      }
+    ];
+
+    services.grafana.provision.dashboards.settings.providers = [
+      {
+        name = "synapse";
+        options.path = "${dashboards}/contrib/grafana/synapse.json";
+      }
+    ];
 
     services.nginx.virtualHosts."matrix.${cfg.domain}" = {
       enableACME = true;
