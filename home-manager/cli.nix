@@ -2,6 +2,7 @@
   # Only imports CLI tools
   imports = [
     ./common
+    ./modules/cleanup
     ./modules/neovim
     ./modules/dev-tools.nix
     ./modules/system-tools.nix

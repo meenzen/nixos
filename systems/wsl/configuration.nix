@@ -19,5 +19,8 @@
     defaultUser = systemConfig.user.username;
   };
 
-  meenzen.home-manager.homeModule = "${inputs.self}/home-manager/cli.nix";
+  meenzen.home-manager = {
+    enable = true;
+    homeModule = "${inputs.self}/home-manager/cli.nix";
+  };
 }
