@@ -30,7 +30,7 @@
 
   boot.loader.systemd-boot.windows."11" = {
     title = "Micros~1 Spyware";
-    efiDeviceHandle = "HD1b65535a3";
+    efiDeviceHandle = "HD1b65535a4";
   };
 
   # Mounts
