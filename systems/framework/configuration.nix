@@ -25,6 +25,7 @@
   meenzen.openfortivpn.enable = true;
   meenzen.hardware.bluetooth.enable = true;
   meenzen.hardware.uhk.enable = true;
+  meenzen.hardware.esp32.enable = true;
   meenzen.home-manager.extraConfig = {
     additionalPinnedApps = [
       "applications:google-chrome.desktop"
