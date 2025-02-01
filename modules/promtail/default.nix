@@ -7,7 +7,7 @@
   cfg = config.meenzen.promtail;
 
   fullHostname =
-    if config.networking.domain == ""
+    if toString config.networking.domain == ""
     then config.networking.hostName
     else "${config.networking.hostName}.${config.networking.domain}";
 in {
