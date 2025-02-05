@@ -16,6 +16,7 @@
     ./desktop
     ./docker
     ./fedifetcher
+    ./firewall
     ./firmware-update
     ./fonts
     ./gaming
@@ -40,7 +41,6 @@
     ./plasma
     ./postgresql
     ./promtail
-    ./security
     ./stylix
     ./users
     ./virtualbox
