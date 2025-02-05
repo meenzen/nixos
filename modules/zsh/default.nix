@@ -1,16 +1,26 @@
 {
+  config,
+  lib,
   pkgs,
   systemConfig,
   ...
-}: {
-  programs.zsh.enable = true;
+}: let
+  cfg = config.meenzen.zsh;
+in {
+  options.meenzen.zsh = {
+    enable = lib.mkEnableOption "Enable zsh";
+  };
 
-  # make completions work
-  environment.pathsToLink = ["/share/zsh"];
+  config = lib.mkIf cfg.enable {
+    programs.zsh.enable = true;
 
-  users.users = {
-    "${systemConfig.user.username}" = {
-      shell = pkgs.zsh;
+    # make completions work
+    environment.pathsToLink = ["/share/zsh"];
+
+    users.users = {
+      "${systemConfig.user.username}" = {
+        shell = pkgs.zsh;
+      };
     };
   };
 }

@@ -21,5 +21,6 @@ in {
     meenzen.stylix.enable = true;
     meenzen.vpn.enable = true;
     meenzen.yubikey.enable = true;
+    meenzen.zsh.enable = true;
   };
 }
