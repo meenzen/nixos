@@ -27,11 +27,6 @@
         user = "root";
       };
 
-      "neon.mnzn.dev" = {
-        hostname = "neon.mnzn.dev";
-        user = "root";
-      };
-
       "ssh-gateway.human-dev.io" = {
         proxyCommand = "${pkgs.cloudflared}/bin/cloudflared access ssh --hostname %h";
       };
