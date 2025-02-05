@@ -21,6 +21,7 @@
   networking.hostId = "91312b0a";
   system.stateVersion = "24.11";
 
+  meenzen.server.enable = true;
   meenzen.backup.enable = true;
   meenzen.hetzner.enable = true;
   meenzen.nginx = {

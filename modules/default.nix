@@ -41,6 +41,7 @@
     ./plasma
     ./postgresql
     ./promtail
+    ./server
     ./stylix
     ./users
     ./virtualbox
