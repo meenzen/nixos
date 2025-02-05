@@ -49,25 +49,25 @@ in {
 
     xdg.portal = {
       enable = true;
-      extraPortals = with pkgs; [
-        kdePackages.xdg-desktop-portal-kde
+      extraPortals = [
+        pkgs.kdePackages.xdg-desktop-portal-kde
       ];
     };
 
-    environment.systemPackages = with pkgs; [
-      kdePackages.xdg-desktop-portal-kde
-      kdePackages.filelight
-      kdePackages.kruler
-      kdePackages.kcolorchooser
-      kdePackages.kdeconnect-kde
-      kdePackages.neochat
-      kdePackages.kolourpaint
-      kdePackages.ghostwriter
-      kdePackages.kdenlive
-      krita
-      xwaylandvideobridge
-      xdg-utils
-      qpwgraph
+    environment.systemPackages = [
+      pkgs.kdePackages.xdg-desktop-portal-kde
+      pkgs.kdePackages.filelight
+      pkgs.kdePackages.kruler
+      pkgs.kdePackages.kcolorchooser
+      pkgs.kdePackages.kdeconnect-kde
+      pkgs.kdePackages.neochat
+      pkgs.kdePackages.kolourpaint
+      pkgs.kdePackages.ghostwriter
+      pkgs.kdePackages.kdenlive
+      pkgs.krita
+      pkgs.xwaylandvideobridge
+      pkgs.xdg-utils
+      pkgs.qpwgraph
     ];
 
     # fix GTK apps in KDE

@@ -5,12 +5,12 @@
   pkgs,
   ...
 }: {
-  environment.systemPackages = with pkgs; [
-    git
-    vim
-    wget
-    duf
-    htop
-    ncdu
+  environment.systemPackages = [
+    pkgs.git
+    pkgs.vim
+    pkgs.wget
+    pkgs.duf
+    pkgs.htop
+    pkgs.ncdu
   ];
 }

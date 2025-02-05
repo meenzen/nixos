@@ -1,6 +1,6 @@
 {pkgs, ...}: {
-  home.packages = with pkgs; [
-    onedrive
+  home.packages = [
+    pkgs.onedrive
   ];
   services.nextcloud-client.enable = true;
   programs.thunderbird = {

@@ -1,7 +1,7 @@
 {pkgs, ...}: {
-  home.packages = with pkgs; [
-    prismlauncher
-    chiaki-ng
+  home.packages = [
+    pkgs.prismlauncher
+    pkgs.chiaki-ng
   ];
 
   programs.obs-studio = {

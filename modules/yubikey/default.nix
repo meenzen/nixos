@@ -12,16 +12,16 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    services.udev.packages = with pkgs; [
-      yubikey-personalization
+    services.udev.packages = [
+      pkgs.yubikey-personalization
     ];
 
     # Smartcard support
     services.pcscd.enable = true;
 
     # Management GUI
-    environment.systemPackages = with pkgs; [
-      yubioath-flutter
+    environment.systemPackages = [
+      pkgs.yubioath-flutter
     ];
   };
 }

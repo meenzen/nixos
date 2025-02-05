@@ -11,9 +11,9 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
-      openfortivpn
-      openfortivpn-webview
+    environment.systemPackages = [
+      pkgs.openfortivpn
+      pkgs.openfortivpn-webview
     ];
   };
 }

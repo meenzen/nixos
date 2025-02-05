@@ -22,9 +22,9 @@ in {
       };
       aggregatedIcons = pkgs.buildEnv {
         name = "system-icons";
-        paths = with pkgs; [
-          kdePackages.breeze # for plasma
-          gnome-themes-extra
+        paths = [
+          pkgs.kdePackages.breeze # for plasma
+          pkgs.gnome-themes-extra
         ];
         pathsToLink = ["/share/icons"];
       };
@@ -40,25 +40,25 @@ in {
 
     fonts = {
       fontDir.enable = true;
-      packages = with pkgs; [
+      packages = [
         pkgs.nerd-fonts.fira-code
         pkgs.nerd-fonts.hack
         pkgs.nerd-fonts.jetbrains-mono
 
         # default fonts
-        dejavu_fonts
-        freefont_ttf
-        gyre-fonts # TrueType substitutes for standard PostScript fonts
-        liberation_ttf
-        unifont
-        noto-fonts
-        noto-fonts-cjk-sans
-        noto-fonts-color-emoji
-        noto-fonts-emoji
+        pkgs.dejavu_fonts
+        pkgs.freefont_ttf
+        pkgs.gyre-fonts # TrueType substitutes for standard PostScript fonts
+        pkgs.liberation_ttf
+        pkgs.unifont
+        pkgs.noto-fonts
+        pkgs.noto-fonts-cjk-sans
+        pkgs.noto-fonts-color-emoji
+        pkgs.noto-fonts-emoji
 
         # microsoft fonts
-        corefonts
-        vistafonts
+        pkgs.corefonts
+        pkgs.vistafonts
       ];
       fontconfig = {
         antialias = true;

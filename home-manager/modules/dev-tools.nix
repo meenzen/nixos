@@ -32,19 +32,19 @@ in {
     DOTNET_ROOT = "${dotnet-combined}/share/dotnet";
     MSBUILDTERMINALLOGGER = "auto";
   };
-  home.packages = with pkgs; [
+  home.packages = [
     # Compilers
     dotnet-combined
-    gcc
+    pkgs.gcc
 
     # Rust
-    rustup
+    pkgs.rustup
 
     # Misc
-    hyperfine
-    glow
-    tokei
-    difftastic
-    terraform
+    pkgs.hyperfine
+    pkgs.glow
+    pkgs.tokei
+    pkgs.difftastic
+    pkgs.terraform
   ];
 }

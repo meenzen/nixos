@@ -1,8 +1,8 @@
 {pkgs, ...}: {
-  home.packages = with pkgs; [
-    discord
-    teamspeak_client
-    mumble
-    beeper
+  home.packages = [
+    pkgs.discord
+    pkgs.teamspeak_client
+    pkgs.mumble
+    pkgs.beeper
   ];
 }

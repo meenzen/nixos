@@ -1,7 +1,7 @@
 {pkgs, ...}: {
-  home.packages = with pkgs; [
-    vlc
-    strawberry
+  home.packages = [
+    pkgs.vlc
+    pkgs.strawberry
   ];
 
   programs.mpv.enable = true;

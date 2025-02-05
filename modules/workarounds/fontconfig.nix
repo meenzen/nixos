@@ -1,8 +1,11 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   environment.variables = {
-    LD_LIBRARY_PATH = with pkgs;
-      lib.makeLibraryPath [
-        fontconfig
-      ];
+    LD_LIBRARY_PATH = lib.makeLibraryPath [
+      pkgs.fontconfig
+    ];
   };
 }

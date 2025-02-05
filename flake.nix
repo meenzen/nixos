@@ -84,11 +84,11 @@
           };
         in {
           devShells.default = pkgs.mkShell {
-            nativeBuildInputs = with pkgs; [
-              git
-              nixVersions.stable
-              nil
-              alejandra
+            nativeBuildInputs = [
+              pkgs.git
+              pkgs.nixVersions.stable
+              pkgs.nil
+              pkgs.alejandra
               colmena.packages."${system}".colmena
               agenix.packages."${system}".default
             ];

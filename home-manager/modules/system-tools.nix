@@ -1,50 +1,50 @@
 {pkgs, ...}: {
-  home.packages = with pkgs; [
-    strace
-    ltrace
-    lsof
+  home.packages = [
+    pkgs.strace
+    pkgs.ltrace
+    pkgs.lsof
 
-    sysstat
-    lm_sensors # sensors
-    ethtool
-    pciutils # lspci
-    usbutils # lsusb
-    cyme # better lsusb
-    smartmontools # smartctl
+    pkgs.sysstat
+    pkgs.lm_sensors # sensors
+    pkgs.ethtool
+    pkgs.pciutils # lspci
+    pkgs.usbutils # lsusb
+    pkgs.cyme # better lsusb
+    pkgs.smartmontools # smartctl
 
-    htop
-    btop
-    iotop-c
-    iftop
-    duf
-    ncdu
+    pkgs.htop
+    pkgs.btop
+    pkgs.iotop-c
+    pkgs.iftop
+    pkgs.duf
+    pkgs.ncdu
 
     # gpu related tools
-    glxinfo
-    vulkan-tools
-    gpu-viewer
+    pkgs.glxinfo
+    pkgs.vulkan-tools
+    pkgs.gpu-viewer
 
-    zip
-    xz
-    unzip
-    p7zip
-    zstd
+    pkgs.zip
+    pkgs.xz
+    pkgs.unzip
+    pkgs.p7zip
+    pkgs.zstd
 
-    file
-    which
-    tree
-    gnused
-    gnutar
-    gawk
-    gnupg
-    dos2unix
+    pkgs.file
+    pkgs.which
+    pkgs.tree
+    pkgs.gnused
+    pkgs.gnutar
+    pkgs.gawk
+    pkgs.gnupg
+    pkgs.dos2unix
 
-    nnn # terminal file manager
-    ripgrep # grep alternative
-    jq # json processer
-    yq-go # yaml processer
-    eza # ls alternative
-    fzf # fuzzy finder
-    bat # cat alternative
+    pkgs.nnn # terminal file manager
+    pkgs.ripgrep # grep alternative
+    pkgs.jq # json processer
+    pkgs.yq-go # yaml processer
+    pkgs.eza # ls alternative
+    pkgs.fzf # fuzzy finder
+    pkgs.bat # cat alternative
   ];
 }

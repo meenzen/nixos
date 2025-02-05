@@ -11,17 +11,17 @@
 
   jetbrains-plugins = ["github-copilot" "ideavim"];
 in {
-  home.packages = with pkgs; [
+  home.packages = [
     # Editors
-    vscode
-    kdePackages.kate
+    pkgs.vscode
+    pkgs.kdePackages.kate
 
     # https://nixos.wiki/wiki/Jetbrains_Tools
     #(meenzen.jetbrains.plugins.addPlugins meenzen.jetbrains.rider jetbrains-plugins)
-    (jetbrains.plugins.addPlugins jetbrains.rider jetbrains-plugins)
-    (jetbrains.plugins.addPlugins jetbrains.rust-rover jetbrains-plugins)
-    (jetbrains.plugins.addPlugins jetbrains.webstorm jetbrains-plugins)
-    jetbrains-toolbox
+    (pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains.rider jetbrains-plugins)
+    (pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains.rust-rover jetbrains-plugins)
+    (pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains.webstorm jetbrains-plugins)
+    pkgs.jetbrains-toolbox
   ];
 
   home.file.".ideavimrc".text = ''

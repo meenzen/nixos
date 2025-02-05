@@ -26,9 +26,9 @@ in {
     hardware.graphics = {
       # On 64-bit systems, whether to also install 32-bit drivers for 32-bit applications (such as Wine).
       enable32Bit = true;
-      extraPackages = with pkgs; [
+      extraPackages = [
         # Video acceleration support
-        nvidia-vaapi-driver
+        pkgs.nvidia-vaapi-driver
       ];
     };
     environment.sessionVariables = {
@@ -38,9 +38,9 @@ in {
       # required for Firefox
       MOZ_DISABLE_RDD_SANDBOX = "1";
     };
-    environment.systemPackages = with pkgs; [
-      libva
-      libva-utils
+    environment.systemPackages = [
+      pkgs.libva
+      pkgs.libva-utils
     ];
   };
 }
