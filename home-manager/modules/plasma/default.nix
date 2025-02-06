@@ -1,4 +1,10 @@
-{extraConfig, ...}: {
+{
+  pkgs,
+  extraConfig,
+  ...
+}: {
+  services.gpg-agent.pinentryPackage = pkgs.pinentry-qt;
+
   # reference: https://github.com/pjones/plasma-manager/tree/trunk/modules
   programs.plasma = {
     enable = true;
