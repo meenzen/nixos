@@ -118,6 +118,16 @@ in {
     meenzen.backup.paths = ["/var/lib/mastodon"];
 
     services.mastodon = {
+      package = pkgs.mastodon.overrideAttrs (old: {
+        mastodonModules = old.mastodonModules.overrideAttrs (old: {
+          # FIXME: Remove once fixed in nixpkgs. See https://github.com/NixOS/nixpkgs/issues/380366
+          postBuild = ''
+            # Remove workspace "package" as it contains broken symlinks
+            rm -r ~/node_modules/@mastodon
+          '';
+        });
+      });
+
       enable = true;
       localDomain = cfg.domain;
       configureNginx = true;
