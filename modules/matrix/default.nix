@@ -52,9 +52,12 @@ in {
       settings = {
         server_name = cfg.domain;
         public_baseurl = "https://matrix.${cfg.domain}";
+
+        # Security
         allow_guest_access = false;
         enable_registration = false;
-        enable_metrics = true;
+
+        # Endpoints
         listeners = [
           {
             port = cfg.port;
@@ -70,6 +73,15 @@ in {
             ];
           }
         ];
+        enable_metrics = true;
+
+        # Cleanup
+        delete_stale_devices_after = "1y";
+        media_retention = {
+          remote_media_lifetime = "1y";
+          local_media_lifetime = "5y";
+        };
+        forgotten_room_retention_period = "30d";
       };
     };
 
