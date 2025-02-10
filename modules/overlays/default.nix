@@ -4,18 +4,17 @@
       # tokei: add support for razor files, see https://github.com/XAMPPRocky/tokei/pull/992
       (final: prev: {
         tokei = prev.tokei.overrideAttrs (oldAttrs: rec {
-          version = "13.0.0-alpha.6";
+          version = "13.0.0-alpha.8";
           src = prev.fetchFromGitHub {
             owner = "XAMPPRocky";
             repo = "tokei";
             rev = "v${version}";
-            sha256 = "sha256-dKDoGdZPKeXdY6seFYEwQZkn2RtcFPddu2DtIZrnXJI=";
+            sha256 = "sha256-jCI9VM3y76RI65E5UGuAPuPkDRTMyi+ydx64JWHcGfE=";
           };
-          cargoDeps = oldAttrs.cargoDeps.overrideAttrs (lib.const {
-            name = "tokei-vendor.tar.gz";
+          cargoDeps = final.rustPlatform.fetchCargoVendor {
             inherit src;
-            outputHash = "sha256-ftAn9d50r07NrtFi0JJVeCy2q0ucfXmSg7T2zSTxJ30=";
-          });
+            hash = "sha256-LzlyrKaRjUo6JnVLQnHidtI4OWa+GrhAc4D8RkL+nmQ=";
+          };
         });
       })
 
