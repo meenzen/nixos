@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-meenzen.url = "github:meenzen/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
 
     # Helper Libraries
     nixos-hardware.url = "github:nixos/nixos-hardware";
@@ -68,6 +68,7 @@
   outputs = {
     self,
     nixpkgs,
+    nixpkgs-stable,
     flake-utils,
     colmena,
     agenix,
@@ -119,10 +120,13 @@
 
     mkSystem = systemModule: let
       systemConfig = defaultConfig;
+      pkgs-stable = import nixpkgs-stable {
+        system = "x86_64-linux";
+      };
     in
       nixpkgs.lib.nixosSystem {
         specialArgs = {
-          inherit inputs outputs systemConfig;
+          inherit inputs outputs systemConfig pkgs-stable;
         };
         modules = [
           ./modules

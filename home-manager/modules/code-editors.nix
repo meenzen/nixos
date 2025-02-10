@@ -3,12 +3,6 @@
   inputs,
   ...
 }: let
-  # own nixpkgs with some updated packages
-  meenzen = import inputs.nixpkgs-meenzen {
-    system = pkgs.system;
-    config.allowUnfree = true;
-  };
-
   jetbrains-plugins = ["github-copilot" "ideavim"];
 in {
   home.packages = [

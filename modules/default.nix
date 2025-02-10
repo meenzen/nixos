@@ -44,6 +44,7 @@
     ./server
     ./stylix
     ./users
+    ./verapdf
     ./virtualbox
     ./vpn
     ./workarounds

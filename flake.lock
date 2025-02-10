@@ -993,18 +993,18 @@
         "url": "https://github.com/NixOS/nixpkgs/archive/072a6db25e947df2f31aab9eccd0ab75d5b2da11.tar.gz"
       }
     },
-    "nixpkgs-meenzen": {
+    "nixpkgs-stable": {
       "locked": {
-        "lastModified": 1731676054,
-        "narHash": "sha256-OZiZ3m8SCMfh3B6bfGC/Bm4x3qc1m2SVEAlkV6iY7Yg=",
-        "owner": "meenzen",
+        "lastModified": 1739055578,
+        "narHash": "sha256-2MhC2Bgd06uI1A0vkdNUyDYsMD0SLNGKtD8600mZ69A=",
+        "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "5e4fbfb6b3de1aa2872b76d49fafc942626e2add",
+        "rev": "a45fa362d887f4d4a7157d95c28ca9ce2899b70e",
         "type": "github"
       },
       "original": {
-        "owner": "meenzen",
-        "ref": "nixos-unstable",
+        "owner": "nixos",
+        "ref": "nixos-24.11",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -1243,7 +1243,7 @@
         "nixos-hardware": "nixos-hardware",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_5",
-        "nixpkgs-meenzen": "nixpkgs-meenzen",
+        "nixpkgs-stable": "nixpkgs-stable",
         "nixvim": "nixvim",
         "plasma-manager": "plasma-manager",
         "protontweaks": "protontweaks",
@@ -1286,11 +1286,11 @@
         "tinted-zed": "tinted-zed"
       },
       "locked": {
-        "lastModified": 1739117494,
-        "narHash": "sha256-HqUir6OE3oNrQRtlLA7oRHkKMGNMKHkAPqG5HFcODK8=",
+        "lastModified": 1739186294,
+        "narHash": "sha256-BfJKfBpmvodPufE9SgP5b3OTPndG/Nt1tTNze3IOAjQ=",
         "owner": "danth",
         "repo": "stylix",
-        "rev": "e72aa84da1c6982c11620a4154ded8c603f33f46",
+        "rev": "eb5f81756731a3eefa42b1caf494ba5a9c8aedb4",
         "type": "github"
       },
       "original": {

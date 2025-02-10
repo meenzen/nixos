@@ -20,6 +20,7 @@
   meenzen.desktop.enable = true;
   meenzen.latest-kernel.enable = false;
   meenzen.virtualbox.enable = true;
+  meenzen.verapdf.enable = true;
   meenzen.certs.enable = true;
   meenzen.promtail.enable = true;
   meenzen.cloudflare-warp.enable = true;
