@@ -57,9 +57,9 @@ in {
         };
         chunking = {
           nar-size-threshold = 512 * 1024; # 512 KiB
-          min-size = 64 * 1024; # 64 KiB
-          avg-size = 512 * 1024; # 512 KiB
-          max-size = 1024 * 1024; # 1 MiB
+          min-size = 256 * 1024; # 256 KiB
+          avg-size = 4 * 1024 * 1024; # 4 MiB
+          max-size = 16 * 1024 * 1024; # 16 MiB
         };
         compression.type = "zstd";
         garbage-collection = {
