@@ -17,5 +17,5 @@ alejandra . >/dev/null 2>&1
 print "==> Adding Changes to Git"
 git add .
 
-print "==> Running 'colmena apply --experimental-flake-eval $@'"
-colmena apply --experimental-flake-eval $@
+print "==> Running 'colmena apply --experimental-flake-eval --verbose $@'"
+colmena apply --experimental-flake-eval --verbose $@
