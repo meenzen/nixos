@@ -6,6 +6,7 @@
     ./authentik
     ./backup
     ./basic-packages
+    ./beeper
     ./bootloader
     ./build-vm
     ./certs
