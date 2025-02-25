@@ -133,7 +133,7 @@ in {
       (
         pkgs.writeScriptBin "matrix-synapse-run-synapse_auto_compressor" ''
           set -eux
-          sudo -u matrix-synapse ${pkgs.matrix-synapse-tools.rust-synapse-compress-state}/bin/synapse_auto_compressor -p "user=matrix-synapse dbname=matrix-synapse host=/run/postgresql" -c 1000 -n 1000
+          sudo -u matrix-synapse ${pkgs.rust-synapse-state-compress}/bin/synapse_auto_compressor -p "user=matrix-synapse dbname=matrix-synapse host=/run/postgresql" -c 1000 -n 1000
         ''
       )
       (

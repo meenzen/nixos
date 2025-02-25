@@ -15,9 +15,9 @@ in {
     inputs.stylix.nixosModules.stylix
   ];
 
-  config = lib.mkIf cfg.enable {
+  config = {
     stylix = {
-      enable = true;
+      enable = cfg.enable;
 
       image = pkgs.fetchurl {
         name = "PlasmaDark.jpg";
