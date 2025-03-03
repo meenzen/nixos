@@ -71,8 +71,8 @@ in {
       };
 
       # The Kvantum theme is broken, see: https://github.com/danth/stylix/issues/835
-      targets.qt.platform = "kvantum";
-      targets.qt.enable = false;
+      #targets.qt.platform = "kvantum";
+      #targets.qt.enable = false;
     };
   };
 }
