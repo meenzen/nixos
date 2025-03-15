@@ -29,7 +29,13 @@ in {
     };
   };
 
+  imports = [
+    ./element-call.nix
+  ];
+
   config = lib.mkIf cfg.enable {
+    meenzen.matrix.element-call.enable = true;
+
     age.secrets = {
       matrixSharedSecret = {
         file = "${inputs.self}/secrets/matrixSharedSecret.age";

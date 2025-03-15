@@ -18,6 +18,7 @@ let
   attic = [neon];
   grafana = [neon];
   github = [neon];
+  livekit = [neon];
 in {
   # Mastodon
   "mastodonEmailPassword.age".publicKeys = users ++ mastodon;
@@ -74,4 +75,8 @@ in {
 
   # Password
   "hashedPassword.age".publicKeys = users ++ servers;
+
+  # LiveKit
+  "livekitKeys.age".publicKeys = users ++ livekit;
+  "livekitServiceEnvironment.age".publicKeys = users ++ livekit;
 }
