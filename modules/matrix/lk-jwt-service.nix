@@ -48,7 +48,7 @@ in {
       };
 
       environment = {
-        LIVEKIT_URL = "ws://${config.meenzen.livekit.domain}";
+        LIVEKIT_URL = "wss://${config.meenzen.livekit.domain}";
         LIVEKIT_JWT_PORT = toString cfg.port;
       };
     };
