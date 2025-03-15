@@ -56,4 +56,8 @@
       "applications:com.heroicgameslauncher.hgl.desktop"
     ];
   };
+
+  environment.systemPackages = [
+    pkgs.fractal
+  ];
 }
