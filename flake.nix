@@ -90,6 +90,7 @@
               pkgs.nixVersions.stable
               pkgs.nil
               pkgs.alejandra
+              pkgs.uutils-coreutils-noprefix
               colmena.packages."${system}".colmena
               agenix.packages."${system}".default
             ];
