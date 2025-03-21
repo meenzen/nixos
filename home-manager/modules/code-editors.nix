@@ -15,7 +15,7 @@ in {
     (pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains.rider jetbrains-plugins)
     (pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains.rust-rover jetbrains-plugins)
     (pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains.webstorm jetbrains-plugins)
-    pkgs.jetbrains-toolbox
+    #pkgs.jetbrains-toolbox
   ];
 
   home.file.".ideavimrc".text = ''
