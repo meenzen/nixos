@@ -48,6 +48,7 @@
     ./verapdf
     ./virtualbox
     ./vpn
+    ./websites
     ./workarounds
     ./yubikey
     ./zsh

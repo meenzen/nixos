@@ -19,6 +19,25 @@
       recommendedTlsSettings = true;
       clientMaxBodySize = "100m";
     }
+    // lib.optionalAttrs cfg.enableCloudflare {
+      # Use real IP addresses for requests from Cloudflare
+      commonHttpConfig = let
+        realIpsFromList = lib.strings.concatMapStringsSep "\n" (x: "set_real_ip_from  ${x};");
+        fileToList = x: lib.strings.splitString "\n" (builtins.readFile x);
+        cfipv4 = fileToList (pkgs.fetchurl {
+          url = "https://www.cloudflare.com/ips-v4";
+          sha256 = "sha256-8Cxtg7wBqwroV3Fg4DbXAMdFU1m84FTfiE5dfZ5Onns=";
+        });
+        cfipv6 = fileToList (pkgs.fetchurl {
+          url = "https://www.cloudflare.com/ips-v6";
+          sha256 = "sha256-np054+g7rQDE3sr9U8Y/piAp89ldto3pN9K+KCNMoKk=";
+        });
+      in ''
+        ${realIpsFromList cfipv4}
+        ${realIpsFromList cfipv6}
+        real_ip_header CF-Connecting-IP;
+      '';
+    }
     // lib.optionalAttrs (!cfg.allowIndexing) {
       appendHttpConfig = ''
         add_header X-Robots-Tag "noindex, nofollow, nosnippet, noarchive";
@@ -35,6 +54,7 @@
 in {
   options.meenzen.nginx = {
     enable = lib.mkEnableOption "Enable common Nginx settings";
+    enableCloudflare = lib.mkEnableOption "Enable Cloudflare settings";
     testPage = lib.mkOption {
       type = lib.types.str;
       default = "";

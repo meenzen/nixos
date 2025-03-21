@@ -1,0 +1,13 @@
+{
+  "contacts": [
+    {
+      "email_address": "admin@meenzen.net",
+      "matrix_id": "@samuel:mnzn.dev",
+      "role": "m.role.admin"
+    },
+    {
+      "email_address": "security@meenzen.net",
+      "role": "m.role.security"
+    }
+  ]
+}

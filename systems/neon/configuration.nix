@@ -26,6 +26,7 @@
   meenzen.hetzner.enable = true;
   meenzen.nginx = {
     enable = true;
+    enableCloudflare = true;
     testPage = "neon.mnzn.dev";
   };
   meenzen.grafana.enable = true;
@@ -44,4 +45,5 @@
   meenzen.cheshbot.enable = true;
   meenzen.attic.enable = true;
   meenzen.mudblazor-docs.enable = true;
+  meenzen.websites."mnzn.dev".enable = true;
 }
