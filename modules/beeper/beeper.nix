@@ -10,10 +10,10 @@
   common-updater-scripts,
 }: let
   pname = "beepertexts";
-  version = "4.0.470";
+  version = "4.0.551";
   src = fetchurl {
     url = "https://beeper-desktop.download.beeper.com/builds/Beeper-${version}.AppImage";
-    hash = "sha256-uHvXBz2y5kN8mU/cAaQbLgmsWtdPVUf70M4CLcYwsTg=";
+    hash = "sha256-OLwLjgWFOiBS5RkEpvhH7hreri8EF+JRvKy+Kdre8gM=";
   };
   appimage = appimageTools.wrapType2 {
     inherit version pname src;
