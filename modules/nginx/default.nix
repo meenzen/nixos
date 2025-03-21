@@ -48,6 +48,7 @@
         "${cfg.testPage}" = {
           enableACME = true;
           forceSSL = true;
+          default = true;
         };
       };
     };

@@ -2,6 +2,10 @@
   "m.homeserver": {
     "base_url": "https://matrix.mnzn.dev"
   },
+  "org.matrix.msc2965.authentication": {
+    "issuer": "https://auth.mnzn.dev/",
+    "account": "https://auth.mnzn.dev/account"
+  },
   "org.matrix.msc4143.rtc_foci": [
     {
       "type": "livekit",
