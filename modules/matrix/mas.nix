@@ -46,13 +46,10 @@ in {
     };
 
     services.matrix-synapse = {
+      extras = ["oidc"];
       extraConfigFiles = [
         config.age.secrets.masSynapseSecretConfig.path
       ];
-      settings.experimental_features.msc3861 = {
-        enabled = true;
-        issuer = "https://${cfg.domain}/";
-      };
     };
 
     meenzen.matrix.mas.configFile = lib.mkDefault (
