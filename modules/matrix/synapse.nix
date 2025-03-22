@@ -36,8 +36,8 @@ in {
 
   config = lib.mkIf cfg.enable {
     age.secrets = {
-      matrixSharedSecret = {
-        file = "${inputs.self}/secrets/matrixSharedSecret.age";
+      synapseConfig = {
+        file = "${inputs.self}/secrets/synapseConfig.age";
         owner = serviceName;
         group = serviceName;
       };
@@ -51,7 +51,7 @@ in {
       enableRegistrationScript = true;
 
       extraConfigFiles = [
-        config.age.secrets.matrixSharedSecret.path
+        config.age.secrets.synapseConfig.path
       ];
 
       settings = {

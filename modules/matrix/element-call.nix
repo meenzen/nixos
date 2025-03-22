@@ -30,14 +30,6 @@ in {
     meenzen.lk-jwt-service.enable = true;
 
     services.matrix-synapse.settings = {
-      experimental_features = {
-        # MSC3266: Room summary API. Used for knocking over federation
-        msc3266_enabled = true;
-        # MSC4222 needed for syncv2 state_after. This allow clients to
-        # correctly track the state of the room.
-        msc4222_enabled = true;
-      };
-
       # The maximum allowed duration by which sent events can be delayed, as
       # per MSC4140.
       max_event_delay_duration = "24h";

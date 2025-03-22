@@ -38,19 +38,9 @@ in {
         owner = serviceName;
         group = serviceName;
       };
-      masSynapseSecretConfig = {
-        file = "${inputs.self}/secrets/masSynapseSecretConfig.age";
-        owner = "matrix-synapse";
-        group = "matrix-synapse";
-      };
     };
 
-    services.matrix-synapse = {
-      extras = ["oidc"];
-      extraConfigFiles = [
-        config.age.secrets.masSynapseSecretConfig.path
-      ];
-    };
+    services.matrix-synapse.extras = ["oidc"];
 
     meenzen.matrix.mas.configFile = lib.mkDefault (
       pkgs.writeTextFile {

@@ -33,9 +33,8 @@ in {
   "fedifetcherConfigJson.age".publicKeys = users ++ mastodon;
 
   # Matrix
-  "matrixSharedSecret.age".publicKeys = users ++ matrix;
+  "synapseConfig.age".publicKeys = users ++ matrix;
   "masSecretConfig.age".publicKeys = users ++ matrix;
-  "masSynapseSecretConfig.age".publicKeys = users ++ matrix;
 
   # Authentik
   "authentikEnvironment.age".publicKeys = users ++ authentik;
