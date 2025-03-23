@@ -6,9 +6,8 @@
   ...
 }: {
   imports = [
-    ./fontconfig.nix
     ./insecure-packages.nix
-    ./jetbrains-toolbox.nix
+    ./libraries.nix
     ./nix-consistency.nix
     ./shebang.nix
     ./unpatched-binaries.nix
