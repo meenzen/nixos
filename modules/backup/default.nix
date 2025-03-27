@@ -46,6 +46,7 @@ in {
             "/etc/group"
             "/etc/machine-id"
             "/etc/passwd"
+            "/etc/ssh"
             "/etc/subgid"
             "/etc/subuid"
             "/var/lib/nixos"
