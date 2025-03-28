@@ -97,6 +97,24 @@
         proxyJump = "ssh-gateway.human-dev.io";
       };
 
+      nixp01 = lib.hm.dag.entryAfter ["ssh-gateway.human-dev.io"] {
+        hostname = "172.16.0.204";
+        proxyJump = "ssh-gateway.human-dev.io";
+      };
+      "172.16.0.204" = lib.hm.dag.entryAfter ["ssh-gateway.human-dev.io"] {
+        hostname = "172.16.0.204";
+        proxyJump = "ssh-gateway.human-dev.io";
+      };
+
+      nixproxy01 = lib.hm.dag.entryAfter ["ssh-gateway.human-dev.io"] {
+        hostname = "192.168.155.26";
+        proxyJump = "ssh-gateway.human-dev.io";
+      };
+      "192.168.155.26" = lib.hm.dag.entryAfter ["ssh-gateway.human-dev.io"] {
+        hostname = "192.168.155.26";
+        proxyJump = "ssh-gateway.human-dev.io";
+      };
+
       "git.human.de".hostname = "git.human.de";
       "sentry.human.de".hostname = "167.235.55.186";
       "nix-01.human-dev.io".user = "root";
