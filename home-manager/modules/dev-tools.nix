@@ -23,5 +23,6 @@ in {
     pkgs.tokei
     pkgs.difftastic
     pkgs.terraform
+    pkgs.devenv
   ];
 }
