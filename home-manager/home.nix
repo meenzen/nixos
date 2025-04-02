@@ -14,6 +14,7 @@
     ./modules/media-player
     ./modules/neovim
     ./modules/nix-tools
+    ./modules/office
     ./modules/plasma
     ./modules/shells
     ./modules/ssh
