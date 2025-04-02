@@ -1,24 +1,24 @@
 {
   imports = [
     ./common
+    ./modules/browsers
     ./modules/cleanup
+    ./modules/code-editors
     ./modules/communication
+    ./modules/desktop
+    ./modules/dev-tools
+    ./modules/fun
     ./modules/gaming
+    ./modules/git
+    ./modules/keepass
+    ./modules/media-player
     ./modules/neovim
+    ./modules/nix-tools
     ./modules/plasma
-    ./modules/desktop.nix
-    ./modules/dev-tools.nix
-    ./modules/system-tools.nix
-    ./modules/nix-tools.nix
-    ./modules/git.nix
-    ./modules/starship.nix
-    ./modules/wezterm.nix
-    ./modules/shells.nix
-    ./modules/ssh.nix
-    ./modules/browsers.nix
-    ./modules/keepass.nix
-    ./modules/fun.nix
-    ./modules/media-player.nix
-    ./modules/code-editors.nix
+    ./modules/shells
+    ./modules/ssh
+    ./modules/starship
+    ./modules/system-tools
+    ./modules/wezterm
   ];
 }
