@@ -19,6 +19,7 @@ let
   grafana = [neon];
   github = [neon];
   livekit = [neon];
+  kener = [neon];
 in {
   # Mastodon
   "mastodonEmailPassword.age".publicKeys = users ++ mastodon;
@@ -80,4 +81,8 @@ in {
   # LiveKit
   "livekitKeys.age".publicKeys = users ++ livekit;
   "livekitServiceEnvironment.age".publicKeys = users ++ livekit;
+
+  # Kener
+  "kenerEnvironment.age".publicKeys = users ++ kener;
+  "kenerPostgresPassword.age".publicKeys = users ++ kener;
 }

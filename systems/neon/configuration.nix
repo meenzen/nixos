@@ -46,4 +46,5 @@
   meenzen.attic.enable = true;
   meenzen.mudblazor-docs.enable = true;
   meenzen.websites."mnzn.dev".enable = true;
+  meenzen.services.kener.enable = true;
 }

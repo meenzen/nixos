@@ -43,6 +43,7 @@
     ./postgresql
     ./promtail
     ./server
+    ./services
     ./stylix
     ./users
     ./verapdf
