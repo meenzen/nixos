@@ -19,7 +19,7 @@ jobs:
           token: ${{ secrets.ATTIC_TOKEN }}
 
       - name: Check flake
-        run: nix flake check -Lv
+        run: nix flake check
 
       - name: Install tools
         run: nix profile install nixpkgs#direnv nixpkgs#nix-direnv
