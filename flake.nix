@@ -7,7 +7,7 @@
 
     # Helper Libraries
     nixos-hardware.url = "github:nixos/nixos-hardware";
-    flake-utils.url = "github:numtide/flake-utils";
+    flake-parts.url = "github:hercules-ci/flake-parts";
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL/main";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -65,114 +65,121 @@
     authentik-nix.url = "github:nix-community/authentik-nix";
   };
 
-  outputs = {
+  outputs = inputs @ {
     self,
-    nixpkgs,
-    nixpkgs-stable,
-    flake-utils,
-    colmena,
-    agenix,
+    flake-parts,
     ...
-  } @ inputs: let
-    inherit (self) outputs;
+  }:
+    flake-parts.lib.mkFlake {inherit inputs;} (top @ {
+      config,
+      withSystem,
+      moduleWithSystem,
+      ...
+    }: let
+      defaultConfig = {
+        user = {
+          username = "meenzens";
+          fullName = "Samuel Meenzen";
+          email = "samuel@meenzen.net";
+          initialPassword = "password";
+          authorizedKeys = [
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMa9vjZasAelcVAdtLa+vI0dYvx4hba2z6z+J+u39irB meenzens@framework"
+            "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIDOHTWbt687mGfFsdxrgSyCtyrb547mw5+SL3FdAT5KeAAAABHNzaDo= YubiKey C"
+          ];
+          extraGroups = [];
+        };
+      };
+    in {
+      imports = [];
+      flake = {
+        nixosConfigurations = let
+          mkSystem = systemModule: let
+            systemConfig = defaultConfig;
+            pkgs-stable = import inputs.nixpkgs-stable {
+              system = "x86_64-linux";
+            };
+          in
+            inputs.nixpkgs.lib.nixosSystem {
+              specialArgs = {
+                inherit inputs systemConfig pkgs-stable;
+              };
+              modules = [
+                ./modules
+                systemModule
+              ];
+            };
+        in {
+          framework = mkSystem ./systems/framework/configuration.nix;
+          install-iso = mkSystem ./systems/install-iso/configuration.nix;
+          neon = mkSystem ./systems/neon/configuration.nix;
+          the-machine = mkSystem ./systems/the-machine/configuration.nix;
+          vm = mkSystem ./systems/vm/configuration.nix;
+          wsl = mkSystem ./systems/wsl/configuration.nix;
+        };
 
-    devShells =
-      flake-utils.lib.eachDefaultSystem
-      (
-        system: let
-          pkgs = import nixpkgs {
-            inherit system;
+        # See https://github.com/zhaofengli/colmena/pull/228
+        colmenaHive = inputs.colmena.lib.makeHive self.outputs.colmena;
+
+        colmena = let
+          mkServer = targetHost: systemModule: {
+            deployment.targetHost = targetHost;
+            imports = [systemModule];
           };
         in {
-          devShells.default = pkgs.mkShell {
-            nativeBuildInputs = [
-              pkgs.git
-              pkgs.nixVersions.stable
-              pkgs.nil
-              pkgs.alejandra
-              pkgs.uutils-coreutils-noprefix
-              colmena.packages."${system}".colmena
-              agenix.packages."${system}".default
-            ];
-            shellHook = ''
-              echo ""
-              echo "$(git --version)"
-              echo "$(nil --version)"
-              echo "$(alejandra --version)"
-              echo ""
-            '';
+          meta = {
+            nixpkgs = import inputs.nixpkgs {
+              system = "x86_64-linux";
+            };
+            specialArgs = {
+              inherit inputs;
+              systemConfig = defaultConfig;
+            };
           };
-        }
-      );
 
-    defaultConfig = {
-      user = {
-        username = "meenzens";
-        fullName = "Samuel Meenzen";
-        email = "samuel@meenzen.net";
-        initialPassword = "password";
-        authorizedKeys = [
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMa9vjZasAelcVAdtLa+vI0dYvx4hba2z6z+J+u39irB meenzens@framework"
-          "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIDOHTWbt687mGfFsdxrgSyCtyrb547mw5+SL3FdAT5KeAAAABHNzaDo= YubiKey C"
-        ];
-        extraGroups = [];
-      };
-    };
+          defaults = {pkgs, ...}: {
+            imports = [
+              ./modules
+            ];
+            deployment.buildOnTarget = true;
+          };
 
-    mkSystem = systemModule: let
-      systemConfig = defaultConfig;
-      pkgs-stable = import nixpkgs-stable {
-        system = "x86_64-linux";
-      };
-    in
-      nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs outputs systemConfig pkgs-stable;
-        };
-        modules = [
-          ./modules
-          systemModule
-        ];
-      };
-
-    mkServer = targetHost: systemModule: {
-      deployment.targetHost = targetHost;
-      imports = [systemModule];
-    };
-  in {
-    inherit (devShells) devShells;
-
-    nixosConfigurations = {
-      framework = mkSystem ./systems/framework/configuration.nix;
-      install-iso = mkSystem ./systems/install-iso/configuration.nix;
-      neon = mkSystem ./systems/neon/configuration.nix;
-      the-machine = mkSystem ./systems/the-machine/configuration.nix;
-      vm = mkSystem ./systems/vm/configuration.nix;
-      wsl = mkSystem ./systems/wsl/configuration.nix;
-    };
-
-    # See https://github.com/zhaofengli/colmena/pull/228
-    colmenaHive = colmena.lib.makeHive self.outputs.colmena;
-
-    colmena = {
-      meta = {
-        nixpkgs = import nixpkgs {
-          system = "x86_64-linux";
-        };
-        specialArgs = {
-          inherit inputs outputs;
-          systemConfig = defaultConfig;
+          neon = self.lib.mkServer "neon.mnzn.dev" ./systems/neon/configuration.nix;
         };
       };
-
-      defaults = {pkgs, ...}: {
-        imports = [
-          ./modules
-        ];
-        deployment.buildOnTarget = true;
+      systems = [
+        "aarch64-darwin"
+        "aarch64-linux"
+        "x86_64-darwin"
+        "x86_64-linux"
+      ];
+      perSystem = {
+        config,
+        self',
+        inputs',
+        pkgs,
+        lib,
+        system,
+        ...
+      }: {
+        formatter = pkgs.alejandra;
+        devShells.default = pkgs.mkShell {
+          nativeBuildInputs = [
+            pkgs.git
+            pkgs.nixVersions.stable
+            pkgs.nil
+            pkgs.alejandra
+            pkgs.uutils-coreutils-noprefix
+            inputs'.colmena.packages.colmena
+            inputs'.agenix.packages.default
+          ];
+          shellHook = ''
+            echo ""
+            echo "$(git --version)"
+            echo "$(nil --version)"
+            echo "$(alejandra --version)"
+            echo ""
+          '';
+        };
       };
-
-      neon = mkServer "neon.mnzn.dev" ./systems/neon/configuration.nix;
-    };
-  };
+    });
 }

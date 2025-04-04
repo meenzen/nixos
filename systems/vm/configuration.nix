@@ -5,6 +5,11 @@
   pkgs,
   ...
 }: {
+  fileSystems."/" = {
+    device = "/dev/vda";
+    fsType = "ext4";
+  };
+
   system.stateVersion = "23.11";
   networking.hostName = "vm";
   networking.networkmanager.enable = true;
