@@ -38,6 +38,9 @@ in {
     virtualisation.oci-containers.containers."${serviceName}" = {
       image = "ghcr.io/rajnandan1/kener:3.2.12@sha256:ca37bd088f3172c932488765701dee8a176895ad2237ab00d5de7700116b8ad6";
       ports = ["127.0.0.1:${toString cfg.port}:3000"];
+      volumes = [
+        "${serviceName}-uploads:/app/uploads"
+      ];
       environment = {
         TZ = "UTC";
         ORIGIN = "https://${cfg.domain}";
