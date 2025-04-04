@@ -143,7 +143,7 @@
             deployment.buildOnTarget = true;
           };
 
-          neon = self.lib.mkServer "neon.mnzn.dev" ./systems/neon/configuration.nix;
+          neon = mkServer "neon.mnzn.dev" ./systems/neon/configuration.nix;
         };
       };
       systems = [
