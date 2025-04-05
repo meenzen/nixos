@@ -84,11 +84,6 @@ in {
             idle_timeout = 600;
             max_lifetime = 1800;
           };
-          email = {
-            from = ''"Authentication Service" <root@localhost>'';
-            reply_to = ''"Authentication Service" <root@localhost>'';
-            transport = "blackhole";
-          };
           passwords = {
             enabled = true;
             schemes = [
