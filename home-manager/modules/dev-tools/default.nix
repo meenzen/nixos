@@ -14,9 +14,6 @@ in {
     dotnet
     pkgs.gcc
 
-    # Rust
-    pkgs.rustup
-
     # Misc
     pkgs.hyperfine
     pkgs.glow
