@@ -119,8 +119,8 @@ in {
 
     # fix startup, see https://github.com/NixOS/nixpkgs/pull/352485
     systemd.services.loki = {
-      wants = ["network-online.target"];
-      after = ["network-online.target"];
+      requires = ["network-online.target"];
+      wantedBy = ["multi-user.target"];
     };
 
     services.grafana.provision.datasources.settings.datasources = [
