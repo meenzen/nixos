@@ -3,7 +3,9 @@
   inputs,
   ...
 }: let
-  jetbrains-plugins = ["github-copilot" "ideavim"];
+  # plugins are currently broken, see https://github.com/nixos/nixpkgs/issues/400317
+  #jetbrains-plugins = ["github-copilot" "ideavim"];
+  jetbrains-plugins = [];
 in {
   home.packages = [
     # Editors
