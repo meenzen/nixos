@@ -37,7 +37,7 @@ in
           file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
         }
       ];
-      initExtra = ''
+      initContent = ''
         zstyle ':completion:*' menu select
 
         bindkey "^[[1;5C" forward-word
