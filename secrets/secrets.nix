@@ -6,8 +6,9 @@ let
   # ssh-keyscan -t ed25519 <host>
   neon = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFsdZx97CPaUCYagHxZKuB9r9nfRjB2Rv4UWJtWyy+7e";
   framework = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILK3+4hV7Nt878acFUZkA/+TP1/l3gBQ/k1EHY4V94IF";
-  systems = [neon framework];
-  servers = [neon];
+  lithium = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOVJKyiSdl3cZh8r3sLYj2IaWHJ2opgBzGeFj7Vtzjng";
+  systems = [neon lithium framework];
+  servers = [neon lithium];
   mastodon = [neon];
   matrix = [neon];
   authentik = [neon];
