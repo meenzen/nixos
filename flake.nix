@@ -112,6 +112,7 @@
           framework = mkSystem ./systems/framework/configuration.nix;
           install-iso = mkSystem ./systems/install-iso/configuration.nix;
           neon = mkSystem ./systems/neon/configuration.nix;
+          lithium = mkSystem ./systems/lithium/configuration.nix;
           the-machine = mkSystem ./systems/the-machine/configuration.nix;
           vm = mkSystem ./systems/vm/configuration.nix;
           wsl = mkSystem ./systems/wsl/configuration.nix;
@@ -144,6 +145,7 @@
           };
 
           neon = mkServer "neon.mnzn.dev" ./systems/neon/configuration.nix;
+          lithium = mkServer "lithium.localdomain" ./systems/lithium/configuration.nix;
         };
       };
       systems = [

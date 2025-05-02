@@ -17,9 +17,8 @@
 
     # SSH hosts config
     matchBlocks = {
-      proxmox = {
+      "lithium.localdomain" = {
         hostname = "192.168.1.4";
-        user = "root";
       };
 
       "mail.meenzen.net" = {
