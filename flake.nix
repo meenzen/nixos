@@ -60,6 +60,7 @@
       url = "github:rain-cafe/protontweaks/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
 
     # Other Programs
     authentik-nix.url = "github:nix-community/authentik-nix";

@@ -10,6 +10,8 @@
     inputs.disko.nixosModules.disko
     ./disko.nix
     ./hardware-configuration.nix
+
+    ./minecraft.nix
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -20,4 +22,5 @@
   system.stateVersion = "24.11";
 
   meenzen.server.enable = true;
+  meenzen.minecraft.enable = true;
 }
