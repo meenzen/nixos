@@ -12,7 +12,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     environment.systemPackages = [
-      (pkgs.callPackage ./beeper.nix {})
+      pkgs.beeper
     ];
   };
 }
