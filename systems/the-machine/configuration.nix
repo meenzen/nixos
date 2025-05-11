@@ -60,4 +60,6 @@
   environment.systemPackages = [
     pkgs.fractal
   ];
+
+  meenzen.virtualbox.enable = true;
 }
