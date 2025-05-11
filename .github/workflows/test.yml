@@ -28,4 +28,4 @@ jobs:
         run: direnv allow
 
       - name: Colmena build
-        run: direnv exec . colmena build --experimental-flake-eval --verbose --no-build-on-target
+        run: direnv exec . colmena build --verbose --no-build-on-target
