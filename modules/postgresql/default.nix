@@ -18,14 +18,15 @@ in {
     services.postgresql =
       {
         enable = true;
-        package = pkgs.postgresql_16;
+        package = pkgs.postgresql_17;
         settings = {
           # https://pgtune.leopard.in.ua/
-          # DB Version: 16
+          # DB Version: 17
           # OS Type: linux
           # DB Type: web
           # Total Memory (RAM): 16 GB
           # CPUs num: 8
+          # Connections num: 200
           # Data Storage: ssd
           max_connections = 200;
           shared_buffers = "4GB";
@@ -36,7 +37,7 @@ in {
           default_statistics_target = 100;
           random_page_cost = 1.1;
           effective_io_concurrency = 200;
-          work_mem = "5242kB";
+          work_mem = "20164kB";
           huge_pages = "off";
           min_wal_size = "1GB";
           max_wal_size = "4GB";
@@ -68,7 +69,7 @@ in {
       (let
         # Specify the postgresql package you'd like to upgrade to.
         # Do not forget to list the extensions you need.
-        newPostgres = pkgs.postgresql_16;
+        newPostgres = pkgs.postgresql_17;
       in
         pkgs.writeScriptBin "postgres-upgrade-cluster" ''
           set -eux
