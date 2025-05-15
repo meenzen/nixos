@@ -3,7 +3,7 @@
   extraConfig,
   ...
 }: {
-  services.gpg-agent.pinentryPackage = pkgs.pinentry-qt;
+  services.gpg-agent.pinentry.package = pkgs.pinentry-qt;
 
   # reference: https://github.com/pjones/plasma-manager/tree/trunk/modules
   programs.plasma = {
