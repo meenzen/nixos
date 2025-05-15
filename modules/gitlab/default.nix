@@ -49,6 +49,21 @@ in {
         owner = serviceName;
         group = serviceName;
       };
+      gitlabActiveRecordPrimaryKey = {
+        file = "${inputs.self}/secrets/gitlabActiveRecordPrimaryKey.age";
+        owner = serviceName;
+        group = serviceName;
+      };
+      gitlabActiveRecordDeterministicKey = {
+        file = "${inputs.self}/secrets/gitlabActiveRecordDeterministicKey.age";
+        owner = serviceName;
+        group = serviceName;
+      };
+      gitlabActiveRecordSalt = {
+        file = "${inputs.self}/secrets/gitlabActiveRecordSalt.age";
+        owner = serviceName;
+        group = serviceName;
+      };
     };
 
     meenzen.backup.paths = ["/var/gitlab/state"];
@@ -66,6 +81,9 @@ in {
         otpFile = config.age.secrets.gitlabOtpSecret.path;
         dbFile = config.age.secrets.gitlabDbSecret.path;
         jwsFile = config.age.secrets.gitlabJwsSecret.path;
+        activeRecordPrimaryKeyFile = config.age.secrets.gitlabActiveRecordPrimaryKey.path;
+        activeRecordDeterministicKeyFile = config.age.secrets.gitlabActiveRecordDeterministicKey.path;
+        activeRecordSaltFile = config.age.secrets.gitlabActiveRecordSalt.path;
       };
 
       extraConfig = {

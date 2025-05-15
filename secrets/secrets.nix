@@ -53,6 +53,9 @@ in {
   "gitlabJwsSecret.age".publicKeys = users ++ gitlab;
   "gitlabRootPassword.age".publicKeys = users ++ gitlab;
   "gitlabDatabasePassword.age".publicKeys = users ++ gitlab;
+  "gitlabActiveRecordPrimaryKey.age".publicKeys = users ++ gitlab;
+  "gitlabActiveRecordDeterministicKey.age".publicKeys = users ++ gitlab;
+  "gitlabActiveRecordSalt.age".publicKeys = users ++ gitlab;
 
   # Collabora
   "collaboraEnvironment.age".publicKeys = users ++ collabora;
