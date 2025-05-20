@@ -15,19 +15,15 @@ in {
       default = "git.mnzn.dev";
       description = "Domain for GitLab";
     };
-    registryDomain = lib.mkOption {
-      type = lib.types.str;
-      default = "registry.mnzn.dev";
-      description = "Domain for GitLab registry";
-    };
-    registryPort = lib.mkOption {
-      type = lib.types.int;
-      default = 5000;
-      description = "Local port for GitLab registry";
-    };
   };
 
+  imports = [
+    ./registry.nix
+  ];
+
   config = lib.mkIf cfg.enable {
+    meenzen.gitlab.registry.enable = true;
+
     age.secrets = {
       gitlabSecret = {
         file = "${inputs.self}/secrets/gitlabSecret.age";
@@ -73,11 +69,6 @@ in {
         file = "${inputs.self}/secrets/gitlabActiveRecordSalt.age";
         owner = serviceName;
         group = serviceName;
-      };
-      gitlabRegistryEnvironment = {
-        file = "${inputs.self}/secrets/gitlabRegistryEnvironment.age";
-        owner = config.systemd.services.docker-registry.serviceConfig.User;
-        group = config.systemd.services.docker-registry.serviceConfig.User;
       };
     };
 
@@ -130,61 +121,13 @@ in {
             }
           ];
         };
-
-        # Unset registry port so that "registry.example.org" instead of "registry.example.org:443" is used
-        # as the registry URL in the GitLab UI.
-        registry.port = null;
-      };
-
-      registry = {
-        enable = true;
-        port = cfg.registryPort;
-        externalAddress = cfg.registryDomain;
-        externalPort = 443;
-
-        # This certificate is automatically generated and only used for jwt signing.
-        certFile = "/var/lib/gitlab-registry/registry_auth_cert";
-        keyFile = "/var/lib/gitlab-registry/registry_auth_key";
       };
     };
 
-    services.dockerRegistry = {
-      # disable local filesystem storage
-      storagePath = null;
-      extraConfig = {
-        storage = {
-          s3 = {
-            # Override secrets using environment variables REGISTRY_STORAGE_S3_ACCESSKEY and REGISTRY_STORAGE_S3_SECRETKEY
-            accesskey = "";
-            secretkey = "";
-            bucket = "meenzen-gitlab-registry";
-            region = "hel1";
-            regionendpoint = "https://hel1.your-objectstorage.com";
-            maxrequestspersecond = 100;
-            chunksize = 104857600;
-          };
-          redirect.disable = true;
-        };
-      };
-    };
-    systemd.services.docker-registry.serviceConfig.EnvironmentFile = config.age.secrets.gitlabRegistryEnvironment.path;
-
-    services.nginx.virtualHosts = {
-      "${cfg.domain}" = {
-        enableACME = true;
-        forceSSL = true;
-        locations."/".proxyPass = "http://unix:/run/gitlab/gitlab-workhorse.socket";
-      };
-      "${cfg.registryDomain}" = {
-        enableACME = true;
-        forceSSL = true;
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:${toString config.services.gitlab.registry.port}";
-          extraConfig = ''
-            client_max_body_size 0;
-          '';
-        };
-      };
+    services.nginx.virtualHosts."${cfg.domain}" = {
+      enableACME = true;
+      forceSSL = true;
+      locations."/".proxyPass = "http://unix:/run/gitlab/gitlab-workhorse.socket";
     };
   };
 }
