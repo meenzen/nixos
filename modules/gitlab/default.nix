@@ -15,6 +15,16 @@ in {
       default = "git.mnzn.dev";
       description = "Domain for GitLab";
     };
+    registryDomain = lib.mkOption {
+      type = lib.types.str;
+      default = "registry.mnzn.dev";
+      description = "Domain for GitLab registry";
+    };
+    registryPort = lib.mkOption {
+      type = lib.types.int;
+      default = 5000;
+      description = "Local port for GitLab registry";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -114,13 +124,40 @@ in {
             }
           ];
         };
+
+        # Unset registry port so that "registry.example.org" instead of "registry.example.org:443" is used
+        # as the registry URL in the GitLab UI.
+        registry.port = null;
+      };
+
+      registry = {
+        enable = true;
+        port = cfg.registryPort;
+        externalAddress = cfg.registryDomain;
+        externalPort = 443;
+
+        # This certificate is automatically generated and only used for jwt signing.
+        certFile = "/var/lib/gitlab-registry/registry_auth_cert";
+        keyFile = "/var/lib/gitlab-registry/registry_auth_key";
       };
     };
 
-    services.nginx.virtualHosts."${cfg.domain}" = {
-      enableACME = true;
-      forceSSL = true;
-      locations."/".proxyPass = "http://unix:/run/gitlab/gitlab-workhorse.socket";
+    services.nginx.virtualHosts = {
+      "${cfg.domain}" = {
+        enableACME = true;
+        forceSSL = true;
+        locations."/".proxyPass = "http://unix:/run/gitlab/gitlab-workhorse.socket";
+      };
+      "${cfg.registryDomain}" = {
+        enableACME = true;
+        forceSSL = true;
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:${toString config.services.gitlab.registry.port}";
+          extraConfig = ''
+            client_max_body_size 0;
+          '';
+        };
+      };
     };
   };
 }
