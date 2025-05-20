@@ -96,6 +96,7 @@ in {
       # disable local filesystem storage
       storagePath = null;
       extraConfig = {
+        # configuration reference: https://gitlab.com/gitlab-org/container-registry/-/blob/master/docs/configuration.md
         storage = {
           s3 = {
             # Override secrets using environment variables REGISTRY_STORAGE_S3_ACCESSKEY and REGISTRY_STORAGE_S3_SECRETKEY
