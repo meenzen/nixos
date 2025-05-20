@@ -96,6 +96,7 @@ in {
         activeRecordSaltFile = config.age.secrets.gitlabActiveRecordSalt.path;
       };
 
+      # Example config: https://gitlab.com/gitlab-org/gitlab/blob/master/config/gitlab.yml.example
       extraConfig = {
         omniauth = {
           enabled = true;
