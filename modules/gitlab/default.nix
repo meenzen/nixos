@@ -74,6 +74,11 @@ in {
         owner = serviceName;
         group = serviceName;
       };
+      gitlabRegistryEnvironment = {
+        file = "${inputs.self}/secrets/gitlabRegistryEnvironment.age";
+        owner = config.systemd.services.docker-registry.serviceConfig.User;
+        group = config.systemd.services.docker-registry.serviceConfig.User;
+      };
     };
 
     meenzen.backup.paths = ["/var/gitlab/state"];
@@ -142,6 +147,27 @@ in {
         keyFile = "/var/lib/gitlab-registry/registry_auth_key";
       };
     };
+
+    services.dockerRegistry = {
+      # disable local filesystem storage
+      storagePath = null;
+      extraConfig = {
+        storage = {
+          s3 = {
+            # Override secrets using environment variables REGISTRY_STORAGE_S3_ACCESSKEY and REGISTRY_STORAGE_S3_SECRETKEY
+            accesskey = "";
+            secretkey = "";
+            bucket = "meenzen-gitlab-registry";
+            region = "hel1";
+            regionendpoint = "https://hel1.your-objectstorage.com";
+            maxrequestspersecond = 100;
+            chunksize = 104857600;
+          };
+          redirect.disable = true;
+        };
+      };
+    };
+    systemd.services.docker-registry.serviceConfig.EnvironmentFile = config.age.secrets.gitlabRegistryEnvironment.path;
 
     services.nginx.virtualHosts = {
       "${cfg.domain}" = {
