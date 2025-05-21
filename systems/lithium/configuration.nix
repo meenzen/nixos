@@ -23,4 +23,21 @@
 
   meenzen.server.enable = true;
   meenzen.minecraft.enable = true;
+
+  age.secrets = {
+    gitlabRunnerLithiumNix = {
+      file = "${inputs.self}/secrets/gitlabRunnerLithiumNix.age";
+    };
+    gitlabRunnerLithiumDocker = {
+      file = "${inputs.self}/secrets/gitlabRunnerLithiumDocker.age";
+    };
+  };
+  meenzen.services.gitlab-runner = {
+    enable = true;
+    enableHardwareAcceleration = true;
+    concurrency = 8;
+    cleanupSchedule = "weekly";
+    nixRunnerConfigFile = config.age.secrets.gitlabRunnerLithiumNix.path;
+    dockerRunnerConfigFile = config.age.secrets.gitlabRunnerLithiumDocker.path;
+  };
 }

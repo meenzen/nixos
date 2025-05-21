@@ -90,4 +90,8 @@ in {
   # Kener
   "kenerEnvironment.age".publicKeys = users ++ kener;
   "kenerPostgresPassword.age".publicKeys = users ++ kener;
+
+  # GitLab Runner
+  "gitlabRunnerLithiumNix.age".publicKeys = users ++ [lithium];
+  "gitlabRunnerLithiumDocker.age".publicKeys = users ++ [lithium];
 }

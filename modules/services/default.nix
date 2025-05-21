@@ -1,5 +1,6 @@
 {
   imports = [
+    ./gitlab-runner
     ./kener
   ];
 }
