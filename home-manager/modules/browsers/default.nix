@@ -1,10 +1,9 @@
 {pkgs, ...}: let
   args = [
-    "--enable-features=UseOzonePlatform"
+    "--enable-features=UseOzonePlatform,WaylandLinuxDrmSyncobj,VaapiVideoDecodeLinuxGL"
     "--ozone-platform=wayland"
     "--ignore-gpu-blocklist"
     "--enable-zero-copy"
-    "--enable-features=VaapiVideoDecodeLinuxGL"
   ];
 in {
   home.packages = [
