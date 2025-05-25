@@ -27,7 +27,9 @@ in {
     # https://github.com/LovingMelody/nix-citizen/tree/main/modules/nixos/star-citizen
     nix-citizen.starCitizen = {
       enable = true;
-      helperScript.enable = true;
+      preCommands = ''
+        export DXVK_HUD=compiler;
+      '';
       location = "/games/star-citizen";
     };
   };
