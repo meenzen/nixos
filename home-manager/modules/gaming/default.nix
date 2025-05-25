@@ -1,4 +1,9 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  osConfig,
+  ...
+}: {
   home.packages = [
     pkgs.prismlauncher
     pkgs.chiaki-ng
@@ -13,4 +18,9 @@
       input-overlay
     ];
   };
+
+  # fix slow steam download speed
+  home.file.".steam/steam/steam_dev.cfg".text = lib.mkIf osConfig.programs.steam.enable ''
+    @nClientDownloadEnableHTTP2PlatformLinux 0
+  '';
 }
