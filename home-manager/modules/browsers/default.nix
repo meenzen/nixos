@@ -1,6 +1,6 @@
 {pkgs, ...}: let
   args = [
-    "--enable-features=UseOzonePlatform,WaylandLinuxDrmSyncobj,VaapiVideoDecodeLinuxGL"
+    "--enable-features=UseOzonePlatform,VaapiVideoDecodeLinuxGL"
     "--ozone-platform=wayland"
     "--ignore-gpu-blocklist"
     "--enable-zero-copy"
