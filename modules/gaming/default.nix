@@ -55,8 +55,16 @@ in {
 
     programs.steam = {
       enable = true;
+      package = pkgs.steam.override {
+        extraEnv = {
+          #MANGOHUD = true;
+          OBS_VKCAPTURE = true;
+          DXVK_HUD = "compiler";
+        };
+      };
       remotePlay.openFirewall = true;
       dedicatedServer.openFirewall = true;
+      localNetworkGameTransfers.openFirewall = true;
       gamescopeSession.enable = true;
       extraCompatPackages = [
         pkgs.proton-ge-bin
