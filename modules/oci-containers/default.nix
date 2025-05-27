@@ -9,6 +9,11 @@
 in {
   options.meenzen.oci-containers = {
     enable = lib.mkEnableOption "Enable OCI container support";
+    autoPrune = lib.mkOption {
+      type = lib.types.bool;
+      default = config.meenzen.server.enable;
+      description = "Enable automatic pruning.";
+    };
     github = {
       registry = lib.mkOption {
         type = lib.types.str;
@@ -23,10 +28,6 @@ in {
     };
   };
 
-  imports = [
-    inputs.arion.nixosModules.arion
-  ];
-
   config = lib.mkIf cfg.enable {
     environment.systemPackages = [
       pkgs.dive # look into docker image layers
@@ -38,17 +39,12 @@ in {
       enable = true;
       dockerCompat = true;
       dockerSocket.enable = true;
-      defaultNetwork.settings = {
-        dns_enabled = true;
-      };
+      defaultNetwork.settings.dns_enabled = true;
       autoPrune = {
-        enable = true;
+        enable = cfg.autoPrune;
         dates = "daily";
         flags = ["--all"];
       };
-    };
-    virtualisation.arion = {
-      backend = "podman-socket";
     };
 
     # Allow DNS and mDNS so that containers can resolve hostnames

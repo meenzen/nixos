@@ -10,13 +10,20 @@
 in {
   options.meenzen.docker = {
     enable = lib.mkEnableOption "Enable Docker";
+    enablePodman = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Use Podman instead of Docker.";
+    };
   };
 
   config = lib.mkIf cfg.enable {
     users.users."${systemConfig.user.username}".extraGroups = ["docker"];
 
+    meenzen.oci-containers.enable = cfg.enablePodman;
+
     virtualisation.docker = {
-      enable = true;
+      enable = !cfg.enablePodman;
       daemon.settings = {
         # use a mirror that is not rate limited
         "registry-mirrors" = ["https://mirror.gcr.io"];
