@@ -34,6 +34,8 @@ in {
       pkgs.podman-tui # status of containers in the terminal
       pkgs.podman-compose
     ];
+    environment.variables.PODMAN_COMPOSE_WARNING_LOGS = "false";
+
     virtualisation.docker.enable = false;
     virtualisation.podman = {
       enable = true;
