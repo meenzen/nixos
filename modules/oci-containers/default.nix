@@ -15,6 +15,11 @@ in {
       description = "Enable automatic pruning.";
     };
     github = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = config.meenzen.server.enable;
+        description = "Enable GitHub registry support.";
+      };
       registry = lib.mkOption {
         type = lib.types.str;
         default = "ghcr.io";
@@ -34,7 +39,7 @@ in {
       pkgs.podman-tui # status of containers in the terminal
       pkgs.podman-compose
     ];
-    environment.variables.PODMAN_COMPOSE_WARNING_LOGS = "false";
+    environment.sessionVariables.PODMAN_COMPOSE_WARNING_LOGS = "false";
 
     virtualisation.docker.enable = false;
     virtualisation.podman = {
@@ -52,7 +57,7 @@ in {
     # Allow DNS and mDNS so that containers can resolve hostnames
     networking.firewall.interfaces."podman+".allowedUDPPorts = [53 5353];
 
-    age.secrets = {
+    age.secrets = lib.mkIf cfg.github.enable {
       githubRegistryPassword = {
         file = "${inputs.self}/secrets/githubRegistryPassword.age";
       };
