@@ -28,7 +28,7 @@ in {
 
     # https://github.com/rain-cafe/protontweaks
     nixpkgs.overlays = [inputs.protontweaks.overlay];
-    services.protontweaks.enable = true;
+    services.protontweaks.enable = false;
 
     # Kernel Tweaks
     # boot.kernelPackages = pkgs.linuxPackages_xanmod;

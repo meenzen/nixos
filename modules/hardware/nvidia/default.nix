@@ -20,7 +20,9 @@ in {
       powerManagement.finegrained = false;
       open = true;
       nvidiaSettings = true;
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
+      # package = config.boot.kernelPackages.nvidiaPackages.stable;
+      # fix https://github.com/ValveSoftware/gamescope/issues/1592
+      package = config.boot.kernelPackages.nvidiaPackages.beta;
     };
 
     hardware.graphics = {
