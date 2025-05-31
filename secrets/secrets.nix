@@ -38,6 +38,9 @@ in {
   "synapseConfig.age".publicKeys = users ++ matrix;
   "masSecretConfig.age".publicKeys = users ++ matrix;
 
+  # Conduit
+  "conduitEnvironment.age".publicKeys = users ++ matrix;
+
   # Authentik
   "authentikEnvironment.age".publicKeys = users ++ authentik;
 

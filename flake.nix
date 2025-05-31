@@ -59,6 +59,7 @@
 
     # Other Programs
     authentik-nix.url = "github:nix-community/authentik-nix";
+    conduit.url = "gitlab:meenzen/conduit?ref=feat/s3";
   };
 
   outputs = inputs @ {
