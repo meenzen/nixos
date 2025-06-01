@@ -10,6 +10,7 @@ let
     weather = "curl wttr.in/Wiesbaden";
     lolcat = "clolcat";
     neofetch = "fastfetch";
+    fuck = "f";
   };
 in
   {pkgs, ...}: {
