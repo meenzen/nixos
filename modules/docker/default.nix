@@ -18,7 +18,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    users.users."${systemConfig.user.username}".extraGroups = ["docker"];
+    users.users."${systemConfig.user.username}".extraGroups = ["docker" "podman"];
 
     meenzen.oci-containers.enable = cfg.enablePodman;
 
