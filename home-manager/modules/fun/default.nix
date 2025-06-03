@@ -19,6 +19,4 @@
       fortune | ponysay
     '')
   ];
-
-  programs.pay-respects.enable = true;
 }

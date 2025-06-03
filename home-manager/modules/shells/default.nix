@@ -58,6 +58,11 @@ in
       options = ["--cmd cd"];
     };
 
+    # command autocorrect
+    programs.pay-respects.enable = true;
+    programs.nix-index.enable = true;
+
+    # direnv
     programs.direnv.enable = true;
     programs.direnv.nix-direnv.enable = true;
   }
