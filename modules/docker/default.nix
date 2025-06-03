@@ -20,7 +20,16 @@ in {
   config = lib.mkIf cfg.enable {
     users.users."${systemConfig.user.username}".extraGroups = ["docker" "podman"];
 
-    meenzen.oci-containers.enable = cfg.enablePodman;
+    meenzen.oci-containers = {
+      enable = cfg.enablePodman;
+      enableDockerCompat = false;
+    };
+
+    environment.systemPackages = [
+      pkgs.dive
+      pkgs.docker
+      pkgs.docker-compose
+    ];
 
     virtualisation.docker = {
       enable = !cfg.enablePodman;

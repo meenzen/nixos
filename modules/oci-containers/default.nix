@@ -14,6 +14,11 @@ in {
       default = config.meenzen.server.enable;
       description = "Enable automatic pruning.";
     };
+    enableDockerCompat = lib.mkOption {
+      type = lib.types.bool;
+      default = config.meenzen.server.enable;
+      description = "Enable docker compatibility mode for Podman.";
+    };
     github = {
       enable = lib.mkOption {
         type = lib.types.bool;
@@ -34,17 +39,18 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = [
-      pkgs.dive # look into docker image layers
-      pkgs.podman-tui # status of containers in the terminal
-      pkgs.podman-compose
-    ];
+    environment.systemPackages =
+      [
+        pkgs.dive # look into docker image layers
+        pkgs.podman-tui # status of containers in the terminal
+      ]
+      ++ lib.optional cfg.enableDockerCompat pkgs.podman-compose;
     environment.sessionVariables.PODMAN_COMPOSE_WARNING_LOGS = "false";
 
     virtualisation.docker.enable = false;
     virtualisation.podman = {
       enable = true;
-      dockerCompat = true;
+      dockerCompat = cfg.enableDockerCompat;
       dockerSocket.enable = true;
       defaultNetwork.settings.dns_enabled = true;
       autoPrune = {
