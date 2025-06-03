@@ -12,7 +12,7 @@ in {
     enable = lib.mkEnableOption "Enable Docker";
     enablePodman = lib.mkOption {
       type = lib.types.bool;
-      default = true;
+      default = false;
       description = "Use Podman instead of Docker.";
     };
   };
