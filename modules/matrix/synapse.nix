@@ -32,6 +32,16 @@ in {
       default = 8008;
       description = "Local port for Matrix Server";
     };
+    compressorChunkSize = lib.mkOption {
+      type = lib.types.int;
+      default = 500;
+      description = "Chunk size for synapse_auto_compressor";
+    };
+    compressorChunksToCompress = lib.mkOption {
+      type = lib.types.int;
+      default = 1000;
+      description = "Number of chunks to compress with synapse_auto_compressor";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -48,7 +58,9 @@ in {
     services.matrix-synapse = {
       enable = true;
       withJemalloc = true;
-      enableRegistrationScript = true;
+
+      # No longer needed, use mas-cli instead
+      enableRegistrationScript = false;
 
       extraConfigFiles = [
         config.age.secrets.synapseConfig.path
@@ -134,11 +146,21 @@ in {
       locations."/_synapse/client".proxyPass = "http://[::1]:${toString cfg.port}";
     };
 
+    services.synapse-auto-compressor = {
+      enable = true;
+      startAt = "daily";
+      settings = {
+        chunk_size = cfg.compressorChunkSize;
+        chunks_to_compress = cfg.compressorChunksToCompress;
+      };
+    };
+
+    # Scripts for manual maintenance tasks
     environment.systemPackages = [
       (
         pkgs.writeScriptBin "matrix-synapse-run-synapse_auto_compressor" ''
           set -eux
-          sudo -u matrix-synapse ${pkgs.rust-synapse-state-compress}/bin/synapse_auto_compressor -p "user=matrix-synapse dbname=matrix-synapse host=/run/postgresql" -c 1000 -n 1000
+          sudo -u matrix-synapse ${pkgs.rust-synapse-state-compress}/bin/synapse_auto_compressor -p "user=matrix-synapse dbname=matrix-synapse host=/run/postgresql" -c ${toString cfg.compressorChunkSize} -n ${toString cfg.compressorChunksToCompress}
         ''
       )
       (
