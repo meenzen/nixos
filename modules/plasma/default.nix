@@ -27,7 +27,8 @@ in {
     };
 
     # Enable Wayland support in Chromium based apps
-    environment.sessionVariables.NIXOS_OZONE_WL = "1";
+    # Chromium Wayland is broken, see https://github.com/NixOS/nixpkgs/issues/334175
+    #environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
     # Enable CUPS
     services.printing.enable = true;
