@@ -7,8 +7,4 @@ source "$(dirname "$0")/lib.sh"
 print_start "Installing NixOS Configuration"
 alejandra_format
 
-print_status "Rebuilding NixOS"
-print_divider
-git add .
-sudo nixos-rebuild boot --upgrade --verbose --flake . $@
-print_divider
+nixos_rebuild "boot" "." "$@"

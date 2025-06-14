@@ -62,3 +62,24 @@ alejandra_format () {
     exit 1
   fi
 }
+
+nixos_rebuild () {
+  if [ -z "$1" ]; then
+    print_error "No command provided for nixos_rebuild."
+    exit 1
+  fi
+  local command="$1"
+
+  if [ -z "$2" ]; then
+    print_error "No hostname provided for nixos_rebuild."
+    exit 1
+  fi
+  local hostname="$2"
+  local args="$3"
+
+  print_status "Rebuilding NixOS"
+  print_divider
+  git add .
+  sudo nixos-rebuild $command --upgrade --verbose --flake $hostname $args
+  print_divider
+}

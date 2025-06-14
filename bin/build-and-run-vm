@@ -7,11 +7,7 @@ source "$(dirname "$0")/lib.sh"
 print_start "Building and Running VM"
 alejandra_format
 
-print_status "Building VM"
-print_divider
-git add .
-nixos-rebuild build-vm --upgrade --verbose --flake .#vm
-print_divider
+nixos_rebuild "build-vm" ".#vm" "$@"
 
 print_status "Starting VM"
 ./result/bin/run-vm-vm

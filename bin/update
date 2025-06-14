@@ -11,8 +11,4 @@ print_status "Updating Flake"
 git add .
 nix flake update --verbose
 
-print_status "Rebuilding NixOS"
-print_divider
-git add .
-sudo nixos-rebuild switch --upgrade --verbose --flake . $@
-print_divider
+nixos_rebuild "switch" "." "$@"
