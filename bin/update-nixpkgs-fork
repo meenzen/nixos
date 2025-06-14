@@ -2,6 +2,8 @@
 
 set -eo pipefail
 
+source "$(dirname "$0")/lib.sh"
+
 NIXPKGS="$HOME/dev/nixpkgs"
 NIXPKGS_URI="https://github.com/NixOS/nixpkgs.git"
 NIXPKGS_BRANCH=nixos-unstable
@@ -11,10 +13,6 @@ DOTNET_VERSIONS=("6.0" "7.0" "8.0")
 DOTNET_DIRECTORY="$NIXPKGS/pkgs/development/compilers/dotnet"
 
 JETBRAINS_DIRECTORY="$NIXPKGS/pkgs/applications/editors/jetbrains"
-
-LIGHT_BLUE='\033[1;34m'
-RED='\033[0;31m'
-NO_COLOR='\033[0m'
 
 FORCE=false
 if [ "$1" == "--force" ]; then
@@ -27,14 +25,6 @@ git_ahead_of_origin () {
 
 git_uncommitted_changes () {
   [ -n "$(git status --porcelain)" ]
-}
-
-print () {
-  echo -e "${LIGHT_BLUE}$1${NO_COLOR}"
-}
-
-print_error () {
-  echo -e "${RED}Error:${NO_COLOR} $1"
 }
 
 print "=> Starting Nixpkgs fork update"

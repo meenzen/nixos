@@ -2,12 +2,7 @@
 
 set -eo pipefail
 
-LIGHT_BLUE='\033[1;34m'
-NO_COLOR='\033[0m'
-
-print () {
-    echo -e "${LIGHT_BLUE}$1${NO_COLOR}"
-}
+source "$(dirname "$0")/lib.sh"
 
 print "=> Starting Install"
 

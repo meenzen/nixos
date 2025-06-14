@@ -2,12 +2,7 @@
 
 set -eo pipefail
 
-LIGHT_BLUE='\033[1;34m'
-NO_COLOR='\033[0m'
-
-print () {
-    echo -e "${LIGHT_BLUE}$1${NO_COLOR}"
-}
+source "$(dirname "$0")/lib.sh"
 
 print "=> Starting Install"
 
@@ -17,5 +12,5 @@ alejandra . >/dev/null 2>&1
 print "==> Adding Changes to Git"
 git add .
 
-print "==> Running 'colmena apply --verbose $@'"
+print "==> Running 'colmena apply'"
 colmena apply --verbose $@
