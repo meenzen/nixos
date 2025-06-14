@@ -4,11 +4,11 @@ set -eo pipefail
 
 source "$(dirname "$0")/lib.sh"
 
-print "=> Starting ISO Build"
+print_start "Building ISO"
 
-print "==> Formatting Code"
+print_status "Formatting Code"
 alejandra . >/dev/null 2>&1
 
-print "==> Building ISO"
+print_status "Building ISO"
 git add .
 nix build --verbose .#nixosConfigurations.install-iso.config.system.build.isoImage

@@ -4,11 +4,11 @@ set -eo pipefail
 
 source "$(dirname "$0")/lib.sh"
 
-print "=> Starting Install"
+print_start "Installing NixOS Configuration"
 
-print "==> Formatting Code"
+print_status "Formatting Code"
 alejandra . >/dev/null 2>&1
 
-print "==> Rebuilding NixOS"
+print_status "Rebuilding NixOS"
 git add .
 sudo nixos-rebuild switch --upgrade --verbose --flake . $@

@@ -4,15 +4,15 @@ set -eo pipefail
 
 source "$(dirname "$0")/lib.sh"
 
-print "=> Starting Storage Optimization"
+print_start "Optimizing Disk Usage"
 
-print "==> Running \"nix-collect-garbage\""
+print_status "Running \"nix-collect-garbage\""
 nix-collect-garbage --delete-older-than 7d
 
-print "==> Running \"nix-collect-garbage\" as root"
+print_status "Running \"nix-collect-garbage\" as root"
 sudo nix-collect-garbage --delete-older-than 7d
 
-print "==> Running \"sudo nix-store --optimise\""
+print_status "Running \"sudo nix-store --optimise\""
 sudo nix-store --optimise
 
-print "=> Done!"
+print_end "Done!"

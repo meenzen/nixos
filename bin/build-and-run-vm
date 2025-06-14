@@ -4,25 +4,19 @@ set -eo pipefail
 
 source "$(dirname "$0")/lib.sh"
 
-print "=> Starting VM Build"
+print_start "Building and Running VM"
 
-print "==> Formatting Code"
+print_status "Formatting Code"
 alejandra . >/dev/null 2>&1
 
-print "==> Building VM"
+print_status "Building VM"
 git add .
 nixos-rebuild build-vm --upgrade --verbose --flake .#vm
 
-print "==> Starting VM"
+print_status "Starting VM"
 ./result/bin/run-vm-vm
 
-echo "Do you want to delete the disk image? [y/N]"
+prompt_or_exit "Do you want to delete the disk image?"
 
-read -r response
-
-if [ "$response" != "y" ]; then
-    exit 0
-fi
-
-print "==> Deleting Disk Image"
+print_status "Deleting Disk Image"
 rm -f vm.qcow2

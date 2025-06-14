@@ -27,7 +27,7 @@ git_uncommitted_changes () {
   [ -n "$(git status --porcelain)" ]
 }
 
-print "=> Starting Nixpkgs fork update"
+print_start "Starting Nixpkgs fork update"
 
 echo "Nixpkgs: $NIXPKGS"
 echo "Nixpkgs Repo: $NIXPKGS_URI"
@@ -35,7 +35,7 @@ echo "Nixpkgs Branch: $NIXPKGS_BRANCH"
 echo "Force Update: $FORCE (use --force to reset the fork to upstream before updating)"
 
 # Requirements
-print "==> Checking Requirements"
+print_status "Checking Requirements"
 
 if [ ! -d "$NIXPKGS" ]; then
   print_error "Nixpkgs not found at $NIXPKGS"
@@ -60,10 +60,10 @@ if git_uncommitted_changes; then
 fi
 
 # Preparation
-print "==> Fetching upstream"
+print_status "Fetching upstream"
 git fetch upstream
 
-print "==> Checking out $NIXPKGS_BRANCH"
+print_status "Checking out $NIXPKGS_BRANCH"
 git checkout $NIXPKGS_BRANCH
 
 if git_uncommitted_changes; then
@@ -72,7 +72,7 @@ if git_uncommitted_changes; then
 fi
 
 if [ "$FORCE" = true ]; then
-  print "==> Resetting to upstream/$NIXPKGS_BRANCH"
+  print_status "Resetting to upstream/$NIXPKGS_BRANCH"
   git reset --hard upstream/$NIXPKGS_BRANCH
 fi
 
@@ -83,17 +83,17 @@ fi
 
 # .NET SDKs
 if [ "$DOTNET_SKIP" = true ]; then
-  print "==> Skipping .NET SDKs"
+  print_status "Skipping .NET SDKs"
 else
-  print "==> Updating .NET"
+  print_status "Updating .NET"
   cd "$DOTNET_DIRECTORY"
 
   for version in "${DOTNET_VERSIONS[@]}"; do
-  print "==> Updating .NET $version"
+  print_status "Updating .NET $version"
   ./update.sh "$version"
 
   if git_uncommitted_changes; then
-      print "==> Changes detected, committing"
+      print_status "Changes detected, committing"
       git add .
       git commit -m "dotnet-sdk $version: update to latest version"
   fi
@@ -101,15 +101,15 @@ else
 fi
 
 # JetBrains IDEs
-print "==> Updating JetBrains"
+print_status "Updating JetBrains"
 cd "$JETBRAINS_DIRECTORY"
 
 bin/update_bin.py
 
 # Cleanup
 if git_ahead_of_origin; then
-  print "==> Pushing changes"
+  print_status "Pushing changes"
   git push origin $NIXPKGS_BRANCH --force
 fi
 
-print "=> Nixpkgs fork update complete"
+print_end "Nixpkgs fork update complete"

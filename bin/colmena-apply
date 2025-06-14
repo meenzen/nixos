@@ -4,13 +4,13 @@ set -eo pipefail
 
 source "$(dirname "$0")/lib.sh"
 
-print "=> Starting Install"
+print_start "Applying Configuration"
 
-print "==> Formatting Code"
+print_status "Formatting Code"
 alejandra . >/dev/null 2>&1
 
-print "==> Adding Changes to Git"
+print_status "Adding Changes to Git"
 git add .
 
-print "==> Running 'colmena apply'"
+print_status "Running 'colmena apply'"
 colmena apply --verbose $@

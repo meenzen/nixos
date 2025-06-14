@@ -4,13 +4,13 @@ set -eo pipefail
 
 source "$(dirname "$0")/lib.sh"
 
-print "=> Starting Update"
+print_start "Updating Flake"
 
-print "==> Formatting Code"
+print_status "Formatting Code"
 alejandra . >/dev/null 2>&1
 
-print "==> Adding Changes to Git"
+print_status "Adding Changes to Git"
 git add .
 
-print "==> Updating Flake"
+print_status "Updating Flake"
 nix flake update --verbose
