@@ -4,20 +4,25 @@
   ...
 }: let
   # plugins are currently broken, see https://github.com/nixos/nixpkgs/issues/400317
-  #jetbrains-plugins = ["github-copilot" "ideavim"];
-  jetbrains-plugins = [];
+  #plugins = ["github-copilot" "ideavim"];
+  plugins = [];
+
+  # https://nixos.wiki/wiki/Jetbrains_Tools
+  mkIde = package:
+    if plugins != []
+    then (pkgs.jetbrains.plugins.addPlugins package plugins)
+    else package;
 in {
   home.packages = [
     # Editors
     pkgs.vscode
     pkgs.kdePackages.kate
 
-    # https://nixos.wiki/wiki/Jetbrains_Tools
-    #(meenzen.jetbrains.plugins.addPlugins meenzen.jetbrains.rider jetbrains-plugins)
-    (pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains.rider jetbrains-plugins)
-    (pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains.rust-rover jetbrains-plugins)
-    (pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains.webstorm jetbrains-plugins)
     #pkgs.jetbrains-toolbox
+
+    (mkIde pkgs.jetbrains.rider)
+    (mkIde pkgs.jetbrains.rust-rover)
+    (mkIde pkgs.jetbrains.webstorm)
   ];
 
   home.file.".ideavimrc".text = ''
