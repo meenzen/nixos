@@ -19,7 +19,22 @@ print_status () {
 }
 
 print_error () {
-  echo -e "${RED}Error:${NO_COLOR} $1"
+  echo -e "${RED}==> Error:${NO_COLOR} $1"
+}
+
+print_divider () {
+  local columns=${COLUMNS:-80}
+  local divider_char="${1:-─}"
+  local color="${2:-$LIGHT_BLUE}"
+  local divider_line=""
+  for ((i=0; i<columns; i++)); do
+    divider_line+="$divider_char"
+  done
+  echo -e "${color}${divider_line}${NO_COLOR}"
+}
+
+print_divider_error () {
+  print_divider "" "$RED"
 }
 
 prompt_or_exit () {
@@ -32,5 +47,14 @@ prompt_or_exit () {
 
 alejandra_format () {
   print_status "Formatting Code"
-  alejandra . >/dev/null 2>&1
+  if ! alejandra . >/dev/null 2>&1; then
+    print_error "Alejandra formatting failed."
+
+    # Run alejandra again so that the user can see the error message
+    print_divider_error
+    alejandra . || true
+    print_divider_error
+
+    exit 1
+  fi
 }
