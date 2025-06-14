@@ -8,5 +8,7 @@ print_start "Building ISO"
 alejandra_format
 
 print_status "Building ISO"
+print_divider
 git add .
 nix build --verbose .#nixosConfigurations.install-iso.config.system.build.isoImage
+print_divider

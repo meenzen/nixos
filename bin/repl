@@ -4,7 +4,8 @@ set -eo pipefail
 
 source "$(dirname "$0")/lib.sh"
 
-print "Starting nix repl (press Ctrl+D to exit)..."
-echo ""
+print_start "Starting nix repl (press Ctrl+D to exit)..."
 
+print_divider
 nix --extra-experimental-features repl-flake repl .
+print_divider
