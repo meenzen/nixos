@@ -2,12 +2,7 @@
 
 set -eo pipefail
 
-RED='\033[0;31m'
-NO_COLOR='\033[0m'
-
-print_warning () {
-    echo -e "Warning: ${RED}$1${NO_COLOR}"
-}
+source "$(dirname "$0")/lib.sh"
 
 print_warning "This script will remove all IDEs installed using JetBrains Toolbox."
 print_warning "It will also remove any configuration, cache and plugins."
