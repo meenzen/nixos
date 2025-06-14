@@ -29,3 +29,8 @@ prompt_or_exit () {
     exit 0
   fi
 }
+
+alejandra_format () {
+  print_status "Formatting Code"
+  alejandra . >/dev/null 2>&1
+}

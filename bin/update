@@ -5,9 +5,7 @@ set -eo pipefail
 source "$(dirname "$0")/lib.sh"
 
 print_start "Updating"
-
-print_status "Formatting Code"
-alejandra . >/dev/null 2>&1
+alejandra_format
 
 print_status "Updating Flake"
 git add .
