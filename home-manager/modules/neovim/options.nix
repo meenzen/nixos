@@ -35,6 +35,9 @@
       spelllang = "en_us"; # spell checking language
     };
 
-    clipboard.register = "unnamedplus";
+    clipboard = {
+      register = "unnamedplus";
+      providers.wl-copy.enable = true;
+    };
   };
 }
