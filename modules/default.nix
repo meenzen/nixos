@@ -42,6 +42,7 @@
     ./plasma
     ./postgresql
     ./promtail
+    ./remote-desktop
     ./server
     ./services
     ./stylix

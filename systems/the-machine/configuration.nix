@@ -46,6 +46,7 @@
   };
 
   meenzen.desktop.enable = true;
+  meenzen.remote-desktop.enable = true;
   meenzen.hardware.nvidia.enable = true;
   meenzen.hardware.bluetooth.enable = true;
   meenzen.hardware.wooting.enable = true;
