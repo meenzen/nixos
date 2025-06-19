@@ -144,6 +144,7 @@ in {
       '';
       locations."/_matrix".proxyPass = "http://[::1]:${toString cfg.port}";
       locations."/_synapse/client".proxyPass = "http://[::1]:${toString cfg.port}";
+      locations."/_synapse/admin".proxyPass = "http://[::1]:${toString cfg.port}";
     };
 
     services.synapse-auto-compressor = {
