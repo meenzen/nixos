@@ -30,6 +30,10 @@
         proxyCommand = "${pkgs.cloudflared}/bin/cloudflared access ssh --hostname %h";
       };
 
+      "ssh-gateway-dmz.human-dev.io" = {
+        proxyCommand = "${pkgs.cloudflared}/bin/cloudflared access ssh --hostname %h";
+      };
+
       # Document Library
       postnotes01 = lib.hm.dag.entryAfter ["ssh-gateway.human-dev.io"] {
         hostname = "172.16.0.26";
@@ -104,12 +108,19 @@
         hostname = "172.16.0.204";
         proxyJump = "ssh-gateway.human-dev.io";
       };
-      nixos-proxy-01 = lib.hm.dag.entryAfter ["ssh-gateway.human-dev.io"] {
+      nixos-proxy-01 = lib.hm.dag.entryAfter ["ssh-gateway-dmz.human-dev.io"] {
         hostname = "192.168.155.26";
-        proxyJump = "ssh-gateway.human-dev.io";
+        proxyJump = "ssh-gateway-dmz.human-dev.io";
       };
-      # pass: xnixosp2
-      nixos-proxy-02 = lib.hm.dag.entryAfter ["ssh-gateway.human-dev.io" "nixos-proxy-01"] {
+      "192.168.155.26" = lib.hm.dag.entryAfter ["ssh-gateway-dmz.human-dev.io"] {
+        hostname = "192.168.155.26";
+        proxyJump = "ssh-gateway-dmz.human-dev.io";
+      };
+      nixos-proxy-02 = lib.hm.dag.entryAfter ["ssh-gateway-dmz.human-dev.io"] {
+        hostname = "192.168.155.27";
+        proxyJump = "nixos-proxy-01";
+      };
+      "192.168.155.27" = lib.hm.dag.entryAfter ["ssh-gateway-dmz.human-dev.io"] {
         hostname = "192.168.155.27";
         proxyJump = "nixos-proxy-01";
       };
