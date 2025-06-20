@@ -26,10 +26,6 @@
         user = "root";
       };
 
-      "ssh-gateway.human-dev.io" = {
-        proxyCommand = "${pkgs.cloudflared}/bin/cloudflared access ssh --hostname %h";
-      };
-
       "ssh-gateway-dmz.human-dev.io" = {
         proxyCommand = "${pkgs.cloudflared}/bin/cloudflared access ssh --hostname %h";
       };
@@ -37,12 +33,6 @@
       # Document Library
       postnotes01 = lib.hm.dag.entryAfter ["ssh-gateway-dmz.human-dev.io"] {
         hostname = "172.16.0.26";
-        proxyJump = "ssh-gateway-dmz.human-dev.io";
-      };
-
-      # GitLab Runner, cloudflared
-      smn_01 = lib.hm.dag.entryAfter ["ssh-gateway-dmz.human-dev.io"] {
-        hostname = "172.16.0.211";
         proxyJump = "ssh-gateway-dmz.human-dev.io";
       };
 
