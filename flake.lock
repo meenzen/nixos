@@ -191,16 +191,16 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1748653203,
-        "narHash": "sha256-iruZAt1P7VpqxCu7uxAt1azQTKoKg7TJWuNNOTS4Rns=",
-        "owner": "meenzen",
+        "lastModified": 1749575199,
+        "narHash": "sha256-khuGGwZRLkfUDmWP30gVQkL3duq/YDZX5RO3aB3Jnnc=",
+        "owner": "AndSDev",
         "repo": "conduit",
-        "rev": "1124334e5f2ff0cc239d592ddf4706236b043441",
+        "rev": "02ddf2725871997671f973791736e66025c29c10",
         "type": "gitlab"
       },
       "original": {
-        "owner": "meenzen",
-        "ref": "feat/s3",
+        "owner": "AndSDev",
+        "ref": "s3-media-storage",
         "repo": "conduit",
         "type": "gitlab"
       }
