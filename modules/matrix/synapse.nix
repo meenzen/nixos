@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  pkgs-unstable-small,
   inputs,
   ...
 }: let
@@ -45,6 +46,13 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    nixpkgs.overlays = [
+      # https://nixpk.gs/pr-tracker.html?pr=417990
+      (final: prev: {
+        matrix-synapse-unwrapped = pkgs-unstable-small.matrix-synapse-unwrapped.overrideAttrs (oldAttrs: {});
+      })
+    ];
+
     age.secrets = {
       synapseConfig = {
         file = "${inputs.self}/secrets/synapseConfig.age";
