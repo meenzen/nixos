@@ -38,6 +38,8 @@ in {
     };
 
     services.atticd = {
+      package = inputs.attic.packages."x86_64-linux".attic-server;
+
       enable = true;
       user = cfg.user;
       group = cfg.user;
