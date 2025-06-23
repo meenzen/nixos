@@ -4,7 +4,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
-    nixpkgs-unstable-small.url = "github:nixos/nixpkgs/nixos-unstable-small";
 
     # Helper Libraries
     nixos-hardware.url = "github:nixos/nixos-hardware";
@@ -124,16 +123,13 @@
             deployment.targetHost = targetHost;
             imports = [systemModule];
           };
-          pkgs-unstable-small = import inputs.nixpkgs-unstable-small {
-            system = "x86_64-linux";
-          };
         in {
           meta = {
             nixpkgs = import inputs.nixpkgs {
               system = "x86_64-linux";
             };
             specialArgs = {
-              inherit inputs pkgs-unstable-small;
+              inherit inputs;
               systemConfig = defaultConfig;
             };
           };
