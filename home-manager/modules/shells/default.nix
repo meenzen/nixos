@@ -60,7 +60,9 @@ in
 
     # command autocorrect
     programs.pay-respects.enable = true;
-    programs.nix-index.enable = true;
+    home.packages = [
+      pkgs.nix-index
+    ];
 
     # direnv
     programs.direnv.enable = true;
