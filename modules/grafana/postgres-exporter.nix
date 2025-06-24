@@ -9,15 +9,15 @@
   exporter = pkgs.fetchFromGitHub {
     owner = "prometheus-community";
     repo = "postgres_exporter";
-    rev = "f9c74570ed80d1a67c4a70e155cdb8d9689825eb";
-    sha256 = "sha256-zKyr95e170GgbGMwAQolymjg7/hYPaeN9bg8NQKUIDE=";
+    rev = "6d3078da3553bc1b522388e22fec01a314577cf4";
+    sha256 = "0s6qjsj6lv87bcnsd0fnj2lqp1vb19fj2sl014cd6qzllp4h0q1m";
   };
 
   dashboards = pkgs.fetchFromGitHub {
     owner = "lstn";
     repo = "misc-grafana-dashboards";
-    rev = "68432fdac54781febcd4a05a8007463231ed8d17";
-    sha256 = "sha256-sFjbwaLRPIdn/xLFyaFybV8FaaoSNRGyt8WdKfl3lhE=";
+    rev = "e18068331e9a54f82766844cad2c7fa098e4a1e0";
+    sha256 = "0i9pli3i4rzvm74850jw5c91q7xbnr9cavcy5f8ssgf8j5swyjfh";
   };
 
   fullHostname =

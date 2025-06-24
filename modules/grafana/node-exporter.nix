@@ -9,8 +9,8 @@
   dashboards = pkgs.fetchFromGitHub {
     owner = "rfmoz";
     repo = "grafana-dashboards";
-    rev = "cad8539cc4c4ed043935e69b9c1ec23e551806f4";
-    sha256 = "sha256-9BYujV2xXRRDvNI4sjimZEB4Z2TY/0WhwJRh5P122rs=";
+    rev = "0d3a3c0118f27873342626a4ecb36d35acf0ad01";
+    sha256 = "1lf21fxqc96876izglspsskvwcfjdd9dx88m9mhbdks560797c4l";
   };
 
   fullHostname =

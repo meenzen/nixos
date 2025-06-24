@@ -11,8 +11,8 @@
   dashboards = pkgs.fetchFromGitHub {
     owner = "element-hq";
     repo = "synapse";
-    rev = "ac1bf682ff012ee8af5153318eec5d25ed786e90";
-    sha256 = "sha256-s6qbYUzxJ9ca3K2X5H0X2WwbwebmnH5wKG2Vj2rGjpg=";
+    rev = "3cabaa84ca7d93d05e32a4f45601567751bb15ed";
+    sha256 = "1r5mcqgqfgpv3wgmqf6jxcj0hrdmaxqgm1wpbxa9nkpyn5pb8dyj";
   };
 in {
   options.meenzen.matrix.synapse = {

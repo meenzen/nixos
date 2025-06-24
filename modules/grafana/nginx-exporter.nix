@@ -9,8 +9,8 @@
   exporter = pkgs.fetchFromGitHub {
     owner = "nginxinc";
     repo = "nginx-prometheus-exporter";
-    rev = "8d61758aa1bc4bcc27dfb76dcb79078c53703bb4";
-    sha256 = "sha256-czkzXy0g6Hp0MF77fPojuojW5m7B1vxdYBMMcbMEqxc=";
+    rev = "9237ce63146ab59b2c5562d28089a529536c5863";
+    sha256 = "03v8143485awvr2hb8gqijbgnl958mfi4b4xbw1aywvsc95jby7w";
   };
 
   fullHostname =
