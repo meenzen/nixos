@@ -22,4 +22,5 @@
 
     difftastic.enable = true;
   };
+  programs.mergiraf.enable = true;
 }
