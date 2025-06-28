@@ -20,8 +20,7 @@ in {
     pkgs.tokei
     pkgs.difftastic
     pkgs.terraform
-    # https://github.com/NixOS/nixpkgs/issues/420134
-    #pkgs.devenv
+    pkgs.devenv
     pkgs.gh
     pkgs.glab
     pkgs.nixpkgs-review
