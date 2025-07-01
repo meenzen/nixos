@@ -115,15 +115,15 @@ in {
     };
 
     systemd.services.docker-registry = {
-      after = ["postgresql.service" "gitlab-registry-migrate.service"];
-      requires = ["postgresql.service" "gitlab-registry-migrate.service"];
+      after = ["postgresql.target" "gitlab-registry-migrate.service"];
+      requires = ["postgresql.target" "gitlab-registry-migrate.service"];
       wants = ["gitlab-registry-migrate.service"];
       serviceConfig.EnvironmentFile = config.age.secrets.gitlabRegistryEnvironment.path;
     };
 
     systemd.services.gitlab-registry-migrate = {
-      after = ["postgresql.service"];
-      requires = ["postgresql.service"];
+      after = ["postgresql.target"];
+      requires = ["postgresql.target"];
       wantedBy = ["multi-user.target"];
       serviceConfig = {
         Type = "oneshot";

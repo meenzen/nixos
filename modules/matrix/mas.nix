@@ -126,8 +126,8 @@ in {
       enable = true;
       description = "MAS";
       wants = ["network-online.target"];
-      after = ["network-online.target" "postgresql.service"];
-      requires = ["postgresql.service"];
+      after = ["network-online.target" "postgresql.target"];
+      requires = ["postgresql.target"];
       wantedBy = ["multi-user.target"];
       serviceConfig = {
         ExecStart = "${cfg.package}/bin/mas-cli --config=${cfg.configFile} --config=${config.age.secrets.masSecretConfig.path} server";
