@@ -102,6 +102,8 @@ in {
       };
     };
 
+    # todo: make this more reliable
+    # see https://github.com/nixos/nixpkgs/blob/master/nixos/modules/services/databases/postgresql.md#initializing-module-services-postgres-initializing
     services.postgresql = {
       enable = true;
       initialScript = pkgs.writeText "setup-matrix-synapse.sql" ''

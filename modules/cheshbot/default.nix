@@ -80,7 +80,7 @@ in {
     };
 
     # workaround until https://github.com/NixOS/nixpkgs/pull/326306 is merged
-    systemd.services.postgresql.postStart = let
+    systemd.services.postgresql-setup.postStart = let
       password_file_path = config.age.secrets.cheshbotPostgresPassword.path;
     in ''
       psql -tA <<'EOF'
