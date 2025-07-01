@@ -79,7 +79,7 @@ in {
     systemd.services.postgresql.postStart = let
       password_file_path = config.age.secrets.kenerPostgresPassword.path;
     in ''
-      $PSQL -tA <<'EOF'
+      psql -tA <<'EOF'
         DO $$
         DECLARE password TEXT;
         BEGIN
