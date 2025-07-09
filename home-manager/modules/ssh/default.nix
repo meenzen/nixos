@@ -108,11 +108,27 @@
       };
       nixos-proxy-02 = lib.hm.dag.entryAfter ["ssh-gateway-dmz.human-dev.io"] {
         hostname = "192.168.155.27";
-        proxyJump = "nixos-proxy-01";
+        proxyJump = "ssh-gateway-dmz.human-dev.io";
       };
       "192.168.155.27" = lib.hm.dag.entryAfter ["ssh-gateway-dmz.human-dev.io"] {
         hostname = "192.168.155.27";
-        proxyJump = "nixos-proxy-01";
+        proxyJump = "ssh-gateway-dmz.human-dev.io";
+      };
+      nixos-app-01 = lib.hm.dag.entryAfter ["ssh-gateway-dmz.human-dev.io"] {
+        hostname = "192.168.155.28";
+        proxyJump = "ssh-gateway-dmz.human-dev.io";
+      };
+      "192.168.155.28" = lib.hm.dag.entryAfter ["ssh-gateway-dmz.human-dev.io"] {
+        hostname = "192.168.155.28";
+        proxyJump = "ssh-gateway-dmz.human-dev.io";
+      };
+      nixos-app-02 = lib.hm.dag.entryAfter ["ssh-gateway-dmz.human-dev.io"] {
+        hostname = "192.168.155.29";
+        proxyJump = "ssh-gateway-dmz.human-dev.io";
+      };
+      "192.168.155.29" = lib.hm.dag.entryAfter ["ssh-gateway-dmz.human-dev.io"] {
+        hostname = "192.168.155.29";
+        proxyJump = "ssh-gateway-dmz.human-dev.io";
       };
 
       "git.human.de".hostname = "git.human.de";
