@@ -19,7 +19,10 @@ in {
 
     networking.firewall.enable = lib.mkForce true;
 
+    # Don't require a password for sudo
     security.sudo.wheelNeedsPassword = false;
+    security.sudo-rs.wheelNeedsPassword = false;
+
     users = {
       # Always overwrite manually configured users
       mutableUsers = lib.mkForce false;

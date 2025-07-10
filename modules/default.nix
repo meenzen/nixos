@@ -17,7 +17,6 @@
     ./desktop
     ./docker
     ./fedifetcher
-    ./firewall
     ./firmware-update
     ./fonts
     ./gaming
@@ -43,6 +42,7 @@
     ./postgresql
     ./promtail
     ./remote-desktop
+    ./security
     ./server
     ./services
     ./stylix
