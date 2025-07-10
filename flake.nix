@@ -139,7 +139,10 @@
             imports = [
               ./modules
             ];
-            deployment.buildOnTarget = true;
+            deployment = {
+              buildOnTarget = true;
+              targetUser = "meenzens";
+            };
           };
 
           neon = mkServer "neon.mnzn.dev" ./systems/neon/configuration.nix;
