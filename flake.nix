@@ -101,15 +101,15 @@
                 systemModule
               ];
             };
-        in {
-          framework = mkSystem ./systems/framework/configuration.nix;
-          install-iso = mkSystem ./systems/install-iso/configuration.nix;
-          neon = mkSystem ./systems/neon/configuration.nix;
-          lithium = mkSystem ./systems/lithium/configuration.nix;
-          the-machine = mkSystem ./systems/the-machine/configuration.nix;
-          vm = mkSystem ./systems/vm/configuration.nix;
-          wsl = mkSystem ./systems/wsl/configuration.nix;
-        };
+        in
+          {
+            framework = mkSystem ./systems/framework/configuration.nix;
+            install-iso = mkSystem ./systems/install-iso/configuration.nix;
+            the-machine = mkSystem ./systems/the-machine/configuration.nix;
+            vm = mkSystem ./systems/vm/configuration.nix;
+            wsl = mkSystem ./systems/wsl/configuration.nix;
+          }
+          // self.outputs.colmenaHive.nodes;
 
         # See https://github.com/zhaofengli/colmena/pull/228
         colmenaHive = inputs.colmena.lib.makeHive self.outputs.colmena;
