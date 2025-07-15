@@ -78,11 +78,6 @@ in {
         owner = "mastodon";
         group = "mastodon";
       };
-      mastodonOtpSecret = {
-        file = "${inputs.self}/secrets/mastodonOtpSecret.age";
-        owner = "mastodon";
-        group = "mastodon";
-      };
       mastodonVapidPublicKey = {
         file = "${inputs.self}/secrets/mastodonVapidPublicKey.age";
         owner = "mastodon";
@@ -139,7 +134,6 @@ in {
       streamingProcesses = 1;
       sidekiqThreads = 10;
       secretKeyBaseFile = config.age.secrets.mastodonSecretKeyBase.path;
-      otpSecretFile = config.age.secrets.mastodonOtpSecret.path;
       vapidPublicKeyFile = config.age.secrets.mastodonVapidPublicKey.path;
       vapidPrivateKeyFile = config.age.secrets.mastodonVapidPrivateKey.path;
       activeRecordEncryptionPrimaryKeyFile = config.age.secrets.mastodonActiveRecordPrimaryKey.path;

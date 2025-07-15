@@ -108,7 +108,6 @@ in {
 
     environment.systemPackages = [
       cfg.package
-      pkgs.syn2mas
       (pkgs.writeScriptBin "mas-cli-wrapper" ''
         sudo -u ${serviceName} ${cfg.package}/bin/mas-cli --config=${cfg.configFile} --config=${config.age.secrets.masSecretConfig.path} $@
       '')

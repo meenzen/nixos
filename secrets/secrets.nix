@@ -28,7 +28,6 @@ in {
   "mastodonActiveRecordDeterministicKey.age".publicKeys = users ++ mastodon;
   "mastodonActiveRecordSalt.age".publicKeys = users ++ mastodon;
   "mastodonSecretKeyBase.age".publicKeys = users ++ mastodon;
-  "mastodonOtpSecret.age".publicKeys = users ++ mastodon;
   "mastodonVapidPublicKey.age".publicKeys = users ++ mastodon;
   "mastodonVapidPrivateKey.age".publicKeys = users ++ mastodon;
   "mastodonS3Config.age".publicKeys = users ++ mastodon;
