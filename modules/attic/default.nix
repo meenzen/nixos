@@ -23,6 +23,8 @@ in {
       default = "atticd";
       description = "User for Attic";
     };
+    chunking = lib.mkEnableOption "Enable chunking for Attic";
+    cleanup = lib.mkEnableOption "Enable cleanup for Attic";
   };
 
   imports = [
@@ -58,16 +60,25 @@ in {
           endpoint = "https://hel1.your-objectstorage.com";
         };
         chunking = {
-          nar-size-threshold = 512 * 1024; # 512 KiB
+          nar-size-threshold =
+            if cfg.chunking
+            then 512 * 1024 # 512 KiB
+            else 0; # Disable chunking if not enabled
           min-size = 256 * 1024; # 256 KiB
           avg-size = 4 * 1024 * 1024; # 4 MiB
           max-size = 16 * 1024 * 1024; # 16 MiB
         };
         compression.type = "zstd";
-        garbage-collection = {
-          interval = "12 hours";
-          default-retention-period = "6 months";
-        };
+        garbage-collection =
+          if cfg.cleanup
+          then {
+            interval = "1 hour";
+            default-retention-period = "1 hour";
+          }
+          else {
+            interval = "12 hours";
+            default-retention-period = "3 months";
+          };
       };
     };
 
