@@ -13,7 +13,6 @@
       package = pkgs.nginxMainline;
       recommendedGzipSettings = true;
       recommendedBrotliSettings = true;
-      recommendedZstdSettings = true;
       recommendedOptimisation = true;
       recommendedProxySettings = true;
       recommendedTlsSettings = true;
