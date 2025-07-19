@@ -48,4 +48,5 @@
   meenzen.websites."mnzn.dev".enable = true;
   meenzen.services.kener.enable = true;
   meenzen.services.conduit.enable = true;
+  meenzen.services.miniflux.enable = true;
 }

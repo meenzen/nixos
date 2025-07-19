@@ -96,4 +96,7 @@ in {
   # GitLab Runner
   "gitlabRunnerLithiumNix.age".publicKeys = users ++ [lithium];
   "gitlabRunnerLithiumDocker.age".publicKeys = users ++ [lithium];
+
+  # Miniflux
+  "minifluxEnvironment.age".publicKeys = users ++ [neon];
 }
