@@ -9,9 +9,9 @@
   imports = [
     inputs.disko.nixosModules.disko
     ./disko.nix
-
     ./hardware-configuration.nix
     ./networking.nix
+    ./vms.nix
   ];
 
   boot.loader.systemd-boot.enable = true;

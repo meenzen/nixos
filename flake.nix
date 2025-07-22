@@ -24,6 +24,10 @@
       url = "github:nix-community/disko/latest";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    microvm = {
+      url = "github:microvm-nix/microvm.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Home Manager
     home-manager = {
@@ -85,6 +89,11 @@
     in {
       imports = [];
       flake = {
+        nixosModules = rec {
+          meenzen = import ./modules;
+          default = meenzen;
+        };
+
         nixosConfigurations = let
           mkSystem = systemModule: let
             systemConfig = defaultConfig;
@@ -97,7 +106,7 @@
                 inherit inputs systemConfig pkgs-stable;
               };
               modules = [
-                ./modules
+                self.nixosModules.default
                 systemModule
               ];
             };
@@ -132,7 +141,7 @@
 
           defaults = {pkgs, ...}: {
             imports = [
-              ./modules
+              self.nixosModules.meenzen
             ];
             deployment = {
               buildOnTarget = true;
