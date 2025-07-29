@@ -10,6 +10,7 @@
     ./modules/fun
     ./modules/gaming
     ./modules/git
+    ./modules/hyprland
     ./modules/keepass
     ./modules/media-player
     ./modules/neovim

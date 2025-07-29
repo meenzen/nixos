@@ -9,11 +9,25 @@ files=(
   "$HOME/.config/gtk-3.0/settings.ini.backup"
   "$HOME/.config/gtk-3.0/gtk.css.backup"
   "$HOME/.config/kdeglobals"
+  "$HOME/.config/"
+)
+
+dirs=(
+  "$HOME/.config/hypr"
+  "$HOME/.config/hyprpanel"
+  "$HOME/.config/rofi"
 )
 
 for file in "${files[@]}"; do
   if [ -f "$file" ]; then
     echo "Removing $file"
     rm -f "$file"
+  fi
+done
+
+for dir in "${dirs[@]}"; do
+  if [ -d "$dir" ]; then
+    echo "Recursively removing $dir"
+    rm -rf "$dir"
   fi
 done

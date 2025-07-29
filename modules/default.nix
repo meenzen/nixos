@@ -25,6 +25,7 @@
     ./hardware
     ./hetzner
     ./home-manager
+    ./hyprland
     ./latest-kernel
     ./locale
     ./mastodon

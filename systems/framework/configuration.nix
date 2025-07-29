@@ -18,6 +18,7 @@
   boot.initrd.luks.devices."luks-d72b6916-393c-4db9-8194-6d48d1cf5189".device = "/dev/disk/by-uuid/d72b6916-393c-4db9-8194-6d48d1cf5189";
 
   meenzen.desktop.enable = true;
+  meenzen.hyprland.enable = true;
   meenzen.latest-kernel.enable = false;
   meenzen.virtualbox.enable = true;
   meenzen.verapdf.enable = true;
