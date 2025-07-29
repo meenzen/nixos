@@ -9,13 +9,13 @@ files=(
   "$HOME/.config/gtk-3.0/settings.ini.backup"
   "$HOME/.config/gtk-3.0/gtk.css.backup"
   "$HOME/.config/kdeglobals"
-  "$HOME/.config/"
 )
 
 dirs=(
   "$HOME/.config/hypr"
   "$HOME/.config/hyprpanel"
   "$HOME/.config/rofi"
+  "$HOME/.config/fontconfig"
 )
 
 for file in "${files[@]}"; do
