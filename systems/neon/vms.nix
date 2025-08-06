@@ -79,6 +79,8 @@ in {
           vcpu = 8;
           mem = 1024 * 16; # 16 GiB
 
+          vsock.cid = vms.vm-gitlab-runner.id;
+
           # Allow the microvm to write to the nix store
           writableStoreOverlay = "/nix/.rw-store";
 
