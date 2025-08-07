@@ -21,6 +21,7 @@
     ./modules/ssh
     ./modules/starship
     ./modules/system-tools
+    ./modules/virt-manager
     ./modules/wezterm
   ];
 }

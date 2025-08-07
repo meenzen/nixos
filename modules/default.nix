@@ -50,6 +50,7 @@
     ./stylix
     ./users
     ./verapdf
+    ./virt-manager
     ./virtualbox
     ./vpn
     ./websites

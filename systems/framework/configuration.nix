@@ -21,7 +21,7 @@
   meenzen.desktop.enable = true;
   meenzen.hyprland.enable = true;
   meenzen.latest-kernel.enable = false;
-  meenzen.virtualbox.enable = true;
+  meenzen.virt-manager.enable = true;
   meenzen.verapdf.enable = true;
   meenzen.certs.enable = true;
   meenzen.promtail.enable = true;

@@ -62,5 +62,5 @@
     pkgs.fractal
   ];
 
-  meenzen.virtualbox.enable = true;
+  meenzen.virt-manager.enable = true;
 }
