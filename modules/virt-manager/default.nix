@@ -15,5 +15,8 @@ in {
     users.groups.libvirtd.members = [systemConfig.user.username];
     virtualisation.libvirtd.enable = true;
     virtualisation.spiceUSBRedirection.enable = true;
+    networking.firewall.trustedInterfaces = [
+      "virbr0"
+    ];
   };
 }
