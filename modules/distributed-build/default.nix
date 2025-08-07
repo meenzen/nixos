@@ -27,10 +27,18 @@ in {
         sshUser = cfg.user;
         system = "x86_64-linux";
         protocol = "ssh-ng";
-        maxJobs = 2;
+        maxJobs = 4;
         speedFactor = 2;
         supportedFeatures = ["nixos-test" "benchmark" "big-parallel" "kvm"];
-        mandatoryFeatures = [];
+      }
+      {
+        hostName = "mergeatron.human-dev.io";
+        sshUser = cfg.user;
+        system = "x86_64-linux";
+        protocol = "ssh-ng";
+        maxJobs = 4;
+        speedFactor = 2;
+        supportedFeatures = ["nixos-test" "benchmark" "big-parallel" "kvm"];
       }
     ];
     nix.distributedBuilds = true;
