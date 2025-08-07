@@ -15,6 +15,7 @@
     ./cloudflare-warp
     ./collabora
     ./desktop
+    ./distributed-build
     ./docker
     ./fedifetcher
     ./firmware-update

@@ -11,7 +11,7 @@
     ./disko.nix
     ./hardware-configuration.nix
     ./networking.nix
-    ./vms.nix
+    #./vms.nix
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -44,6 +44,7 @@
   meenzen.collabora.enable = true;
   meenzen.cheshbot.enable = true;
   meenzen.attic.enable = true;
+  meenzen.distributed-build.enableHost = true;
   meenzen.mudblazor-docs.enable = true;
   meenzen.websites."mnzn.dev".enable = true;
   meenzen.services.kener.enable = true;
