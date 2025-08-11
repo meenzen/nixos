@@ -4,7 +4,7 @@
   ...
 }: {
   imports = [
-    inputs.nixvim.homeManagerModules.nixvim
+    inputs.nixvim.homeModules.nixvim
     ./completions.nix
     ./eyeliner.nix
     ./git.nix
