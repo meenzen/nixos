@@ -1140,6 +1140,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-review": {
+      "locked": {
+        "lastModified": 1754935627,
+        "narHash": "sha256-5EpeeXY4xvf25mNLvn+OfTWz7UU0+wzONE0AKaYG7iA=",
+        "owner": "yuyuyureka",
+        "repo": "nixpkgs",
+        "rev": "fdb0eabc095eaea147e3ed5e7b3f3499d58f08e0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "yuyuyureka",
+        "ref": "synapse-1-135-1",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-stable": {
       "locked": {
         "lastModified": 1724316499,
@@ -1528,6 +1544,7 @@
         "nixos-hardware": "nixos-hardware",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_9",
+        "nixpkgs-review": "nixpkgs-review",
         "nixpkgs-stable": "nixpkgs-stable_3",
         "nixvim": "nixvim",
         "plasma-manager": "plasma-manager",

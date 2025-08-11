@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs-review.url = "github:yuyuyureka/nixpkgs/synapse-1-135-1";
 
     # Helper Libraries
     nixos-hardware.url = "github:nixos/nixos-hardware";
@@ -100,10 +101,13 @@
             pkgs-stable = import inputs.nixpkgs-stable {
               system = "x86_64-linux";
             };
+            pkgs-review = import inputs.nixpkgs-review {
+              system = "x86_64-linux";
+            };
           in
             inputs.nixpkgs.lib.nixosSystem {
               specialArgs = {
-                inherit inputs systemConfig pkgs-stable;
+                inherit inputs systemConfig pkgs-stable pkgs-review;
               };
               modules = [
                 self.nixosModules.default
@@ -128,13 +132,19 @@
             deployment.targetHost = targetHost;
             imports = [systemModule];
           };
+          pkgs-stable = import inputs.nixpkgs-stable {
+            system = "x86_64-linux";
+          };
+          pkgs-review = import inputs.nixpkgs-review {
+            system = "x86_64-linux";
+          };
         in {
           meta = {
             nixpkgs = import inputs.nixpkgs {
               system = "x86_64-linux";
             };
             specialArgs = {
-              inherit inputs;
+              inherit inputs pkgs-stable pkgs-review;
               systemConfig = defaultConfig;
             };
           };
