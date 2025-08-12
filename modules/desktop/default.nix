@@ -13,6 +13,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     meenzen.adb.enable = true;
+    meenzen.audio.enable = true;
     meenzen.bootloader.enable = true;
     meenzen.docker.enable = true;
     meenzen.fonts.enable = true;
@@ -22,5 +23,22 @@ in {
     meenzen.vpn.enable = true;
     meenzen.yubikey.enable = true;
     meenzen.zsh.enable = true;
+
+    # KDE Partition Manager
+    programs.partition-manager.enable = true;
+
+    environment.systemPackages = [
+      pkgs.kdePackages.filelight
+      pkgs.kdePackages.kruler
+      pkgs.kdePackages.kcolorchooser
+      pkgs.kdePackages.neochat
+      pkgs.kdePackages.kolourpaint
+      pkgs.kdePackages.ghostwriter
+      pkgs.kdePackages.kdenlive
+      pkgs.kdePackages.xwaylandvideobridge
+      pkgs.krita
+      pkgs.xdg-utils
+      pkgs.qpwgraph
+    ];
   };
 }

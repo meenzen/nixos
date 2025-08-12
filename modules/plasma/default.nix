@@ -15,17 +15,6 @@ in {
     # Enable the X11 windowing system.
     services.xserver.enable = true;
 
-    # Enable sound with pipewire.
-    services.pulseaudio.enable = false;
-    security.rtkit.enable = true;
-    services.pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-      #jack.enable = true;
-    };
-
     # Enable Wayland support in Chromium based apps
     # Chromium Wayland is broken, see https://github.com/NixOS/nixpkgs/issues/334175
     #environment.sessionVariables.NIXOS_OZONE_WL = "1";
@@ -44,12 +33,16 @@ in {
       pkgs.kdePackages.baloo
     ];
 
+    # Fix GTK apps in KDE
+    programs.dconf.enable = true;
+
     # Force KDE file picker
     environment.sessionVariables.XDG_CURRENT_DESKTOP = "KDE";
     environment.sessionVariables.GTK_USE_PORTAL = "1";
 
     xdg.portal = {
       enable = true;
+      xdgOpenUsePortal = true;
       extraPortals = [
         pkgs.kdePackages.xdg-desktop-portal-kde
       ];
@@ -57,25 +50,8 @@ in {
 
     environment.systemPackages = [
       pkgs.kdePackages.xdg-desktop-portal-kde
-      pkgs.kdePackages.filelight
-      pkgs.kdePackages.kruler
-      pkgs.kdePackages.kcolorchooser
       pkgs.kdePackages.kdeconnect-kde
-      pkgs.kdePackages.neochat
-      pkgs.kdePackages.kolourpaint
-      pkgs.kdePackages.ghostwriter
-      pkgs.kdePackages.kdenlive
-      pkgs.kdePackages.xwaylandvideobridge
-      pkgs.krita
-      pkgs.xdg-utils
-      pkgs.qpwgraph
     ];
-
-    # fix GTK apps in KDE
-    programs.dconf.enable = true;
-
-    # KDE Partition Manager
-    programs.partition-manager.enable = true;
 
     # KDE Connect Firewall
     networking.firewall = {

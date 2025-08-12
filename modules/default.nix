@@ -3,6 +3,7 @@
     ./adb
     ./agenix
     ./attic
+    ./audio
     ./authentik
     ./backup
     ./basic-packages
