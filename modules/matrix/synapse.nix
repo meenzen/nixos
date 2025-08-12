@@ -11,8 +11,8 @@
   dashboards = pkgs.fetchFromGitHub {
     owner = "element-hq";
     repo = "synapse";
-    rev = "3cabaa84ca7d93d05e32a4f45601567751bb15ed";
-    sha256 = "1r5mcqgqfgpv3wgmqf6jxcj0hrdmaxqgm1wpbxa9nkpyn5pb8dyj";
+    rev = "9135d78b88a429cf0220d6a93bdac7485a3a0f88";
+    hash = "sha256-9nN4sQXCamVi+FRN9++FN5nQmjYZnPKDLxjxEuga6EM=";
   };
 in {
   options.meenzen.matrix.synapse = {
@@ -45,6 +45,27 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    # Testing latest synapse version
+    nixpkgs.overlays = [
+      (
+        final: prev: {
+          matrix-synapse-unwrapped = prev.matrix-synapse-unwrapped.overrideAttrs (oldAttrs: rec {
+            version = "1.136.0";
+            src = prev.fetchFromGitHub {
+              owner = "element-hq";
+              repo = "synapse";
+              rev = "v${version}";
+              hash = "sha256-9nN4sQXCamVi+FRN9++FN5nQmjYZnPKDLxjxEuga6EM=";
+            };
+            cargoDeps = final.rustPlatform.fetchCargoVendor {
+              inherit src;
+              hash = "sha256-GX4lVg6aPVlqFgSSGsUg3wi7bne9jVWPTVx8rO5SjL8=";
+            };
+          });
+        }
+      )
+    ];
+
     age.secrets = {
       synapseConfig = {
         file = "${inputs.self}/secrets/synapseConfig.age";
@@ -73,6 +94,7 @@ in {
         # Security
         allow_guest_access = false;
         enable_registration = false;
+        suppress_key_server_warning = true;
 
         # Endpoints
         listeners = [

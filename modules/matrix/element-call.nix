@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  pkgs-review,
   ...
 }: let
   cfg = config.meenzen.matrix.element-call;
@@ -29,15 +28,6 @@ in {
   config = lib.mkIf cfg.enable {
     meenzen.livekit.enable = true;
     meenzen.lk-jwt-service.enable = true;
-
-    # Testing latest synapse version
-    nixpkgs.overlays = [
-      (
-        final: prev: {
-          matrix-synapse-unwrapped = pkgs-review.matrix-synapse-unwrapped;
-        }
-      )
-    ];
 
     services.matrix-synapse.settings = {
       # The maximum allowed duration by which sent events can be delayed, as
