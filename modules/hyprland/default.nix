@@ -46,7 +46,6 @@ in {
       environment.sessionVariables.GTK_USE_PORTAL = "1";
       xdg.portal = {
         enable = true;
-        xdgOpenUsePortal = true;
         extraPortals = [
           pkgs.xdg-desktop-portal-hyprland
         ];
