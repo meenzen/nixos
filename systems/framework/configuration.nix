@@ -19,7 +19,7 @@
 
   meenzen.distributed-build.enable = true;
   meenzen.desktop.enable = true;
-  meenzen.hyprland.enable = true;
+  meenzen.hyprland.enable = false;
   meenzen.latest-kernel.enable = false;
   meenzen.virt-manager.enable = true;
   meenzen.verapdf.enable = true;

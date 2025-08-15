@@ -1,8 +1,8 @@
 {pkgs, ...}: let
   args = [
     # Chromium Wayland is broken, see https://github.com/NixOS/nixpkgs/issues/334175
-    #"--enable-features=UseOzonePlatform,VaapiVideoDecodeLinuxGL"
-    #"--ozone-platform=wayland"
+    "--enable-features=UseOzonePlatform,VaapiVideoDecodeLinuxGL"
+    "--ozone-platform=wayland"
     "--ignore-gpu-blocklist"
     "--enable-zero-copy"
   ];
