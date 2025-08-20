@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
-    nixpkgs-review.url = "github:yuyuyureka/nixpkgs/synapse-1-135-1";
+    nixpkgs-review.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     # Helper Libraries
     nixos-hardware.url = "github:nixos/nixos-hardware";
