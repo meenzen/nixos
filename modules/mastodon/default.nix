@@ -53,6 +53,9 @@ in {
     };
   };
   config = lib.mkIf cfg.enable {
+    # sudo-rs currently breaks mastodon-tootctl, see https://github.com/NixOS/nixpkgs/issues/435839
+    meenzen.sudo-rs.enable = lib.mkForce false;
+
     nixpkgs.overlays = [
       (
         final: prev: {

@@ -49,6 +49,7 @@
     ./server
     ./services
     ./stylix
+    ./sudo-rs
     ./users
     ./verapdf
     ./virt-manager
