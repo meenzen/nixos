@@ -21,6 +21,7 @@ let
   github = [neon];
   livekit = [neon];
   kener = [neon];
+  forgejo = [neon];
 in {
   # Mastodon
   "mastodonEmailPassword.age".publicKeys = users ++ mastodon;
@@ -99,4 +100,8 @@ in {
 
   # Miniflux
   "minifluxEnvironment.age".publicKeys = users ++ [neon];
+
+  # Forgejo
+  "forgejoS3Key.age".publicKeys = users ++ forgejo;
+  "forgejoS3Secret.age".publicKeys = users ++ forgejo;
 }
