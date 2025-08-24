@@ -56,7 +56,7 @@ in {
           MINIO_BUCKET = "meenzen-forgejo";
           MINIO_LOCATION = "hel1";
           MINIO_USE_SSL = true;
-          SERVE_DIRECT = true;
+          SERVE_DIRECT = false;
         };
       };
       secrets = {
