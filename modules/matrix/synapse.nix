@@ -50,16 +50,16 @@ in {
       (
         final: prev: {
           matrix-synapse-unwrapped = prev.matrix-synapse-unwrapped.overrideAttrs (oldAttrs: rec {
-            version = "1.136.0";
+            version = "1.137.0";
             src = prev.fetchFromGitHub {
               owner = "element-hq";
               repo = "synapse";
               rev = "v${version}";
-              hash = "sha256-9nN4sQXCamVi+FRN9++FN5nQmjYZnPKDLxjxEuga6EM=";
+              hash = "sha256-jnbW1p5JK00Of6XqoDfWs/4SqIztafjkvXUDWhMTm30=";
             };
             cargoDeps = final.rustPlatform.fetchCargoVendor {
               inherit src;
-              hash = "sha256-GX4lVg6aPVlqFgSSGsUg3wi7bne9jVWPTVx8rO5SjL8=";
+              hash = "sha256-qpgDErV1VVzaUHHQX4ReXCPihdrSKI/4HtbDeQIblR8=";
             };
           });
         }

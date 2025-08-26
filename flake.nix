@@ -32,12 +32,15 @@
 
     # Home Manager
     home-manager = {
-      url = "github:nix-community/home-manager/master";
+      url = "github:meenzen/home-manager?ref=fix/breeze-qt5";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Customization
-    stylix.url = "github:danth/stylix";
+    #stylix.url = "github:danth/stylix";
+    # see https://github.com/nix-community/stylix/pull/1866kdePackages.breeze.
+    stylix.url = "github:meenzen/stylix?ref=fix/qt-theme";
+
     nixvim.url = "github:nix-community/nixvim";
     plasma-manager = {
       url = "github:pjones/plasma-manager";
