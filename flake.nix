@@ -62,7 +62,7 @@
 
     # Miscellaneous
     authentik-nix.url = "github:nix-community/authentik-nix";
-    conduit.url = "gitlab:meenzen/conduit?ref=s3-media-storage";
+    conduit.url = "gitlab:famedly/conduit";
     attic.url = "github:meenzen/attic?ref=fix/s3";
   };
 
