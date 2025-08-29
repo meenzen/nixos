@@ -59,6 +59,9 @@ in {
           MINIO_USE_SSL = true;
           SERVE_DIRECT = false;
         };
+        "repository.signing".DEFAULT_TRUST_MODEL = "committer";
+        picture.ENABLE_FEDERATED_AVATAR = true;
+        federation.ENABLED = true;
       };
       secrets = {
         storage = {
