@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   home.packages = [
-    pkgs.discord
-    pkgs.teamspeak_client
+    pkgs.vesktop
     pkgs.mumble
+    #pkgs.teamspeak_client
   ];
 }

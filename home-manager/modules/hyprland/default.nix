@@ -58,7 +58,7 @@
           [
             # programs
             "$mod, B, exec, brave"
-            "$mod, D, exec, discord"
+            "$mod, D, exec, vesktop"
             "$mod, E, exec, $fileManager"
             "$mod, F, exec, firefox"
             "$mod, G, exec, google-chrome-stable"

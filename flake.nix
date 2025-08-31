@@ -32,7 +32,7 @@
 
     # Home Manager
     home-manager = {
-      url = "github:meenzen/home-manager?ref=fix/breeze-qt5";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
