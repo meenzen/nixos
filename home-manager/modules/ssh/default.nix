@@ -10,13 +10,19 @@
 
   programs.ssh = {
     enable = true;
-    compression = true;
-    addKeysToAgent = "yes";
-    controlMaster = "auto";
-    controlPersist = "60m";
+    enableDefaultConfig = false;
 
     # SSH hosts config
     matchBlocks = {
+      "*" = {
+        addKeysToAgent = "yes";
+        compression = true;
+        controlMaster = "auto";
+        controlPath = "~/.ssh/master-%r@%n:%p";
+        controlPersist = "60m";
+        userKnownHostsFile = "~/.ssh/known_hosts";
+      };
+
       "lithium.localdomain" = {
         hostname = "192.168.1.4";
       };
