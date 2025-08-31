@@ -78,19 +78,20 @@ in {
         cd ${cfg.stateDir}
         sudo=exec
         if [[ "$USER" != forgejo ]]; then
-          sudo='exec /run/wrappers/bin/sudo -u ${cfg.user} -g ${cfg.group} --preserve-env=GITEA_WORK_DIR --preserve-env=GITEA_CUSTOM --preserve-env=FORGEJO_WORK_DIR --preserve-env=FORGEJO_CUSTOM'
+          sudo='exec /run/wrappers/bin/sudo -u ${cfg.user} -g ${cfg.group}'
         fi
-        export GITEA_WORK_DIR=${cfg.stateDir}
-        export GITEA_CUSTOM=${cfg.customDir}
-        export FORGEJO_WORK_DIR=${cfg.stateDir}
-        export FORGEJO_CUSTOM=${cfg.customDir}
 
         # if no subcommand is given, use "help" as default so we don't start the server by accident
         if [ $# -eq 0 ]; then
           set -- help
         fi
 
-        $sudo ${lib.getExe cfg.package} "$@"
+        $sudo ${pkgs.coreutils}/bin/env \
+          GITEA_WORK_DIR="${cfg.stateDir}" \
+          GITEA_CUSTOM="${cfg.customDir}" \
+          FORGEJO_WORK_DIR="${cfg.stateDir}" \
+          FORGEJO_CUSTOM="${cfg.customDir}" \
+          ${lib.getExe cfg.package} "$@"
       '';
     in [
       forgejo-wrapper
