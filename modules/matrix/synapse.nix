@@ -32,6 +32,20 @@
     };
     forgotten_room_retention_period = "30d";
   };
+
+  workerConfig = config.services.matrix-synapse-next.workers;
+  workerMetricsPorts = lib.range 1 (
+    workerConfig.federationSenders
+    + workerConfig.federationReceivers
+    + workerConfig.initialSyncers
+    + workerConfig.normalSyncers
+    + workerConfig.eventPersisters
+    + (
+      if workerConfig.useUserDirectoryWorker
+      then 1
+      else 0
+    )
+  );
 in {
   options.meenzen.matrix.synapse = {
     enable = lib.mkEnableOption "Enable Matrix Server";
@@ -92,6 +106,8 @@ in {
         workerStartingPort = 8200;
         metricsStartingPort = 18083;
 
+        enableMetrics = true;
+
         federationSenders = 2;
         federationReceivers = 2;
         initialSyncers = 1;
@@ -99,6 +115,18 @@ in {
         eventPersisters = 2;
         useUserDirectoryWorker = true;
       };
+
+      # Metrics ports used by workers:
+      # ss -ltnp | grep synapse
+      #LISTEN 0      50              127.0.0.1:18084      0.0.0.0:*    users:((".synapse_worker",pid=3005816,fd=14))
+      #LISTEN 0      50              127.0.0.1:18085      0.0.0.0:*    users:((".synapse_worker",pid=3005817,fd=14))
+      #LISTEN 0      50              127.0.0.1:18086      0.0.0.0:*    users:((".synapse_worker",pid=3005827,fd=14))
+      #LISTEN 0      50              127.0.0.1:18087      0.0.0.0:*    users:((".synapse_worker",pid=3005818,fd=14))
+      #LISTEN 0      50              127.0.0.1:18088      0.0.0.0:*    users:((".synapse_worker",pid=3005819,fd=15))
+      #LISTEN 0      50              127.0.0.1:18089      0.0.0.0:*    users:((".synapse_worker",pid=3005820,fd=15))
+      #LISTEN 0      50              127.0.0.1:18090      0.0.0.0:*    users:((".synapse_worker",pid=3005830,fd=14))
+      #LISTEN 0      50              127.0.0.1:18091      0.0.0.0:*    users:((".synapse_worker",pid=3005821,fd=14))
+      #LISTEN 0      50              127.0.0.1:18092      0.0.0.0:*    users:((".synapse_worker",pid=3005829,fd=14))
 
       settings =
         {
@@ -171,15 +199,20 @@ in {
       '';
     };
 
-    # todo: workers metrics
-    services.prometheus.scrapeConfigs = lib.mkIf (!cfg.enableWorkers) [
+    # firewall rule for prometheus scraping
+    #networking.firewall.allowedTCPPorts = lib.mkIf cfg.enableWorkers workerMetricsPorts;
+
+    services.prometheus.scrapeConfigs = [
       {
         job_name = "synapse";
         scrape_interval = "15s";
         metrics_path = "/_synapse/metrics";
         static_configs = [
           {
-            targets = ["[::1]:${toString cfg.port}"];
+            targets =
+              if cfg.enableWorkers
+              then (lib.map (i: "127.0.0.1:" + toString (18083 + i)) workerMetricsPorts)
+              else ["[::1]:${toString cfg.port}"];
             labels = {
               instance = cfg.matrixDomain;
             };
