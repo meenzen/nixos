@@ -102,7 +102,7 @@ in {
             homeserver = config.meenzen.matrix.synapse.domain;
             endpoint =
               if config.meenzen.matrix.synapse.enableWorkers
-              then "https://${config.meenzen.matrix.synapse.domain}"
+              then "https://${config.meenzen.matrix.synapse.matrixDomain}"
               else "http://[::1]:${toString config.meenzen.matrix.synapse.port}";
           };
         };

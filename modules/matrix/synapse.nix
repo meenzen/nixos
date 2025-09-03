@@ -93,6 +93,7 @@ in {
     meenzen.backup.paths = ["/var/lib/matrix-synapse"];
 
     # Synapse with Workers
+    # https://github.com/D4ndellion/nixos-matrix-modules
     services.matrix-synapse-next = lib.mkIf cfg.enableWorkers {
       enable = cfg.enableWorkers;
       enableNginx = cfg.enableWorkers;
@@ -225,16 +226,31 @@ in {
       }
     ];
 
-    services.nginx.virtualHosts."${cfg.matrixDomain}" = lib.mkIf (!cfg.enableWorkers) {
-      enableACME = true;
-      forceSSL = true;
-      locations."/".extraConfig = ''
-        return 404;
-      '';
-      locations."/_matrix".proxyPass = "http://[::1]:${toString cfg.port}";
-      locations."/_synapse/client".proxyPass = "http://[::1]:${toString cfg.port}";
-      locations."/_synapse/admin".proxyPass = "http://[::1]:${toString cfg.port}";
-    };
+    services.nginx.virtualHosts."${cfg.matrixDomain}" =
+      if cfg.enableWorkers
+      then {
+        locations."/_synapse/admin" = {
+          proxyPass = "http://$synapse_backend";
+        };
+        locations."/_synapse/mas" = {
+          proxyPass = "http://$synapse_backend";
+          extraConfig = ''
+            allow 127.0.0.1;
+            allow ::1;
+            deny all;
+          '';
+        };
+      }
+      else {
+        enableACME = true;
+        forceSSL = true;
+        locations."/".extraConfig = ''
+          return 404;
+        '';
+        locations."/_matrix".proxyPass = "http://[::1]:${toString cfg.port}";
+        locations."/_synapse/client".proxyPass = "http://[::1]:${toString cfg.port}";
+        locations."/_synapse/admin".proxyPass = "http://[::1]:${toString cfg.port}";
+      };
 
     services.synapse-auto-compressor = {
       # Not compatible with workers because of a stuped assertion: https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/services/matrix/synapse-auto-compressor.nix#L115
