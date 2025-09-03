@@ -45,27 +45,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    # Testing latest synapse version
-    nixpkgs.overlays = [
-      (
-        final: prev: {
-          matrix-synapse-unwrapped = prev.matrix-synapse-unwrapped.overrideAttrs (oldAttrs: rec {
-            version = "1.137.0";
-            src = prev.fetchFromGitHub {
-              owner = "element-hq";
-              repo = "synapse";
-              rev = "v${version}";
-              hash = "sha256-jnbW1p5JK00Of6XqoDfWs/4SqIztafjkvXUDWhMTm30=";
-            };
-            cargoDeps = final.rustPlatform.fetchCargoVendor {
-              inherit src;
-              hash = "sha256-qpgDErV1VVzaUHHQX4ReXCPihdrSKI/4HtbDeQIblR8=";
-            };
-          });
-        }
-      )
-    ];
-
     age.secrets = {
       synapseConfig = {
         file = "${inputs.self}/secrets/synapseConfig.age";

@@ -38,7 +38,7 @@
 
     # Customization
     #stylix.url = "github:danth/stylix";
-    # see https://github.com/nix-community/stylix/pull/1866kdePackages.breeze.
+    # see https://github.com/nix-community/stylix/pull/1866
     stylix.url = "github:meenzen/stylix?ref=fix/qt-theme";
 
     nixvim.url = "github:nix-community/nixvim";
