@@ -21,5 +21,6 @@ in {
     meenzen.matrix.element-call.enable = true;
     meenzen.matrix.mas.enable = true;
     meenzen.matrix.synapse.enable = true;
+    meenzen.matrix.synapse.enableWorkers = true;
   };
 }

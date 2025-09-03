@@ -14,9 +14,28 @@
     rev = "9135d78b88a429cf0220d6a93bdac7485a3a0f88";
     hash = "sha256-9nN4sQXCamVi+FRN9++FN5nQmjYZnPKDLxjxEuga6EM=";
   };
+
+  synapseSharedSettings = {
+    server_name = cfg.domain;
+    public_baseurl = "https://${cfg.matrixDomain}";
+
+    # Security
+    allow_guest_access = false;
+    enable_registration = false;
+    suppress_key_server_warning = true;
+
+    # Cleanup
+    delete_stale_devices_after = "1y";
+    media_retention = {
+      remote_media_lifetime = "1y";
+      local_media_lifetime = "5y";
+    };
+    forgotten_room_retention_period = "30d";
+  };
 in {
   options.meenzen.matrix.synapse = {
     enable = lib.mkEnableOption "Enable Matrix Server";
+    enableWorkers = lib.mkEnableOption "Enable Synapse Workers";
     domain = lib.mkOption {
       type = lib.types.str;
       default = "mnzn.dev";
@@ -44,6 +63,10 @@ in {
     };
   };
 
+  imports = [
+    inputs.nixos-matrix-modules.nixosModules.default
+  ];
+
   config = lib.mkIf cfg.enable {
     age.secrets = {
       synapseConfig = {
@@ -55,52 +78,84 @@ in {
 
     meenzen.backup.paths = ["/var/lib/matrix-synapse"];
 
-    services.matrix-synapse = {
-      enable = true;
-      withJemalloc = true;
-
-      # No longer needed, use mas-cli instead
-      enableRegistrationScript = false;
+    # Synapse with Workers
+    services.matrix-synapse-next = lib.mkIf cfg.enableWorkers {
+      enable = cfg.enableWorkers;
+      enableNginx = cfg.enableWorkers;
+      package = pkgs.matrix-synapse;
 
       extraConfigFiles = [
         config.age.secrets.synapseConfig.path
       ];
 
-      settings = {
-        server_name = cfg.domain;
-        public_baseurl = "https://${cfg.matrixDomain}";
+      workers = {
+        workerStartingPort = 8200;
+        metricsStartingPort = 18083;
 
-        # Security
-        allow_guest_access = false;
-        enable_registration = false;
-        suppress_key_server_warning = true;
-
-        # Endpoints
-        listeners = [
-          {
-            port = cfg.port;
-            bind_addresses = ["::1"];
-            type = "http";
-            tls = false;
-            x_forwarded = true;
-            resources = [
-              {
-                names = ["client" "federation" "metrics"];
-                compress = true;
-              }
-            ];
-          }
-        ];
-        enable_metrics = true;
-
-        # Cleanup
-        delete_stale_devices_after = "1y";
-        media_retention = {
-          remote_media_lifetime = "1y";
-          local_media_lifetime = "5y";
-        };
-        forgotten_room_retention_period = "30d";
+        federationSenders = 2;
+        federationReceivers = 2;
+        initialSyncers = 1;
+        normalSyncers = 1;
+        eventPersisters = 2;
+        useUserDirectoryWorker = true;
       };
+
+      settings =
+        {
+          database = {
+            name = "psycopg2";
+            args = {
+              host = "/var/run/postgresql";
+              user = "matrix-synapse";
+              password = "synapse";
+              dbname = "matrix-synapse";
+            };
+          };
+          redis = {
+            enabled = true;
+            path = "/var/run/redis-synapse/redis.sock";
+          };
+        }
+        // synapseSharedSettings;
+    };
+    systemd.services.matrix-synapse.serviceConfig.TimeoutStartSec = 600;
+    services.redis.servers.synapse = lib.mkIf cfg.enableWorkers {
+      enable = true;
+      user = serviceName;
+      unixSocket = "/var/run/redis-synapse/redis.sock";
+      unixSocketPerm = 770;
+    };
+
+    # Monolithic Synapse
+    services.matrix-synapse = lib.mkIf (!cfg.enableWorkers) {
+      enable = !cfg.enableWorkers;
+      withJemalloc = true;
+      enable_metrics = true;
+
+      extraConfigFiles = [
+        config.age.secrets.synapseConfig.path
+      ];
+
+      settings =
+        {
+          # Endpoints
+          listeners = [
+            {
+              port = cfg.port;
+              bind_addresses = ["::1"];
+              type = "http";
+              tls = false;
+              x_forwarded = true;
+              resources = [
+                {
+                  names = ["client" "federation" "metrics"];
+                  compress = true;
+                }
+              ];
+            }
+          ];
+        }
+        // synapseSharedSettings;
     };
 
     # todo: make this more reliable
@@ -116,7 +171,8 @@ in {
       '';
     };
 
-    services.prometheus.scrapeConfigs = [
+    # todo: workers metrics
+    services.prometheus.scrapeConfigs = lib.mkIf (!cfg.enableWorkers) [
       {
         job_name = "synapse";
         scrape_interval = "15s";
@@ -139,7 +195,7 @@ in {
       }
     ];
 
-    services.nginx.virtualHosts."${cfg.matrixDomain}" = {
+    services.nginx.virtualHosts."${cfg.matrixDomain}" = lib.mkIf (!cfg.enableWorkers) {
       enableACME = true;
       forceSSL = true;
       locations."/".extraConfig = ''
@@ -151,7 +207,8 @@ in {
     };
 
     services.synapse-auto-compressor = {
-      enable = true;
+      # Not compatible with workers because of a stuped assertion: https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/services/matrix/synapse-auto-compressor.nix#L115
+      enable = !cfg.enableWorkers;
       startAt = "daily";
       settings = {
         chunk_size = cfg.compressorChunkSize;
