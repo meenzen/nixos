@@ -199,9 +199,6 @@ in {
       '';
     };
 
-    # firewall rule for prometheus scraping
-    #networking.firewall.allowedTCPPorts = lib.mkIf cfg.enableWorkers workerMetricsPorts;
-
     services.prometheus.scrapeConfigs = [
       {
         job_name = "synapse";
