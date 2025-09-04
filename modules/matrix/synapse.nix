@@ -147,7 +147,6 @@ in {
         }
         // synapseSharedSettings;
     };
-    systemd.services.matrix-synapse.serviceConfig.TimeoutStartSec = 600;
     services.redis.servers.synapse = lib.mkIf cfg.enableWorkers {
       enable = true;
       user = serviceName;
@@ -205,17 +204,79 @@ in {
         job_name = "synapse";
         scrape_interval = "15s";
         metrics_path = "/_synapse/metrics";
-        static_configs = [
-          {
-            targets =
-              if cfg.enableWorkers
-              then (lib.map (i: "127.0.0.1:" + toString (18083 + i)) workerMetricsPorts)
-              else ["[::1]:${toString cfg.port}"];
-            labels = {
-              instance = cfg.matrixDomain;
+        static_configs =
+          if cfg.enableWorkers
+          then let
+            # Worker Metrics: https://element-hq.github.io/synapse/latest/metrics-howto.html?highlight=metrics#monitoring-workers
+
+            # Helper to find a listener exposing metrics
+            hasMetrics = l: lib.any (r: lib.elem "metrics" r.names) (l.resources or []);
+            mainMetricsListener =
+              lib.findFirst hasMetrics null (config.services.matrix-synapse-next.settings.listeners or []);
+
+            mkTarget = {
+              port,
+              labels,
+            }: {
+              targets = ["127.0.0.1:${toString port}"];
+              inherit labels;
             };
-          }
-        ];
+
+            # todo: fix the master entry, it does not work currently
+            masterEntry =
+              lib.optional (mainMetricsListener != null && mainMetricsListener ? port)
+              (mkTarget {
+                port = mainMetricsListener.port;
+                labels = {
+                  instance = cfg.matrixDomain;
+                  job = "master";
+                  index = 1;
+                };
+              });
+
+            wcfg = config.services.matrix-synapse-next.workers;
+
+            workerList = lib.mapAttrsToList lib.nameValuePair wcfg.instances;
+
+            typeToJob = t:
+              {
+                "fed-sender" = "federation_sender";
+                "fed-receiver" = "federation_receiver";
+                "initial-sync" = "initial_sync";
+                "normal-sync" = "sync";
+                "event-persist" = "event_persist";
+                "user-dir" = "user_dir";
+              }.${
+                t
+              } or t;
+
+            workerEntries =
+              lib.concatMap (
+                w: let
+                  metricsListener =
+                    lib.findFirst hasMetrics null (w.value.settings.worker_listeners or []);
+                in
+                  lib.optional (metricsListener != null && metricsListener ? port)
+                  (mkTarget {
+                    port = metricsListener.port;
+                    labels = {
+                      instance = cfg.matrixDomain;
+                      job = typeToJob w.value.type;
+                      index = toString w.value.index;
+                    };
+                  })
+              )
+              workerList;
+          in
+            masterEntry ++ workerEntries
+          else [
+            {
+              targets = ["[::1]:${toString cfg.port}"];
+              labels = {
+                instance = cfg.matrixDomain;
+              };
+            }
+          ];
       }
     ];
 
