@@ -19,6 +19,19 @@
     server_name = cfg.domain;
     public_baseurl = "https://${cfg.matrixDomain}";
 
+    # General
+    max_upload_size = "100M";
+    media_upload_limits = [
+      {
+        time_period = "24h";
+        max_size = "500M";
+      }
+      {
+        time_period = "28d";
+        max_size = "2G";
+      }
+    ];
+
     # Security
     allow_guest_access = false;
     enable_registration = false;
