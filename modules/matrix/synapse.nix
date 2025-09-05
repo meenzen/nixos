@@ -307,11 +307,6 @@ in {
         };
         locations."/_synapse/mas" = {
           proxyPass = "http://$synapse_backend";
-          extraConfig = ''
-            allow 127.0.0.1;
-            allow ::1;
-            deny all;
-          '';
         };
       }
       else {
