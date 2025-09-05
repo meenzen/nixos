@@ -28,7 +28,7 @@ in {
           # CPUs num: 8
           # Connections num: 200
           # Data Storage: ssd
-          max_connections = 200;
+          max_connections = 500;
           shared_buffers = "4GB";
           effective_cache_size = "12GB";
           maintenance_work_mem = "1GB";

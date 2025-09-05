@@ -208,7 +208,6 @@ in {
           if cfg.enableWorkers
           then let
             # Worker Metrics: https://element-hq.github.io/synapse/latest/metrics-howto.html?highlight=metrics#monitoring-workers
-
             # Helper to find a listener exposing metrics
             hasMetrics = l: lib.any (r: lib.elem "metrics" r.names) (l.resources or []);
             mainMetricsListener =
