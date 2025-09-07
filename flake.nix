@@ -37,9 +37,7 @@
     };
 
     # Customization
-    #stylix.url = "github:danth/stylix";
-    # see https://github.com/nix-community/stylix/pull/1866
-    stylix.url = "github:meenzen/stylix?ref=fix/qt-theme";
+    stylix.url = "github:nix-community/stylix";
 
     nixvim.url = "github:nix-community/nixvim";
     plasma-manager = {
