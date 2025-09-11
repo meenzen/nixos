@@ -40,6 +40,7 @@
       "org.kde.plasma.battery"
     ];
   };
+  meenzen.plymouth.enable = true;
   meenzen.remote-desktop.enable = true;
   services.teamviewer.enable = true;
 }

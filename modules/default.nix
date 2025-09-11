@@ -42,6 +42,7 @@
     ./optimization
     ./overlays
     ./plasma
+    ./plymouth
     ./postgresql
     ./promtail
     ./remote-desktop
