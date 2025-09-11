@@ -49,7 +49,7 @@ in {
       useUserPackages = true;
       backupFileExtension = "backup";
       users."${systemConfig.user.username}" = import cfg.homeModule;
-      sharedModules = [inputs.plasma-manager.homeManagerModules.plasma-manager];
+      sharedModules = [inputs.plasma-manager.homeModules.plasma-manager];
     };
   };
 }
