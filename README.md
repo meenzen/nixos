@@ -9,7 +9,7 @@ Personal NixOS configuration.
 
 ## Hetzner Dedicated Server
 
-This is how to10. 110. tall NixOS on a Hetzner dedicated server using kexec and disko.
+This is how to install NixOS on a Hetzner dedicated server using kexec and disko.
 
 1. Boot the Hetzner rescue system (Linux)
 2. SSH into the rescue system using the provided password
