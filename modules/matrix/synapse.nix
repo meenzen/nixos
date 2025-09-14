@@ -15,6 +15,15 @@
     hash = "sha256-9nN4sQXCamVi+FRN9++FN5nQmjYZnPKDLxjxEuga6EM=";
   };
 
+  synapseOption =
+    if cfg.enableWorkers
+    then config.services.matrix-synapse-next
+    else config.services.matrix-synapse;
+
+  plugins = with synapseOption.package.plugins; [
+    matrix-synapse-s3-storage-provider
+  ];
+
   synapseSharedSettings = {
     server_name = cfg.domain;
     public_baseurl = "https://${cfg.matrixDomain}";
@@ -103,7 +112,7 @@ in {
       };
     };
 
-    meenzen.backup.paths = ["/var/lib/matrix-synapse"];
+    meenzen.backup.paths = [config.services.matrix-synapse.dataDir];
 
     # Synapse with Workers
     # https://github.com/D4ndellion/nixos-matrix-modules
@@ -111,6 +120,7 @@ in {
       enable = cfg.enableWorkers;
       enableNginx = cfg.enableWorkers;
       package = pkgs.matrix-synapse;
+      plugins = plugins;
 
       extraConfigFiles = [
         config.age.secrets.synapseConfig.path
@@ -172,6 +182,7 @@ in {
       enable = !cfg.enableWorkers;
       withJemalloc = true;
       enable_metrics = true;
+      plugins = plugins;
 
       extraConfigFiles = [
         config.age.secrets.synapseConfig.path
@@ -335,14 +346,58 @@ in {
       (
         pkgs.writeScriptBin "matrix-synapse-run-synapse_auto_compressor" ''
           set -eux
-          sudo -u matrix-synapse ${pkgs.rust-synapse-state-compress}/bin/synapse_auto_compressor -p "user=matrix-synapse dbname=matrix-synapse host=/run/postgresql" -c ${toString cfg.compressorChunkSize} -n ${toString cfg.compressorChunksToCompress}
+          sudo -u ${serviceName} ${pkgs.rust-synapse-state-compress}/bin/synapse_auto_compressor -p "user=matrix-synapse dbname=matrix-synapse host=/run/postgresql" -c ${toString cfg.compressorChunkSize} -n ${toString cfg.compressorChunksToCompress}
         ''
       )
       (
         pkgs.writeScriptBin "matrix-synapse-vacuum-full" ''
           set -eux
-          sudo -u matrix-synapse psql -U matrix-synapse -d matrix-synapse -c "VACUUM FULL VERBOSE"
+          sudo -u ${serviceName} psql -U matrix-synapse -d matrix-synapse -c "VACUUM FULL VERBOSE"
         ''
+      )
+      (
+        let
+          command = lib.getExe synapseOption.package.plugins.matrix-synapse-s3-storage-provider;
+          dir = "${config.services.matrix-synapse.dataDir}";
+          mediaDir = "${dir}/media_store";
+          cacheDir = "${dir}/s3_media_upload";
+
+          secretConfig = config.age.secrets.synapseConfig.path;
+          dbConfig = pkgs.writeText "database.yaml" ''
+            user: matrix-synapse
+            database: matrix-synapse
+            host: /var/run/postgresql
+          '';
+        in
+          pkgs.writeScriptBin "matrix-synapse-media-upload" ''
+            set -euo pipefail
+
+            # Elevate to service user if needed
+            TARGET="${serviceName}"
+            USER="$(id -un)"
+            if [ "$USER" != "$TARGET" ]; then
+              echo "Current user is $USER, switching to $TARGET"
+              exec sudo -u "$TARGET" "$0" "$@"
+            fi
+
+            get_property() {
+              local key="$1"
+              grep "$key:" ${secretConfig} | awk '{print $2}'
+            }
+
+            mkdir -p ${cacheDir}
+            cd ${cacheDir}
+            cp -f ${dbConfig} ${cacheDir}/database.yaml
+
+            export S3_BUCKET="$(get_property bucket)"
+            export S3_ENDPOINT="$(get_property endpoint_url)"
+            export AWS_ACCESS_KEY_ID="$(get_property access_key_id)"
+            export AWS_SECRET_ACCESS_KEY="$(get_property secret_access_key)"
+
+            ${command} update-db 7d
+            ${command} check-deleted ${mediaDir}
+            ${command} upload ${mediaDir} $S3_BUCKET --delete --endpoint-url $S3_ENDPOINT
+          ''
       )
     ];
   };
