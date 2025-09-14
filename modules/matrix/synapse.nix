@@ -49,8 +49,10 @@
     # Cleanup
     delete_stale_devices_after = "1y";
     media_retention = {
-      remote_media_lifetime = "1y";
-      local_media_lifetime = "5y";
+      # Media is not cleaned up from s3, see https://github.com/matrix-org/synapse-s3-storage-provider/issues/115
+      # Until this is fixed, there is no reason to enable media retention
+      # remote_media_lifetime = "1y";
+      # local_media_lifetime = "5y";
     };
     forgotten_room_retention_period = "30d";
   };
@@ -68,6 +70,48 @@
       else 0
     )
   );
+
+  mediaUploadScript = let
+    command = lib.getExe synapseOption.package.plugins.matrix-synapse-s3-storage-provider;
+    dir = "${config.services.matrix-synapse.dataDir}";
+    mediaDir = "${dir}/media_store";
+    cacheDir = "${dir}/s3_media_upload";
+
+    secretConfig = config.age.secrets.synapseConfig.path;
+    dbConfig = pkgs.writeText "database.yaml" ''
+      user: matrix-synapse
+      database: matrix-synapse
+      host: /var/run/postgresql
+    '';
+  in (pkgs.writeScriptBin "matrix-synapse-media-upload" ''
+    set -euo pipefail
+
+    # Elevate to service user if needed
+    TARGET="${serviceName}"
+    USER="$(id -un)"
+    if [ "$USER" != "$TARGET" ]; then
+      echo "Current user is $USER, switching to $TARGET"
+      exec sudo -u "$TARGET" "$0" "$@"
+    fi
+
+    get_property() {
+      local key="$1"
+      grep "$key:" ${secretConfig} | ${pkgs.gawk}/bin/awk '{print $2}'
+    }
+
+    mkdir -p ${cacheDir}
+    cd ${cacheDir}
+    cp -f ${dbConfig} ${cacheDir}/database.yaml
+
+    export S3_BUCKET="$(get_property bucket)"
+    export S3_ENDPOINT="$(get_property endpoint_url)"
+    export AWS_ACCESS_KEY_ID="$(get_property access_key_id)"
+    export AWS_SECRET_ACCESS_KEY="$(get_property secret_access_key)"
+
+    ${command} --no-progress update-db ${cfg.s3UploadOlderThan}
+    ${command} --no-progress check-deleted ${mediaDir}
+    ${command} --no-progress upload ${mediaDir} $S3_BUCKET --delete --endpoint-url $S3_ENDPOINT
+  '');
 in {
   options.meenzen.matrix.synapse = {
     enable = lib.mkEnableOption "Enable Matrix Server";
@@ -96,6 +140,11 @@ in {
       type = lib.types.int;
       default = 1000;
       description = "Number of chunks to compress with synapse_auto_compressor";
+    };
+    s3UploadOlderThan = lib.mkOption {
+      type = lib.types.str;
+      default = "1d";
+      description = "Upload media that hasn't been accessed for this duration to S3";
     };
   };
 
@@ -341,8 +390,23 @@ in {
       };
     };
 
+    systemd.services.matrix-synapse-media-upload = {
+      description = "Upload local Synapse media to S3";
+      wants = ["network.target" "postgresql.service"];
+      after = ["network.target" "postgresql.service"];
+      startAt = "hourly";
+      serviceConfig = {
+        Type = "oneshot";
+        User = serviceName;
+        WorkingDirectory = config.services.matrix-synapse.dataDir;
+        # execute using bash, executing the script directly does not work
+        ExecStart = "${pkgs.bash}/bin/bash ${lib.getExe mediaUploadScript}";
+      };
+    };
+
     # Scripts for manual maintenance tasks
     environment.systemPackages = [
+      mediaUploadScript
       (
         pkgs.writeScriptBin "matrix-synapse-run-synapse_auto_compressor" ''
           set -eux
@@ -354,50 +418,6 @@ in {
           set -eux
           sudo -u ${serviceName} psql -U matrix-synapse -d matrix-synapse -c "VACUUM FULL VERBOSE"
         ''
-      )
-      (
-        let
-          command = lib.getExe synapseOption.package.plugins.matrix-synapse-s3-storage-provider;
-          dir = "${config.services.matrix-synapse.dataDir}";
-          mediaDir = "${dir}/media_store";
-          cacheDir = "${dir}/s3_media_upload";
-
-          secretConfig = config.age.secrets.synapseConfig.path;
-          dbConfig = pkgs.writeText "database.yaml" ''
-            user: matrix-synapse
-            database: matrix-synapse
-            host: /var/run/postgresql
-          '';
-        in
-          pkgs.writeScriptBin "matrix-synapse-media-upload" ''
-            set -euo pipefail
-
-            # Elevate to service user if needed
-            TARGET="${serviceName}"
-            USER="$(id -un)"
-            if [ "$USER" != "$TARGET" ]; then
-              echo "Current user is $USER, switching to $TARGET"
-              exec sudo -u "$TARGET" "$0" "$@"
-            fi
-
-            get_property() {
-              local key="$1"
-              grep "$key:" ${secretConfig} | awk '{print $2}'
-            }
-
-            mkdir -p ${cacheDir}
-            cd ${cacheDir}
-            cp -f ${dbConfig} ${cacheDir}/database.yaml
-
-            export S3_BUCKET="$(get_property bucket)"
-            export S3_ENDPOINT="$(get_property endpoint_url)"
-            export AWS_ACCESS_KEY_ID="$(get_property access_key_id)"
-            export AWS_SECRET_ACCESS_KEY="$(get_property secret_access_key)"
-
-            ${command} update-db 7d
-            ${command} check-deleted ${mediaDir}
-            ${command} upload ${mediaDir} $S3_BUCKET --delete --endpoint-url $S3_ENDPOINT
-          ''
       )
     ];
   };
