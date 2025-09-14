@@ -37,6 +37,7 @@ in {
   # Matrix
   "synapseConfig.age".publicKeys = users ++ matrix;
   "masSecretConfig.age".publicKeys = users ++ matrix;
+  "draupnirAccessToken.age".publicKeys = users ++ matrix;
 
   # Conduit
   "conduitEnvironment.age".publicKeys = users ++ matrix;
