@@ -29,6 +29,9 @@ in {
       forgejoS3Secret = {
         file = "${inputs.self}/secrets/forgejoS3Secret.age";
       };
+      forgejoEmailPassword = {
+        file = "${inputs.self}/secrets/forgejoEmailPassword.age";
+      };
     };
 
     meenzen.backup.paths = [config.services.forgejo.stateDir];
@@ -62,12 +65,31 @@ in {
         "repository.signing".DEFAULT_TRUST_MODEL = "committer";
         picture.ENABLE_FEDERATED_AVATAR = true;
         federation.ENABLED = true;
+        mailer = {
+          ENABLED = true;
+          PROTOCOL = "smtp+starttls";
+          SMTP_ADDR = "mail.meenzen.net";
+          SMTP_PORT = 587;
+          USER = "forge@meenzen.net";
+          FROM = "Forgejo <forge@meenzen.net>";
+        };
+        "email.incoming" = {
+          ENABLED = true;
+          REPLY_TO_ADDRESS = "forge+%{token}@meenzen.net";
+          HOST = "mail.meenzen.net";
+          PORT = 993;
+          USERNAME = "forge@meenzen.net";
+          USE_TLS = true;
+          DELETE_HANDLED_MESSAGE = true;
+        };
       };
       secrets = {
         storage = {
           MINIO_ACCESS_KEY_ID = config.age.secrets.forgejoS3Key.path;
           MINIO_SECRET_ACCESS_KEY = config.age.secrets.forgejoS3Secret.path;
         };
+        mailer.PASSWD = config.age.secrets.forgejoEmailPassword.path;
+        "email.incoming".PASSWORD = config.age.secrets.forgejoEmailPassword.path;
       };
     };
 

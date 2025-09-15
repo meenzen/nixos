@@ -106,4 +106,5 @@ in {
   # Forgejo
   "forgejoS3Key.age".publicKeys = users ++ forgejo;
   "forgejoS3Secret.age".publicKeys = users ++ forgejo;
+  "forgejoEmailPassword.age".publicKeys = users ++ forgejo;
 }
