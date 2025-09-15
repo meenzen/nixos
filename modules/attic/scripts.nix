@@ -5,7 +5,7 @@
       pkgs.writeShellApplication {
         name = "attic-login";
         text = ''
-          if [ -z "$1" ]; then
+          if [ -z "''${1-}" ]; then
             echo "Usage: $0 <token>"
             exit 1
           fi
@@ -17,7 +17,7 @@
       pkgs.writeShellApplication {
         name = "attic-push-path";
         text = ''
-          if [ -z "$1" ]; then
+          if [ -z "''${1-}" ]; then
             echo "Usage: $0 <path>"
             echo "Example: $0 \$(which bash)"
             exit 1
