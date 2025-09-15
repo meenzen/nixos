@@ -5,10 +5,10 @@
   inputs,
   ...
 }: let
-  cfg = config.meenzen.gitlab;
+  cfg = config.meenzen.services.gitlab;
   serviceName = "gitlab";
 in {
-  options.meenzen.gitlab = {
+  options.meenzen.services.gitlab = {
     enable = lib.mkEnableOption "Enable GitLab";
     domain = lib.mkOption {
       type = lib.types.str;
@@ -22,7 +22,7 @@ in {
   ];
 
   config = lib.mkIf cfg.enable {
-    meenzen.gitlab.registry.enable = true;
+    meenzen.services.gitlab.registry.enable = true;
 
     age.secrets = {
       gitlabSecret = {

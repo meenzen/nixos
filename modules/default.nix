@@ -22,7 +22,6 @@
     ./firmware-update
     ./fonts
     ./gaming
-    ./gitlab
     ./grafana
     ./hardware
     ./hetzner

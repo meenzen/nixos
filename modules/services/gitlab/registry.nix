@@ -5,7 +5,7 @@
   inputs,
   ...
 }: let
-  cfg = config.meenzen.gitlab.registry;
+  cfg = config.meenzen.services.gitlab.registry;
   serviceName = "docker-registry";
   databaseConfig = {
     enabled = true;
@@ -14,7 +14,7 @@
   };
   registryBin = "${config.services.dockerRegistry.package}/bin/registry";
 in {
-  options.meenzen.gitlab.registry = {
+  options.meenzen.services.gitlab.registry = {
     enable = lib.mkEnableOption "Enable GitLab registry";
     domain = lib.mkOption {
       type = lib.types.str;
