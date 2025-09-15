@@ -54,6 +54,10 @@ in {
           ENABLED = true;
           DEFAULT_ACTIONS_URL = "github";
         };
+        cache = {
+          ADAPTER = "twoqueue";
+          HOST = ''{"size":10000,"recent_ratio":0.25,"ghost_ratio":0.5}'';
+        };
         storage = {
           STORAGE_TYPE = "minio";
           MINIO_ENDPOINT = "hel1.your-objectstorage.com";
