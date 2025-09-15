@@ -73,26 +73,29 @@ in {
 
     environment.systemPackages = let
       cfg = config.services.forgejo;
-      forgejo-wrapper = pkgs.writeScriptBin "forgejo-wrapper" ''
-        #!${pkgs.runtimeShell}
-        cd ${cfg.stateDir}
-        sudo=exec
-        if [[ "$USER" != forgejo ]]; then
-          sudo='exec /run/wrappers/bin/sudo -u ${cfg.user} -g ${cfg.group}'
-        fi
+      forgejo-wrapper = pkgs.writeShellApplication {
+        name = "forgejo-wrapper";
+        runtimeInputs = [pkgs.coreutils];
+        text = ''
+          cd ${cfg.stateDir}
+          sudo="exec"
+          if [[ "$USER" != forgejo ]]; then
+            sudo='exec /run/wrappers/bin/sudo -u ${cfg.user} -g ${cfg.group}'
+          fi
 
-        # if no subcommand is given, use "help" as default so we don't start the server by accident
-        if [ $# -eq 0 ]; then
-          set -- help
-        fi
+          # if no subcommand is given, use "help" as default so we don't start the server by accident
+          if [ $# -eq 0 ]; then
+            set -- help
+          fi
 
-        $sudo ${pkgs.coreutils}/bin/env \
-          GITEA_WORK_DIR="${cfg.stateDir}" \
-          GITEA_CUSTOM="${cfg.customDir}" \
-          FORGEJO_WORK_DIR="${cfg.stateDir}" \
-          FORGEJO_CUSTOM="${cfg.customDir}" \
-          ${lib.getExe cfg.package} "$@"
-      '';
+          $sudo env \
+            GITEA_WORK_DIR="${cfg.stateDir}" \
+            GITEA_CUSTOM="${cfg.customDir}" \
+            FORGEJO_WORK_DIR="${cfg.stateDir}" \
+            FORGEJO_CUSTOM="${cfg.customDir}" \
+            ${lib.getExe cfg.package} "$@"
+        '';
+      };
     in [
       forgejo-wrapper
     ];

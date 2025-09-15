@@ -9,14 +9,23 @@
     pkgs.fortune
     pkgs.sl
     pkgs.bb
-
-    (pkgs.writeScriptBin "ai" ''
-      echo "AI is now enabled!"
-    '')
-    (pkgs.writeScriptBin "llm" ''
-      echo "Generating message..."
-      sleep 1
-      fortune | ponysay
-    '')
+    (
+      pkgs.writeShellApplication {
+        name = "ai";
+        text = ''
+          echo "AI is now enabled!"
+        '';
+      }
+    )
+    (
+      pkgs.writeShellApplication {
+        name = "llm";
+        text = ''
+          echo "Generating message..."
+          sleep 1
+          fortune | ponysay
+        '';
+      }
+    )
   ];
 }

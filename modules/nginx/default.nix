@@ -86,16 +86,27 @@ in {
 
     environment.systemPackages = [
       (
-        pkgs.writeScriptBin "nginx-goaccess" ''
-          set -e
-          ${pkgs.goaccess}/bin/goaccess --log-format=COMBINED /var/log/nginx/access.log /var/log/nginx/access.log.1 $@
-        ''
+        pkgs.writeShellApplication {
+          name = "nginx-goaccess";
+          runtimeInputs = [
+            pkgs.goaccess
+          ];
+          text = ''
+            goaccess --log-format=COMBINED /var/log/nginx/access.log /var/log/nginx/access.log.1 "$@"
+          '';
+        }
       )
       (
-        pkgs.writeScriptBin "nginx-goaccess-all" ''
-          set -e
-          ${pkgs.gzip}/bin/zcat -f /var/log/nginx/access.log.* | ${pkgs.goaccess}/bin/goaccess --log-format=COMBINED /var/log/nginx/access.log $@
-        ''
+        pkgs.writeShellApplication {
+          name = "nginx-goaccess-all";
+          runtimeInputs = [
+            pkgs.goaccess
+            pkgs.gzip
+          ];
+          text = ''
+            zcat -f /var/log/nginx/access.log.* | goaccess --log-format=COMBINED /var/log/nginx/access.log "$@"
+          '';
+        }
       )
     ];
   };

@@ -138,36 +138,37 @@ in {
 
     environment.systemPackages = let
       user = serviceName;
-      mkScript = name: command: (pkgs.writeScriptBin "gitlab-registry-${name}" ''
-        set -euo pipefail
+      mkScript = name: command: (pkgs.writeShellApplication {
+        name = "gitlab-registry-${name}";
+        text = ''
+          # Load env file
+          export_vars=""
+          if [ -f ${config.age.secrets.gitlabRegistryEnvironment.path} ]; then
+            while IFS= read -r line || [[ -n "$line" ]]; do
+              # Skip empty lines and lines starting with #
+              [[ -z "$line" || "$line" == \#* ]] && continue
 
-        # Load env file
-        export_vars=""
-        if [ -f ${config.age.secrets.gitlabRegistryEnvironment.path} ]; then
-          while IFS= read -r line || [[ -n "$line" ]]; do
-            # Skip empty lines and lines starting with #
-            [[ -z "$line" || "$line" == \#* ]] && continue
+              # Split on the first '='
+              key="''${line%%=*}"
+              value="''${line#*=}"
 
-            # Split on the first '='
-            key="''${line%%=*}"
-            value="''${line#*=}"
+              # Trim leading/trailing spaces from key and value
+              key="$(echo -e "''${key}" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+              value="$(echo -e "''${value}" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
 
-            # Trim leading/trailing spaces from key and value
-            key="$(echo -e "''${key}" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
-            value="$(echo -e "''${value}" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+              # Export the variable
+              export "$key=$value"
+              export_vars+=" $key=$value"
+            done < ${config.age.secrets.gitlabRegistryEnvironment.path}
+          fi
 
-            # Export the variable
-            export "$key=$value"
-            export_vars+=" $key=$value"
-          done < ${config.age.secrets.gitlabRegistryEnvironment.path}
-        fi
-
-        if [ $# -eq 0 ]; then
-          sudo -u ${user} env $export_vars ${registryBin} ${command} ${config.services.dockerRegistry.configFile}
-        else
-          sudo -u ${user} env $export_vars ${registryBin} ${command} "$@" ${config.services.dockerRegistry.configFile}
-        fi
-      '');
+          if [ $# -eq 0 ]; then
+            sudo -u ${user} env "$export_vars" ${registryBin} ${command} ${config.services.dockerRegistry.configFile}
+          else
+            sudo -u ${user} env "$export_vars" ${registryBin} ${command} "$@" ${config.services.dockerRegistry.configFile}
+          fi
+        '';
+      });
     in [
       (mkScript "garbage-collect" "garbage-collect")
       (mkScript "database-migrate" "database migrate up")

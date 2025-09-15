@@ -66,11 +66,17 @@ in {
     ];
     environment.systemPackages = [
       pkgs.tmux
-      (pkgs.writeScriptBin "minecraft-console-paper" ''
-        echo "Attaching to server console, press Ctrl+B then D to detach"
-        sleep 3
-        tmux -S /run/minecraft/paper.sock attach
-      '')
+      (
+        pkgs.writeShellApplication {
+          name = "minecraft-console-paper";
+          runtimeInputs = [pkgs.tmux];
+          text = ''
+            echo "Attaching to server console, press Ctrl+B then D to detach"
+            sleep 3
+            tmux -S /run/minecraft/paper.sock attach
+          '';
+        }
+      )
     ];
   };
 }

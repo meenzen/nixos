@@ -83,35 +83,45 @@
       database: matrix-synapse
       host: /var/run/postgresql
     '';
-  in (pkgs.writeScriptBin "matrix-synapse-media-upload" ''
-    set -euo pipefail
+  in (pkgs.writeShellApplication {
+    name = "matrix-synapse-media-upload";
+    text = ''
+      # Elevate to service user if needed
+      TARGET="${serviceName}"
+      USER="$(id -un)"
+      if [ "$USER" != "$TARGET" ]; then
+        echo "Current user is $USER, switching to $TARGET"
+        exec sudo -u "$TARGET" "$0" "$@"
+      fi
 
-    # Elevate to service user if needed
-    TARGET="${serviceName}"
-    USER="$(id -un)"
-    if [ "$USER" != "$TARGET" ]; then
-      echo "Current user is $USER, switching to $TARGET"
-      exec sudo -u "$TARGET" "$0" "$@"
-    fi
+      get_property() {
+        local key="$1"
+        grep "$key:" ${secretConfig} | ${pkgs.gawk}/bin/awk '{print $2}'
+      }
 
-    get_property() {
-      local key="$1"
-      grep "$key:" ${secretConfig} | ${pkgs.gawk}/bin/awk '{print $2}'
-    }
+      mkdir -p ${cacheDir}
+      cd ${cacheDir}
+      cp -f ${dbConfig} ${cacheDir}/database.yaml
 
-    mkdir -p ${cacheDir}
-    cd ${cacheDir}
-    cp -f ${dbConfig} ${cacheDir}/database.yaml
+      S3_BUCKET="$(get_property bucket)"
+      export S3_BUCKET
 
-    export S3_BUCKET="$(get_property bucket)"
-    export S3_ENDPOINT="$(get_property endpoint_url)"
-    export AWS_ACCESS_KEY_ID="$(get_property access_key_id)"
-    export AWS_SECRET_ACCESS_KEY="$(get_property secret_access_key)"
+      S3_ENDPOINT="$(get_property endpoint_url)"
+      export S3_ENDPOINT
 
-    ${command} --no-progress update-db ${cfg.s3UploadOlderThan}
-    ${command} --no-progress check-deleted ${mediaDir}
-    ${command} --no-progress upload ${mediaDir} $S3_BUCKET --delete --endpoint-url $S3_ENDPOINT
-  '');
+      AWS_ACCESS_KEY_ID="$(get_property access_key_id)"
+      export AWS_ACCESS_KEY_ID
+
+      AWS_SECRET_ACCESS_KEY="$(get_property secret_access_key)"
+      export AWS_SECRET_ACCESS_KEY
+
+      set -x
+
+      ${command} "$@" update-db "${cfg.s3UploadOlderThan}"
+      ${command} "$@" check-deleted "${mediaDir}"
+      ${command} "$@" upload "${mediaDir}" "$S3_BUCKET" --delete --endpoint-url "$S3_ENDPOINT"
+    '';
+  });
 in {
   options.meenzen.matrix.synapse = {
     enable = lib.mkEnableOption "Enable Matrix Server";
@@ -400,7 +410,7 @@ in {
         User = serviceName;
         WorkingDirectory = config.services.matrix-synapse.dataDir;
         # execute using bash, executing the script directly does not work
-        ExecStart = "${pkgs.bash}/bin/bash ${lib.getExe mediaUploadScript}";
+        ExecStart = "${pkgs.bash}/bin/bash ${lib.getExe mediaUploadScript} --no-progress";
       };
     };
 
@@ -408,16 +418,25 @@ in {
     environment.systemPackages = [
       mediaUploadScript
       (
-        pkgs.writeScriptBin "matrix-synapse-run-synapse_auto_compressor" ''
-          set -eux
-          sudo -u ${serviceName} ${pkgs.rust-synapse-state-compress}/bin/synapse_auto_compressor -p "user=matrix-synapse dbname=matrix-synapse host=/run/postgresql" -c ${toString cfg.compressorChunkSize} -n ${toString cfg.compressorChunksToCompress}
-        ''
+        pkgs.writeShellApplication {
+          name = "matrix-synapse-compress-state";
+          runtimeInputs = [
+            pkgs.rust-synapse-state-compress
+          ];
+          text = ''
+            set -x
+            sudo -u ${serviceName} synapse_auto_compressor -p "user=matrix-synapse dbname=matrix-synapse host=/run/postgresql" -c ${toString cfg.compressorChunkSize} -n ${toString cfg.compressorChunksToCompress}
+          '';
+        }
       )
       (
-        pkgs.writeScriptBin "matrix-synapse-vacuum-full" ''
-          set -eux
-          sudo -u ${serviceName} psql -U matrix-synapse -d matrix-synapse -c "VACUUM FULL VERBOSE"
-        ''
+        pkgs.writeShellApplication {
+          name = "matrix-synapse-vacuum-full";
+          text = ''
+            set -x
+            sudo -u ${serviceName} psql -U matrix-synapse -d matrix-synapse -c "VACUUM FULL VERBOSE"
+          '';
+        }
       )
     ];
   };

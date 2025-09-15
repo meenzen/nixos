@@ -111,9 +111,17 @@ in {
 
     environment.systemPackages = [
       cfg.package
-      (pkgs.writeScriptBin "mas-cli-wrapper" ''
-        sudo -u ${serviceName} ${cfg.package}/bin/mas-cli --config=${cfg.configFile} --config=${config.age.secrets.masSecretConfig.path} $@
-      '')
+      (
+        pkgs.writeShellApplication {
+          name = "mas-cli-wrapper";
+          text = ''
+            if [ -z "''${1-}" ]; then
+              set -- --help
+            fi
+            sudo -u ${serviceName} ${cfg.package}/bin/mas-cli --config=${cfg.configFile} --config=${config.age.secrets.masSecretConfig.path} "$@"
+          '';
+        }
+      )
     ];
 
     users.users."${serviceName}" = {
