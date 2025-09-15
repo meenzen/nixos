@@ -86,6 +86,10 @@ in {
           USE_TLS = true;
           DELETE_HANDLED_MESSAGE = true;
         };
+        other = {
+          SHOW_FOOTER_VERSION = false;
+          SHOW_FOOTER_POWERED_BY = false;
+        };
       };
       secrets = {
         storage = {
