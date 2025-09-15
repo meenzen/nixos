@@ -44,6 +44,22 @@
       "nofail"
     ];
   };
+  fileSystems."/bigboi" = {
+    device = "/dev/disk/by-uuid/8cc465c3-eed0-419d-a42c-29e1b0bdf22d";
+    fsType = "btrfs";
+    options = [
+      "defaults"
+      "noatime"
+      "commit=120"
+      "discard=async"
+      "compress-force=zstd:1"
+      "space_cache=v2"
+    ];
+  };
+  services.btrfs.autoScrub.enable = true;
+  environment.systemPackages = [
+    pkgs.compsize
+  ];
 
   meenzen.desktop.enable = true;
   meenzen.remote-desktop.enable = true;
@@ -57,10 +73,6 @@
       "applications:com.heroicgameslauncher.hgl.desktop"
     ];
   };
-
-  environment.systemPackages = [
-    pkgs.fractal
-  ];
 
   meenzen.virt-manager.enable = true;
 }
