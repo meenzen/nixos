@@ -56,6 +56,7 @@ in {
                   {name = "oauth";}
                   {name = "compat";}
                   {name = "graphql";}
+                  {name = "adminapi";}
                 ];
                 binds = [
                   {address = "[::]:${toString cfg.port}";}
