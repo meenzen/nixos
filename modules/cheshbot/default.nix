@@ -42,6 +42,7 @@ in {
         LANG = "en_GB.UTF-8";
         "Serilog__WriteTo__0__Args__formatter" = "Serilog.Formatting.Compact.RenderedCompactJsonFormatter, Serilog.Formatting.Compact";
         "CheshBot__OpenAiModel" = "gpt-4o";
+        ASPNETCORE_FORWARDEDHEADERS_ENABLED = "true";
       };
       environmentFiles = [
         config.age.secrets.cheshbotEnvironment.path
