@@ -16,8 +16,12 @@
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": ["\\.nix$"],
-      "matchStrings": ["image = \\\"(?<depName>.*?)(?::(?<currentValue>.*?))?@?(?<currentDigest>sha256:[a-f0-9]+)?\\\";\\n"],
+      "managerFilePatterns": [
+        "/\\.nix$/"
+      ],
+      "matchStrings": [
+        "image = \\\"(?<depName>.*?)(?::(?<currentValue>.*?))?@?(?<currentDigest>sha256:[a-f0-9]+)?\\\";\\n"
+      ],
       "datasourceTemplate": "docker"
     }
   ]
