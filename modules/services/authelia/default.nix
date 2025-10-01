@@ -101,6 +101,9 @@ in {
               authelia_url = "https://${cfg.domain}";
             }
           ];
+          redis = {
+            host = "/var/run/redis-${user}/redis.sock";
+          };
         };
         server = {
           address = "tcp://:${toString cfg.port}/";
@@ -113,6 +116,13 @@ in {
           };
         };
       };
+    };
+
+    services.redis.servers."${user}" = {
+      enable = true;
+      user = user;
+      unixSocket = "/var/run/redis-${user}/redis.sock";
+      unixSocketPerm = 770;
     };
 
     meenzen.postgresql.enable = true;
