@@ -86,6 +86,11 @@ in {
         };
         authentication_backend = {
           file = {
+            watch = true;
+            search = {
+              email = true;
+              case_insensitive = true;
+            };
             path = "${directory}/users.yml";
           };
         };
