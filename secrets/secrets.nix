@@ -11,7 +11,6 @@ let
   servers = [neon lithium];
   mastodon = [neon];
   matrix = [neon];
-  authentik = [neon];
   restic = [neon];
   gitlab = [neon];
   collabora = [neon];
@@ -43,9 +42,6 @@ in {
 
   # Conduit
   "conduitEnvironment.age".publicKeys = users ++ matrix;
-
-  # Authentik
-  "authentikEnvironment.age".publicKeys = users ++ authentik;
 
   # Restic
   "resticEnv.age".publicKeys = users ++ restic;

@@ -59,7 +59,6 @@
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
 
     # Miscellaneous
-    authentik-nix.url = "github:nix-community/authentik-nix";
     conduit.url = "gitlab:famedly/conduit";
     attic.url = "github:meenzen/attic?ref=fix/s3";
     nixos-matrix-modules.url = "github:D4ndellion/nixos-matrix-modules";
