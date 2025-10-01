@@ -22,6 +22,7 @@ let
   livekit = [neon];
   kener = [neon];
   forgejo = [neon];
+  authelia = [neon];
 in {
   # Mastodon
   "mastodonEmailPassword.age".publicKeys = users ++ mastodon;
@@ -107,4 +108,13 @@ in {
   "forgejoS3Key.age".publicKeys = users ++ forgejo;
   "forgejoS3Secret.age".publicKeys = users ++ forgejo;
   "forgejoEmailPassword.age".publicKeys = users ++ forgejo;
+
+  # Authelia
+  "autheliaStorageEncryptionKey.age".publicKeys = users ++ authelia;
+  "autheliaSessionSecret.age".publicKeys = users ++ authelia;
+  "autheliaOidcIssuerPrivateKey.age".publicKeys = users ++ authelia;
+  "autheliaOidcHmacSecret.age".publicKeys = users ++ authelia;
+  "autheliaJwtSecret.age".publicKeys = users ++ authelia;
+  "autheliaEmailConfiguration.age".publicKeys = users ++ authelia;
+  "autheliaOidcClientConfiguration.age".publicKeys = users ++ authelia;
 }

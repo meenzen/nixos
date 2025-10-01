@@ -1,5 +1,6 @@
 {
   imports = [
+    ./authelia
     ./conduit
     ./forgejo
     ./gitlab

@@ -50,4 +50,5 @@
   meenzen.services.conduit.enable = true;
   meenzen.services.miniflux.enable = true;
   meenzen.services.forgejo.enable = true;
+  meenzen.services.authelia.enable = true;
 }
