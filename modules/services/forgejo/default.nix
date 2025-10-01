@@ -48,8 +48,6 @@ in {
           HTTP_PORT = cfg.port;
         };
         session.COOKIE_SECURE = true;
-        # disable registration, create users using the cli
-        service.DISABLE_REGISTRATION = true;
         actions = {
           ENABLED = true;
           DEFAULT_ACTIONS_URL = "github";
@@ -89,6 +87,18 @@ in {
         other = {
           SHOW_FOOTER_VERSION = false;
           SHOW_FOOTER_POWERED_BY = false;
+        };
+
+        # Authelia OIDC
+        openid = {
+          ENABLE_OPENID_SIGNIN = false;
+          ENABLE_OPENID_SIGNUP = true;
+          WHITELISTED_URIS = "login.mnzn.dev";
+        };
+        service = {
+          DISABLE_REGISTRATION = false;
+          ALLOW_ONLY_EXTERNAL_REGISTRATION = true;
+          SHOW_REGISTRATION_BUTTON = false;
         };
       };
       secrets = {
