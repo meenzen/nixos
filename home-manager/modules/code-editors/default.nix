@@ -1,5 +1,6 @@
 {
   pkgs,
+  pkgs-review,
   inputs,
   ...
 }: let
@@ -20,9 +21,10 @@ in {
 
     #pkgs.jetbrains-toolbox
 
-    (mkIde pkgs.jetbrains.rider)
-    (mkIde pkgs.jetbrains.rust-rover)
-    (mkIde pkgs.jetbrains.webstorm)
+    # https://github.com/NixOS/nixpkgs/pull/449437
+    (mkIde pkgs-review.jetbrains.rider)
+    (mkIde pkgs-review.jetbrains.rust-rover)
+    (mkIde pkgs-review.jetbrains.webstorm)
   ];
 
   home.file.".ideavimrc".text = ''

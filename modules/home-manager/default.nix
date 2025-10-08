@@ -1,5 +1,6 @@
 {
   config,
+  pkgs-review,
   lib,
   inputs,
   outputs,
@@ -42,7 +43,7 @@ in {
   config = lib.mkIf cfg.enable {
     home-manager = {
       extraSpecialArgs = {
-        inherit inputs outputs systemConfig;
+        inherit inputs outputs systemConfig pkgs-review;
         extraConfig = cfg.extraConfig;
       };
       useGlobalPkgs = true;

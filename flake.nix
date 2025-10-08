@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
-    nixpkgs-review.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs-review.url = "github:nixos/nixpkgs/master";
 
     # Helper Libraries
     nixos-hardware.url = "github:nixos/nixos-hardware";
@@ -101,9 +101,11 @@
             systemConfig = defaultConfig;
             pkgs-stable = import inputs.nixpkgs-stable {
               system = "x86_64-linux";
+              config.allowUnfree = true;
             };
             pkgs-review = import inputs.nixpkgs-review {
               system = "x86_64-linux";
+              config.allowUnfree = true;
             };
           in
             inputs.nixpkgs.lib.nixosSystem {
@@ -135,9 +137,11 @@
           };
           pkgs-stable = import inputs.nixpkgs-stable {
             system = "x86_64-linux";
+            config.allowUnfree = true;
           };
           pkgs-review = import inputs.nixpkgs-review {
             system = "x86_64-linux";
+            config.allowUnfree = true;
           };
         in {
           meta = {
