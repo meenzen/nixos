@@ -42,5 +42,6 @@
   };
   meenzen.plymouth.enable = true;
   meenzen.remote-desktop.enable = true;
+  meenzen.winboat.enable = true;
   services.teamviewer.enable = true;
 }

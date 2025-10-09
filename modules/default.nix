@@ -55,6 +55,7 @@
     ./virtualbox
     ./vpn
     ./websites
+    ./winboat
     ./workarounds
     ./yubikey
     ./zsh
