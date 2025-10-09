@@ -18,6 +18,7 @@ in {
     # Editors
     pkgs.vscode
     pkgs.kdePackages.kate
+    pkgs.msedit
 
     #pkgs.jetbrains-toolbox
 
