@@ -1,7 +1,6 @@
 {
   lib,
   pkgs,
-  pkgs-review,
   ...
 }: {
   nixpkgs.overlays = [
@@ -20,25 +19,6 @@
           inherit src;
           hash = "sha256-LzlyrKaRjUo6JnVLQnHidtI4OWa+GrhAc4D8RkL+nmQ=";
         };
-      });
-    })
-
-    (final: prev: {
-      # https://github.com/NixOS/nixpkgs/pull/449133
-      intel-graphics-compiler = pkgs-review.intel-graphics-compiler;
-      # https://github.com/NixOS/nixpkgs/pull/449515
-      fw-ectool = pkgs-review.fw-ectool;
-      # https://github.com/NixOS/nixpkgs/pull/449551
-      ltrace = prev.ltrace.overrideAttrs (oldAttrs: {
-        patches =
-          (oldAttrs.patches or [])
-          ++ [
-            (pkgs.fetchpatch {
-              name = "ltrace-0.7.3-print-test-pie.patch";
-              url = "https://raw.githubusercontent.com/gentoo/gentoo/refs/heads/master/dev-debug/ltrace/files/ltrace-0.7.3-print-test-pie.patch";
-              hash = "sha256-rUafTv13a4vS/yNIVRMbm5zwWTVTqMmFgmnS/XtPfdE=";
-            })
-          ];
       });
     })
   ];
