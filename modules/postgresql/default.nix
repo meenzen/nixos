@@ -18,7 +18,7 @@ in {
     services.postgresql =
       {
         enable = true;
-        package = pkgs.postgresql_17;
+        package = pkgs.postgresql_18;
         settings = {
           # https://pgtune.leopard.in.ua/
           # DB Version: 17
@@ -64,12 +64,12 @@ in {
     };
     meenzen.backup.paths = [config.services.postgresqlBackup.location];
 
-    # Major Upgrade Docs: https://nixos.org/manual/nixos/stable/#module-services-postgres-upgrading
+    # Major Upgrade Docs: https://nixos.org/manual/nixos/unstable/#module-services-postgres-upgrading
     environment.systemPackages = lib.mkIf cfg.enableMajorUpgrade [
       (let
         # Specify the postgresql package you'd like to upgrade to.
         # Do not forget to list the extensions you need.
-        newPostgres = pkgs.postgresql_17;
+        newPostgres = pkgs.postgresql_18;
       in
         pkgs.writeShellApplication {
           name = "postgres-upgrade-cluster";
@@ -83,6 +83,16 @@ in {
 
             export OLDDATA="${config.services.postgresql.dataDir}"
             export OLDBIN="${config.services.postgresql.package}/bin"
+
+            # Enable checksums
+            echo "You can enable checksums using this command: 'sudo -u postgres $OLDBIN/pg_checksums --pgdata=\"$OLDDATA\" --enable --progress --verbose'"
+
+            read -p "This will upgrade the postgresql cluster in $OLDDATA to ${newPostgres.version} and store the new cluster in $NEWDATA. Do you want to continue? (y/N) " -n 1 -r
+            echo
+            if [[ ! $REPLY =~ ^[Yy]$ ]]
+            then
+                exit 1
+            fi
 
             install -d -m 0700 -o postgres -g postgres "$NEWDATA"
             cd "$NEWDATA"
