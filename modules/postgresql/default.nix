@@ -20,6 +20,9 @@ in {
         enable = true;
         package = pkgs.postgresql_18;
         settings = {
+          # Make it go fast
+          io_method = "io_uring";
+
           # https://pgtune.leopard.in.ua/
           # DB Version: 17
           # OS Type: linux
