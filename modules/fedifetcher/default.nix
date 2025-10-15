@@ -21,7 +21,10 @@ in {
       description = "FediFetcher";
       wants = ["mastodon-web.service"];
       after = ["mastodon-web.service"];
-      startAt = "*-*-* *:*:00";
+
+      # every 10 minutes
+      startAt = "*:0/10";
+
       serviceConfig = {
         Type = "oneshot";
         DynamicUser = true;
