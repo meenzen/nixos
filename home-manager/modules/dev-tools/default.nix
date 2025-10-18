@@ -28,5 +28,9 @@ in {
     pkgs.gh
     pkgs.glab
     pkgs.nixpkgs-review
+
+    # Kubernetes
+    pkgs.kubectl
+    (pkgs.callPackage ./cloudfleet.nix {})
   ];
 }
