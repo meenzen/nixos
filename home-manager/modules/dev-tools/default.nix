@@ -31,6 +31,7 @@ in {
 
     # Kubernetes
     pkgs.kubectl
+    pkgs.kubernetes-helm
     (pkgs.callPackage ./cloudfleet.nix {})
   ];
 }
