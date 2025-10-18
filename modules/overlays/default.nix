@@ -21,5 +21,19 @@
         };
       });
     })
+
+    # update https://github.com/NixOS/nixpkgs/pull/448969
+    (final: prev: {
+      argocd-autopilot = prev.argocd-autopilot.overrideAttrs (oldAttrs: rec {
+        version = "0.4.20";
+        src = prev.fetchFromGitHub {
+          owner = "argoproj-labs";
+          repo = "argocd-autopilot";
+          rev = "v${version}";
+          sha256 = "sha256-JLh41ZWiDcDrUtd8d+Ak5TFca4L6VHzUguS55P9lmj0=";
+        };
+        vendorHash = "sha256-Ur0BfIg4lZakjx01UOL4n5/O1yjTJJcGuDxWVDqUOyY=";
+      });
+    })
   ];
 }

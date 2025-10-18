@@ -32,6 +32,7 @@ in {
     # Kubernetes
     pkgs.kubectl
     pkgs.kubernetes-helm
+    pkgs.argocd-autopilot
     (pkgs.callPackage ./cloudfleet.nix {})
   ];
 }
