@@ -24,12 +24,12 @@ in {
           io_method = "io_uring";
 
           # https://pgtune.leopard.in.ua/
-          # DB Version: 17
+          # DB Version: 18
           # OS Type: linux
           # DB Type: web
           # Total Memory (RAM): 16 GB
           # CPUs num: 8
-          # Connections num: 200
+          # Connections num: 500
           # Data Storage: ssd
           max_connections = 500;
           shared_buffers = "4GB";
@@ -40,7 +40,7 @@ in {
           default_statistics_target = 100;
           random_page_cost = 1.1;
           effective_io_concurrency = 200;
-          work_mem = "20164kB";
+          work_mem = "8256kB";
           huge_pages = "off";
           min_wal_size = "1GB";
           max_wal_size = "4GB";
