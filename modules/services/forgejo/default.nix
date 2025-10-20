@@ -67,6 +67,7 @@ in {
         "repository.signing".DEFAULT_TRUST_MODEL = "committer";
         picture.ENABLE_FEDERATED_AVATAR = true;
         federation.ENABLED = true;
+        moderation.ENABLED = true;
         mailer = {
           ENABLED = true;
           PROTOCOL = "smtp+starttls";
