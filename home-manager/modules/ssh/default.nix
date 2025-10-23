@@ -16,10 +16,11 @@
     matchBlocks = {
       "*" = {
         addKeysToAgent = "yes";
-        compression = true;
-        controlMaster = "auto";
-        controlPath = "~/.ssh/master-%r@%n:%p";
-        controlPersist = "60m";
+        compression = false;
+        # currently broken
+        #controlMaster = "auto";
+        #controlPath = "~/.ssh/master-%r@%n:%p";
+        #controlPersist = "60m";
         userKnownHostsFile = "~/.ssh/known_hosts";
       };
 

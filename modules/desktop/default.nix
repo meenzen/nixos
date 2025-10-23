@@ -20,7 +20,7 @@ in {
     meenzen.home-manager.enable = true;
     meenzen.plasma.enable = true;
     meenzen.stylix.enable = true;
-    meenzen.vpn.enable = true;
+    meenzen.vpn.enable = false;
     meenzen.yubikey.enable = true;
     meenzen.zsh.enable = true;
 
