@@ -31,7 +31,6 @@ in {
       pkgs.kdePackages.filelight
       pkgs.kdePackages.kruler
       pkgs.kdePackages.kcolorchooser
-      pkgs.kdePackages.neochat
       pkgs.kdePackages.kolourpaint
       pkgs.kdePackages.ghostwriter
       pkgs.kdePackages.kdenlive
