@@ -35,7 +35,6 @@ in {
       pkgs.kdePackages.kolourpaint
       pkgs.kdePackages.ghostwriter
       pkgs.kdePackages.kdenlive
-      pkgs.kdePackages.xwaylandvideobridge
       pkgs.krita
       pkgs.xdg-utils
       pkgs.qpwgraph
