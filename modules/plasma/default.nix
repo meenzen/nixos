@@ -20,7 +20,7 @@ in {
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
     # Enable CUPS
-    services.printing.enable = true;
+    #services.printing.enable = true;
 
     # KDE Plasma Desktop
     services.displayManager.sddm.enable = true;
