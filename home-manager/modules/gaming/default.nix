@@ -10,7 +10,7 @@
 
   home.packages = [
     pkgs.prismlauncher
-    pkgs.chiaki-ng
+    #pkgs.chiaki-ng
   ];
 
   programs.obs-studio = {
