@@ -11,12 +11,6 @@
     ./hardware-configuration.nix
   ];
 
-  # temporary infinite recursion fix: https://github.com/NixOS/nixos-hardware/issues/1655
-  hardware.framework.enableKmod = false;
-  boot.extraModulePackages = with config.boot.kernelPackages; [
-    framework-laptop-kmod
-  ];
-
   system.stateVersion = "23.11";
   networking.hostName = "framework";
   networking.networkmanager.enable = true;
