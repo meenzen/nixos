@@ -20,7 +20,7 @@
     pkgs.ncdu
 
     # gpu related tools
-    pkgs.glxinfo
+    pkgs.mesa-demos
     pkgs.vulkan-tools
     pkgs.gpu-viewer
 

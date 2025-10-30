@@ -23,7 +23,7 @@ in {
     # Install WinBoat and dependencies
     environment.systemPackages = with pkgs; [
       inputs.winboat.packages.x86_64-linux.winboat
-      freerdp3
+      freerdp
       docker-compose
       iptables
     ];

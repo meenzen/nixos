@@ -54,11 +54,10 @@ in {
         pkgs.noto-fonts
         pkgs.noto-fonts-cjk-sans
         pkgs.noto-fonts-color-emoji
-        pkgs.noto-fonts-emoji
 
         # microsoft fonts
         pkgs.corefonts
-        pkgs.vistafonts
+        pkgs.vista-fonts
       ];
       fontconfig = {
         antialias = true;
