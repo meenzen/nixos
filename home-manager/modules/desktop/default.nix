@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   home.packages = [
     pkgs.onedrive
+    pkgs.motrix # download manager
   ];
   services.nextcloud-client.enable = true;
   programs.thunderbird = {
