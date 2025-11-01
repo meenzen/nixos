@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  inputs,
   ...
 }: let
   cfg = config.meenzen.winboat;
@@ -22,7 +21,7 @@ in {
 
     # Install WinBoat and dependencies
     environment.systemPackages = with pkgs; [
-      inputs.winboat.packages.x86_64-linux.winboat
+      winboat
       freerdp
       docker-compose
       iptables
