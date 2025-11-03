@@ -421,7 +421,7 @@ in {
         pkgs.writeShellApplication {
           name = "matrix-synapse-compress-state";
           runtimeInputs = [
-            pkgs.rust-synapse-state-compress
+            pkgs.rust-synapse-compress-state
           ];
           text = ''
             set -x
