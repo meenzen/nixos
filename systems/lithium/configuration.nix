@@ -33,7 +33,7 @@
     };
   };
   meenzen.services.gitlab-runner = {
-    enable = true;
+    enable = false;
     enableHardwareAcceleration = true;
     concurrency = 8;
     cleanupSchedule = "weekly";
