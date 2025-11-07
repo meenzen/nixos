@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  config,
   ...
 }: {
   # cloudflared is required for tunneling through Cloudflare Zero Trust
@@ -8,19 +9,28 @@
 
   services.ssh-agent.enable = true;
 
+  # fix https://github.com/nix-community/home-manager/issues/8129
+  home.sessionVariablesExtra = ''
+    if [ -z "$SSH_AUTH_SOCK" ]; then
+      export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/${config.services.ssh-agent.socket}
+    fi
+  '';
+
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
+
+    # temporary workaround https://github.com/NixOS/nixpkgs/issues/456221#issuecomment-3452733065
+    package = pkgs.openssh_10_2;
 
     # SSH hosts config
     matchBlocks = {
       "*" = {
         addKeysToAgent = "yes";
         compression = false;
-        # currently broken
-        #controlMaster = "auto";
-        #controlPath = "~/.ssh/master-%r@%n:%p";
-        #controlPersist = "60m";
+        controlMaster = "auto";
+        controlPath = "~/.ssh/master-%r@%n:%p";
+        controlPersist = "60m";
         userKnownHostsFile = "~/.ssh/known_hosts";
       };
 

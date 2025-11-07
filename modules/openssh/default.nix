@@ -1,4 +1,8 @@
-{systemConfig, ...}: {
+{
+  systemConfig,
+  pkgs,
+  ...
+}: {
   services.openssh = {
     enable = true;
     openFirewall = true;
@@ -21,4 +25,7 @@
       "192.168.0.0/16"
     ];
   };
+
+  # temporary workaround https://github.com/NixOS/nixpkgs/issues/456221#issuecomment-3452733065
+  programs.ssh.package = pkgs.openssh_10_2;
 }
