@@ -21,6 +21,7 @@ let
   livekit = [neon];
   kener = [neon];
   forgejo = [neon];
+  forgejo-runner = [lithium];
   authelia = [neon];
 in {
   # Mastodon
@@ -104,6 +105,8 @@ in {
   "forgejoS3Key.age".publicKeys = users ++ forgejo;
   "forgejoS3Secret.age".publicKeys = users ++ forgejo;
   "forgejoEmailPassword.age".publicKeys = users ++ forgejo;
+  # Forgejo Runner
+  "forgejoRunnerToken.age".publicKeys = users ++ forgejo-runner;
 
   # Authelia
   "autheliaStorageEncryptionKey.age".publicKeys = users ++ authelia;

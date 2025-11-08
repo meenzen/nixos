@@ -3,6 +3,7 @@
     ./authelia
     ./conduit
     ./forgejo
+    ./forgejo-runner
     ./gitlab
     ./gitlab-runner
     ./kener

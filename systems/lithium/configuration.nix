@@ -40,4 +40,5 @@
     nixRunnerConfigFile = config.age.secrets.gitlabRunnerLithiumNix.path;
     dockerRunnerConfigFile = config.age.secrets.gitlabRunnerLithiumDocker.path;
   };
+  meenzen.services.forgejo-runner.enable = true;
 }
