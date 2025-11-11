@@ -61,6 +61,10 @@ in {
       };
     networking.firewall.allowedTCPPorts = lib.mkIf cfg.enableLocalNetwork [5432];
 
+    # Raise the open file limit for the PostgreSQL service
+    # This is required with io_uring, otherwise 'could not setup io_uring queue: Too many open files' errors may occur
+    systemd.services.postgresql.serviceConfig.LimitNOFILE = 65536;
+
     services.postgresqlBackup = {
       enable = true;
       backupAll = true;
