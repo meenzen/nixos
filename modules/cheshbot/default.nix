@@ -35,7 +35,7 @@ in {
     };
 
     virtualisation.oci-containers.containers."${serviceName}" = {
-      image = "ghcr.io/meenzen/cheshbot:latest@sha256:321b344f334546a56dcd9b6d4e7f8194d6b7c02be22e1d89f21a74c8281652ff";
+      image = "ghcr.io/meenzen/cheshbot:latest@sha256:88b1982a02226c043f30e535ab836ef440fe64e6ddb5d5361beb3bdb71952303";
       ports = ["127.0.0.1:${toString cfg.port}:8080"];
       environment = {
         TZ = "UTC";
