@@ -20,9 +20,6 @@
     enable = true;
     enableDefaultConfig = false;
 
-    # temporary workaround https://github.com/NixOS/nixpkgs/issues/456221#issuecomment-3452733065
-    package = pkgs.openssh_10_2;
-
     # SSH hosts config
     matchBlocks = {
       "*" = {

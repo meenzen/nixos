@@ -20,10 +20,9 @@ in {
     pkgs.msedit
 
     #pkgs.jetbrains-toolbox
-
     (mkIde pkgs.jetbrains.rider)
-    (mkIde pkgs.jetbrains.rust-rover)
-    (mkIde pkgs.jetbrains.webstorm)
+    #(mkIde pkgs.jetbrains.rust-rover)
+    #(mkIde pkgs.jetbrains.webstorm)
   ];
 
   home.file.".ideavimrc".text = ''
