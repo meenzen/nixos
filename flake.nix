@@ -61,7 +61,7 @@
     # Miscellaneous
     conduit.url = "gitlab:famedly/conduit";
     attic.url = "github:meenzen/attic?ref=fix/s3";
-    nixos-matrix-modules.url = "github:D4ndellion/nixos-matrix-modules";
+    nixos-matrix-modules.url = "github:meenzen/nixos-matrix-modules";
   };
 
   outputs = inputs @ {
