@@ -10,7 +10,7 @@
     "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-calamares-plasma6.nix"
   ];
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "25.11";
   networking.hostName = "install-iso";
   networking.networkmanager.enable = true;
   networking.firewall.enable = true;
