@@ -4,6 +4,7 @@
     ./agenix
     ./attic
     ./audio
+    ./auto-upgrade
     ./backup
     ./basic-packages
     ./beeper

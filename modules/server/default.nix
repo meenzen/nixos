@@ -34,5 +34,10 @@ in {
         };
       };
     };
+
+    meenzen.auto-upgrade = {
+      enable = true;
+      allowReboot = true;
+    };
   };
 }
