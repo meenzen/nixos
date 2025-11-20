@@ -42,6 +42,7 @@
   };
   meenzen.plymouth.enable = true;
   meenzen.remote-desktop.enable = true;
-  meenzen.winboat.enable = true;
+  # currently broken https://github.com/NixOS/nixpkgs/issues/462513
+  meenzen.winboat.enable = false;
   services.teamviewer.enable = true;
 }
