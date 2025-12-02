@@ -39,12 +39,13 @@
   # Print diff after rebuild
   system.activationScripts = {
     diff = ''
-      set -eo pipefail
-      source "${inputs.self}/bin/lib.sh"
-      PATH=$PATH:${lib.makeBinPath [pkgs.nix]}
-      print_divider_basic
-      ${pkgs.nvd}/bin/nvd diff /run/current-system "$systemConfig"
-      print_divider_basic
+      if [[ -e /run/current-system ]]; then
+        source "${inputs.self}/bin/lib.sh"
+        PATH=$PATH:${lib.makeBinPath [pkgs.nix]}
+        print_divider_basic
+        ${pkgs.nvd}/bin/nvd diff /run/current-system "$systemConfig" || true
+        print_divider_basic
+      fi
     '';
   };
 }
