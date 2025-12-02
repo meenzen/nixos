@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -eo pipefail
+
+source "$(dirname "$0")/lib.sh"
+
+print_start "Building NixOS Configuration"
+alejandra_format
+
+nixos_rebuild "build" "." "$@"

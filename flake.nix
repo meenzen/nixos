@@ -189,6 +189,8 @@
             pkgs.git
             pkgs.nixVersions.stable
             pkgs.nil
+            pkgs.nom
+            pkgs.nvd
             pkgs.alejandra
             pkgs.uutils-coreutils-noprefix
             inputs'.colmena.packages.colmena

@@ -85,5 +85,16 @@ nixos_rebuild () {
   print_divider
   git add .
   sudo nixos-rebuild $command --upgrade --verbose --flake $hostname $args
+
+  # diff using nvd
+  if [ "$command" = "build" ]; then
+    print_divider_basic
+    nvd diff /run/current-system "$(realpath ./result)"
+  fi
+  if [ "$command" = "boot" ]; then
+    print_divider_basic
+    nvd diff /run/current-system "$(realpath /nix/var/nix/profiles/system)"
+  fi
+
   print_divider
 }
