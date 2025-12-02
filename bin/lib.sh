@@ -41,6 +41,10 @@ print_divider_error () {
   print_divider "" "$COLOR_RED"
 }
 
+print_divider_basic () {
+  print_divider "" "$COLOR_NONE"
+}
+
 prompt_or_exit () {
   echo "$1 [y/N]"
   read -r response

@@ -1,4 +1,9 @@
-{lib, ...}: {
+{
+  lib,
+  pkgs,
+  inputs,
+  ...
+}: {
   nixpkgs = {
     config = {
       # Allow installing unfree packages
@@ -30,4 +35,16 @@
 
   # Enable Flakes
   nix.settings.experimental-features = ["nix-command" "flakes"];
+
+  # Print diff after rebuild
+  system.activationScripts = {
+    diff = ''
+      set -eo pipefail
+      source "${inputs.self}/bin/lib.sh"
+      PATH=$PATH:${lib.makeBinPath [pkgs.nix]}
+      print_divider_basic
+      ${pkgs.nvd}/bin/nvd diff /run/current-system "$systemConfig"
+      print_divider_basic
+    '';
+  };
 }
