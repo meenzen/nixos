@@ -9,6 +9,9 @@ print_start "Optimizing Disk Usage"
 print_status "Running \"nix-collect-garbage\""
 nix-collect-garbage --delete-older-than 7d
 
+print_status "Deleting old system generations"
+sudo nix-env -p /nix/var/nix/profiles/system --delete-generations +5
+
 print_status "Running \"nix-collect-garbage\" as root"
 sudo nix-collect-garbage --delete-older-than 7d
 

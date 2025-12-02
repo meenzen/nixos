@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   # Automatic garbage collection
   nix.gc = {
     automatic = true;
@@ -14,10 +18,7 @@
       pkgs.writeShellApplication {
         name = "cleanup-nix-store";
         text = ''
-          nix-collect-garbage --delete-older-than 7d
-          sudo nix-env -p /nix/var/nix/profiles/system --delete-generations +2
-          sudo nix-collect-garbage --delete-older-than 7d
-          sudo nix-store --optimise
+          ${inputs.self}/bin/optimize
         '';
       }
     )
