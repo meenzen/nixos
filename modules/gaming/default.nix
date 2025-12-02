@@ -53,6 +53,10 @@ in {
       pkgs.mangohud
     ];
 
+    environment.variables = {
+      DXVK_HUD = "compiler";
+    };
+
     programs.steam = {
       enable = true;
       package = pkgs.steam.override {
