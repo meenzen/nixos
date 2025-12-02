@@ -12,7 +12,7 @@ in {
   };
 
   imports = [
-    inputs.nix-citizen.nixosModules.StarCitizen
+    inputs.nix-citizen.nixosModules.default
   ];
 
   config = lib.mkIf cfg.enable {
@@ -25,7 +25,7 @@ in {
     };
 
     # https://github.com/LovingMelody/nix-citizen/tree/main/modules/nixos/star-citizen
-    nix-citizen.starCitizen = {
+    programs.rsi-launcher = {
       enable = true;
       preCommands = ''
         export DXVK_HUD=compiler;
