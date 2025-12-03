@@ -23,4 +23,12 @@
       }
     )
   ];
+
+  # cleanup gc roots
+  services.angrr = {
+    enable = true;
+    period = "2weeks";
+    enableNixGcIntegration = true;
+  };
+  programs.direnv.angrr.autoUse = true;
 }
