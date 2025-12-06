@@ -43,6 +43,7 @@
     ./plasma
     ./plymouth
     ./postgresql
+    ./printing
     ./promtail
     ./remote-desktop
     ./security

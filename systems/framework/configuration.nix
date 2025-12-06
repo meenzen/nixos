@@ -24,7 +24,6 @@
   meenzen.virt-manager.enable = true;
   meenzen.verapdf.enable = true;
   meenzen.certs.enable = true;
-  meenzen.promtail.enable = true;
   meenzen.cloudflare-warp.enable = true;
   meenzen.openfortivpn.enable = true;
   meenzen.beeper.enable = true;
@@ -40,9 +39,9 @@
       "org.kde.plasma.battery"
     ];
   };
+  meenzen.printing.enable = true;
   meenzen.plymouth.enable = true;
   meenzen.remote-desktop.enable = true;
-  # currently broken https://github.com/NixOS/nixpkgs/issues/462513
-  meenzen.winboat.enable = false;
+  meenzen.winboat.enable = true;
   services.teamviewer.enable = true;
 }

@@ -19,9 +19,6 @@ in {
     # Chromium Wayland is broken, see https://github.com/NixOS/nixpkgs/issues/334175
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
-    # Enable CUPS
-    #services.printing.enable = true;
-
     # KDE Plasma Desktop
     services.displayManager.sddm.enable = true;
     services.displayManager.sddm.wayland.enable = true;
