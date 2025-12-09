@@ -11,6 +11,8 @@ in {
     enable = lib.mkEnableOption "Enable Plasma Desktop";
   };
 
+  imports = [./tiling.nix];
+
   config = lib.mkIf cfg.enable {
     # Enable the X11 windowing system.
     services.xserver.enable = true;

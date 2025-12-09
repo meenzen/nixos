@@ -19,5 +19,5 @@
   services.qemuGuest.enable = true;
 
   meenzen.desktop.enable = true;
-  meenzen.desktop.slim = true;
+  meenzen.plasma.tiling.enable = true;
 }

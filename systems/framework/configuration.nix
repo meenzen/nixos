@@ -19,6 +19,7 @@
 
   meenzen.distributed-build.enable = true;
   meenzen.desktop.enable = true;
+  meenzen.plasma.tiling.enable = true;
   meenzen.hyprland.enable = false;
   meenzen.latest-kernel.enable = false;
   meenzen.virt-manager.enable = true;

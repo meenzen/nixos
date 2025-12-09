@@ -7,6 +7,7 @@
     ./fonts.nix
     ./panels.nix
     ./spectacle.nix
+    ./tiling.nix
     ./window-rules.nix
   ];
 
