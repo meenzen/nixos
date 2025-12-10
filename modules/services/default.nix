@@ -8,5 +8,6 @@
     ./gitlab-runner
     ./kener
     ./miniflux
+    ./mnzn-website
   ];
 }

@@ -44,10 +44,10 @@
   meenzen.attic.enable = true;
   meenzen.distributed-build.enableHost = true;
   meenzen.mudblazor-docs.enable = true;
-  meenzen.websites."mnzn.dev".enable = true;
   meenzen.services.kener.enable = true;
   meenzen.services.conduit.enable = true;
   meenzen.services.miniflux.enable = true;
   meenzen.services.forgejo.enable = true;
   meenzen.services.authelia.enable = true;
+  meenzen.services.mnzn-website.enable = true;
 }

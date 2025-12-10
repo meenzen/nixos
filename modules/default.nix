@@ -56,7 +56,6 @@
     ./virt-manager
     ./virtualbox
     ./vpn
-    ./websites
     ./winboat
     ./workarounds
     ./yubikey
