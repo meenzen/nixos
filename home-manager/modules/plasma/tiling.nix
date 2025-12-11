@@ -159,5 +159,14 @@ in {
         };
       };
     };
+
+    meenzen.plasma.windowRules = {
+      tiling-disable-maximize = {
+        Description = "Disable maximizing to mitigate tiling issues";
+        maximizehorizrule = 2;
+        maximizevertrule = 2;
+        types = 1;
+      };
+    };
   };
 }

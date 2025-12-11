@@ -1,11 +1,12 @@
 {
-  programs.plasma.configFile.kwinrulesrc = {
-    General = {
-      count = 1;
-      rules = "1";
-    };
-
-    "1" = {
+  lib,
+  config,
+  osConfig,
+  ...
+}: let
+  cfg = config.meenzen.plasma.windowRules;
+  defaultRules = {
+    pin-picture-in-picture = {
       Description = "Pin Picture in Picture";
 
       wmclass = "brave";
@@ -24,5 +25,28 @@
       skiptaskbar = true;
       skiptaskbarrule = 2;
     };
+  };
+in {
+  options.meenzen.plasma.windowRules = lib.mkOption {
+    type = lib.types.attrs;
+    default = defaultRules;
+    apply = x: lib.recursiveUpdate defaultRules x;
+    description = ''
+      Define custom window rules for KDE Plasma's KWin window manager.
+      Each rule should be an attribute set with properties corresponding to KWin's window rules.
+      Refer to KWin documentation for available properties.
+    '';
+  };
+
+  config = lib.mkIf osConfig.meenzen.plasma.enable {
+    programs.plasma.configFile.kwinrulesrc =
+      {
+        General = {
+          count = toString (builtins.length (builtins.attrNames cfg));
+          # comma separated list of rule ids
+          rules = builtins.concatStringsSep "," (builtins.attrNames cfg);
+        };
+      }
+      // cfg;
   };
 }
