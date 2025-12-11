@@ -162,9 +162,14 @@ in {
 
     meenzen.plasma.windowRules = {
       tiling-disable-maximize = {
-        Description = "Disable maximizing to mitigate tiling issues";
+        Description = "Disable maximizing to prevent tiling issues";
         maximizehorizrule = 2;
         maximizevertrule = 2;
+        types = 1;
+      };
+      tiling-override-min-size = {
+        Description = "Override minimum window size to prevent tiling issues";
+        minsizerule = 2;
         types = 1;
       };
     };
