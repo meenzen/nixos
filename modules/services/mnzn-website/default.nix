@@ -24,7 +24,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     virtualisation.oci-containers.containers."${serviceName}" = {
-      image = "ghcr.io/meenzen/website:0.1.18@sha256:3366d1cd94aacf96ce9086749a307ef013f59ab7156ec00b304a9e635e7b7e0a";
+      image = "ghcr.io/meenzen/website:0.1.20@sha256:e2411857a67ff51e56f9dc5017393afa5b0c9d8c7c6ccc9013dbf027aa427ccb";
       ports = ["127.0.0.1:${toString cfg.port}:8080"];
       environment = {
         TZ = "UTC";
