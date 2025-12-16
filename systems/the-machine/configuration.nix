@@ -62,6 +62,7 @@
   ];
 
   meenzen.desktop.enable = true;
+  meenzen.plasma.tiling.enable = true;
   meenzen.remote-desktop.enable = true;
   meenzen.hardware.nvidia.enable = true;
   meenzen.hardware.bluetooth.enable = true;
@@ -75,4 +76,5 @@
   };
 
   meenzen.virt-manager.enable = true;
+  meenzen.printing.enable = true;
 }
