@@ -37,7 +37,6 @@
     enable = true;
     enableSearch = true;
   };
-  meenzen.fedifetcher.enable = true;
   meenzen.matrix.enable = true;
   meenzen.collabora.enable = true;
   meenzen.cheshbot.enable = true;

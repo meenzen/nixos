@@ -18,7 +18,6 @@
     ./desktop
     ./distributed-build
     ./docker
-    ./fedifetcher
     ./firmware-update
     ./fonts
     ./gaming
