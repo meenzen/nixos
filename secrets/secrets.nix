@@ -23,6 +23,7 @@ let
   forgejo = [neon];
   forgejo-runner = [lithium];
   authelia = [neon];
+  mnzn-website = [neon];
 in {
   # Mastodon
   "mastodonEmailPassword.age".publicKeys = users ++ mastodon;
@@ -115,4 +116,7 @@ in {
   "autheliaJwtSecret.age".publicKeys = users ++ authelia;
   "autheliaEmailConfiguration.age".publicKeys = users ++ authelia;
   "autheliaOidcClientConfiguration.age".publicKeys = users ++ authelia;
+
+  # mnzn.dev Website
+  "mnznWebsiteEnvironment.age".publicKeys = users ++ mnzn-website;
 }

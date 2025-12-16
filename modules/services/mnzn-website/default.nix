@@ -23,6 +23,11 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    age.secrets = {
+      mnznWebsiteEnvironment = {
+        file = "${inputs.self}/secrets/mnznWebsiteEnvironment.age";
+      };
+    };
     virtualisation.oci-containers.containers."${serviceName}" = {
       image = "ghcr.io/meenzen/website:0.1.28@sha256:2c37d0c8af741509af35637ca151df63850ec60740cd6228acbf2b09e477f92e";
       ports = ["127.0.0.1:${toString cfg.port}:8080"];
@@ -32,6 +37,7 @@ in {
         ASPNETCORE_FORWARDEDHEADERS_ENABLED = "true";
       };
       environmentFiles = [
+        config.age.secrets.mnznWebsiteEnvironment.path
       ];
       extraOptions = [
         "--add-host=host.docker.internal:host-gateway"
