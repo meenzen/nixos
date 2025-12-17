@@ -32,11 +32,10 @@
 
         # virtual desktops
         kwinrc.Desktops.Number = {
-          value = 3;
-          # always force 3 desktops
+          value = 9;
           immutable = true;
         };
-        kwinrc.Desktops.Rows = 1;
+        kwinrc.Desktops.Rows = 3;
 
         # general behavior
         kwinrc.Tiling.padding = 4;
