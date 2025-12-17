@@ -9,13 +9,6 @@
 
   services.ssh-agent.enable = true;
 
-  # fix https://github.com/nix-community/home-manager/issues/8129
-  home.sessionVariablesExtra = ''
-    if [ -z "$SSH_AUTH_SOCK" ]; then
-      export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/${config.services.ssh-agent.socket}
-    fi
-  '';
-
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
