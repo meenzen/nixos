@@ -27,8 +27,28 @@
   # cleanup gc roots
   services.angrr = {
     enable = true;
-    period = "2weeks";
     enableNixGcIntegration = true;
+    settings = {
+      temporary-root-policies = {
+        direnv = {
+          path-regex = "/\\.direnv/";
+          period = "14d";
+        };
+        result = {
+          path-regex = "/result[^/]*$";
+          period = "3d";
+        };
+      };
+      profile-policies = {
+        system = {
+          profile-paths = ["/nix/var/nix/profiles/system"];
+          keep-since = "14d";
+          keep-latest-n = 10;
+          keep-booted-system = true;
+          keep-current-system = true;
+        };
+      };
+    };
   };
   programs.direnv.angrr.autoUse = true;
 }
