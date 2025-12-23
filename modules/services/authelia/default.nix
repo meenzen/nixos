@@ -92,6 +92,12 @@ in {
               case_insensitive = true;
             };
             path = "${directory}/users.yml";
+            extra_attributes = {
+              nextcloud_user = {
+                multi_valued = false;
+                value_type = "string";
+              };
+            };
           };
         };
         session = {
