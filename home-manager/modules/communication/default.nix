@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   home.packages = [
-    pkgs.vesktop
+    # build failure
+    #pkgs.vesktop
     pkgs.mumble
     #pkgs.teamspeak_client
   ];

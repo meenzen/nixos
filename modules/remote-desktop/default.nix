@@ -13,8 +13,7 @@ in {
   config = lib.mkIf cfg.enable {
     environment.systemPackages = [
       pkgs.kdePackages.krdc
-      # build failure
-      #pkgs.rustdesk-flutter
+      pkgs.rustdesk-flutter
     ];
   };
 }

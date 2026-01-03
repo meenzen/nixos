@@ -19,8 +19,7 @@ in {
   ];
 
   config = lib.mkIf cfg.enable {
-    # build failure
-    meenzen.matrix.draupnir.enable = false;
+    meenzen.matrix.draupnir.enable = true;
     meenzen.matrix.element-call.enable = true;
     meenzen.matrix.mas.enable = true;
     meenzen.matrix.synapse.enable = true;
