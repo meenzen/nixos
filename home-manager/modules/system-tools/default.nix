@@ -1,7 +1,8 @@
 {pkgs, ...}: {
   home.packages = [
     pkgs.strace
-    pkgs.ltrace
+    # build failure
+    #pkgs.ltrace
     pkgs.lsof
 
     pkgs.sysstat

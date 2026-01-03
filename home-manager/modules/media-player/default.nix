@@ -2,7 +2,7 @@
   home.packages = [
     pkgs.vlc
     pkgs.strawberry
-    pkgs.youtube-music
+    pkgs.pear-desktop
   ];
 
   programs.mpv.enable = true;
