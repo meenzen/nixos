@@ -29,6 +29,7 @@ in {
           pkgs.unifont
           pkgs.noto-fonts
           pkgs.noto-fonts-cjk-sans
+          pkgs.noto-fonts-cjk-serif
           pkgs.noto-fonts-color-emoji
 
           # microsoft fonts
@@ -36,6 +37,7 @@ in {
           pkgs.vista-fonts
         ];
         fontconfig = {
+          enable = true;
           antialias = true;
           cache32Bit = true;
           hinting.enable = true;
