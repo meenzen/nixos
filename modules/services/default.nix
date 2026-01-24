@@ -9,5 +9,6 @@
     ./kener
     ./miniflux
     ./mnzn-website
+    ./uptime-kuma
   ];
 }
