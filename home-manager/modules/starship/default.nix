@@ -74,6 +74,8 @@
       git_branch.symbol = " ";
       git_branch.format = ''\[[$symbol$branch]($style)\]'';
       git_status.format = ''([\[$all_status$ahead_behind\]]($style))'';
+      git_status.behind = "↓$count";
+      git_status.ahead = "↑$count";
       golang.symbol = " ";
       golang.format = ''\[[$symbol($version)]($style)\]'';
       haskell.symbol = " ";
@@ -87,15 +89,12 @@
       kotlin.format = ''\[[$symbol($version)]($style)\]'';
       lua.symbol = " ";
       lua.format = ''\[[$symbol($version)]($style)\]'';
-      #memory_usage.symbol = " ";
       memory_usage.format = ''\[$symbol[$ram( | $swap)]($style)\]'';
-      #nim.symbol = " ";
       nim.format = ''\[[$symbol($version)]($style)\]'';
       nix_shell.symbol = " ";
       nix_shell.format = ''\[[$symbol$state( \($name\))]($style)\]'';
       nodejs.symbol = '' '';
       nodejs.format = ''\[[$symbol($version)]($style)\]'';
-      #package.symbol = " ";
       package.format = ''\[[$symbol$version]($style)\]'';
       python.symbol = " ";
       python.format = ''\[[''${symbol}''${pyenv_prefix}(''${version})(\($virtualenv\))]($style)\]'';
