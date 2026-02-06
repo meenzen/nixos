@@ -38,7 +38,7 @@ in {
     };
 
     virtualisation.oci-containers.containers."${serviceName}" = {
-      image = "docker.io/collabora/code:latest@sha256:7983fd172c69f4545f93533fee62c06fdcd1aa0806f694db7b9ec6809caa4bd8";
+      image = "docker.io/collabora/code:latest@sha256:fa876e9fc1fdeb9aabac545e9fced19360e3a0492879432d857c17be4e4ea025";
       ports = ["127.0.0.1:${toString cfg.port}:9980"];
       extraOptions = ["--cap-add" "MKNOD"];
       environment = {
