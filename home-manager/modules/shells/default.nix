@@ -56,6 +56,10 @@ in
         # Ctrl + Backspace to delete word
         "ctrl-h".command = "backward-kill-word";
       };
+      interactiveShellInit = ''
+        # Disable default greeting message
+        set fish_greeting
+      '';
     };
 
     programs.nushell.enable = true;
