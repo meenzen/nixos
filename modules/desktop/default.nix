@@ -23,6 +23,8 @@ in {
     meenzen.stylix.enable = !cfg.slim;
     meenzen.yubikey.enable = !cfg.slim;
     meenzen.zsh.enable = !cfg.slim;
+    meenzen.fish.enable = !cfg.slim;
+    meenzen.fish.default = !cfg.slim;
 
     # KDE Partition Manager
     programs.partition-manager.enable = true;

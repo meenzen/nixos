@@ -9,6 +9,7 @@
 in {
   options.meenzen.zsh = {
     enable = lib.mkEnableOption "Enable zsh";
+    default = lib.mkEnableOption "Make zsh the default shell";
   };
 
   config = lib.mkIf cfg.enable {
@@ -17,7 +18,7 @@ in {
     # make completions work
     environment.pathsToLink = ["/share/zsh"];
 
-    users.users = {
+    users.users = lib.mkIf cfg.default {
       "${systemConfig.user.username}" = {
         shell = pkgs.zsh;
       };

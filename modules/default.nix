@@ -19,6 +19,7 @@
     ./distributed-build
     ./docker
     ./firmware-update
+    ./fish
     ./fonts
     ./gaming
     ./grafana
