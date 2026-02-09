@@ -49,7 +49,15 @@ in
       '';
     };
 
-    programs.fish.enable = true;
+    programs.fish = {
+      enable = true;
+      shellAliases = aliases;
+      binds = {
+        # Ctrl + Backspace to delete word
+        "ctrl-h".command = "backward-kill-word";
+      };
+    };
+
     programs.nushell.enable = true;
 
     # smarter cd command
