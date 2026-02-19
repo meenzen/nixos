@@ -48,6 +48,8 @@ in {
     environment.systemPackages = [
       pkgs.kdePackages.xdg-desktop-portal-kde
       pkgs.kdePackages.kdeconnect-kde
+      # Required for OCR in Spectacle
+      pkgs.tesseract
     ];
 
     # KDE Connect Firewall
