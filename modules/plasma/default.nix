@@ -22,8 +22,7 @@ in {
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
     # KDE Plasma Desktop
-    services.displayManager.sddm.enable = true;
-    services.displayManager.sddm.wayland.enable = true;
+    services.displayManager.plasma-login-manager.enable = true;
     services.desktopManager.plasma6.enable = true;
     services.desktopManager.plasma6.enableQt5Integration = true;
 
