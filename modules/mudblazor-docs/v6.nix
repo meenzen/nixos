@@ -24,7 +24,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     virtualisation.oci-containers.containers."${serviceName}" = {
-      image = "ghcr.io/meenzen/mudblazor-docs:6@sha256:c33169f77f81e6f8936ac3d9ef9214b7be4036e370249096e6fe6d9cd025b7c5";
+      image = "ghcr.io/meenzen/mudblazor-docs@sha256:637fc5857952499831c30850f72f5a65f4c0e667f2a054f62c9c884a6ba563c7";
       ports = ["127.0.0.1:${toString cfg.port}:8080"];
     };
 
