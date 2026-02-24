@@ -38,8 +38,7 @@ in {
       ++ lib.optionals (!cfg.slim) [
         pkgs.kdePackages.kruler
         pkgs.kdePackages.kcolorchooser
-        # broken see https://github.com/NixOS/nixpkgs/issues/483540
-        #pkgs.kdePackages.kdenlive
+        pkgs.kdePackages.kdenlive
         pkgs.krita
         pkgs.qpwgraph
       ];
