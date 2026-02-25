@@ -34,11 +34,11 @@ in {
       servers.paper = {
         enable = true;
         jvmOpts = "-Xmx8G -Xms2G";
-        package = pkgs.paperServers.paper-1_21_5;
+        package = pkgs.paperServers.paper-1_21_11;
         symlinks = {
           "plugins/bluemap.jar" = pkgs.fetchurl {
-            url = "https://github.com/BlueMap-Minecraft/BlueMap/releases/download/v5.7/bluemap-5.7-paper.jar";
-            hash = "sha256-4T9Pf1FA/XlByNTmVIimj+7aCyX/BPy011gdT70mFAk=";
+            url = "https://github.com/BlueMap-Minecraft/BlueMap/releases/download/v5.16/bluemap-5.16-paper.jar";
+            hash = "sha256-eduusmBTLb1WYk+LzoqyL7yhWK5KKGCwT8zv+55Gdso=";
             name = "bluemap.jar";
           };
           "plugins/BlueMap/core.conf" = pkgs.writeTextFile {
