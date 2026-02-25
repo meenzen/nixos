@@ -36,6 +36,11 @@ in {
         jvmOpts = "-Xmx8G -Xms2G";
         package = pkgs.paperServers.paper-1_21_11;
         symlinks = {
+          "plugins/chunky.jar" = pkgs.fetchurl {
+            url = "https://cdn.modrinth.com/data/fALzjamp/versions/P3y2MXnd/Chunky-Bukkit-1.4.40.jar";
+            hash = "sha256-KlR3/ID3EBLhWt4c402+uDbhdiOyjbESSSwPFEPAlyE=";
+            name = "chunky.jar";
+          };
           "plugins/bluemap.jar" = pkgs.fetchurl {
             url = "https://github.com/BlueMap-Minecraft/BlueMap/releases/download/v5.16/bluemap-5.16-paper.jar";
             hash = "sha256-eduusmBTLb1WYk+LzoqyL7yhWK5KKGCwT8zv+55Gdso=";
