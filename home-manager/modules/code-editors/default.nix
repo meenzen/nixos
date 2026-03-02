@@ -18,7 +18,8 @@ in {
     pkgs.vscode
     pkgs.kdePackages.kate
     pkgs.msedit
-    pkgs.okteta
+    # currently broken, see https://github.com/NixOS/nixpkgs/pull/495596
+    #pkgs.okteta
 
     #pkgs.jetbrains-toolbox
     (mkIde pkgs.jetbrains.rider)
