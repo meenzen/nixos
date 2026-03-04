@@ -48,5 +48,28 @@
         '';
       }
     )
+    (
+      pkgs.writeShellApplication {
+        name = "postgres-refresh-collations";
+        text = ''
+          echo "Refreshing collations for all databases..."
+          sudo -u postgres psql << EOF
+            DO $$
+            DECLARE
+                db_record RECORD;
+            BEGIN
+                FOR db_record IN
+                    SELECT datname
+                    FROM pg_database
+                    WHERE datname NOT IN ('template0')
+                      AND datcollversion IS NOT NULL
+                LOOP
+                    EXECUTE format('ALTER DATABASE %I REFRESH COLLATION VERSION', db_record.datname);
+                END LOOP;
+            END$$;
+          EOF
+        '';
+      }
+    )
   ];
 }
