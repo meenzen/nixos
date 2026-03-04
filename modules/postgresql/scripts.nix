@@ -53,7 +53,7 @@
         name = "postgres-refresh-collations";
         text = ''
           echo "Refreshing collations for all databases..."
-          sudo -u postgres psql << EOF
+          sudo -u postgres psql << 'EOF'
             DO $$
             DECLARE
                 db_record RECORD;
