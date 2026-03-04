@@ -1,6 +1,5 @@
 {pkgs, ...}: let
   args = [
-    # Chromium Wayland is broken, see https://github.com/NixOS/nixpkgs/issues/334175
     "--enable-features=UseOzonePlatform,VaapiVideoDecodeLinuxGL"
     "--ozone-platform=wayland"
     "--ignore-gpu-blocklist"
@@ -10,7 +9,6 @@ in {
   home.packages = [
     pkgs.firefox
 
-    # https://discourse.nixos.org/t/google-chrome-not-working-after-recent-nixos-rebuild/43746/8
     (pkgs.google-chrome.override {
       commandLineArgs = args;
     })

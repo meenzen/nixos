@@ -18,7 +18,6 @@ in {
     services.xserver.enable = true;
 
     # Enable Wayland support in Chromium based apps
-    # Chromium Wayland is broken, see https://github.com/NixOS/nixpkgs/issues/334175
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
     # KDE Plasma Desktop
