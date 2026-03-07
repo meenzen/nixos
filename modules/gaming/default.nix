@@ -48,7 +48,7 @@ in {
 
     environment.systemPackages = [
       pkgs.heroic
-      pkgs.wineWowPackages.stable
+      pkgs.wineWow64Packages.stable
       pkgs.winetricks
       pkgs.mangohud
     ];
