@@ -25,6 +25,10 @@
       enable = true;
       git.enable = true;
     };
-    mergiraf.enable = true;
+    mergiraf = {
+      enable = true;
+      enableGitIntegration = true;
+      enableJujutsuIntegration = true;
+    };
   };
 }
