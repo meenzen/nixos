@@ -77,4 +77,9 @@
 
   meenzen.virt-manager.enable = true;
   meenzen.printing.enable = true;
+
+  programs.ausweisapp = {
+    enable = true;
+    openFirewall = true;
+  };
 }
