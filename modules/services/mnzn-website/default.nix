@@ -76,7 +76,7 @@ in {
         DECLARE password TEXT;
         BEGIN
           password := trim(both from replace(pg_read_file('${password_file_path}'), E'\n', '''));
-          EXECUTE format('ALTER ROLE ${serviceName} WITH PASSWORD '''%s''';', password);
+          EXECUTE format('ALTER ROLE "${serviceName}" WITH PASSWORD '''%s''';', password);
         END $$;
       EOF
     '';
