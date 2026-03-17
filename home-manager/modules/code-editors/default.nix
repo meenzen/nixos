@@ -24,6 +24,7 @@ in {
     (mkIde pkgs.jetbrains.rider)
     #(mkIde pkgs.jetbrains.rust-rover)
     #(mkIde pkgs.jetbrains.webstorm)
+    (mkIde pkgs.jetbrains.phpstorm)
   ];
 
   home.file.".ideavimrc".text = ''
