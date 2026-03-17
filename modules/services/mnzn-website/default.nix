@@ -27,6 +27,11 @@ in {
       mnznWebsiteEnvironment = {
         file = "${inputs.self}/secrets/mnznWebsiteEnvironment.age";
       };
+      mnznWebsitePostgresPassword = {
+        file = "${inputs.self}/secrets/mnznWebsitePostgresPassword.age";
+        owner = "postgres";
+        group = "postgres";
+      };
     };
     virtualisation.oci-containers.containers."${serviceName}" = {
       image = "ghcr.io/meenzen/website:0.1.55@sha256:0e09a7869ff09ba581ff81fafba725eb6db62c03e7efb8604130b1406959a359";
@@ -48,6 +53,33 @@ in {
         passwordFile = config.age.secrets.githubRegistryPassword.path;
       };
     };
+
+    meenzen.postgresql = {
+      enable = true;
+      enableLocalNetwork = true;
+    };
+    services.postgresql = {
+      ensureUsers = [
+        {
+          name = serviceName;
+          ensureDBOwnership = true;
+        }
+      ];
+      ensureDatabases = [serviceName];
+    };
+    # workaround until https://github.com/NixOS/nixpkgs/pull/326306 is merged
+    systemd.services.postgresql-setup.postStart = let
+      password_file_path = config.age.secrets.mnznWebsitePostgresPassword.path;
+    in ''
+      psql -tA <<'EOF'
+        DO $$
+        DECLARE password TEXT;
+        BEGIN
+          password := trim(both from replace(pg_read_file('${password_file_path}'), E'\n', '''));
+          EXECUTE format('ALTER ROLE ${serviceName} WITH PASSWORD '''%s''';', password);
+        END $$;
+      EOF
+    '';
 
     services.nginx.virtualHosts."${cfg.domain}" = {
       forceSSL = true;

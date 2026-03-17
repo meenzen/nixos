@@ -119,4 +119,5 @@ in {
 
   # mnzn.dev Website
   "mnznWebsiteEnvironment.age".publicKeys = users ++ mnzn-website;
+  "mnznWebsitePostgresPassword.age".publicKeys = users ++ mnzn-website;
 }
