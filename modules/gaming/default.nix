@@ -14,7 +14,6 @@ in {
   imports = [
     # https://github.com/fufexan/nix-gaming
     inputs.nix-gaming.nixosModules.pipewireLowLatency
-    inputs.protontweaks.nixosModules.protontweaks
     ./star-citizen.nix
   ];
 
@@ -25,10 +24,6 @@ in {
       substituters = ["https://nix-gaming.cachix.org"];
       trusted-public-keys = ["nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="];
     };
-
-    # https://github.com/rain-cafe/protontweaks
-    nixpkgs.overlays = [inputs.protontweaks.overlay];
-    services.protontweaks.enable = false;
 
     # Kernel Tweaks
     # boot.kernelPackages = pkgs.linuxPackages_xanmod;

@@ -43,6 +43,6 @@
   meenzen.printing.enable = true;
   meenzen.plymouth.enable = true;
   meenzen.remote-desktop.enable = true;
-  meenzen.winboat.enable = true;
+  meenzen.winboat.enable = false;
   services.teamviewer.enable = true;
 }

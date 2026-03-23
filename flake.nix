@@ -52,10 +52,6 @@
       url = "github:LovingMelody/nix-citizen";
       inputs.nix-gaming.follows = "nix-gaming";
     };
-    protontweaks = {
-      url = "github:rain-cafe/protontweaks/main";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
 
     # Miscellaneous
