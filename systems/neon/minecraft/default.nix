@@ -32,9 +32,9 @@ in {
       openFirewall = true;
       servers.flip = let
         modpack = pkgs.fetchPackwizModpack {
-          url = "https://forge.mnzn.dev/FLiP/minecraft-modpack/raw/commit/1829cfafadea57e943d53374469bc5afdf0f61c7/pack.toml";
-          packHash = "sha256-byqmMZNzEUOrJXyhD8uKqNv6PF2rDOv03O8OQl9+22g=";
-          manifestHash = "sha256:0cxadv9k7v7csxf7p3pv5ycpszh975ailla1ig827gg96a7j15lw";
+          url = "https://forge.mnzn.dev/FLiP/minecraft-modpack/raw/commit/43c70e1ce77d146c481b36fdec38fc045b8630cb/pack.toml";
+          packHash = "sha256-Yq7v5WVXr0L8sAHKexStWWdcdyg7+zibFO7JcEz1idQ=";
+          manifestHash = "sha256:097nfrd8makps19l6bn3ama93phg1r7c4s85azcpsr5fmccwkfwn";
         };
         mcVersion = modpack.manifest.versions.minecraft;
         fabricVersion = modpack.manifest.versions.fabric;
