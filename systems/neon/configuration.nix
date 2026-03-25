@@ -12,8 +12,6 @@
     ./hardware-configuration.nix
     ./networking.nix
     #./vms.nix
-
-    ./minecraft
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -45,11 +43,12 @@
   meenzen.attic.enable = true;
   meenzen.distributed-build.enableHost = true;
   meenzen.mudblazor-docs.enable = true;
-  meenzen.minecraft.enable = true;
   meenzen.services.conduit.enable = true;
   meenzen.services.miniflux.enable = true;
   meenzen.services.forgejo.enable = true;
   meenzen.services.authelia.enable = true;
   meenzen.services.mnzn-website.enable = true;
   meenzen.services.uptime-kuma.enable = true;
+  meenzen.services.minecraft.enable = true;
+  meenzen.services.minecraft.flip.enable = true;
 }
