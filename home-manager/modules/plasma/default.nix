@@ -16,6 +16,8 @@
   config = lib.mkIf osConfig.meenzen.plasma.enable {
     services.gpg-agent.pinentry.package = pkgs.pinentry-qt;
 
+    gtk.gtk4.theme = null;
+
     # reference: https://github.com/pjones/plasma-manager/tree/trunk/modules
     programs.plasma = {
       enable = true;

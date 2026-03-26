@@ -9,6 +9,7 @@
       enable = true;
       package = pkgs.gitFull;
       lfs.enable = true;
+      signing.format = "openpgp";
       settings = {
         user.name = systemConfig.user.fullName;
         user.email = systemConfig.user.email;
