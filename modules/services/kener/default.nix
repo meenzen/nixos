@@ -36,7 +36,7 @@ in {
     };
 
     virtualisation.oci-containers.containers."${serviceName}" = {
-      image = "ghcr.io/rajnandan1/kener:4.0.22@sha256:c810badeb565a1e2d99751ee74ddeb8cc9943c6f232cf4908d0c0dc3f712bb90";
+      image = "ghcr.io/rajnandan1/kener:4.0.23@sha256:e7181feb260aaff98c466eb693217205e3d1cf323b46716ed3133246e828180b";
       ports = ["127.0.0.1:${toString cfg.port}:3000"];
       volumes = [
         "${serviceName}-uploads:/app/uploads"
