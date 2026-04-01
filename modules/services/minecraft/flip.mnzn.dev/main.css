@@ -1,0 +1,37 @@
+:root {
+    color-scheme: light dark;
+    --background-color-light: #fff;
+    --background-color-dark: #222;
+    --text-color-light: #222;
+    --text-color-dark: #f6f6f6;
+    --background-color: light-dark(var(--background-color-light), var(--background-color-dark));
+    --text-color: light-dark(var(--text-color-light), var(--text-color-dark));
+
+    --text-color-code-light: #555;
+    --text-color-code-dark: #aaa;
+    --text-color-code: light-dark(var(--text-color-code-light), var(--text-color-code-dark));
+
+    --backgtound-color-code-light: #eee;
+    --background-color-code-dark: #333;
+    --background-color-code: light-dark(var(--background-color-code-light), var(--background-color  -code-dark));
+}
+
+body {
+    font-family: "JetBrains Mono", "Roboto Mono", monospace;
+    font-optical-sizing: auto;
+    font-weight: normal;
+    font-style: normal;
+
+    background: var(--background-color);
+    color: var(--text-color);
+}
+
+main {
+    max-width: 800px;
+    margin: auto;
+}
+
+code {
+    background: var(--background-color-code);
+    color: var(--text-color-code);
+}
