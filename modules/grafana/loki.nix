@@ -36,8 +36,13 @@ in {
       };
     };
 
-    # override promtail url to use local instance
-    meenzen.promtail.url = "http://127.0.0.1:${toString cfg.port}/loki/api/v1/push";
+    # override Fluent Bit to use local instance
+    meenzen.services.fluent-bit = {
+      lokiHost = "127.0.0.1";
+      lokiUri = "/loki/api/v1/push";
+      lokiPort = cfg.port;
+      lokiTls = false;
+    };
 
     services.loki = {
       enable = true;

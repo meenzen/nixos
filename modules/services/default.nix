@@ -2,6 +2,7 @@
   imports = [
     ./authelia
     ./conduit
+    ./fluent-bit
     ./forgejo
     ./forgejo-runner
     ./gitlab

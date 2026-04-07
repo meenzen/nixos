@@ -80,8 +80,8 @@ in {
   "prometheusAdminPassword.age".publicKeys = users ++ grafana;
   "lokiAdminPassword.age".publicKeys = users ++ grafana;
 
-  # Promtail
-  "promtailLokiAdminPassword.age".publicKeys = users ++ systems;
+  # Fluent Bit
+  "fluentBitEnvironment.age".publicKeys = users ++ systems;
 
   # Password
   "hashedPassword.age".publicKeys = users ++ servers;
