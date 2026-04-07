@@ -1,7 +1,7 @@
 {
   config,
   lib,
-  pkgs-stable,
+  pkgs,
   ...
 }: let
   cfg = config.meenzen.cloudflare-warp;
@@ -13,8 +13,10 @@ in {
   config = lib.mkIf cfg.enable {
     services.cloudflare-warp = {
       enable = true;
-      # Cloudflare Warp 2026.1.150.0 is broken, so use the stable version 2025.10.186.0 instead
-      package = pkgs-stable.cloudflare-warp;
+      package = pkgs.cloudflare-warp;
     };
+
+    # see https://github.com/NixOS/nixpkgs/issues/504119#issuecomment-4143108440
+    networking.firewall.checkReversePath = "loose";
   };
 }
