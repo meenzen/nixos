@@ -139,7 +139,7 @@
       };
 
       "git.human.de".hostname = "git.human.de";
-      "sentry.human.de".hostname = "167.235.55.186";
+      "sentry.human.de".hostname = "sentry.human.de";
       "nix-01.human-dev.io".user = "root";
     };
   };
