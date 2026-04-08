@@ -7,9 +7,9 @@
 }: let
   cfg = config.meenzen.services.minecraft.flip;
   modpack = pkgs.fetchPackwizModpack {
-    url = "https://forge.mnzn.dev/FLiP/minecraft-modpack/raw/commit/d5ca807b4612a2ce285db6d39f7929eaed0d2417/pack.toml";
-    packHash = "sha256-lsUuqgfQrZl2+4Zsy1tb1h8aYKnwZDgIjjHdomuzNZI=";
-    manifestHash = "sha256:04ndbdd6bfh2zja9vdvi33lp9gpsnqbfnpfwfx6a8scs1kwwn39b";
+    url = "https://forge.mnzn.dev/FLiP/minecraft-modpack/raw/commit/49795a147cbec8c2eff472d3611056d6bb22710e/pack.toml";
+    packHash = "sha256-ga1mFtnAav+XEb3g/f82Px2NvmWDX4Y59ZH9cN+JFAM=";
+    manifestHash = "sha256:1jx576ivf9fj44mgkqai6z42jq0pif356da2w2lmcnml4bbx1ipc";
   };
   mcVersion = modpack.manifest.versions.minecraft;
   fabricVersion = modpack.manifest.versions.fabric;
