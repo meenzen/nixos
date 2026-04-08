@@ -31,7 +31,7 @@ in {
     environment.etc = {
       "fail2ban/filter.d/nginx-badbots.local".text = pkgs.lib.mkDefault (pkgs.lib.mkAfter ''
         [Definition]
-        failregex = ^<HOST> - .* "-" ".*(trendictionbot|SemrushBot|AhrefsBot|ClaudeBot|MJ12bot|Bytespider|DataForSeoBot|GPTBot|magpie-crawler|barkrowler|DotBot|SenutoBot|semantic-visions\.com).*"$
+        failregex = ^<HOST> - .* "-" ".*(trendictionbot|SemrushBot|AhrefsBot|ClaudeBot|MJ12bot|Bytespider|DataForSeoBot|GPTBot|magpie-crawler|barkrowler|DotBot|SenutoBot|meta-externalagent|semantic-visions\.com).*"$
         ignoreregex =
       '');
     };
