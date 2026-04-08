@@ -6,6 +6,32 @@
   ...
 }: let
   cfg = config.meenzen.nginx-badbots;
+  regexEscape = str: builtins.replaceStrings [''.''] [''\.''] str;
+  userAgents = [
+    # Marketing / SEO bots
+    "AhrefsBot"
+    "barkrowler"
+    "DataForSeoBot"
+    "DotBot"
+    "magpie-crawler"
+    "MJ12bot"
+    "semantic-visions.com"
+    "SemrushBot"
+    "SenutoBot"
+    "trendictionbot"
+
+    # AI bots can fuck off, they are not welcome here.
+    "ClaudeBot"
+    "GPTBot"
+
+    # Ban Facebook for scraping forge.mnzn.dev which does not allow scraping.
+    "meta-externalagent"
+
+    # TikTok
+    "Bytespider"
+  ];
+  userAgentsEscaped = map regexEscape userAgents;
+  userAgentsCombined = lib.concatStringsSep "|" userAgentsEscaped;
 in {
   options.meenzen.nginx-badbots = {
     enable = lib.mkEnableOption "Block Bad Crawlers";
@@ -31,7 +57,7 @@ in {
     environment.etc = {
       "fail2ban/filter.d/nginx-badbots.local".text = pkgs.lib.mkDefault (pkgs.lib.mkAfter ''
         [Definition]
-        failregex = ^<HOST> - .* "-" ".*(trendictionbot|SemrushBot|AhrefsBot|ClaudeBot|MJ12bot|Bytespider|DataForSeoBot|GPTBot|magpie-crawler|barkrowler|DotBot|SenutoBot|meta-externalagent|semantic-visions\.com).*"$
+        failregex = ^<HOST> - .* "-" ".*(${userAgentsCombined}).*"$
         ignoreregex =
       '');
     };
