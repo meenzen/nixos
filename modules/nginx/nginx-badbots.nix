@@ -21,8 +21,17 @@
     "trendictionbot"
 
     # AI bots can fuck off, they are not welcome here.
+    "anthropic-ai"
+
     "ClaudeBot"
+    "claude-web"
+
     "GPTBot"
+    "ChatGPT-User"
+    "OAI-SearchBot"
+
+    "PerplexityBot"
+    "Perplexity-User"
 
     # Ban Facebook for scraping forge.mnzn.dev which does not allow scraping.
     "meta-externalagent"
