@@ -147,6 +147,12 @@ in {
       extraConfig = ''
         client_max_body_size 512M;
       '';
+      locations."/robots.txt" = {
+        extraConfig = ''
+          rewrite ^/(.*) $1;
+          return 200 "User-agent: *\nDisallow: /";
+        '';
+      };
       locations."/".proxyPass = "http://localhost:${toString cfg.port}";
     };
   };
