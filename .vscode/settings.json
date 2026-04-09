@@ -16,5 +16,6 @@
         ]
       }
     }
-  }
+  },
+  "nixEnvSelector.suggestion": false
 }
