@@ -16,6 +16,7 @@
     ./cloudflare-warp
     ./collabora
     ./desktop
+    ./determinate-nix
     ./distributed-build
     ./docker
     ./firmware-update

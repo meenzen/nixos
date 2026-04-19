@@ -6,6 +6,9 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-review.url = "github:nixos/nixpkgs/nixos-unstable-small";
 
+    # Determinate Nix
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
+
     # Helper Libraries
     nixos-hardware.url = "github:nixos/nixos-hardware";
     flake-parts.url = "github:hercules-ci/flake-parts";
