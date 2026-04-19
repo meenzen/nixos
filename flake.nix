@@ -186,7 +186,6 @@
         devShells.default = pkgs.mkShell {
           nativeBuildInputs = [
             pkgs.git
-            pkgs.nixVersions.stable
             pkgs.nil
             pkgs.nom
             pkgs.nvd
