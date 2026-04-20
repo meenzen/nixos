@@ -196,8 +196,8 @@
           ];
           shellHook = ''
             echo ""
-            echo "$(git --version)"
             echo "$(nix --version)"
+            echo "$(git --version)"
             echo "$(nil --version)"
             echo "$(alejandra --version)"
             echo ""
