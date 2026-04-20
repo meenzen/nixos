@@ -5,6 +5,8 @@
   ...
 }: let
   cfg = config.meenzen.services.gitlab-runner;
+  nix = config.nix.package;
+  ciPackages = with pkgs; [nix cacert git openssh coreutils bash];
 in {
   options.meenzen.services.gitlab-runner = {
     enable = lib.mkEnableOption "Enable GitLab Runner";
@@ -88,6 +90,7 @@ in {
             "/nix/store:/nix/store:ro"
             "/nix/var/nix/db:/nix/var/nix/db:ro"
             "/nix/var/nix/daemon-socket:/nix/var/nix/daemon-socket:ro"
+            "/nix/var/determinate/determinate-nixd.socket:/nix/var/determinate/determinate-nixd.socket:ro"
           ];
           registrationFlags = lib.mkIf cfg.enableHardwareAcceleration [
             "--docker-devices /dev/kvm"
@@ -105,12 +108,12 @@ in {
             mkdir -p -m 0755 /nix/var/nix/profiles/per-user/root
             mkdir -p -m 0700 "$HOME/.nix-defexpr"
 
-            . ${pkgs.nix}/etc/profile.d/nix.sh
+            . ${nix}/etc/profile.d/nix.sh
 
-            ${pkgs.nix}/bin/nix-env -i ${lib.strings.concatStringsSep " " (with pkgs; [nix cacert git openssh coreutils bash])}
+            ${nix}/bin/nix-env -i ${lib.strings.concatStringsSep " " ciPackages}
 
-            ${pkgs.nix}/bin/nix-channel --add https://nixos.org/channels/nixpkgs-unstable
-            ${pkgs.nix}/bin/nix-channel --update nixpkgs
+            ${nix}/bin/nix-channel --add https://nixos.org/channels/nixpkgs-unstable
+            ${nix}/bin/nix-channel --update nixpkgs
           '';
           environmentVariables = {
             ENV = "/etc/profile";
