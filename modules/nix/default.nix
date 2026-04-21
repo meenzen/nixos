@@ -2,6 +2,7 @@
   lib,
   pkgs,
   inputs,
+  config,
   ...
 }: {
   nixpkgs = {
@@ -41,7 +42,7 @@
     diff = ''
       if [[ -e /run/current-system ]]; then
         source "${inputs.self}/bin/lib.sh"
-        PATH=$PATH:${lib.makeBinPath [pkgs.nix]}
+        PATH=$PATH:${lib.makeBinPath [config.nix.package]}
         print_divider_basic
         ${pkgs.nvd}/bin/nvd diff /run/current-system "$systemConfig" || true
         print_divider_basic
