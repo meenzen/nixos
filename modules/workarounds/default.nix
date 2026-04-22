@@ -10,6 +10,5 @@
     ./libraries.nix
     ./nix-consistency.nix
     ./shebang.nix
-    ./unpatched-binaries.nix
   ];
 }
