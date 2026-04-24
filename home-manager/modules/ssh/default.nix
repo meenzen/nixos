@@ -86,12 +86,6 @@
         proxyJump = "ssh-gateway-dmz.human-dev.io";
       };
 
-      # stirling-pdf
-      docker01 = lib.hm.dag.entryAfter ["ssh-gateway-dmz.human-dev.io"] {
-        hostname = "172.16.0.48";
-        proxyJump = "ssh-gateway-dmz.human-dev.io";
-      };
-
       helabftw1 = lib.hm.dag.entryAfter ["ssh-gateway-dmz.human-dev.io"] {
         hostname = "172.16.0.15";
         proxyJump = "ssh-gateway-dmz.human-dev.io";
