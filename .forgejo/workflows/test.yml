@@ -1,0 +1,31 @@
+name: "Test"
+on:
+  pull_request:
+  push:
+jobs:
+  tests:
+    runs-on: nixos
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: DeterminateSystems/determinate-nix-action@v3
+      - uses: DeterminateSystems/flake-checker-action@main
+
+      - name: Setup Attic cache
+        uses: ryanccn/attic-action@v0.5.0
+        with:
+          endpoint: https://attic.mnzn.dev
+          cache: main
+          token: ${{ secrets.ATTIC_TOKEN }}
+
+      - name: Check flake
+        run: nix flake check
+
+      - name: Install tools
+        run: nix profile install nixpkgs#direnv nixpkgs#nix-direnv
+
+      - name: Set up direnv
+        run: direnv allow
+
+      - name: Colmena build
+        run: direnv exec . colmena build --verbose --no-build-on-target
