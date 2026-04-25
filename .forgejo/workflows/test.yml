@@ -8,7 +8,9 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - uses: DeterminateSystems/determinate-nix-action@v3
+      - name: Setup Nix
+        run: "$SETUP_NIX_SCRIPT"
+
       - uses: DeterminateSystems/flake-checker-action@main
 
       - name: Setup Attic cache
