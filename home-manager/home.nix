@@ -7,6 +7,7 @@
     ./modules/communication
     ./modules/desktop
     ./modules/dev-tools
+    ./modules/devenv
     ./modules/fun
     ./modules/gaming
     ./modules/git

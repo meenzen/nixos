@@ -45,7 +45,6 @@ in {
     pkgs.tokei
     pkgs.difftastic
     pkgs.terraform
-    pkgs.devenv
     pkgs.gh
     pkgs.glab
     pkgs.nixpkgs-review
