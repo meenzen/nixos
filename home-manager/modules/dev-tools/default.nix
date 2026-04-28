@@ -49,6 +49,7 @@ in {
     pkgs.glab
     pkgs.nixpkgs-review
     pkgs.csharprepl
+    pkgs.shellcheck
 
     # Kubernetes
     pkgs.kubectl
