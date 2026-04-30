@@ -24,6 +24,7 @@ let
   forgejo-runner = [lithium];
   authelia = [neon];
   mnzn-website = [neon];
+  glitchtip = [neon];
 in {
   # Mastodon
   "mastodonEmailPassword.age".publicKeys = users ++ mastodon;
@@ -120,4 +121,7 @@ in {
   # mnzn.dev Website
   "mnznWebsiteEnvironment.age".publicKeys = users ++ mnzn-website;
   "mnznWebsitePostgresPassword.age".publicKeys = users ++ mnzn-website;
+
+  # GlitchTip
+  "glitchtipEnvironment.age".publicKeys = users ++ glitchtip;
 }

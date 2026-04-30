@@ -7,6 +7,7 @@
     ./forgejo-runner
     ./gitlab
     ./gitlab-runner
+    ./glitchtip
     ./kener
     ./minecraft
     ./miniflux
