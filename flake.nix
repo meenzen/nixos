@@ -163,7 +163,8 @@
             };
           };
 
-          neon = mkServer "neon.mnzn.dev" ./systems/neon/configuration.nix;
+          # Workaround for https://github.com/DeterminateSystems/nix-src/issues/441
+          neon = mkServer "95.217.150.38" ./systems/neon/configuration.nix;
           lithium = mkServer "lithium.localdomain" ./systems/lithium/configuration.nix;
         };
       };

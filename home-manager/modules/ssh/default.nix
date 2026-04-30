@@ -28,6 +28,13 @@
         hostname = "192.168.1.4";
       };
 
+      # neon.mnzn.dev: disable multiplexing for direct connections
+      # workaround for https://github.com/DeterminateSystems/nix-src/issues/441
+      "95.217.150.38" = {
+        controlMaster = "no";
+        controlPath = "none";
+      };
+
       "mail.meenzen.net" = {
         hostname = "mail.meenzen.net";
         user = "root";
