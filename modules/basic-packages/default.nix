@@ -12,5 +12,6 @@
     pkgs.duf
     pkgs.htop
     pkgs.ncdu
+    pkgs.pwgen
   ];
 }
