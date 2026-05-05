@@ -14,6 +14,8 @@
     #./vms.nix
   ];
 
+  boot.zfs.forceImportRoot = false;
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   networking.hostName = "neon";

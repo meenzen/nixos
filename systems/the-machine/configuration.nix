@@ -17,6 +17,8 @@
     ./hardware-configuration.nix
   ];
 
+  boot.zfs.forceImportRoot = false;
+
   # nixos-generate-config --root /tmp/config --no-filesystems
   # echo "<encryption-key>" > /tmp/secret.key
   # sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode disko nixos/systems/the-machine/disko.nix
