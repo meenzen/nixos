@@ -6,7 +6,7 @@
 }: let
   cfg = config.meenzen.services.gitlab-runner;
   nix = config.nix.package;
-  ciPackages = with pkgs; [nix cacert git openssh coreutils bash];
+  ciPackages = with pkgs; [nix cacert git openssh coreutils bash direnv nix-direnv devenv];
 in {
   options.meenzen.services.gitlab-runner = {
     enable = lib.mkEnableOption "Enable GitLab Runner";

@@ -7,7 +7,7 @@
 }: let
   cfg = config.meenzen.services.forgejo-runner;
   nix = config.nix.package;
-  ciPackages = with pkgs; [nix cacert git openssh coreutils bash];
+  ciPackages = with pkgs; [nix cacert git openssh coreutils bash direnv nix-direnv devenv];
   setup-nix-script = pkgs.writeScript "setup-nix" ''
     mkdir -p -m 0755 /nix/var/log/nix/drvs
     mkdir -p -m 0755 /nix/var/nix/gcroots
