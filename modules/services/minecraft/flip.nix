@@ -7,9 +7,9 @@
 }: let
   cfg = config.meenzen.services.minecraft.flip;
   modpack = pkgs.fetchPackwizModpack {
-    url = "https://forge.mnzn.dev/FLiP/minecraft-modpack/raw/commit/e7cb1ffb7bf8857854e3b6a50b7b4de13775420e/pack.toml";
-    packHash = "sha256-DwMqQ94casLOGeK2t8vFGbpq4ndxU3+aUaam10f99js=";
-    manifestHash = "sha256:0dm1c09qaag657q60bc1qjviz42bcf1ikm6h1y217qn0ahxw14r5";
+    url = "https://forge.mnzn.dev/FLiP/minecraft-modpack/raw/commit/e1d6fa3588489171f9a281f366ced2f31d124e16/pack/pack.toml";
+    packHash = "sha256-T7Tr8Lh0Z5i1cx3Gee7g/UOP17t68dq0c+Uv4HPCCx8=";
+    manifestHash = "sha256:060scrgqxvkf6qc73zbllnr8v99ngmc679q7kaly66jywx52jami";
   };
   mcVersion = modpack.manifest.versions.minecraft;
   fabricVersion = modpack.manifest.versions.fabric;
@@ -49,7 +49,10 @@ in {
     services.minecraft-servers.servers.flip = {
       enable = true;
       jvmOpts = "-Xmx8G -Xms2G";
-      package = pkgs.fabricServers.${serverVersion}.override {loaderVersion = fabricVersion;};
+      package = pkgs.fabricServers.${serverVersion}.override {
+        jre_headless = pkgs.openjdk25_headless;
+        loaderVersion = fabricVersion;
+      };
       symlinks = {
         "mods" = "${modpack}/mods";
       };
