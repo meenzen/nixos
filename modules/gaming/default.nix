@@ -44,7 +44,6 @@ in {
     environment.systemPackages = [
       pkgs.heroic
       pkgs.wineWow64Packages.stable
-      pkgs.winetricks
       pkgs.mangohud
     ];
 
@@ -59,6 +58,13 @@ in {
           #MANGOHUD = true;
           OBS_VKCAPTURE = true;
           DXVK_HUD = "compiler";
+
+          # These must not be set because they interfere with some games.
+          # They are set system-wide for software development, so we need
+          # to override them here.
+          DOTNET_ROOT = lib.mkForce "";
+          DOTNET_ROOT_X64 = lib.mkForce "";
+          DOTNET_MULTILEVEL_LOOKUP = lib.mkForce "";
         };
       };
       remotePlay.openFirewall = true;
