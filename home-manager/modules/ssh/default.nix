@@ -14,7 +14,7 @@
     enableDefaultConfig = false;
 
     # SSH hosts config
-    matchBlocks = {
+    settings = {
       "*" = {
         addKeysToAgent = "yes";
         compression = false;
