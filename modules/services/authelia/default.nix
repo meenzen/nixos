@@ -143,7 +143,7 @@ in {
     };
 
     services.nginx.virtualHosts.${cfg.domain} = {
-      enableACME = true;
+      useACMEHost = "mnzn.dev";
       forceSSL = true;
       locations."/" = {
         proxyPass = "http://127.0.0.1:${toString cfg.port}";

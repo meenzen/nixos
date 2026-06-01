@@ -159,7 +159,7 @@ in {
     };
 
     services.nginx.virtualHosts."${cfg.domain}" = {
-      enableACME = true;
+      useACMEHost = "mnzn.dev";
       forceSSL = true;
       locations."/".proxyPass = "http://[::1]:${toString cfg.port}";
       locations."/assets" = {

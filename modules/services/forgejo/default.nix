@@ -142,7 +142,7 @@ in {
     ];
 
     services.nginx.virtualHosts.${cfg.domain} = {
-      enableACME = true;
+      useACMEHost = "mnzn.dev";
       forceSSL = true;
       extraConfig = ''
         client_max_body_size 512M;

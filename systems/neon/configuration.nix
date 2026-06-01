@@ -26,11 +26,18 @@
   meenzen.server.enable = true;
   meenzen.backup.enable = true;
   meenzen.hetzner.enable = true;
+
+  meenzen.services.acme-mnzn.enable = true;
   meenzen.nginx = {
     enable = true;
     enableCloudflare = true;
     testPage = "neon.mnzn.dev";
   };
+  services.nginx.virtualHosts."neon.mnzn.dev" = {
+    enableACME = lib.mkForce false;
+    useACMEHost = "mnzn.dev";
+  };
+
   meenzen.grafana.enable = true;
   meenzen.services.fluent-bit.enable = true;
   meenzen.postgresql.enable = true;

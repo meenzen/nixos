@@ -49,7 +49,7 @@ in {
     systemd.services.conduit.serviceConfig.EnvironmentFile = config.age.secrets.conduitEnvironment.path;
 
     services.nginx.virtualHosts.${cfg.domain} = {
-      enableACME = true;
+      useACMEHost = "mnzn.dev";
       forceSSL = true;
       locations."/" = {
         proxyPass = "http://[::1]:${toString cfg.port}";

@@ -372,6 +372,8 @@ in {
     services.nginx.virtualHosts."${cfg.matrixDomain}" =
       if cfg.enableWorkers
       then {
+        enableACME = false;
+        useACMEHost = "mnzn.dev";
         locations."/_synapse/admin" = {
           proxyPass = "http://$synapse_backend";
         };
@@ -380,7 +382,7 @@ in {
         };
       }
       else {
-        enableACME = true;
+        useACMEHost = "mnzn.dev";
         forceSSL = true;
         locations."/".extraConfig = ''
           return 404;

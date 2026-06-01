@@ -79,7 +79,7 @@ in {
     ];
 
     services.nginx.virtualHosts.${cfg.domain} = {
-      enableACME = true;
+      useACMEHost = "mnzn.dev";
       forceSSL = true;
       root = website;
     };

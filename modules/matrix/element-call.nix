@@ -53,7 +53,7 @@ in {
     services.matrix-synapse-next.settings = synapseSettings;
 
     services.nginx.virtualHosts.${cfg.domain} = {
-      enableACME = true;
+      useACMEHost = "mnzn.dev";
       forceSSL = true;
       root = pkgs.element-call;
       locations."/".extraConfig = ''

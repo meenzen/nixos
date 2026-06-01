@@ -26,6 +26,9 @@ let
   mnzn-website = [neon];
   glitchtip = [neon];
 in {
+  # ACME
+  "acmeMnznEnvironment.age".publicKeys = users ++ [neon];
+
   # Mastodon
   "mastodonEmailPassword.age".publicKeys = users ++ mastodon;
   "mastodonActiveRecordPrimaryKey.age".publicKeys = users ++ mastodon;

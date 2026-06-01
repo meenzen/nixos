@@ -125,7 +125,7 @@ in {
     };
 
     services.nginx.virtualHosts."${cfg.domain}" = {
-      enableACME = true;
+      useACMEHost = "mnzn.dev";
       forceSSL = true;
       locations."/".proxyPass = "http://unix:/run/gitlab/gitlab-workhorse.socket";
     };
