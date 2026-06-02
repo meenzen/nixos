@@ -40,7 +40,9 @@
     };
 
     # Customization
-    stylix.url = "github:nix-community/stylix";
+    #stylix.url = "github:nix-community/stylix";
+    # temporary workaround, see https://github.com/nix-community/stylix/pull/2337
+    stylix.url = "github:nix-community/stylix/pull/2337/head";
 
     nixvim.url = "github:nix-community/nixvim";
     plasma-manager = {

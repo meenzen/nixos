@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs-review,
   inputs,
   ...
 }: let
@@ -33,9 +32,6 @@ in {
     meenzen.backup.paths = [config.services.glitchtip.stateDir];
 
     services.glitchtip = {
-      # temporary workaround https://github.com/NixOS/nixpkgs/pull/523482 / https://nixpkgs-tracker.ocfox.me/?pr=523482
-      package = pkgs-review.glitchtip;
-
       enable = true;
       environmentFiles = [config.age.secrets.glitchtipEnvironment.path];
       redis.createLocally = cfg.enableRedis;
