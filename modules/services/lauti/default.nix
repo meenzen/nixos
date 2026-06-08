@@ -39,6 +39,8 @@ in {
         LAUTI_ADDR = ":${toString cfg.port}";
         LAUTI_LOCALE = "de_DE";
         LAUTI_TIMEZONE = "Europe/Berlin";
+        LAUTI_OSM_TILE_SERVER = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
+        LAUTI_OSM_TILE_CACHE_DIR = "/var/lib/lauti/osm";
       };
     };
 
