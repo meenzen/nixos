@@ -32,6 +32,7 @@
     enable = true;
     enableCloudflare = true;
     testPage = "neon.mnzn.dev";
+    allowIndexing = true;
   };
   services.nginx.virtualHosts."neon.mnzn.dev" = {
     enableACME = lib.mkForce false;

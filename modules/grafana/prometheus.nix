@@ -65,6 +65,9 @@ in {
           proxyWebsockets = true;
         };
         basicAuthFile = config.age.secrets.prometheusAdminPassword.path;
+        extraConfig = ''
+          add_header X-Robots-Tag "noindex, nofollow, nosnippet, noarchive";
+        '';
       };
     };
   };

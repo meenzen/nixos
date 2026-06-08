@@ -128,6 +128,9 @@ in {
       useACMEHost = "mnzn.dev";
       forceSSL = true;
       locations."/".proxyPass = "http://unix:/run/gitlab/gitlab-workhorse.socket";
+      extraConfig = ''
+        add_header X-Robots-Tag "noindex, nofollow, nosnippet, noarchive";
+      '';
     };
   };
 }

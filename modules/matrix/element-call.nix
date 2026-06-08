@@ -56,6 +56,9 @@ in {
       useACMEHost = "mnzn.dev";
       forceSSL = true;
       root = pkgs.element-call;
+      extraConfig = ''
+        add_header X-Robots-Tag "noindex, nofollow, nosnippet, noarchive";
+      '';
       locations."/".extraConfig = ''
         try_files $uri /$uri /index.html;
         add_header Cache-Control "public, max-age=30, stale-while-revalidate=30";

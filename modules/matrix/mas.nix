@@ -168,6 +168,9 @@ in {
           add_header Cache-Control "public, immutable, max-age=31536000";
         '';
       };
+      extraConfig = ''
+        add_header X-Robots-Tag "noindex, nofollow, nosnippet, noarchive";
+      '';
     };
 
     services.nginx.virtualHosts."${config.meenzen.matrix.synapse.matrixDomain}" = {

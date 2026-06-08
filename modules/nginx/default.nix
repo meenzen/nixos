@@ -48,6 +48,9 @@
           enableACME = true;
           forceSSL = true;
           default = true;
+          extraConfig = ''
+            add_header X-Robots-Tag "noindex, nofollow, nosnippet, noarchive";
+          '';
         };
       };
     };

@@ -155,6 +155,7 @@ in {
       forceSSL = true;
       extraConfig = ''
         client_max_body_size 512M;
+        add_header X-Robots-Tag "noindex, nofollow, nosnippet, noarchive";
       '';
       locations."/robots.txt" = {
         extraConfig = ''

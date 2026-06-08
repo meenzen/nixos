@@ -82,6 +82,9 @@ in {
       useACMEHost = "mnzn.dev";
       forceSSL = true;
       root = website;
+      extraConfig = ''
+        add_header X-Robots-Tag "noindex, nofollow, nosnippet, noarchive";
+      '';
     };
   };
 }

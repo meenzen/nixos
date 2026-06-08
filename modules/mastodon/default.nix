@@ -193,8 +193,14 @@ in {
       };
     };
 
-    # Adapted from this excellent guide: https://stanislas.blog/2018/05/moving-mastodon-media-files-to-wasabi-object-storage/
     services.nginx = {
+      virtualHosts."${cfg.domain}" = {
+        extraConfig = ''
+          add_header X-Robots-Tag "noindex, nofollow, nosnippet, noarchive";
+        '';
+      };
+
+      # Adapted from this excellent guide: https://stanislas.blog/2018/05/moving-mastodon-media-files-to-wasabi-object-storage/
       proxyCachePath."mastodon" = {
         enable = true;
         levels = "1:2";
@@ -206,6 +212,9 @@ in {
       virtualHosts."${cfg.cdnDomain}" = {
         enableACME = true;
         forceSSL = true;
+        extraConfig = ''
+          add_header X-Robots-Tag "noindex, nofollow, nosnippet, noarchive";
+        '';
         locations."/" = {
           recommendedProxySettings = false;
           proxyPass = "https://${cfg.cdnBucketName}.${cfg.cdnBucketDomain}/";
