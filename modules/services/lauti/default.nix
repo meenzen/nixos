@@ -47,6 +47,11 @@ in {
     # The NixOS module is broken, it sets this to the old name "eintopf"
     systemd.services.lauti.serviceConfig.StateDirectory = lib.mkForce "lauti";
 
+    # Create the media directory with the correct permissions, otherwise LAUTI won't be able to write to it
+    systemd.tmpfiles.rules = [
+      "d /var/lib/private/lauti/media 0770 nobody nogroup - -"
+    ];
+
     services.nginx.virtualHosts."${cfg.domain}" = {
       forceSSL = true;
       enableACME = true;
