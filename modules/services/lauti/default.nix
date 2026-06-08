@@ -52,12 +52,23 @@ in {
       "d /var/lib/private/lauti/media 0770 nobody nogroup - -"
     ];
 
-    services.nginx.virtualHosts."${cfg.domain}" = {
-      forceSSL = true;
-      enableACME = true;
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:${toString cfg.port}";
-        proxyWebsockets = true;
+    security.acme.certs."${cfg.domain}".extraDomainNames = [
+      "www.${cfg.domain}"
+    ];
+
+    services.nginx.virtualHosts = {
+      "${cfg.domain}" = {
+        forceSSL = true;
+        enableACME = true;
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:${toString cfg.port}";
+          proxyWebsockets = true;
+        };
+      };
+      "www.${cfg.domain}" = {
+        forceSSL = true;
+        useACMEHost = "${cfg.domain}";
+        globalRedirect = "${cfg.domain}";
       };
     };
   };
