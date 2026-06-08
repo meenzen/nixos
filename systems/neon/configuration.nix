@@ -60,4 +60,5 @@
   meenzen.services.minecraft.enable = true;
   meenzen.services.minecraft.flip.enable = true;
   meenzen.services.glitchtip.enable = true;
+  meenzen.services.lauti.enable = true;
 }

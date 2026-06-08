@@ -10,6 +10,7 @@
     ./gitlab-runner
     ./glitchtip
     ./kener
+    ./lauti
     ./minecraft
     ./miniflux
     ./mnzn-website

@@ -25,6 +25,7 @@ let
   authelia = [neon];
   mnzn-website = [neon];
   glitchtip = [neon];
+  lauti = [neon];
 in {
   # ACME
   "acmeMnznEnvironment.age".publicKeys = users ++ [neon];
@@ -127,4 +128,7 @@ in {
 
   # GlitchTip
   "glitchtipEnvironment.age".publicKeys = users ++ glitchtip;
+
+  # LAUTI
+  "lautiEnvironment.age".publicKeys = users ++ lauti;
 }
