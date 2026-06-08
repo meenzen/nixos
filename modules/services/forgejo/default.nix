@@ -141,6 +141,15 @@ in {
       forgejo-wrapper
     ];
 
+    services.anubis.instances.forgejo = {
+      enable = true;
+      settings = {
+        TARGET = "http://localhost:${toString cfg.port}";
+        SERVE_ROBOTS_TXT = false;
+      };
+    };
+    users.users.nginx.extraGroups = [config.users.groups.anubis.name];
+
     services.nginx.virtualHosts.${cfg.domain} = {
       useACMEHost = "mnzn.dev";
       forceSSL = true;
@@ -153,7 +162,7 @@ in {
           return 200 "User-agent: *\nDisallow: /";
         '';
       };
-      locations."/".proxyPass = "http://localhost:${toString cfg.port}";
+      locations."/".proxyPass = "http://unix:${config.services.anubis.instances.forgejo.settings.BIND}";
     };
   };
 }
