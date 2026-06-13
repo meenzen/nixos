@@ -36,7 +36,7 @@ in {
           grpc_listen_port = cfg.grpc-port;
         };
         distributor.receivers.otlp.protocols.grpc.endpoint = "127.0.0.1:${toString cfg.otlp-port}";
-        compactor.compaction.block_retention = "720h"; # 30 days
+        compaction.block_retention = "720h"; # 30 days
         storage.trace = {
           backend = "local";
           local.path = "/var/lib/tempo/blocks";
