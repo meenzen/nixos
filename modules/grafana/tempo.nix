@@ -42,6 +42,10 @@ in {
           local.path = "/var/lib/tempo/blocks";
           wal.path = "/var/lib/tempo/wal";
         };
+        live_store = {
+          shutdown_marker_dir = "/var/lib/tempo/live-store/shutdown-marker";
+          wal.path = "/var/lib/tempo/live-store/traces";
+        };
       };
     };
 
