@@ -46,6 +46,8 @@ in {
           shutdown_marker_dir = "/var/lib/tempo/live-store/shutdown-marker";
           wal.path = "/var/lib/tempo/live-store/traces";
         };
+        backend_scheduler.local_work_path = "/var/lib/tempo";
+        block_builder.wal.path = "/var/lib/tempo/block-builder/traces";
       };
     };
 
