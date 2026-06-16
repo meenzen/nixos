@@ -67,6 +67,7 @@ in {
               (oldAttrs.patches or [])
               ++ [
                 ./limits.patch
+                ./robots.patch
               ];
           });
         }

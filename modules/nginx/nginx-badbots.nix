@@ -38,6 +38,9 @@
 
     # TikTok
     "Bytespider"
+
+    # This bot is crawling the Fediverse: https://fediral.com/bot
+    "FediralBot"
   ];
   userAgentsEscaped = map regexEscape userAgents;
   userAgentsCombined = lib.concatStringsSep "|" userAgentsEscaped;
