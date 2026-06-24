@@ -11,8 +11,8 @@
   dashboards = pkgs.fetchFromGitHub {
     owner = "element-hq";
     repo = "synapse";
-    rev = "9135d78b88a429cf0220d6a93bdac7485a3a0f88";
-    hash = "sha256-9nN4sQXCamVi+FRN9++FN5nQmjYZnPKDLxjxEuga6EM=";
+    rev = "1c79397d7fdbbd8926bfb4b9499c4c07f19e3b22";
+    hash = "sha256-vj8i3132fmbxQGsv0yY2KEx2GHgnRCCv8lrrRYuFyUw=";
   };
 
   synapseOption =
