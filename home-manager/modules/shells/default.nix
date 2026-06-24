@@ -76,7 +76,8 @@ in
       pkgs.nix-index
     ];
 
-    # direnv
+    # direnv / devenv
     programs.direnv.enable = true;
     programs.direnv.nix-direnv.enable = true;
+    programs.devenv.enable = true;
   }

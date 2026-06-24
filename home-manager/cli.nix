@@ -4,7 +4,6 @@
     ./common
     ./modules/cleanup
     ./modules/dev-tools
-    ./modules/devenv
     ./modules/fun
     ./modules/git
     ./modules/neovim
