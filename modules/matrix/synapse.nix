@@ -214,12 +214,9 @@ in {
       settings =
         {
           database = {
-            name = "psycopg2";
             args = {
               host = "/var/run/postgresql";
-              user = "matrix-synapse";
               password = "synapse";
-              dbname = "matrix-synapse";
             };
           };
           redis = {
