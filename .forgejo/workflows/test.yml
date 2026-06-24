@@ -6,7 +6,7 @@ jobs:
   tests:
     runs-on: nixos
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Setup Nix
         run: "$SETUP_NIX_SCRIPT"
       - uses: DeterminateSystems/flake-checker-action@main
