@@ -21,5 +21,8 @@
   programs.nixvim = {
     enable = true;
     defaultEditor = true;
+
+    # Fix infinite recursion: https://github.com/nix-community/nixvim/issues/4460
+    nixpkgs.useGlobalPackages = true;
   };
 }
