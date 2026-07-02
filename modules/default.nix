@@ -10,7 +10,6 @@
     ./beeper
     ./bootloader
     ./build-vm
-    ./certs
     ./cheshbot
     ./cleanup
     ./cloudflare-warp
@@ -57,6 +56,7 @@
     ./virtualbox
     ./vpn
     ./winboat
+    ./work
     ./workarounds
     ./yubikey
     ./zsh

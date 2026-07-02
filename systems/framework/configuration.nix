@@ -23,10 +23,6 @@
   meenzen.hyprland.enable = false;
   meenzen.latest-kernel.enable = false;
   meenzen.virt-manager.enable = true;
-  meenzen.verapdf.enable = true;
-  meenzen.certs.enable = true;
-  meenzen.cloudflare-warp.enable = true;
-  meenzen.openfortivpn.enable = true;
   meenzen.beeper.enable = true;
   meenzen.hardware.bluetooth.enable = true;
   meenzen.hardware.uhk.enable = true;
@@ -44,5 +40,5 @@
   meenzen.plymouth.enable = true;
   meenzen.remote-desktop.enable = true;
   meenzen.winboat.enable = false;
-  services.teamviewer.enable = true;
+  meenzen.work.enable = true;
 }
