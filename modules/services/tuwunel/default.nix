@@ -43,6 +43,11 @@ in {
         allow_registration = false;
         allow_federation = true;
         allow_encryption = true;
+        well_known = {
+          client = "https://${cfg.domain}";
+          server = "${cfg.domain}:443";
+          livekit_url = "https://${config.meenzen.lk-jwt-service.domain}";
+        };
       };
     };
 
