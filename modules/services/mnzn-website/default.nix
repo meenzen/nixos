@@ -91,7 +91,9 @@ in {
       locations."/.well-known/matrix" = {
         proxyPass = "http://127.0.0.1:${toString cfg.port}";
         extraConfig = ''
+          proxy_hide_header 'Content-Type';
           add_header Content-Type application/json;
+          proxy_hide_header 'Access-Control-Allow-Origin';
           add_header Access-Control-Allow-Origin *;
         '';
       };
