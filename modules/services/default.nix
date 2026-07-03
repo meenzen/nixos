@@ -14,6 +14,7 @@
     ./minecraft
     ./miniflux
     ./mnzn-website
+    ./tuwunel
     ./uptime-kuma
   ];
 }

@@ -61,6 +61,7 @@
 
     # Miscellaneous
     conduit.url = "gitlab:famedly/conduit";
+    tuwunel.url = "github:matrix-construct/tuwunel?ref=refs/tags/v1.8.0";
     attic.url = "github:meenzen/attic?ref=fix/s3";
     nixos-matrix-modules.url = "github:D4ndellion/nixos-matrix-modules";
   };

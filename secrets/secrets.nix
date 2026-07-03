@@ -49,6 +49,9 @@ in {
   # Conduit
   "conduitEnvironment.age".publicKeys = users ++ matrix;
 
+  # Tuwunel
+  "tuwunelEnvironment.age".publicKeys = users ++ matrix;
+
   # Restic
   "resticEnv.age".publicKeys = users ++ restic;
   "resticRepository.age".publicKeys = users ++ restic;
