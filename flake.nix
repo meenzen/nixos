@@ -4,7 +4,8 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
-    nixpkgs-review.url = "github:nixos/nixpkgs/nixos-unstable-small";
+    # matrix-tuwunel 1.8.0 https://github.com/NixOS/nixpkgs/pull/537093
+    nixpkgs-review.url = "github:nixos/nixpkgs?ref=refs/pull/537093/head";
 
     # Determinate Nix
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
@@ -60,8 +61,6 @@
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
 
     # Miscellaneous
-    conduit.url = "gitlab:famedly/conduit";
-    tuwunel.url = "github:matrix-construct/tuwunel?ref=refs/tags/v1.8.0";
     attic.url = "github:meenzen/attic?ref=fix/s3";
     nixos-matrix-modules.url = "github:D4ndellion/nixos-matrix-modules";
   };

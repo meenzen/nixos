@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  pkgs-review,
   inputs,
   ...
 }: let
@@ -32,7 +33,7 @@ in {
 
     services.matrix-tuwunel = {
       enable = true;
-      package = inputs.tuwunel.packages."x86_64-linux".default;
+      package = pkgs-review.matrix-tuwunel;
       environmentFile = config.age.secrets.tuwunelEnvironment.path;
 
       settings.global = {
