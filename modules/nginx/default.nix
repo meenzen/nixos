@@ -87,6 +87,12 @@ in {
       "/var/lib/acme"
     ];
 
+    # Delete logs much sooner than the NixOS default
+    services.logrotate.settings.nginx = {
+      frequency = "daily";
+      rotate = 7;
+    };
+
     environment.systemPackages = [
       (
         pkgs.writeShellApplication {
