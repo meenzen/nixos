@@ -69,7 +69,7 @@ in {
     environment.etc = {
       "fail2ban/filter.d/nginx-badbots.local".text = pkgs.lib.mkDefault (pkgs.lib.mkAfter ''
         [Definition]
-        failregex = ^<HOST> - .* "-" ".*(${userAgentsCombined}).*"$
+        failregex = ^<HOST> - .* "[^"]*" ".*(${userAgentsCombined}).*"$
         ignoreregex =
       '');
     };
