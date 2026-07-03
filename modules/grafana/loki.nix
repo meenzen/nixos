@@ -97,7 +97,7 @@ in {
           retention_enabled = true;
         };
 
-        limits_config.retention_period = "14d";
+        limits_config.retention_period = "7d";
 
         frontend = {
           max_outstanding_per_tenant = 4096;
