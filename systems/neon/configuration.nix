@@ -52,7 +52,6 @@
   meenzen.cheshbot.enable = true;
   meenzen.attic.enable = true;
   meenzen.distributed-build.enableHost = true;
-  meenzen.services.conduit.enable = false;
   meenzen.services.tuwunel.enable = true;
   meenzen.services.miniflux.enable = true;
   meenzen.services.forgejo.enable = true;
