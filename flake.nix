@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
     # matrix-tuwunel 1.8.0 https://github.com/NixOS/nixpkgs/pull/537093
     nixpkgs-review.url = "github:nixos/nixpkgs?ref=refs/pull/537093/head";
 
