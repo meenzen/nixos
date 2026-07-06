@@ -19,7 +19,7 @@
     };
 
     # Deployment Tools
-    colmena.url = "github:zhaofengli/colmena";
+    colmena.url = "github:nix-community/colmena";
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -59,7 +59,7 @@
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
 
     # Miscellaneous
-    attic.url = "github:meenzen/attic?ref=fix/s3";
+    attic.url = "github:zhaofengli/attic";
     nixos-matrix-modules.url = "github:D4ndellion/nixos-matrix-modules";
   };
 
