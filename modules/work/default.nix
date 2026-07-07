@@ -27,6 +27,7 @@ in {
         "step-ca.human2.de"
         "safe.human2.de"
         "mde.human2.de"
+        "doku.human2.de"
       ];
     };
   };
