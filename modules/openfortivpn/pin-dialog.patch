@@ -1,0 +1,45 @@
+diff --git a/webauthdialog.cpp b/webauthdialog.cpp
+index 85d944d..fd52373 100644
+--- a/webauthdialog.cpp
++++ b/webauthdialog.cpp
+@@ -15,6 +15,11 @@ WebAuthDialog::WebAuthDialog(QWebEngineWebAuthUxRequest *request, QWidget *paren
+ {
+     uiWebAuthDialog->setupUi(this);
+ 
++    // The pin group uses absolute-positioned children from the .ui file; enforce
++    // a minimum height so the PIN input fields are not clipped on some styles.
++    uiWebAuthDialog->m_pinGroupBox->setMinimumHeight(110);
++    uiWebAuthDialog->m_pinGroupBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
++
+     buttonGroup = new QButtonGroup(this);
+     buttonGroup->setExclusive(true);
+ 
+@@ -94,7 +99,6 @@ void WebAuthDialog::setupSelectAccountUI()
+     uiWebAuthDialog->m_description->setText(tr("Which passkey do you want to use for ")
+                                             + uxRequest->relyingPartyId() + tr("? "));
+     uiWebAuthDialog->m_pinGroupBox->setVisible(false);
+-    uiWebAuthDialog->m_mainVerticalLayout->removeWidget(uiWebAuthDialog->m_pinGroupBox);
+     uiWebAuthDialog->buttonBox->button(QDialogButtonBox::Retry)->setVisible(false);
+ 
+     clearSelectAccountButtons();
+@@ -129,8 +133,11 @@ void WebAuthDialog::setupFinishCollectTokenUI()
+ void WebAuthDialog::setupCollectPinUI()
+ {
+     clearSelectAccountButtons();
+-    uiWebAuthDialog->m_mainVerticalLayout->addWidget(uiWebAuthDialog->m_pinGroupBox);
+     uiWebAuthDialog->m_pinGroupBox->setVisible(true);
++    uiWebAuthDialog->m_pinLineEdit->clear();
++    uiWebAuthDialog->m_confirmPinLineEdit->clear();
++    uiWebAuthDialog->m_pinLineEdit->setEchoMode(QLineEdit::Password);
++    uiWebAuthDialog->m_confirmPinLineEdit->setEchoMode(QLineEdit::Password);
+     uiWebAuthDialog->m_confirmPinLabel->setVisible(false);
+     uiWebAuthDialog->m_confirmPinLineEdit->setVisible(false);
+     uiWebAuthDialog->buttonBox->button(QDialogButtonBox::Ok)->setText(tr("Next"));
+@@ -183,6 +190,7 @@ void WebAuthDialog::setupCollectPinUI()
+                 + tr(" attempts remaining");
+     }
+     uiWebAuthDialog->m_pinEntryErrorLabel->setText(errorDetails);
++    uiWebAuthDialog->m_pinLineEdit->setFocus();
+ }
+ 
+ void WebAuthDialog::onCancelRequest()
