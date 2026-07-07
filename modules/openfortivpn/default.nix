@@ -29,6 +29,9 @@ in {
         {
           name = "human-vpn";
           text = ''
+            # cache credentials so the next command doesn't ask for the password again
+            sudo -v
+
             openfortivpn-webview "${cfg.host}:${toString cfg.port}" 2>/dev/null \
             | sudo openfortivpn "${cfg.host}:${toString cfg.port}" --cookie-on-stdin --pppd-accept-remote
           '';
