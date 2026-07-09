@@ -51,7 +51,7 @@ in {
         listen = "[::]:${toString cfg.port}";
         allowed-hosts = [cfg.domain];
         api-endpoint = "https://${cfg.domain}/";
-        database.url = "postgresql://${cfg.user}?host=/run/postgresql";
+        database.url = "postgresql://${cfg.user}?user=${cfg.user}&host=/run/postgresql";
         jwt = {};
         storage = {
           type = "s3";
