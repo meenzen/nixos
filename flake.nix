@@ -4,7 +4,9 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
-    nixpkgs-review.url = "github:nixos/nixpkgs/nixos-unstable";
+    # nixpkgs-review.url = "github:nixos/nixpkgs?ref=refs/pull/000000/head";
+    # matrix-tuwunel 1.8.0 https://github.com/NixOS/nixpkgs/pull/537093
+    nixpkgs-review.url = "github:nixos/nixpkgs?ref=refs/pull/540955/head";
 
     # Determinate Nix
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
