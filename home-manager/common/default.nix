@@ -8,7 +8,6 @@
       GITLAB_HOST = "https://git.human.de";
       ANSIBLE_NOCOWS = "1";
       NIXPKGS_ALLOW_UNFREE = "1";
-      NIXPKGS_ALLOW_INSECURE = "1";
     };
 
     # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
