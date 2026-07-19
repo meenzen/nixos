@@ -41,6 +41,7 @@ in {
         pkgs.kdePackages.kdenlive
         pkgs.krita
         pkgs.qpwgraph
+        pkgs.mission-center
       ];
   };
 }
