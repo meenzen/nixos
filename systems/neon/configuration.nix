@@ -62,4 +62,11 @@
   meenzen.services.minecraft.flip.enable = true;
   meenzen.services.glitchtip.enable = true;
   meenzen.services.lauti.enable = true;
+
+  networking.hosts = {
+    "95.217.150.38" = [
+      # Fix forgejo federation with local mastodon instance
+      "social.meenzen.net"
+    ];
+  };
 }
