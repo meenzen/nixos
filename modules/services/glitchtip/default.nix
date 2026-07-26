@@ -2,6 +2,7 @@
   config,
   lib,
   inputs,
+  pkgs-review,
   ...
 }: let
   cfg = config.meenzen.services.glitchtip;
@@ -33,6 +34,7 @@ in {
 
     services.glitchtip = {
       enable = true;
+      package = pkgs-review.glitchtip;
       environmentFiles = [config.age.secrets.glitchtipEnvironment.path];
       redis.createLocally = cfg.enableRedis;
       nginx = {

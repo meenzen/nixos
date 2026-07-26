@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  pkgs-review,
   inputs,
   ...
 }: let
@@ -35,7 +34,6 @@ in {
 
     services.draupnir = {
       enable = true;
-      package = pkgs-review.draupnir;
       settings = {
         homeserverUrl = "https://${config.meenzen.matrix.synapse.matrixDomain}";
         managementRoom = cfg.managementRoom;

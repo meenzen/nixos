@@ -5,8 +5,8 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
     # nixpkgs-review.url = "github:nixos/nixpkgs?ref=refs/pull/000000/head";
-    # pkgs/draupnir: add patch for package-lock.json
-    nixpkgs-review.url = "github:nixos/nixpkgs?ref=refs/pull/540955/head";
+    # glitchtip: fix build, see https://github.com/NixOS/nixpkgs/pull/545034
+    nixpkgs-review.url = "github:nixos/nixpkgs/nixos-unstable-small";
 
     # Determinate Nix
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
