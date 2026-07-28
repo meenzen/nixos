@@ -5,7 +5,6 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
     # nixpkgs-review.url = "github:nixos/nixpkgs?ref=refs/pull/000000/head";
-    # glitchtip: fix build, see https://github.com/NixOS/nixpkgs/pull/545034
     nixpkgs-review.url = "github:nixos/nixpkgs/nixos-unstable-small";
 
     # Determinate Nix
