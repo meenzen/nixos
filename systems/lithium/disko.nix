@@ -1,7 +1,7 @@
 {
   disko.devices = {
     disk = {
-      x = {
+      a = {
         type = "disk";
         device = "/dev/nvme0n1";
         content = {
@@ -27,25 +27,9 @@
           };
         };
       };
-      y = {
+      b = {
         type = "disk";
         device = "/dev/nvme1n1";
-        content = {
-          type = "gpt";
-          partitions = {
-            zfs = {
-              size = "100%";
-              content = {
-                type = "zfs";
-                pool = "zroot";
-              };
-            };
-          };
-        };
-      };
-      z = {
-        type = "disk";
-        device = "/dev/nvme2n1";
         content = {
           type = "gpt";
           partitions = {

@@ -21,10 +21,10 @@
   networking.hostName = "lithium";
   networking.domain = "localdomain";
   networking.hostId = "cd913f25";
-  system.stateVersion = "24.11";
+  system.stateVersion = "26.05";
 
   meenzen.server.enable = true;
-  meenzen.minecraft.enable = true;
+  meenzen.minecraft.enable = false;
 
   age.secrets = {
     gitlabRunnerLithiumNix = {
@@ -42,5 +42,5 @@
     nixRunnerConfigFile = config.age.secrets.gitlabRunnerLithiumNix.path;
     dockerRunnerConfigFile = config.age.secrets.gitlabRunnerLithiumDocker.path;
   };
-  meenzen.services.forgejo-runner.enable = true;
+  meenzen.services.forgejo-runner.enable = false;
 }
