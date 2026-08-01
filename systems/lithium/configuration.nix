@@ -14,7 +14,7 @@
     ./minecraft.nix
   ];
 
-  boot.zfs.forceImportRoot = false;
+  boot.zfs.forceImportRoot = true;
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
