@@ -1,7 +1,7 @@
 {
   disko.devices = {
     disk = {
-      a = {
+      main = {
         type = "disk";
         device = "/dev/nvme0n1";
         content = {
@@ -27,27 +27,10 @@
           };
         };
       };
-      b = {
-        type = "disk";
-        device = "/dev/nvme1n1";
-        content = {
-          type = "gpt";
-          partitions = {
-            zfs = {
-              size = "100%";
-              content = {
-                type = "zfs";
-                pool = "zroot";
-              };
-            };
-          };
-        };
-      };
     };
     zpool = {
       zroot = {
         type = "zpool";
-        mode = "raidz1";
         # Workaround: cannot import 'zroot': I/O error in disko tests
         options.cachefile = "none";
         rootFsOptions = {
