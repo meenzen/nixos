@@ -11,7 +11,6 @@
     ./disko.nix
     ./hardware-configuration.nix
     ./networking.nix
-    #./vms.nix
   ];
 
   boot.zfs.forceImportRoot = false;
