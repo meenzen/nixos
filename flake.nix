@@ -59,7 +59,6 @@
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
 
     # Miscellaneous
-    attic.url = "github:zhaofengli/attic";
     nixos-matrix-modules.url = "github:D4ndellion/nixos-matrix-modules";
   };
 
