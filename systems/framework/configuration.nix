@@ -21,7 +21,7 @@
   meenzen.desktop.enable = true;
   meenzen.plasma.tiling.enable = true;
   meenzen.hyprland.enable = false;
-  meenzen.latest-kernel.enable = false;
+  meenzen.latest-kernel.enable = true;
   meenzen.virt-manager.enable = true;
   meenzen.beeper.enable = true;
   meenzen.hardware.bluetooth.enable = true;
