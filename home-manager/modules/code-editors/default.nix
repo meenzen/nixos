@@ -1,5 +1,6 @@
 {
   pkgs,
+  pkgs-review,
   inputs,
   ...
 }: let
@@ -21,10 +22,11 @@ in {
     pkgs.okteta
 
     #pkgs.jetbrains-toolbox
-    (mkIde pkgs.jetbrains.rider)
     #(mkIde pkgs.jetbrains.rust-rover)
     #(mkIde pkgs.jetbrains.webstorm)
-    (mkIde pkgs.jetbrains.phpstorm)
+    # Temporary workaround
+    pkgs-review.jetbrains.rider
+    pkgs-review.jetbrains.phpstorm
   ];
 
   home.file.".ideavimrc".text = ''
