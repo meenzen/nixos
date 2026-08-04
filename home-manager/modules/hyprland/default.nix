@@ -57,7 +57,7 @@
         bind =
           [
             # programs
-            "$mod, B, exec, brave"
+            "$mod, B, exec, brave-origin"
             "$mod, D, exec, vesktop"
             "$mod, E, exec, $fileManager"
             "$mod, F, exec, firefox"

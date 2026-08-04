@@ -18,7 +18,7 @@ in {
 
   programs.chromium = {
     enable = true;
-    package = pkgs.brave.override {
+    package = pkgs.brave-origin.override {
       commandLineArgs = args;
     };
     extensions = [

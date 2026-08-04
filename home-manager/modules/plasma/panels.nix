@@ -25,7 +25,7 @@
                   "applications:org.kde.plasma-systemmonitor.desktop"
                   "applications:org.kde.dolphin.desktop"
                   "applications:org.wezfurlong.wezterm.desktop"
-                  "applications:brave-browser.desktop"
+                  "applications:brave-origin.desktop"
                 ]
                 ++ extraConfig.additionalPinnedApps;
             };
