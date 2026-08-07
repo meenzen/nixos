@@ -79,6 +79,7 @@
 
   meenzen.virt-manager.enable = true;
   meenzen.printing.enable = true;
+  meenzen.services.local-ai.enable = true;
 
   programs.ausweisapp = {
     enable = true;

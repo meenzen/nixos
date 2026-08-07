@@ -11,6 +11,7 @@
     ./glitchtip
     ./kener
     ./lauti
+    ./local-ai
     ./minecraft
     ./miniflux
     ./mnzn-website
