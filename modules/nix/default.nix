@@ -8,7 +8,7 @@
   nixpkgs = {
     config = {
       # Allow installing unfree packages
-      allowUnfree = true;
+      allowUnfree = lib.mkForce true;
       # see https://github.com/nix-community/home-manager/issues/2942
       allowUnfreePredicate = _: true;
     };
