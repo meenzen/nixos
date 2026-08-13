@@ -1,6 +1,5 @@
 {
   pkgs,
-  pkgs-review,
   inputs,
   ...
 }: let
@@ -25,8 +24,8 @@ in {
     #(mkIde pkgs.jetbrains.rust-rover)
     #(mkIde pkgs.jetbrains.webstorm)
     # Temporary workaround
-    pkgs-review.jetbrains.rider
-    pkgs-review.jetbrains.phpstorm
+    pkgs.jetbrains.rider
+    pkgs.jetbrains.phpstorm
   ];
 
   home.file.".ideavimrc".text = ''
