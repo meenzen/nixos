@@ -23,7 +23,6 @@ in {
     #pkgs.jetbrains-toolbox
     #(mkIde pkgs.jetbrains.rust-rover)
     #(mkIde pkgs.jetbrains.webstorm)
-    # Temporary workaround
     pkgs.jetbrains.rider
     pkgs.jetbrains.phpstorm
   ];
