@@ -25,6 +25,8 @@ in {
     meenzen.zsh.enable = !cfg.slim;
     meenzen.fish.enable = !cfg.slim;
     meenzen.fish.default = !cfg.slim;
+    meenzen.hardware.logitech.enable = !cfg.slim;
+    meenzen.hardware.uhk.enable = !cfg.slim;
 
     # KDE Partition Manager
     programs.partition-manager.enable = true;
