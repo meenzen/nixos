@@ -12,6 +12,9 @@ in {
 
   config = lib.mkIf cfg.enable {
     hardware.logitech.wireless.enable = true;
-    programs.solaar.enable = true;
+    programs.solaar = {
+      enable = true;
+      userService.enable = true;
+    };
   };
 }
