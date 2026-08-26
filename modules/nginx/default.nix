@@ -83,6 +83,9 @@ in {
       acceptTerms = true;
       defaults = {
         email = systemConfig.user.email;
+        # Make sure to reload Nginx, this should happen automatically, but just in case
+        reloadServices = ["nginx.service"];
+
         # Hell yeah, we absolutely want short-lived certs!
         # https://letsencrypt.org/docs/profiles/#shortlived
         profile = "shortlived";
