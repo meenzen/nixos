@@ -26,7 +26,14 @@ in {
 
     security.acme = {
       acceptTerms = true;
-      defaults.email = systemConfig.user.email;
+      defaults = {
+        email = systemConfig.user.email;
+        # Hell yeah, we absolutely want short-lived certs!
+        # https://letsencrypt.org/docs/profiles/#shortlived
+        profile = "shortlived";
+        renewInterval = "6h";
+        renewJitter = "1h";
+      };
       certs."${cfg.domain}" = {
         domain = cfg.domain;
         extraDomainNames = ["*.${cfg.domain}"];
