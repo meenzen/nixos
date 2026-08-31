@@ -31,7 +31,7 @@ in {
         # Hell yeah, we absolutely want short-lived certs!
         # https://letsencrypt.org/docs/profiles/#shortlived
         profile = "shortlived";
-        renewInterval = "6h";
+        renewInterval = "00/6:00:00";
         renewJitter = "1h";
       };
       certs."${cfg.domain}" = {
