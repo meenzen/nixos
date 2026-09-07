@@ -5,8 +5,8 @@
   };
 
   # Don't keep too many logs around
-  services.journald.extraConfig = ''
-    MaxRetentionSec=7day
-    SystemMaxUse=1G
-  '';
+  services.journald.settings.Journal = {
+    MaxRetentionSec = "7day";
+    SystemMaxUse = "1G";
+  };
 }
