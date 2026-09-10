@@ -6,10 +6,11 @@
   ...
 }: let
   cfg = config.meenzen.services.minecraft.flip;
+  revision = "0bb5b6c222a4fbb998dd8a6bb04304808cc9b36f";
   modpack = pkgs.fetchPackwizModpack {
-    url = "https://forge.mnzn.dev/FLiP/minecraft-modpack/raw/commit/82a5a1d431bc8b3fda14b449cf9cb2147b7fb00e/pack/pack.toml";
-    packHash = "sha256-+OnWFlfmXkOgJ/P7/2zzYTb3vCJNK27+T5LjDO9hLa8=";
-    manifestHash = "sha256:0b7ii5rzmhnlf1sx3sn851chffzra2a1k3rg0amqap71xppxg7lh";
+    url = "https://forge.mnzn.dev/FLiP/minecraft-modpack/raw/commit/${revision}/pack/pack.toml";
+    packHash = "sha256-cPD4a/zReurdENppS5Zmbt88QLy4e9MAyQrGuv9b15s=";
+    manifestHash = "sha256:03pxkxw73myhz2fksm9bfg9fpp0y2nn64z6awyggg7sh84sdj5n2";
   };
   mcVersion = modpack.manifest.versions.minecraft;
   fabricVersion = modpack.manifest.versions.fabric;
@@ -83,7 +84,7 @@ in {
       forceSSL = true;
       root = website;
       locations."/FLiP.mrpack" = {
-        return = "302 https://forge.mnzn.dev/api/packages/FLiP/generic/minecraft-modpack/latest/FLiP.mrpack";
+        return = "302 https://forge.mnzn.dev/api/packages/FLiP/generic/minecraft-modpack/${revision}/FLiP.mrpack";
       };
       extraConfig = ''
         add_header X-Robots-Tag "noindex, nofollow, nosnippet, noarchive";
