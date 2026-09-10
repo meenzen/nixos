@@ -1,6 +1,7 @@
 {
   imports = [
     ./acme-mnzn
+    ./anubis
     ./authelia
     ./conduit
     ./fluent-bit
