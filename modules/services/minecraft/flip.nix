@@ -82,6 +82,9 @@ in {
       useACMEHost = "mnzn.dev";
       forceSSL = true;
       root = website;
+      locations."/FLiP.mrpack" = {
+        return = "302 https://forge.mnzn.dev/api/packages/FLiP/generic/minecraft-modpack/latest/FLiP.mrpack";
+      };
       extraConfig = ''
         add_header X-Robots-Tag "noindex, nofollow, nosnippet, noarchive";
       '';
