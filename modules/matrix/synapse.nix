@@ -191,7 +191,7 @@ in {
 
         enableMetrics = true;
 
-        federationSenders = 2;
+        federationSenders = 4;
         federationReceivers = 2;
         initialSyncers = 1;
         normalSyncers = 1;
