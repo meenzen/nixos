@@ -54,7 +54,8 @@ in
       shellAliases = aliases;
       binds = {
         # Ctrl + Backspace to delete word
-        "ctrl-h".command = "backward-kill-word";
+        # temporany workaround: currently broken
+        #"ctrl-h".command = "backward-kill-word";
       };
       interactiveShellInit = ''
         # Disable default greeting message
