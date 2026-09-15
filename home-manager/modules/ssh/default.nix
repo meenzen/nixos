@@ -18,7 +18,7 @@
       "*" = {
         addKeysToAgent = "yes";
         compression = false;
-        connectTimeout = 5;
+        connectTimeout = 15;
         controlMaster = "auto";
         controlPath = "~/.ssh/master-%r@%n:%p";
         controlPersist = "60m";
