@@ -24,7 +24,7 @@
   system.stateVersion = "26.05";
 
   meenzen.server.enable = true;
-  meenzen.minecraft.enable = true;
+  meenzen.minecraft.enable = false;
 
   age.secrets = {
     gitlabRunnerLithiumNix = {
@@ -33,14 +33,6 @@
     gitlabRunnerLithiumDocker = {
       file = "${inputs.self}/secrets/gitlabRunnerLithiumDocker.age";
     };
-  };
-  meenzen.services.gitlab-runner = {
-    enable = false;
-    enableHardwareAcceleration = true;
-    concurrency = 8;
-    cleanupSchedule = "weekly";
-    nixRunnerConfigFile = config.age.secrets.gitlabRunnerLithiumNix.path;
-    dockerRunnerConfigFile = config.age.secrets.gitlabRunnerLithiumDocker.path;
   };
   meenzen.services.forgejo-runner.enable = true;
 }
