@@ -27,6 +27,8 @@ in {
     environment.systemPackages = with pkgs; [
       claude-code
       claude-monitor
+      # claude likes to use python, so let's install it
+      python3
     ];
   };
 }
