@@ -5,6 +5,6 @@ set -eo pipefail
 source "$(dirname "$0")/lib.sh"
 
 print_start "Building NixOS Configuration"
-alejandra_format
+lint
 
 nixos_rebuild "build" "." "$@"

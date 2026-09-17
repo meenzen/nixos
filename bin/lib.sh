@@ -67,6 +67,26 @@ alejandra_format () {
   fi
 }
 
+statix_lint () {
+  print_status "Running Statix Linter"
+  statix fix
+  if ! statix check >/dev/null 2>&1; then
+    print_error "Statix linting failed."
+
+    # Run statix again so that the user can see the error message
+    print_divider_error
+    statix check || true
+    print_divider_error
+
+    exit 1
+  fi
+}
+
+lint () {
+  statix_lint
+  alejandra_format
+}
+
 nixos_rebuild () {
   if [ -z "$1" ]; then
     print_error "No command provided for nixos_rebuild."

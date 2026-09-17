@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-set -eo pipefail
+set -ep pipefail
 
 source "$(dirname "$0")/lib.sh"
 
-alejandra_format
+lint
