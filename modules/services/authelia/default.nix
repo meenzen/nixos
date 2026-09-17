@@ -66,7 +66,7 @@ in {
 
     services.authelia.instances.${instance} = {
       enable = true;
-      inherit user;
+      user = user;
       secrets = {
         storageEncryptionKeyFile = config.age.secrets.autheliaStorageEncryptionKey.path;
         sessionSecretFile = config.age.secrets.autheliaSessionSecret.path;
@@ -126,7 +126,7 @@ in {
 
     services.redis.servers."${user}" = {
       enable = true;
-      inherit user;
+      user = user;
       unixSocket = "/var/run/redis-${user}/redis.sock";
       unixSocketPerm = 770;
     };

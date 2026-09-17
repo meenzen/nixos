@@ -179,7 +179,7 @@ in {
       enable = cfg.enableWorkers;
       enableNginx = cfg.enableWorkers;
       package = pkgs.matrix-synapse;
-      inherit plugins;
+      plugins = plugins;
 
       extraConfigFiles = [
         config.age.secrets.synapseConfig.path
@@ -238,7 +238,7 @@ in {
       enable = !cfg.enableWorkers;
       withJemalloc = true;
       enable_metrics = true;
-      inherit plugins;
+      plugins = plugins;
 
       extraConfigFiles = [
         config.age.secrets.synapseConfig.path
