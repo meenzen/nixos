@@ -28,16 +28,6 @@
 in {
   options.meenzen.matrix.element-call = {
     enable = lib.mkEnableOption "Enable Element Call";
-    domain = lib.mkOption {
-      type = lib.types.str;
-      default = "call.mnzn.dev";
-      description = "Domain for Element Call";
-    };
-    matrixBaseDomain = lib.mkOption {
-      type = lib.types.str;
-      default = "mnzn.dev";
-      description = "Domain for Matrix Server";
-    };
   };
 
   imports = [
@@ -54,39 +44,6 @@ in {
     services = {
       matrix-synapse.settings = synapseSettings;
       matrix-synapse-next.settings = synapseSettings;
-
-      nginx.virtualHosts.${cfg.domain} = {
-        useACMEHost = "mnzn.dev";
-        forceSSL = true;
-        root = pkgs.element-call;
-        extraConfig = ''
-          add_header X-Robots-Tag "noindex, nofollow, nosnippet, noarchive";
-        '';
-        locations = {
-          "/".extraConfig = ''
-            try_files $uri /$uri /index.html;
-            add_header Cache-Control "public, max-age=30, stale-while-revalidate=30";
-          '';
-          # assets can be cached because they have hashed filenames
-          "/assets".extraConfig = ''
-            add_header Cache-Control "public, immutable, max-age=31536000";
-          '';
-          "/config.json".extraConfig = ''
-            default_type application/json;
-            return 200 '${
-              builtins.toJSON {
-                default_server_config = {
-                  "m.homeserver" = {
-                    "base_url" = "https://matrix.${cfg.matrixBaseDomain}";
-                    "server_name" = cfg.matrixBaseDomain;
-                  };
-                };
-                livekit.livekit_service_url = "https://${config.meenzen.lk-jwt-service.domain}";
-              }
-            }';
-          '';
-        };
-      };
     };
   };
 }
