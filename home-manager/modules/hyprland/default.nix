@@ -124,24 +124,26 @@
     programs.hyprpanel = {
       enable = false;
       settings = {
-        bar.battery.label = true;
-        bar.bluetooth.label = false;
-        bar.clock.format = "%H:%M:%S";
-        bar.layouts = {
-          "*" = {
-            left = [
-              "clock"
-              "battery"
-              "workspaces"
-            ];
-            middle = ["windowtitle"];
-            right = [
-              "systray"
-              "volume"
-              "network"
-              "bluetooth"
-              "notifications"
-            ];
+        bar = {
+          battery.label = true;
+          bluetooth.label = false;
+          clock.format = "%H:%M:%S";
+          layouts = {
+            "*" = {
+              left = [
+                "clock"
+                "battery"
+                "workspaces"
+              ];
+              middle = ["windowtitle"];
+              right = [
+                "systray"
+                "volume"
+                "network"
+                "bluetooth"
+                "notifications"
+              ];
+            };
           };
         };
         theme.bar.transparent = true;

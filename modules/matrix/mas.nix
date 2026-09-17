@@ -40,8 +40,6 @@ in {
       };
     };
 
-    services.matrix-synapse.extras = ["oidc"];
-
     meenzen.matrix.mas.configFile = lib.mkDefault (
       pkgs.writeTextFile {
         name = "mas-config.yaml";
@@ -125,13 +123,14 @@ in {
       )
     ];
 
-    users.users."${serviceName}" = {
-      isSystemUser = true;
-      group = serviceName;
-      description = "MAS service user";
+    users = {
+      users."${serviceName}" = {
+        isSystemUser = true;
+        group = serviceName;
+        description = "MAS service user";
+      };
+      groups."${serviceName}" = {};
     };
-
-    users.groups."${serviceName}" = {};
 
     systemd.services."${serviceName}" = {
       enable = true;
@@ -148,33 +147,40 @@ in {
       };
     };
 
-    services.postgresql = {
-      ensureUsers = [
-        {
-          name = serviceName;
-          ensureDBOwnership = true;
-        }
-      ];
-      ensureDatabases = [serviceName];
-    };
+    services = {
+      matrix-synapse.extras = ["oidc"];
 
-    services.nginx.virtualHosts."${cfg.domain}" = {
-      useACMEHost = "mnzn.dev";
-      forceSSL = true;
-      locations."/".proxyPass = "http://[::1]:${toString cfg.port}";
-      locations."/assets" = {
-        root = "${cfg.package}/share/matrix-authentication-service";
-        extraConfig = ''
-          add_header Cache-Control "public, immutable, max-age=31536000";
-        '';
+      postgresql = {
+        ensureUsers = [
+          {
+            name = serviceName;
+            ensureDBOwnership = true;
+          }
+        ];
+        ensureDatabases = [serviceName];
       };
-      extraConfig = ''
-        add_header X-Robots-Tag "noindex, nofollow, nosnippet, noarchive";
-      '';
-    };
 
-    services.nginx.virtualHosts."${config.meenzen.matrix.synapse.matrixDomain}" = {
-      locations."~ ^/_matrix/client/(.*)/(login|logout|refresh)".proxyPass = "http://[::1]:${toString cfg.port}";
+      nginx.virtualHosts = {
+        "${cfg.domain}" = {
+          useACMEHost = "mnzn.dev";
+          forceSSL = true;
+          locations = {
+            "/".proxyPass = "http://[::1]:${toString cfg.port}";
+            "/assets" = {
+              root = "${cfg.package}/share/matrix-authentication-service";
+              extraConfig = ''
+                add_header Cache-Control "public, immutable, max-age=31536000";
+              '';
+            };
+          };
+          extraConfig = ''
+            add_header X-Robots-Tag "noindex, nofollow, nosnippet, noarchive";
+          '';
+        };
+        "${config.meenzen.matrix.synapse.matrixDomain}" = {
+          locations."~ ^/_matrix/client/(.*)/(login|logout|refresh)".proxyPass = "http://[::1]:${toString cfg.port}";
+        };
+      };
     };
   };
 }

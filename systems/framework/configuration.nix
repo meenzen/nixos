@@ -12,33 +12,39 @@
   ];
 
   system.stateVersion = "23.11";
-  networking.hostName = "framework";
-  networking.networkmanager.enable = true;
-  networking.firewall.enable = true;
+  networking = {
+    hostName = "framework";
+    networkmanager.enable = true;
+    firewall.enable = true;
+  };
   boot.initrd.luks.devices."luks-d72b6916-393c-4db9-8194-6d48d1cf5189".device = "/dev/disk/by-uuid/d72b6916-393c-4db9-8194-6d48d1cf5189";
 
-  meenzen.distributed-build.enable = false;
-  meenzen.desktop.enable = true;
-  meenzen.plasma.tiling.enable = true;
-  meenzen.hyprland.enable = false;
-  meenzen.latest-kernel.enable = true;
-  meenzen.virt-manager.enable = true;
-  meenzen.beeper.enable = true;
-  meenzen.hardware.bluetooth.enable = true;
-  meenzen.hardware.uhk.enable = true;
-  meenzen.hardware.esp32.enable = true;
-  meenzen.home-manager.extraConfig = {
-    additionalPinnedApps = [
-      "applications:google-chrome.desktop"
-      "applications:rider.desktop"
-    ];
-    additionalShownSystemTrayItems = [
-      "org.kde.plasma.battery"
-    ];
+  meenzen = {
+    distributed-build.enable = false;
+    desktop.enable = true;
+    plasma.tiling.enable = true;
+    hyprland.enable = false;
+    latest-kernel.enable = true;
+    virt-manager.enable = true;
+    beeper.enable = true;
+    hardware = {
+      bluetooth.enable = true;
+      uhk.enable = true;
+      esp32.enable = true;
+    };
+    home-manager.extraConfig = {
+      additionalPinnedApps = [
+        "applications:google-chrome.desktop"
+        "applications:rider.desktop"
+      ];
+      additionalShownSystemTrayItems = [
+        "org.kde.plasma.battery"
+      ];
+    };
+    printing.enable = true;
+    plymouth.enable = true;
+    remote-desktop.enable = true;
+    winboat.enable = false;
+    work.enable = true;
   };
-  meenzen.printing.enable = true;
-  meenzen.plymouth.enable = true;
-  meenzen.remote-desktop.enable = true;
-  meenzen.winboat.enable = false;
-  meenzen.work.enable = true;
 }

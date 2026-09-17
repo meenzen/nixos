@@ -32,12 +32,14 @@ in {
   ];
 
   config = lib.mkIf cfg.enable {
-    meenzen.loki.enable = true;
-    meenzen.nginx-exporter.enable = true;
-    meenzen.node-exporter.enable = true;
-    meenzen.postgres-exporter.enable = true;
-    meenzen.prometheus.enable = true;
-    meenzen.tempo.enable = true;
+    meenzen = {
+      loki.enable = true;
+      nginx-exporter.enable = true;
+      node-exporter.enable = true;
+      postgres-exporter.enable = true;
+      prometheus.enable = true;
+      tempo.enable = true;
+    };
 
     age.secrets = {
       grafanaAdminPassword = {
@@ -52,39 +54,41 @@ in {
       };
     };
 
-    services.grafana = {
-      enable = true;
-      settings = {
-        server = {
-          http_addr = "127.0.0.1";
-          http_port = cfg.port;
-          domain = cfg.domain;
-          root_url = "https://${cfg.domain}/";
-          enable_gzip = true;
-          enforce_domain = true;
+    services = {
+      grafana = {
+        enable = true;
+        settings = {
+          server = {
+            http_addr = "127.0.0.1";
+            http_port = cfg.port;
+            domain = cfg.domain;
+            root_url = "https://${cfg.domain}/";
+            enable_gzip = true;
+            enforce_domain = true;
+          };
+          security = {
+            cookie_secure = true;
+            admin_password = "$__file{${config.age.secrets.grafanaAdminPassword.path}}";
+            secret_key = "$__file{${config.age.secrets.grafanaSecretKey.path}}";
+          };
         };
-        security = {
-          cookie_secure = true;
-          admin_password = "$__file{${config.age.secrets.grafanaAdminPassword.path}}";
-          secret_key = "$__file{${config.age.secrets.grafanaSecretKey.path}}";
-        };
+
+        provision.enable = true;
       };
 
-      provision.enable = true;
-    };
-
-    services.nginx = {
-      enable = true;
-      virtualHosts."${cfg.domain}" = {
-        forceSSL = true;
-        useACMEHost = "mnzn.dev";
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:${toString cfg.port}";
-          proxyWebsockets = true;
+      nginx = {
+        enable = true;
+        virtualHosts."${cfg.domain}" = {
+          forceSSL = true;
+          useACMEHost = "mnzn.dev";
+          locations."/" = {
+            proxyPass = "http://127.0.0.1:${toString cfg.port}";
+            proxyWebsockets = true;
+          };
+          extraConfig = ''
+            add_header X-Robots-Tag "noindex, nofollow, nosnippet, noarchive";
+          '';
         };
-        extraConfig = ''
-          add_header X-Robots-Tag "noindex, nofollow, nosnippet, noarchive";
-        '';
       };
     };
   };

@@ -28,39 +28,41 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    services.tempo = {
-      enable = true;
-      settings = {
-        server = {
-          http_listen_port = cfg.port;
-          grpc_listen_port = cfg.grpc-port;
+    services = {
+      tempo = {
+        enable = true;
+        settings = {
+          server = {
+            http_listen_port = cfg.port;
+            grpc_listen_port = cfg.grpc-port;
+          };
+          distributor.receivers.otlp.protocols.grpc.endpoint = "127.0.0.1:${toString cfg.otlp-port}";
+          backend_worker.compaction.block_retention = "168h"; # 7 days
+          storage.trace = {
+            backend = "local";
+            local.path = "/var/lib/tempo/blocks";
+            wal.path = "/var/lib/tempo/wal";
+          };
+          live_store = {
+            shutdown_marker_dir = "/var/lib/tempo/live-store/shutdown-marker";
+            wal.path = "/var/lib/tempo/live-store/traces";
+          };
+          backend_scheduler.local_work_path = "/var/lib/tempo";
+          block_builder.wal.path = "/var/lib/tempo/block-builder/traces";
         };
-        distributor.receivers.otlp.protocols.grpc.endpoint = "127.0.0.1:${toString cfg.otlp-port}";
-        backend_worker.compaction.block_retention = "168h"; # 7 days
-        storage.trace = {
-          backend = "local";
-          local.path = "/var/lib/tempo/blocks";
-          wal.path = "/var/lib/tempo/wal";
-        };
-        live_store = {
-          shutdown_marker_dir = "/var/lib/tempo/live-store/shutdown-marker";
-          wal.path = "/var/lib/tempo/live-store/traces";
-        };
-        backend_scheduler.local_work_path = "/var/lib/tempo";
-        block_builder.wal.path = "/var/lib/tempo/block-builder/traces";
       };
-    };
 
-    services.grafana.provision.datasources.settings.datasources = [
-      {
-        name = "Tempo";
-        type = "tempo";
-        access = "proxy";
-        orgId = 1;
-        url = "http://127.0.0.1:${toString cfg.port}";
-        basicAuth = false;
-        editable = false;
-      }
-    ];
+      grafana.provision.datasources.settings.datasources = [
+        {
+          name = "Tempo";
+          type = "tempo";
+          access = "proxy";
+          orgId = 1;
+          url = "http://127.0.0.1:${toString cfg.port}";
+          basicAuth = false;
+          editable = false;
+        }
+      ];
+    };
   };
 }

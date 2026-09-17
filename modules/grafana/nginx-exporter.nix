@@ -28,34 +28,37 @@ in {
   };
 
   config = lib.mkIf (cfg.enable && config.services.nginx.enable) {
-    services.nginx.statusPage = true;
-    services.prometheus = {
-      exporters = {
-        nginx = {
-          enable = true;
-          port = cfg.port;
+    services = {
+      nginx.statusPage = true;
+
+      prometheus = {
+        exporters = {
+          nginx = {
+            enable = true;
+            port = cfg.port;
+          };
         };
+        scrapeConfigs = [
+          {
+            job_name = "nginx";
+            static_configs = [
+              {
+                targets = ["127.0.0.1:${toString cfg.port}"];
+                labels = {
+                  instance = fullHostname;
+                };
+              }
+            ];
+          }
+        ];
       };
-      scrapeConfigs = [
+
+      grafana.provision.dashboards.settings.providers = [
         {
-          job_name = "nginx";
-          static_configs = [
-            {
-              targets = ["127.0.0.1:${toString cfg.port}"];
-              labels = {
-                instance = fullHostname;
-              };
-            }
-          ];
+          name = "nginx-prometheus-exporter";
+          options.path = "${exporter}/grafana/dashboard.json";
         }
       ];
     };
-
-    services.grafana.provision.dashboards.settings.providers = [
-      {
-        name = "nginx-prometheus-exporter";
-        options.path = "${exporter}/grafana/dashboard.json";
-      }
-    ];
   };
 }

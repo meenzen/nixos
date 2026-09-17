@@ -117,58 +117,60 @@ in {
 
     meenzen.backup.paths = ["/var/lib/mastodon"];
 
-    services.mastodon = {
-      enable = true;
-      localDomain = cfg.domain;
-      configureNginx = true;
-      extraConfig = {
-        SINGLE_USER_MODE = "false";
-        DEFAULT_LOCALE = "de";
+    services = {
+      mastodon = {
+        enable = true;
+        localDomain = cfg.domain;
+        configureNginx = true;
+        extraConfig = {
+          SINGLE_USER_MODE = "false";
+          DEFAULT_LOCALE = "de";
 
-        S3_OPEN_TIMEOUT = "10";
-        S3_READ_TIMEOUT = "10";
-        S3_ENABLED = "true";
-        S3_BUCKET = cfg.cdnBucketName;
-        S3_PROTOCOL = "https";
-        S3_ENDPOINT = "https://${cfg.cdnBucketDomain}/";
-        S3_HOSTNAME = cfg.cdnDomain;
-        S3_ALIAS_HOST = cfg.cdnDomain;
-        S3_SIGNATURE_VERSION = "v4";
-      };
-      webProcesses = 1;
-      streamingProcesses = 1;
-      sidekiqThreads = 10;
-      secretKeyBaseFile = config.age.secrets.mastodonSecretKeyBase.path;
-      vapidPublicKeyFile = config.age.secrets.mastodonVapidPublicKey.path;
-      vapidPrivateKeyFile = config.age.secrets.mastodonVapidPrivateKey.path;
-      activeRecordEncryptionPrimaryKeyFile = config.age.secrets.mastodonActiveRecordPrimaryKey.path;
-      activeRecordEncryptionKeyDerivationSaltFile = config.age.secrets.mastodonActiveRecordSalt.path;
-      activeRecordEncryptionDeterministicKeyFile = config.age.secrets.mastodonActiveRecordDeterministicKey.path;
-      extraEnvFiles = [
-        config.age.secrets.mastodonS3Config.path
-      ];
-      smtp = {
-        createLocally = false;
-        fromAddress = "Mastodon <mastodon@meenzen.net>";
-        authenticate = true;
-        host = "mail.meenzen.net";
-        port = 587;
-        user = "all@meenzen.net";
-        passwordFile = config.age.secrets.mastodonEmailPassword.path;
-      };
-      mediaAutoRemove = {
-        enable = false; # This is already handled by the cleanup script
-        startAt = "daily";
-        olderThanDays = cfg.cleanupDays;
+          S3_OPEN_TIMEOUT = "10";
+          S3_READ_TIMEOUT = "10";
+          S3_ENABLED = "true";
+          S3_BUCKET = cfg.cdnBucketName;
+          S3_PROTOCOL = "https";
+          S3_ENDPOINT = "https://${cfg.cdnBucketDomain}/";
+          S3_HOSTNAME = cfg.cdnDomain;
+          S3_ALIAS_HOST = cfg.cdnDomain;
+          S3_SIGNATURE_VERSION = "v4";
+        };
+        webProcesses = 1;
+        streamingProcesses = 1;
+        sidekiqThreads = 10;
+        secretKeyBaseFile = config.age.secrets.mastodonSecretKeyBase.path;
+        vapidPublicKeyFile = config.age.secrets.mastodonVapidPublicKey.path;
+        vapidPrivateKeyFile = config.age.secrets.mastodonVapidPrivateKey.path;
+        activeRecordEncryptionPrimaryKeyFile = config.age.secrets.mastodonActiveRecordPrimaryKey.path;
+        activeRecordEncryptionKeyDerivationSaltFile = config.age.secrets.mastodonActiveRecordSalt.path;
+        activeRecordEncryptionDeterministicKeyFile = config.age.secrets.mastodonActiveRecordDeterministicKey.path;
+        extraEnvFiles = [
+          config.age.secrets.mastodonS3Config.path
+        ];
+        smtp = {
+          createLocally = false;
+          fromAddress = "Mastodon <mastodon@meenzen.net>";
+          authenticate = true;
+          host = "mail.meenzen.net";
+          port = 587;
+          user = "all@meenzen.net";
+          passwordFile = config.age.secrets.mastodonEmailPassword.path;
+        };
+        mediaAutoRemove = {
+          enable = false; # This is already handled by the cleanup script
+          startAt = "daily";
+          olderThanDays = cfg.cleanupDays;
+        };
+
+        elasticsearch.host =
+          if cfg.enableSearch
+          then "localhost"
+          else null;
       };
 
-      elasticsearch.host =
-        if cfg.enableSearch
-        then "localhost"
-        else null;
+      opensearch.enable = cfg.enableSearch;
     };
-
-    services.opensearch.enable = cfg.enableSearch;
     networking.firewall.allowedTCPPorts = lib.mkIf cfg.enableSearch [9200];
 
     environment.systemPackages = [

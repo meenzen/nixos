@@ -61,78 +61,82 @@ in {
 
     meenzen.backup.paths = [cfg.certDirectory];
 
-    services.postgresql = {
-      ensureUsers = [
-        {
-          name = serviceName;
-          ensureDBOwnership = true;
-        }
-      ];
-      ensureDatabases = [serviceName];
-    };
+    services = {
+      postgresql = {
+        ensureUsers = [
+          {
+            name = serviceName;
+            ensureDBOwnership = true;
+          }
+        ];
+        ensureDatabases = [serviceName];
+      };
 
-    services.gitlab = {
-      extraConfig = {
+      gitlab = {
+        extraConfig = {
+          registry = {
+            # Unset registry port so that "registry.example.org" instead of "registry.example.org:443" is used
+            # as the registry URL in the GitLab UI.
+            port = null;
+            database = databaseConfig;
+          };
+        };
         registry = {
-          # Unset registry port so that "registry.example.org" instead of "registry.example.org:443" is used
-          # as the registry URL in the GitLab UI.
-          port = null;
+          enable = true;
+          port = cfg.port;
+          externalAddress = cfg.domain;
+          externalPort = 443;
+
+          # This certificate is automatically generated and only used for jwt signing.
+          certFile = "${cfg.certDirectory}/registry_auth_cert";
+          keyFile = "${cfg.certDirectory}/registry_auth_key";
+        };
+      };
+
+      dockerRegistry = {
+        # disable local filesystem storage
+        storagePath = null;
+        extraConfig = {
+          # configuration reference: https://gitlab.com/gitlab-org/container-registry/-/blob/master/docs/configuration.md
+          storage = {
+            s3 = {
+              # Override secrets using environment variables REGISTRY_STORAGE_S3_ACCESSKEY and REGISTRY_STORAGE_S3_SECRETKEY
+              accesskey = "";
+              secretkey = "";
+              bucket = cfg.s3.bucket;
+              region = cfg.s3.region;
+              regionendpoint = cfg.s3.regionEndpoint;
+              maxrequestspersecond = 100;
+              chunksize = 104857600;
+            };
+            redirect.disable = true;
+          };
           database = databaseConfig;
         };
       };
-      registry = {
-        enable = true;
-        port = cfg.port;
-        externalAddress = cfg.domain;
-        externalPort = 443;
-
-        # This certificate is automatically generated and only used for jwt signing.
-        certFile = "${cfg.certDirectory}/registry_auth_cert";
-        keyFile = "${cfg.certDirectory}/registry_auth_key";
-      };
     };
 
-    services.dockerRegistry = {
-      # disable local filesystem storage
-      storagePath = null;
-      extraConfig = {
-        # configuration reference: https://gitlab.com/gitlab-org/container-registry/-/blob/master/docs/configuration.md
-        storage = {
-          s3 = {
-            # Override secrets using environment variables REGISTRY_STORAGE_S3_ACCESSKEY and REGISTRY_STORAGE_S3_SECRETKEY
-            accesskey = "";
-            secretkey = "";
-            bucket = cfg.s3.bucket;
-            region = cfg.s3.region;
-            regionendpoint = cfg.s3.regionEndpoint;
-            maxrequestspersecond = 100;
-            chunksize = 104857600;
-          };
-          redirect.disable = true;
+    systemd.services = {
+      docker-registry = {
+        after = ["postgresql.target" "gitlab-registry-migrate.service"];
+        requires = ["postgresql.target" "gitlab-registry-migrate.service"];
+        wants = ["gitlab-registry-migrate.service"];
+        serviceConfig.EnvironmentFile = config.age.secrets.gitlabRegistryEnvironment.path;
+      };
+
+      gitlab-registry-migrate = {
+        after = ["postgresql.target"];
+        requires = ["postgresql.target"];
+        wantedBy = ["multi-user.target"];
+        serviceConfig = {
+          Type = "oneshot";
+          TimeoutSec = "infinity";
+          Restart = "on-failure";
+          User = serviceName;
+          Group = serviceName;
+          EnvironmentFile = config.age.secrets.gitlabRegistryEnvironment.path;
+          ExecStart = "${registryBin} database migrate up ${config.services.dockerRegistry.configFile}";
         };
-        database = databaseConfig;
-      };
-    };
-
-    systemd.services.docker-registry = {
-      after = ["postgresql.target" "gitlab-registry-migrate.service"];
-      requires = ["postgresql.target" "gitlab-registry-migrate.service"];
-      wants = ["gitlab-registry-migrate.service"];
-      serviceConfig.EnvironmentFile = config.age.secrets.gitlabRegistryEnvironment.path;
-    };
-
-    systemd.services.gitlab-registry-migrate = {
-      after = ["postgresql.target"];
-      requires = ["postgresql.target"];
-      wantedBy = ["multi-user.target"];
-      serviceConfig = {
-        Type = "oneshot";
-        TimeoutSec = "infinity";
-        Restart = "on-failure";
-        User = serviceName;
-        Group = serviceName;
-        EnvironmentFile = config.age.secrets.gitlabRegistryEnvironment.path;
-        ExecStart = "${registryBin} database migrate up ${config.services.dockerRegistry.configFile}";
       };
     };
 

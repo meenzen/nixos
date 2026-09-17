@@ -19,10 +19,12 @@ in {
   ];
 
   config = lib.mkIf cfg.enable {
-    meenzen.matrix.draupnir.enable = true;
-    meenzen.matrix.element-call.enable = true;
-    meenzen.matrix.mas.enable = true;
-    meenzen.matrix.synapse.enable = true;
-    meenzen.matrix.synapse.enableWorkers = true;
+    meenzen.matrix = {
+      draupnir.enable = true;
+      element-call.enable = true;
+      mas.enable = true;
+      synapse.enable = true;
+      synapse.enableWorkers = true;
+    };
   };
 }

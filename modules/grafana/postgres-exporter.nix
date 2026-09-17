@@ -35,39 +35,41 @@ in {
   };
 
   config = lib.mkIf (cfg.enable && config.services.postgresql.enable) {
-    services.prometheus = {
-      exporters = {
-        postgres = {
-          enable = true;
-          port = cfg.port;
-          runAsLocalSuperUser = true;
-          extraFlags = ["--auto-discover-databases"];
+    services = {
+      prometheus = {
+        exporters = {
+          postgres = {
+            enable = true;
+            port = cfg.port;
+            runAsLocalSuperUser = true;
+            extraFlags = ["--auto-discover-databases"];
+          };
         };
+        scrapeConfigs = [
+          {
+            job_name = "postgres";
+            static_configs = [
+              {
+                targets = ["127.0.0.1:${toString cfg.port}"];
+                labels = {
+                  instance = fullHostname;
+                };
+              }
+            ];
+          }
+        ];
       };
-      scrapeConfigs = [
+
+      grafana.provision.dashboards.settings.providers = [
         {
-          job_name = "postgres";
-          static_configs = [
-            {
-              targets = ["127.0.0.1:${toString cfg.port}"];
-              labels = {
-                instance = fullHostname;
-              };
-            }
-          ];
+          name = "postgres-exporter";
+          options.path = "${exporter}/postgres_mixin/dashboards/postgres-overview.json";
+        }
+        {
+          name = "postgres-database";
+          options.path = "${dashboards}/dashboards/postgresql-database.json";
         }
       ];
     };
-
-    services.grafana.provision.dashboards.settings.providers = [
-      {
-        name = "postgres-exporter";
-        options.path = "${exporter}/postgres_mixin/dashboards/postgres-overview.json";
-      }
-      {
-        name = "postgres-database";
-        options.path = "${dashboards}/dashboards/postgresql-database.json";
-      }
-    ];
   };
 }

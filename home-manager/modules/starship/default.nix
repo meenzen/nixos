@@ -51,58 +51,98 @@
       };
 
       # Packages
-      aws.symbol = ''  '';
-      aws.format = ''\[[$symbol($profile)(\($region\))(\[$duration\])]($style)\]'';
-      aws.disabled = true;
+      aws = {
+        symbol = ''  '';
+        format = ''\[[$symbol($profile)(\($region\))(\[$duration\])]($style)\]'';
+        disabled = true;
+      };
       buf.symbol = '' '';
       bun.format = ''\[[$symbol($version)]($style)\]'';
-      c.symbol = '' '';
-      c.format = ''\[[$symbol($version(-$name))]($style)\]'';
+      c = {
+        symbol = '' '';
+        format = ''\[[$symbol($version(-$name))]($style)\]'';
+      };
       cmake.format = ''\[[$symbol($version)]($style)\]'';
       cmd_duration.format = ''\[[⏱ $duration]($style)\]'';
       cobol.format = ''\[[$symbol($version)]($style)\]'';
-      conda.symbol = " ";
-      conda.format = ''\[[$symbol$environment]($style)\]'';
-      dart.symbol = " ";
-      dart.format = ''\[[$symbol($version)]($style)\]'';
-      docker_context.symbol = " ";
-      docker_context.format = ''\[[$symbol$context]($style)\]'';
-      elixir.symbol = " ";
-      elixir.format = ''\[[$symbol($version \(OTP $otp_version\))]($style)\]'';
-      elm.symbol = " ";
-      elm.format = ''\[[$symbol($version)]($style)\]'';
-      git_branch.symbol = " ";
-      git_branch.format = ''\[[$symbol$branch]($style)\]'';
-      git_status.format = ''([\[$all_status$ahead_behind\]]($style))'';
-      git_status.behind = "↓$count";
-      git_status.ahead = "↑$count";
-      golang.symbol = " ";
-      golang.format = ''\[[$symbol($version)]($style)\]'';
-      haskell.symbol = " ";
-      haskell.format = ''\[[$symbol($version)]($style)\]'';
-      hg_branch.symbol = " ";
-      hg_branch.format = ''\[[$symbol$branch]($style)\]'';
-      java.symbol = " ";
-      java.format = ''\[[$symbol($version)]($style)\]'';
-      julia.format = ''\[[$symbol($version)]($style)\]'';
-      julia.symbol = " ";
+      conda = {
+        symbol = " ";
+        format = ''\[[$symbol$environment]($style)\]'';
+      };
+      dart = {
+        symbol = " ";
+        format = ''\[[$symbol($version)]($style)\]'';
+      };
+      docker_context = {
+        symbol = " ";
+        format = ''\[[$symbol$context]($style)\]'';
+      };
+      elixir = {
+        symbol = " ";
+        format = ''\[[$symbol($version \(OTP $otp_version\))]($style)\]'';
+      };
+      elm = {
+        symbol = " ";
+        format = ''\[[$symbol($version)]($style)\]'';
+      };
+      git_branch = {
+        symbol = " ";
+        format = ''\[[$symbol$branch]($style)\]'';
+      };
+      git_status = {
+        format = ''([\[$all_status$ahead_behind\]]($style))'';
+        behind = "↓$count";
+        ahead = "↑$count";
+      };
+      golang = {
+        symbol = " ";
+        format = ''\[[$symbol($version)]($style)\]'';
+      };
+      haskell = {
+        symbol = " ";
+        format = ''\[[$symbol($version)]($style)\]'';
+      };
+      hg_branch = {
+        symbol = " ";
+        format = ''\[[$symbol$branch]($style)\]'';
+      };
+      java = {
+        symbol = " ";
+        format = ''\[[$symbol($version)]($style)\]'';
+      };
+      julia = {
+        format = ''\[[$symbol($version)]($style)\]'';
+        symbol = " ";
+      };
       kotlin.format = ''\[[$symbol($version)]($style)\]'';
-      lua.symbol = " ";
-      lua.format = ''\[[$symbol($version)]($style)\]'';
+      lua = {
+        symbol = " ";
+        format = ''\[[$symbol($version)]($style)\]'';
+      };
       memory_usage.format = ''\[$symbol[$ram( | $swap)]($style)\]'';
       nim.format = ''\[[$symbol($version)]($style)\]'';
-      nix_shell.symbol = " ";
-      nix_shell.format = ''\[[$symbol$state( \($name\))]($style)\]'';
-      nodejs.symbol = '' '';
-      nodejs.format = ''\[[$symbol($version)]($style)\]'';
+      nix_shell = {
+        symbol = " ";
+        format = ''\[[$symbol$state( \($name\))]($style)\]'';
+      };
+      nodejs = {
+        symbol = '' '';
+        format = ''\[[$symbol($version)]($style)\]'';
+      };
       package.format = ''\[[$symbol$version]($style)\]'';
-      python.symbol = " ";
-      python.format = ''\[[''${symbol}''${pyenv_prefix}(''${version})(\($virtualenv\))]($style)\]'';
+      python = {
+        symbol = " ";
+        format = ''\[[''${symbol}''${pyenv_prefix}(''${version})(\($virtualenv\))]($style)\]'';
+      };
       rlang.symbol = "ﳒ ";
-      ruby.symbol = " ";
-      ruby.format = ''\[[$symbol($version)]($style)\]'';
-      rust.symbol = " ";
-      rust.format = ''\[[$symbol($version)]($style)\]'';
+      ruby = {
+        symbol = " ";
+        format = ''\[[$symbol($version)]($style)\]'';
+      };
+      rust = {
+        symbol = " ";
+        format = ''\[[$symbol($version)]($style)\]'';
+      };
       spack.symbol = "🅢 ";
       spack.format = ''\[[$symbol$environment]($style)\]'';
       crystal.format = ''\[[$symbol($version)]($style)\]'';

@@ -14,17 +14,25 @@
     ./minecraft.nix
   ];
 
-  boot.zfs.forceImportRoot = true;
-
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  networking.hostName = "lithium";
-  networking.domain = "localdomain";
-  networking.hostId = "cd913f25";
+  boot = {
+    zfs.forceImportRoot = true;
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+  };
+  networking = {
+    hostName = "lithium";
+    domain = "localdomain";
+    hostId = "cd913f25";
+  };
   system.stateVersion = "26.05";
 
-  meenzen.server.enable = true;
-  meenzen.minecraft.enable = false;
+  meenzen = {
+    server.enable = true;
+    minecraft.enable = false;
+    services.forgejo-runner.enable = true;
+  };
 
   age.secrets = {
     gitlabRunnerLithiumNix = {
@@ -34,5 +42,4 @@
       file = "${inputs.self}/secrets/gitlabRunnerLithiumDocker.age";
     };
   };
-  meenzen.services.forgejo-runner.enable = true;
 }

@@ -62,95 +62,99 @@ in {
       };
     };
 
-    meenzen.backup.paths = [directory];
+    meenzen = {
+      backup.paths = [directory];
+      postgresql.enable = true;
+    };
 
-    services.authelia.instances.${instance} = {
-      enable = true;
-      user = user;
-      secrets = {
-        storageEncryptionKeyFile = config.age.secrets.autheliaStorageEncryptionKey.path;
-        sessionSecretFile = config.age.secrets.autheliaSessionSecret.path;
-        oidcIssuerPrivateKeyFile = config.age.secrets.autheliaOidcIssuerPrivateKey.path;
-        oidcHmacSecretFile = config.age.secrets.autheliaOidcHmacSecret.path;
-        jwtSecretFile = config.age.secrets.autheliaJwtSecret.path;
-      };
-      settingsFiles = [
-        config.age.secrets.autheliaEmailConfiguration.path
-        config.age.secrets.autheliaOidcClientConfiguration.path
-      ];
-      settings = {
-        theme = "auto";
-        default_2fa_method = "webauthn";
-        access_control = {
-          default_policy = "one_factor";
+    services = {
+      authelia.instances.${instance} = {
+        enable = true;
+        user = user;
+        secrets = {
+          storageEncryptionKeyFile = config.age.secrets.autheliaStorageEncryptionKey.path;
+          sessionSecretFile = config.age.secrets.autheliaSessionSecret.path;
+          oidcIssuerPrivateKeyFile = config.age.secrets.autheliaOidcIssuerPrivateKey.path;
+          oidcHmacSecretFile = config.age.secrets.autheliaOidcHmacSecret.path;
+          jwtSecretFile = config.age.secrets.autheliaJwtSecret.path;
         };
-        authentication_backend = {
-          file = {
-            watch = true;
-            search = {
-              email = true;
-              case_insensitive = true;
-            };
-            path = "${directory}/users.yml";
-            extra_attributes = {
-              nextcloud_user = {
-                multi_valued = false;
-                value_type = "string";
+        settingsFiles = [
+          config.age.secrets.autheliaEmailConfiguration.path
+          config.age.secrets.autheliaOidcClientConfiguration.path
+        ];
+        settings = {
+          theme = "auto";
+          default_2fa_method = "webauthn";
+          access_control = {
+            default_policy = "one_factor";
+          };
+          authentication_backend = {
+            file = {
+              watch = true;
+              search = {
+                email = true;
+                case_insensitive = true;
+              };
+              path = "${directory}/users.yml";
+              extra_attributes = {
+                nextcloud_user = {
+                  multi_valued = false;
+                  value_type = "string";
+                };
               };
             };
           };
-        };
-        session = {
-          cookies = [
-            {
-              domain = cfg.cookieDomain;
-              authelia_url = "https://${cfg.domain}";
-            }
-          ];
-          redis = {
-            host = "/var/run/redis-${user}/redis.sock";
+          session = {
+            cookies = [
+              {
+                domain = cfg.cookieDomain;
+                authelia_url = "https://${cfg.domain}";
+              }
+            ];
+            redis = {
+              host = "/var/run/redis-${user}/redis.sock";
+            };
           };
-        };
-        server = {
-          address = "tcp://:${toString cfg.port}/";
-        };
-        storage = {
-          postgres = {
-            address = "unix:///run/postgresql";
-            database = user;
-            username = user;
+          server = {
+            address = "tcp://:${toString cfg.port}/";
+          };
+          storage = {
+            postgres = {
+              address = "unix:///run/postgresql";
+              database = user;
+              username = user;
+            };
           };
         };
       };
-    };
 
-    services.redis.servers."${user}" = {
-      enable = true;
-      user = user;
-      unixSocket = "/var/run/redis-${user}/redis.sock";
-      unixSocketPerm = 770;
-    };
-
-    meenzen.postgresql.enable = true;
-    services.postgresql = {
-      ensureUsers = [
-        {
-          name = user;
-          ensureDBOwnership = true;
-        }
-      ];
-      ensureDatabases = [user];
-    };
-
-    services.nginx.virtualHosts.${cfg.domain} = {
-      useACMEHost = "mnzn.dev";
-      forceSSL = true;
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:${toString cfg.port}";
+      redis.servers."${user}" = {
+        enable = true;
+        user = user;
+        unixSocket = "/var/run/redis-${user}/redis.sock";
+        unixSocketPerm = 770;
       };
-      extraConfig = ''
-        add_header X-Robots-Tag "noindex, nofollow, nosnippet, noarchive";
-      '';
+
+      postgresql = {
+        ensureUsers = [
+          {
+            name = user;
+            ensureDBOwnership = true;
+          }
+        ];
+        ensureDatabases = [user];
+      };
+
+      nginx.virtualHosts.${cfg.domain} = {
+        useACMEHost = "mnzn.dev";
+        forceSSL = true;
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:${toString cfg.port}";
+        };
+        extraConfig = ''
+          add_header X-Robots-Tag "noindex, nofollow, nosnippet, noarchive";
+        '';
+      };
     };
   };
 }

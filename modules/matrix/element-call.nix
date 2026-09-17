@@ -46,41 +46,47 @@ in {
   ];
 
   config = lib.mkIf cfg.enable {
-    meenzen.livekit.enable = true;
-    meenzen.lk-jwt-service.enable = true;
+    meenzen = {
+      livekit.enable = true;
+      lk-jwt-service.enable = true;
+    };
 
-    services.matrix-synapse.settings = synapseSettings;
-    services.matrix-synapse-next.settings = synapseSettings;
+    services = {
+      matrix-synapse.settings = synapseSettings;
+      matrix-synapse-next.settings = synapseSettings;
 
-    services.nginx.virtualHosts.${cfg.domain} = {
-      useACMEHost = "mnzn.dev";
-      forceSSL = true;
-      root = pkgs.element-call;
-      extraConfig = ''
-        add_header X-Robots-Tag "noindex, nofollow, nosnippet, noarchive";
-      '';
-      locations."/".extraConfig = ''
-        try_files $uri /$uri /index.html;
-        add_header Cache-Control "public, max-age=30, stale-while-revalidate=30";
-      '';
-      # assets can be cached because they have hashed filenames
-      locations."/assets".extraConfig = ''
-        add_header Cache-Control "public, immutable, max-age=31536000";
-      '';
-      locations."/config.json".extraConfig = ''
-        default_type application/json;
-        return 200 '${
-          builtins.toJSON {
-            default_server_config = {
-              "m.homeserver" = {
-                "base_url" = "https://matrix.${cfg.matrixBaseDomain}";
-                "server_name" = cfg.matrixBaseDomain;
-              };
-            };
-            livekit.livekit_service_url = "https://${config.meenzen.lk-jwt-service.domain}";
-          }
-        }';
-      '';
+      nginx.virtualHosts.${cfg.domain} = {
+        useACMEHost = "mnzn.dev";
+        forceSSL = true;
+        root = pkgs.element-call;
+        extraConfig = ''
+          add_header X-Robots-Tag "noindex, nofollow, nosnippet, noarchive";
+        '';
+        locations = {
+          "/".extraConfig = ''
+            try_files $uri /$uri /index.html;
+            add_header Cache-Control "public, max-age=30, stale-while-revalidate=30";
+          '';
+          # assets can be cached because they have hashed filenames
+          "/assets".extraConfig = ''
+            add_header Cache-Control "public, immutable, max-age=31536000";
+          '';
+          "/config.json".extraConfig = ''
+            default_type application/json;
+            return 200 '${
+              builtins.toJSON {
+                default_server_config = {
+                  "m.homeserver" = {
+                    "base_url" = "https://matrix.${cfg.matrixBaseDomain}";
+                    "server_name" = cfg.matrixBaseDomain;
+                  };
+                };
+                livekit.livekit_service_url = "https://${config.meenzen.lk-jwt-service.domain}";
+              }
+            }';
+          '';
+        };
+      };
     };
   };
 }

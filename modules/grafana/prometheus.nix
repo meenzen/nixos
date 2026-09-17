@@ -31,43 +31,45 @@ in {
       };
     };
 
-    services.prometheus = {
-      enable = true;
-      port = cfg.port;
-      webExternalUrl = "https://${cfg.domain}";
-      retentionTime = "30d";
-      globalConfig = {
-        scrape_interval = "15s";
-        evaluation_interval = "15s";
-      };
-    };
-
-    services.grafana.provision.datasources.settings.datasources = [
-      {
-        name = "Prometheus";
-        type = "prometheus";
-        access = "proxy";
-        orgId = 1;
-        url = "http://127.0.0.1:${toString config.services.prometheus.port}";
-        basicAuth = false;
-        isDefault = true;
-        editable = false;
-      }
-    ];
-
-    services.nginx = {
-      enable = true;
-      virtualHosts."${cfg.domain}" = {
-        forceSSL = true;
-        useACMEHost = "mnzn.dev";
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:${toString cfg.port}";
-          proxyWebsockets = true;
+    services = {
+      prometheus = {
+        enable = true;
+        port = cfg.port;
+        webExternalUrl = "https://${cfg.domain}";
+        retentionTime = "30d";
+        globalConfig = {
+          scrape_interval = "15s";
+          evaluation_interval = "15s";
         };
-        basicAuthFile = config.age.secrets.prometheusAdminPassword.path;
-        extraConfig = ''
-          add_header X-Robots-Tag "noindex, nofollow, nosnippet, noarchive";
-        '';
+      };
+
+      grafana.provision.datasources.settings.datasources = [
+        {
+          name = "Prometheus";
+          type = "prometheus";
+          access = "proxy";
+          orgId = 1;
+          url = "http://127.0.0.1:${toString config.services.prometheus.port}";
+          basicAuth = false;
+          isDefault = true;
+          editable = false;
+        }
+      ];
+
+      nginx = {
+        enable = true;
+        virtualHosts."${cfg.domain}" = {
+          forceSSL = true;
+          useACMEHost = "mnzn.dev";
+          locations."/" = {
+            proxyPass = "http://127.0.0.1:${toString cfg.port}";
+            proxyWebsockets = true;
+          };
+          basicAuthFile = config.age.secrets.prometheusAdminPassword.path;
+          extraConfig = ''
+            add_header X-Robots-Tag "noindex, nofollow, nosnippet, noarchive";
+          '';
+        };
       };
     };
   };

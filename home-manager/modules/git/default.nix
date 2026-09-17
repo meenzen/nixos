@@ -11,15 +11,17 @@
       lfs.enable = true;
       signing.format = "openpgp";
       settings = {
-        user.name = systemConfig.user.fullName;
-        user.email = systemConfig.user.email;
+        user = {
+          name = systemConfig.user.fullName;
+          email = systemConfig.user.email;
+          signingkey = "/home/${systemConfig.user.username}/.ssh/id_ed25519_sk";
+        };
         init.defaultBranch = "main";
         core.autocrlf = false;
         credential.helper = "libsecret";
         rerere.enabled = true;
         commit.gpgsign = true;
         gpg.format = "ssh";
-        user.signingkey = "/home/${systemConfig.user.username}/.ssh/id_ed25519_sk";
       };
     };
     difftastic = {

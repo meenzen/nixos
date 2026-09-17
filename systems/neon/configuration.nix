@@ -13,59 +13,69 @@
     ./networking.nix
   ];
 
-  boot.zfs.forceImportRoot = false;
-
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  networking.hostName = "neon";
-  networking.domain = "mnzn.dev";
-  networking.hostId = "91312b0a";
   system.stateVersion = "24.11";
 
-  meenzen.server.enable = true;
-  meenzen.backup.enable = true;
-  meenzen.hetzner.enable = true;
-
-  meenzen.services.acme-mnzn.enable = true;
-  meenzen.nginx = {
-    enable = true;
-    enableCloudflare = true;
-    testPage = "neon.mnzn.dev";
-    allowIndexing = true;
+  boot = {
+    zfs.forceImportRoot = false;
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
   };
+
+  networking = {
+    hostName = "neon";
+    domain = "mnzn.dev";
+    hostId = "91312b0a";
+
+    hosts = {
+      # Fix forgejo federation with local mastodon instance
+      "95.217.150.38" = [
+        "social.meenzen.net"
+      ];
+    };
+  };
+
+  meenzen = {
+    server.enable = true;
+    backup.enable = true;
+    hetzner.enable = true;
+    grafana.enable = true;
+    postgresql.enable = true;
+    oci-containers.enable = true;
+    mastodon = {
+      enable = true;
+      enableSearch = true;
+    };
+    matrix.enable = true;
+    collabora.enable = true;
+    cheshbot.enable = true;
+    attic.enable = true;
+    distributed-build.enableHost = true;
+    nginx = {
+      enable = true;
+      enableCloudflare = true;
+      testPage = "neon.mnzn.dev";
+      allowIndexing = true;
+    };
+    services = {
+      acme-mnzn.enable = true;
+      fluent-bit.enable = true;
+      tuwunel.enable = true;
+      miniflux.enable = true;
+      forgejo.enable = true;
+      authelia.enable = true;
+      mnzn-website.enable = true;
+      uptime-kuma.enable = true;
+      minecraft.enable = true;
+      minecraft.flip.enable = true;
+      glitchtip.enable = true;
+      lauti.enable = true;
+    };
+  };
+
   services.nginx.virtualHosts."neon.mnzn.dev" = {
     enableACME = lib.mkForce false;
     useACMEHost = "mnzn.dev";
-  };
-
-  meenzen.grafana.enable = true;
-  meenzen.services.fluent-bit.enable = true;
-  meenzen.postgresql.enable = true;
-  meenzen.oci-containers.enable = true;
-  meenzen.mastodon = {
-    enable = true;
-    enableSearch = true;
-  };
-  meenzen.matrix.enable = true;
-  meenzen.collabora.enable = true;
-  meenzen.cheshbot.enable = true;
-  meenzen.attic.enable = true;
-  meenzen.distributed-build.enableHost = true;
-  meenzen.services.tuwunel.enable = true;
-  meenzen.services.miniflux.enable = true;
-  meenzen.services.forgejo.enable = true;
-  meenzen.services.authelia.enable = true;
-  meenzen.services.mnzn-website.enable = true;
-  meenzen.services.uptime-kuma.enable = true;
-  meenzen.services.minecraft.enable = true;
-  meenzen.services.minecraft.flip.enable = true;
-  meenzen.services.glitchtip.enable = true;
-  meenzen.services.lauti.enable = true;
-
-  networking.hosts = {
-    "95.217.150.38" = [
-      # Fix forgejo federation with local mastodon instance
-      "social.meenzen.net"
-    ];
   };
 }

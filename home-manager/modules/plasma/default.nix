@@ -32,29 +32,35 @@
         baloofilerc."Basic Settings"."Indexing-Enabled" = false;
         krunnerrc.Plugins.baloosearchEnabled = false;
 
-        # virtual desktops
-        kwinrc.Desktops.Number = {
-          value = 9;
-          immutable = true;
+        kwinrc = {
+          # virtual desktops
+          Desktops.Number = {
+            value = 9;
+            immutable = true;
+          };
+          Desktops.Rows = 3;
+
+          # general behavior
+          Tiling.padding = 4;
+          EdgeBarrier.EdgeBarrier = 25;
+
+          Plugins = {
+            # hide cursor when typing
+            hidecursorEnabled = true;
+
+            # translucency for moving windows
+            translucencyEnabled = true;
+
+            # wobbly windows
+            wobblywindowsEnabled = true;
+          };
+
+          # hide cursor when typing
+          "Effect-hidecursor" = {
+            HideOnTyping = true;
+            InactivityDuration = 0;
+          };
         };
-        kwinrc.Desktops.Rows = 3;
-
-        # general behavior
-        kwinrc.Tiling.padding = 4;
-        kwinrc.EdgeBarrier.EdgeBarrier = 25;
-
-        # hide cursor when typing
-        kwinrc.Plugins.hidecursorEnabled = true;
-        kwinrc."Effect-hidecursor" = {
-          HideOnTyping = true;
-          InactivityDuration = 0;
-        };
-
-        # translucency for moving windows
-        kwinrc.Plugins.translucencyEnabled = true;
-
-        # wobbly windows
-        kwinrc.Plugins.wobblywindowsEnabled = true;
 
         # german regional settings
         "plasma-localerc".Formats.LANG = "de_DE.UTF-8";

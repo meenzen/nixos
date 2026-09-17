@@ -28,34 +28,36 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    services.prometheus = {
-      exporters = {
-        node = {
-          enable = true;
-          enabledCollectors = ["systemd" "processes"];
-          port = cfg.port;
+    services = {
+      prometheus = {
+        exporters = {
+          node = {
+            enable = true;
+            enabledCollectors = ["systemd" "processes"];
+            port = cfg.port;
+          };
         };
+        scrapeConfigs = [
+          {
+            job_name = "node";
+            static_configs = [
+              {
+                targets = ["127.0.0.1:${toString cfg.port}"];
+                labels = {
+                  instance = fullHostname;
+                };
+              }
+            ];
+          }
+        ];
       };
-      scrapeConfigs = [
+
+      grafana.provision.dashboards.settings.providers = [
         {
-          job_name = "node";
-          static_configs = [
-            {
-              targets = ["127.0.0.1:${toString cfg.port}"];
-              labels = {
-                instance = fullHostname;
-              };
-            }
-          ];
+          name = "node-exporter-full";
+          options.path = "${dashboards}/prometheus/node-exporter-full.json";
         }
       ];
     };
-
-    services.grafana.provision.dashboards.settings.providers = [
-      {
-        name = "node-exporter-full";
-        options.path = "${dashboards}/prometheus/node-exporter-full.json";
-      }
-    ];
   };
 }

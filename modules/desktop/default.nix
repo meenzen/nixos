@@ -13,20 +13,22 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    meenzen.adb.enable = !cfg.slim;
-    meenzen.audio.enable = true;
-    meenzen.bootloader.enable = true;
-    meenzen.docker.enable = !cfg.slim;
-    meenzen.fonts.enable = true;
-    meenzen.home-manager.enable = !cfg.slim;
-    meenzen.plasma.enable = true;
-    meenzen.stylix.enable = !cfg.slim;
-    meenzen.yubikey.enable = !cfg.slim;
-    meenzen.zsh.enable = !cfg.slim;
-    meenzen.fish.enable = !cfg.slim;
-    meenzen.fish.default = !cfg.slim;
-    meenzen.hardware.logitech.enable = !cfg.slim;
-    meenzen.hardware.uhk.enable = !cfg.slim;
+    meenzen = {
+      adb.enable = !cfg.slim;
+      audio.enable = true;
+      bootloader.enable = true;
+      docker.enable = !cfg.slim;
+      fonts.enable = true;
+      home-manager.enable = !cfg.slim;
+      plasma.enable = true;
+      stylix.enable = !cfg.slim;
+      yubikey.enable = !cfg.slim;
+      zsh.enable = !cfg.slim;
+      fish.enable = !cfg.slim;
+      fish.default = !cfg.slim;
+      hardware.logitech.enable = !cfg.slim;
+      hardware.uhk.enable = !cfg.slim;
+    };
 
     # KDE Partition Manager
     programs.partition-manager.enable = true;

@@ -60,19 +60,21 @@ in {
       "${cfg.domain}" = {
         forceSSL = true;
         enableACME = true;
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:${toString cfg.port}";
-          proxyWebsockets = true;
-        };
-        locations."~* \\.(?:css|js|mjs|png|jpe?g|gif|svg|webp|ico|woff2?|ttf)$" = {
-          proxyPass = "http://127.0.0.1:${toString cfg.port}";
-          extraConfig = ''
-            proxy_hide_header Cache-Control;
-            add_header Cache-Control "public, max-age=86400" always;
-          '';
-        };
-        locations."^~ /google" = {
-          root = ./webroot;
+        locations = {
+          "/" = {
+            proxyPass = "http://127.0.0.1:${toString cfg.port}";
+            proxyWebsockets = true;
+          };
+          "~* \\.(?:css|js|mjs|png|jpe?g|gif|svg|webp|ico|woff2?|ttf)$" = {
+            proxyPass = "http://127.0.0.1:${toString cfg.port}";
+            extraConfig = ''
+              proxy_hide_header Cache-Control;
+              add_header Cache-Control "public, max-age=86400" always;
+            '';
+          };
+          "^~ /google" = {
+            root = ./webroot;
+          };
         };
       };
       "www.${cfg.domain}" = {

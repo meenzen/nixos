@@ -17,39 +17,49 @@ in {
     # Enable the X11 windowing system.
     services.xserver.enable = true;
 
-    # Enable Wayland support in Chromium based apps
-    environment.sessionVariables.NIXOS_OZONE_WL = "1";
-
     # KDE Plasma Desktop
-    services.displayManager.plasma-login-manager.enable = true;
-    services.desktopManager.plasma6.enable = true;
-    services.desktopManager.plasma6.enableQt5Integration = true;
+    services = {
+      displayManager.plasma-login-manager.enable = true;
+      desktopManager = {
+        plasma6.enable = true;
+        plasma6.enableQt5Integration = true;
+      };
+    };
 
-    # disable baloo https://github.com/NixOS/nixpkgs/issues/63489#issuecomment-2046058993
-    environment.plasma6.excludePackages = [
-      pkgs.kdePackages.baloo
-    ];
+    environment = {
+      systemPackages = [
+        pkgs.kdePackages.xdg-desktop-portal-kde
+        pkgs.kdePackages.kdeconnect-kde
+
+        # Required for OCR in Spectacle
+        pkgs.tesseract
+      ];
+
+      sessionVariables = {
+        # Enable Wayland support in Chromium based apps
+        NIXOS_OZONE_WL = "1";
+
+        # Force KDE file picker
+        XDG_CURRENT_DESKTOP = "KDE";
+        GTK_USE_PORTAL = "1";
+      };
+
+      plasma6.excludePackages = [
+        # disable baloo https://github.com/NixOS/nixpkgs/issues/63489#issuecomment-2046058993
+        pkgs.kdePackages.baloo
+      ];
+    };
 
     # Fix GTK apps in KDE
     programs.dconf.enable = true;
 
     # Force KDE file picker
-    environment.sessionVariables.XDG_CURRENT_DESKTOP = "KDE";
-    environment.sessionVariables.GTK_USE_PORTAL = "1";
-
     xdg.portal = {
       enable = true;
       extraPortals = [
         pkgs.kdePackages.xdg-desktop-portal-kde
       ];
     };
-
-    environment.systemPackages = [
-      pkgs.kdePackages.xdg-desktop-portal-kde
-      pkgs.kdePackages.kdeconnect-kde
-      # Required for OCR in Spectacle
-      pkgs.tesseract
-    ];
 
     # KDE Connect Firewall
     networking.firewall = {

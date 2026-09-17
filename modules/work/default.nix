@@ -13,9 +13,11 @@ in {
   config = lib.mkIf cfg.enable {
     services.teamviewer.enable = true;
 
-    meenzen.cloudflare-warp.enable = true;
-    meenzen.openfortivpn.enable = true;
-    meenzen.verapdf.enable = true;
+    meenzen = {
+      cloudflare-warp.enable = true;
+      openfortivpn.enable = true;
+      verapdf.enable = true;
+    };
 
     security.pki.certificateFiles = [
       ./certs/Forti_Proxy_CA.crt

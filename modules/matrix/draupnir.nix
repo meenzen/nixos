@@ -32,34 +32,36 @@ in {
       };
     };
 
-    services.draupnir = {
-      enable = true;
-      settings = {
-        homeserverUrl = "https://${config.meenzen.matrix.synapse.matrixDomain}";
-        managementRoom = cfg.managementRoom;
-        autojoinOnlyIfManager = true;
-        automaticallyRedactForReasons = ["spam" "advertising"];
-        web = {
-          enabled = true;
-          port = cfg.port;
-          address = "0.0.0.0";
-          synapseHTTPAntispam.enabled = true;
+    services = {
+      draupnir = {
+        enable = true;
+        settings = {
+          homeserverUrl = "https://${config.meenzen.matrix.synapse.matrixDomain}";
+          managementRoom = cfg.managementRoom;
+          autojoinOnlyIfManager = true;
+          automaticallyRedactForReasons = ["spam" "advertising"];
+          web = {
+            enabled = true;
+            port = cfg.port;
+            address = "0.0.0.0";
+            synapseHTTPAntispam.enabled = true;
+          };
+          pollReports = true;
+          displayReports = true;
         };
-        pollReports = true;
-        displayReports = true;
+        secrets = {
+          accessToken = config.age.secrets.draupnirAccessToken.path;
+          web.synapseHTTPAntispam.authorization = config.age.secrets.draupnirSynapseAntispamSecret.path;
+        };
       };
-      secrets = {
-        accessToken = config.age.secrets.draupnirAccessToken.path;
-        web.synapseHTTPAntispam.authorization = config.age.secrets.draupnirSynapseAntispamSecret.path;
-      };
-    };
 
-    # Enable synapse-http-antispam plugin for Synapse
-    services.matrix-synapse.plugins = with config.services.matrix-synapse.package.plugins; [
-      synapse-http-antispam
-    ];
-    services.matrix-synapse-next.plugins = with config.services.matrix-synapse-next.package.plugins; [
-      synapse-http-antispam
-    ];
+      # Enable synapse-http-antispam plugin for Synapse
+      matrix-synapse.plugins = with config.services.matrix-synapse.package.plugins; [
+        synapse-http-antispam
+      ];
+      matrix-synapse-next.plugins = with config.services.matrix-synapse-next.package.plugins; [
+        synapse-http-antispam
+      ];
+    };
   };
 }
