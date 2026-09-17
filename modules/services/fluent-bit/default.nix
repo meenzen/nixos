@@ -61,7 +61,7 @@ in {
                 db = "/var/lib/${serviceName}/journal.db";
               }
             ]
-            ++ lib.optional (config.services.nginx.enable) {
+            ++ lib.optional config.services.nginx.enable {
               name = "tail";
               tag = "host.nginx";
               path = "/var/log/nginx/*.log";
@@ -83,7 +83,7 @@ in {
                 ];
               }
             ]
-            ++ lib.optional (config.services.nginx.enable) {
+            ++ lib.optional config.services.nginx.enable {
               name = "modify";
               match = "host.nginx";
               Add = [
@@ -122,7 +122,7 @@ in {
 
     systemd.services.${serviceName}.serviceConfig = {
       EnvironmentFile = config.age.secrets.fluentBitEnvironment.path;
-      SupplementaryGroups = lib.optional (config.services.nginx.enable) "nginx";
+      SupplementaryGroups = lib.optional config.services.nginx.enable "nginx";
       StateDirectory = serviceName;
     };
   };

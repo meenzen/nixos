@@ -10,21 +10,19 @@
   tootctl = "/run/current-system/sw/bin/mastodon-tootctl";
   cleanupScriptName = "mastodon-cleanup";
 
-  cleanupScript = (
-    pkgs.writeShellApplication {
-      name = cleanupScriptName;
-      text = ''
-        set -eux
+  cleanupScript = pkgs.writeShellApplication {
+    name = cleanupScriptName;
+    text = ''
+      set -eux
 
-        cd /var/lib/mastodon
+      cd /var/lib/mastodon
 
-        ${tootctl} media remove --days ${toString cfg.cleanupDays}
-        ${tootctl} media remove --prune-profiles --days ${toString cfg.cleanupDays}
-        ${tootctl} statuses remove --days ${toString cfg.cleanupDays}
-        ${tootctl} preview-cards remove --days ${toString cfg.cleanupDays}
-      '';
-    }
-  );
+      ${tootctl} media remove --days ${toString cfg.cleanupDays}
+      ${tootctl} media remove --prune-profiles --days ${toString cfg.cleanupDays}
+      ${tootctl} statuses remove --days ${toString cfg.cleanupDays}
+      ${tootctl} preview-cards remove --days ${toString cfg.cleanupDays}
+    '';
+  };
 in {
   options.meenzen.mastodon = {
     enable = lib.mkEnableOption "Enable Mastodon Server";

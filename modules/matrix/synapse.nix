@@ -83,45 +83,46 @@
       database: matrix-synapse
       host: /var/run/postgresql
     '';
-  in (pkgs.writeShellApplication {
-    name = "matrix-synapse-media-upload";
-    text = ''
-      # Elevate to service user if needed
-      TARGET="${serviceName}"
-      USER="$(id -un)"
-      if [ "$USER" != "$TARGET" ]; then
-        echo "Current user is $USER, switching to $TARGET"
-        exec sudo -u "$TARGET" "$0" "$@"
-      fi
+  in
+    pkgs.writeShellApplication {
+      name = "matrix-synapse-media-upload";
+      text = ''
+        # Elevate to service user if needed
+        TARGET="${serviceName}"
+        USER="$(id -un)"
+        if [ "$USER" != "$TARGET" ]; then
+          echo "Current user is $USER, switching to $TARGET"
+          exec sudo -u "$TARGET" "$0" "$@"
+        fi
 
-      get_property() {
-        local key="$1"
-        grep "$key:" ${secretConfig} | ${pkgs.gawk}/bin/awk '{print $2}'
-      }
+        get_property() {
+          local key="$1"
+          grep "$key:" ${secretConfig} | ${pkgs.gawk}/bin/awk '{print $2}'
+        }
 
-      mkdir -p ${cacheDir}
-      cd ${cacheDir}
-      cp -f ${dbConfig} ${cacheDir}/database.yaml
+        mkdir -p ${cacheDir}
+        cd ${cacheDir}
+        cp -f ${dbConfig} ${cacheDir}/database.yaml
 
-      S3_BUCKET="$(get_property bucket)"
-      export S3_BUCKET
+        S3_BUCKET="$(get_property bucket)"
+        export S3_BUCKET
 
-      S3_ENDPOINT="$(get_property endpoint_url)"
-      export S3_ENDPOINT
+        S3_ENDPOINT="$(get_property endpoint_url)"
+        export S3_ENDPOINT
 
-      AWS_ACCESS_KEY_ID="$(get_property access_key_id)"
-      export AWS_ACCESS_KEY_ID
+        AWS_ACCESS_KEY_ID="$(get_property access_key_id)"
+        export AWS_ACCESS_KEY_ID
 
-      AWS_SECRET_ACCESS_KEY="$(get_property secret_access_key)"
-      export AWS_SECRET_ACCESS_KEY
+        AWS_SECRET_ACCESS_KEY="$(get_property secret_access_key)"
+        export AWS_SECRET_ACCESS_KEY
 
-      set -x
+        set -x
 
-      ${command} "$@" update-db "${cfg.s3UploadOlderThan}"
-      ${command} "$@" check-deleted "${mediaDir}"
-      ${command} "$@" upload "${mediaDir}" "$S3_BUCKET" --delete --endpoint-url "$S3_ENDPOINT"
-    '';
-  });
+        ${command} "$@" update-db "${cfg.s3UploadOlderThan}"
+        ${command} "$@" check-deleted "${mediaDir}"
+        ${command} "$@" upload "${mediaDir}" "$S3_BUCKET" --delete --endpoint-url "$S3_ENDPOINT"
+      '';
+    };
 in {
   options.meenzen.matrix.synapse = {
     enable = lib.mkEnableOption "Enable Matrix Server";
