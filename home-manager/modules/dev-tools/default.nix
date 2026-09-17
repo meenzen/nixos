@@ -1,7 +1,6 @@
 {
   pkgs,
   lib,
-  inputs,
   ...
 }: let
   dotnet = pkgs.dotnetCorePackages.combinePackages [

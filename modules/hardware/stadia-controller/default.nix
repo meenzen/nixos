@@ -1,8 +1,6 @@
 {
   config,
   lib,
-  pkgs,
-  systemConfig,
   ...
 }: let
   cfg = config.meenzen.hardware.stadia-controller;

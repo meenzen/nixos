@@ -57,20 +57,6 @@
     forgotten_room_retention_period = "30d";
   };
 
-  workerConfig = config.services.matrix-synapse-next.workers;
-  workerMetricsPorts = lib.range 1 (
-    workerConfig.federationSenders
-    + workerConfig.federationReceivers
-    + workerConfig.initialSyncers
-    + workerConfig.normalSyncers
-    + workerConfig.eventPersisters
-    + (
-      if workerConfig.useUserDirectoryWorker
-      then 1
-      else 0
-    )
-  );
-
   mediaUploadScript = let
     command = lib.getExe synapseOption.package.plugins.matrix-synapse-s3-storage-provider;
     dir = "${config.services.matrix-synapse.dataDir}";

@@ -1,12 +1,9 @@
 {
   config,
   lib,
-  pkgs,
-  inputs,
   ...
 }: let
   cfg = config.meenzen.tempo;
-  serviceName = "tempo";
 in {
   options.meenzen.tempo = {
     enable = lib.mkEnableOption "Enable Tempo";

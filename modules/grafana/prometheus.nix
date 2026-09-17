@@ -1,12 +1,10 @@
 {
   config,
   lib,
-  pkgs,
   inputs,
   ...
 }: let
   cfg = config.meenzen.prometheus;
-  serviceName = "prometheus";
 in {
   options.meenzen.prometheus = {
     enable = lib.mkEnableOption "Enable Prometheus";

@@ -1,12 +1,10 @@
 {
   config,
   lib,
-  pkgs,
   inputs,
   ...
 }: let
   cfg = config.meenzen.loki;
-  serviceName = "loki";
 in {
   options.meenzen.loki = {
     enable = lib.mkEnableOption "Enable Loki";

@@ -1,8 +1,6 @@
 {
-  config,
   osConfig,
   lib,
-  pkgs,
   ...
 }: {
   config = lib.mkIf osConfig.programs.steam.enable {

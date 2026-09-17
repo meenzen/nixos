@@ -63,12 +63,7 @@
     flake-parts,
     ...
   }:
-    flake-parts.lib.mkFlake {inherit inputs;} (top @ {
-      config,
-      withSystem,
-      moduleWithSystem,
-      ...
-    }: let
+    flake-parts.lib.mkFlake {inherit inputs;} (_: let
       defaultConfig = {
         user = {
           username = "meenzens";
@@ -148,7 +143,7 @@
             };
           };
 
-          defaults = {pkgs, ...}: {
+          defaults = {...}: {
             imports = [
               self.nixosModules.meenzen
             ];
@@ -169,12 +164,8 @@
         "x86_64-linux"
       ];
       perSystem = {
-        config,
-        self',
         inputs',
         pkgs,
-        lib,
-        system,
         ...
       }: {
         formatter = pkgs.alejandra;
@@ -186,6 +177,7 @@
             pkgs.nvd
             pkgs.alejandra
             pkgs.statix
+            pkgs.deadnix
             pkgs.uutils-coreutils-noprefix
             inputs'.colmena.packages.colmena
             inputs'.agenix.packages.default

@@ -1,8 +1,4 @@
-{
-  systemConfig,
-  pkgs,
-  ...
-}: {
+{systemConfig, ...}: {
   services.openssh = {
     enable = true;
     openFirewall = true;

@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  systemConfig,
   ...
 }: let
   cfg = config.meenzen.nginx-badbots;

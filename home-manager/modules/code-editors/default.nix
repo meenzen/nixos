@@ -1,18 +1,4 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: let
-  # plugins are currently broken, see https://github.com/nixos/nixpkgs/issues/400317
-  #plugins = ["github-copilot" "ideavim"];
-  plugins = [];
-
-  # https://nixos.wiki/wiki/Jetbrains_Tools
-  mkIde = package:
-    if plugins != []
-    then (pkgs.jetbrains.plugins.addPlugins package plugins)
-    else package;
-in {
+{pkgs, ...}: {
   home.packages = [
     # Editors
     pkgs.vscode
@@ -21,8 +7,8 @@ in {
     pkgs.okteta
 
     #pkgs.jetbrains-toolbox
-    #(mkIde pkgs.jetbrains.rust-rover)
-    #(mkIde pkgs.jetbrains.webstorm)
+    #pkgs.jetbrains.rust-rover
+    #pkgs.jetbrains.webstorm
     pkgs.jetbrains.rider
     pkgs.jetbrains.phpstorm
   ];

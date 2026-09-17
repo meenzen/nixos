@@ -1,9 +1,6 @@
 {
-  config,
   inputs,
   lib,
-  pkgs,
-  systemConfig,
   ...
 }: {
   imports = [

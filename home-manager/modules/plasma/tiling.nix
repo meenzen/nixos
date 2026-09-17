@@ -1,8 +1,6 @@
 {
-  config,
   osConfig,
   lib,
-  pkgs,
   ...
 }: let
   gap = 5;

@@ -1,10 +1,4 @@
-{
-  inputs,
-  lib,
-  config,
-  pkgs,
-  ...
-}: {
+{lib, ...}: {
   fileSystems."/" = {
     device = "/dev/vda";
     fsType = "ext4";

@@ -59,7 +59,7 @@ in {
 
     nixpkgs.overlays = [
       (
-        final: prev: {
+        _: prev: {
           mastodon = prev.mastodon.overrideAttrs (oldAttrs: {
             patches =
               (oldAttrs.patches or [])

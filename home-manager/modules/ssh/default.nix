@@ -1,7 +1,6 @@
 {
   lib,
   pkgs,
-  config,
   ...
 }: {
   # cloudflared is required for tunneling through Cloudflare Zero Trust

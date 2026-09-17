@@ -56,7 +56,7 @@ prompt_or_exit () {
 alejandra_format () {
   print_status "Formatting Code"
   if ! alejandra . >/dev/null 2>&1; then
-    print_error "Alejandra formatting failed."
+    print_error "Alejandra formatting failed"
 
     # Run alejandra again so that the user can see the error message
     print_divider_error
@@ -68,10 +68,10 @@ alejandra_format () {
 }
 
 statix_lint () {
-  print_status "Running Statix Linter"
+  print_status "Running statix Linter"
   statix fix
   if ! statix check >/dev/null 2>&1; then
-    print_error "Statix linting failed."
+    print_error "statix linting failed"
 
     # Run statix again so that the user can see the error message
     print_divider_error
@@ -82,8 +82,23 @@ statix_lint () {
   fi
 }
 
+deadnix_lint () {
+  print_status "Running deadnix Linter"
+  if ! deadnix --fail >/dev/null 2>&1; then
+    print_error "deadnix linting failed"
+
+    # Run deadnix again so that the user can see the error message
+    print_divider_error
+    deadnix --fail || true
+    print_divider_error
+
+    exit 1
+  fi
+}
+
 lint () {
   statix_lint
+  deadnix_lint
   alejandra_format
 }
 

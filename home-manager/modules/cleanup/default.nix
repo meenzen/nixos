@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+_: {
   # Automatic garbage collection for user profile
   nix.gc = {
     automatic = true;

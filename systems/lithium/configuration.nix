@@ -1,11 +1,4 @@
-{
-  config,
-  inputs,
-  lib,
-  pkgs,
-  systemConfig,
-  ...
-}: {
+{inputs, ...}: {
   imports = [
     inputs.disko.nixosModules.disko
     ./disko.nix

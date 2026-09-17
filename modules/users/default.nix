@@ -1,11 +1,4 @@
-{
-  inputs,
-  lib,
-  config,
-  pkgs,
-  systemConfig,
-  ...
-}: {
+{systemConfig, ...}: {
   users.users = {
     "${systemConfig.user.username}" = {
       isNormalUser = true;

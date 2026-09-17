@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+_: {
   programs.nixvim = {
     # Highlight when yanking text
     extraConfigLua = ''
