@@ -22,13 +22,9 @@ in {
       ./certs/Web_App_CA.crt
     ];
 
-    networking.hosts = {
-      "192.168.155.28" = [
-        "step-ca.human2.de"
-        "safe.human2.de"
-        "mde.human2.de"
-        "doku.human2.de"
-      ];
-    };
+    environment.systemPackages = with pkgs; [
+      claude-code
+      claude-monitor
+    ];
   };
 }
