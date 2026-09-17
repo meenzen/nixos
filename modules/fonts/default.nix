@@ -56,12 +56,7 @@ in {
         };
         aggregated = pkgs.buildEnv {
           name = "system-fonts-and-icons";
-          paths =
-            config.fonts.packages
-            ++ [
-              #pkgs.kdePackages.breeze
-              #pkgs.gnome-themes-extra
-            ];
+          paths = config.fonts.packages;
           pathsToLink = ["/share/fonts" "/share/icons"];
         };
       in {
