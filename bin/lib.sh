@@ -54,7 +54,7 @@ prompt_or_exit () {
 }
 
 alejandra_format () {
-  print_status "Formatting Code"
+  print_status "Formatting: alejandra"
   if ! alejandra . >/dev/null 2>&1; then
     print_error "Alejandra formatting failed"
 
@@ -68,7 +68,7 @@ alejandra_format () {
 }
 
 statix_lint () {
-  print_status "Running statix Linter"
+  print_status "Linting: statix"
   statix fix
   if ! statix check >/dev/null 2>&1; then
     print_error "statix linting failed"
@@ -83,7 +83,7 @@ statix_lint () {
 }
 
 deadnix_lint () {
-  print_status "Running deadnix Linter"
+  print_status "Linting: deadnix"
   if ! deadnix --fail >/dev/null 2>&1; then
     print_error "deadnix linting failed"
 
