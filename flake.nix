@@ -185,6 +185,7 @@
             pkgs.nom
             pkgs.nvd
             pkgs.alejandra
+            pkgs.statix
             pkgs.uutils-coreutils-noprefix
             inputs'.colmena.packages.colmena
             inputs'.agenix.packages.default
