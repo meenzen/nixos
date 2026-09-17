@@ -11,16 +11,16 @@ in {
 
   imports = [
     ./draupnir.nix
-    ./element-call.nix
     ./mas.nix
+    ./rtc.nix
     ./synapse.nix
   ];
 
   config = lib.mkIf cfg.enable {
     meenzen.matrix = {
       draupnir.enable = true;
-      element-call.enable = true;
       mas.enable = true;
+      rtc.enable = true;
       synapse.enable = true;
       synapse.enableWorkers = true;
     };
