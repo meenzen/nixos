@@ -19,7 +19,6 @@ let
   grafana = [neon];
   github = [neon];
   livekit = [neon];
-  kener = [neon];
   forgejo = [neon];
   forgejo-runner = [lithium];
   authelia = [neon];
@@ -97,10 +96,6 @@ in {
   # LiveKit
   "livekitKeys.age".publicKeys = users ++ livekit;
   "livekitServiceEnvironment.age".publicKeys = users ++ livekit;
-
-  # Kener
-  "kenerEnvironment.age".publicKeys = users ++ kener;
-  "kenerPostgresPassword.age".publicKeys = users ++ kener;
 
   # GitLab Runner
   "gitlabRunnerLithiumNix.age".publicKeys = users ++ [lithium];

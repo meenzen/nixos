@@ -10,7 +10,6 @@
     ./gitlab
     ./gitlab-runner
     ./glitchtip
-    ./kener
     ./lauti
     ./local-ai
     ./minecraft

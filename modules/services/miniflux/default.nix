@@ -6,7 +6,6 @@
   ...
 }: let
   cfg = config.meenzen.services.miniflux;
-  serviceName = "kener";
 in {
   options.meenzen.services.miniflux = {
     enable = lib.mkEnableOption "Enable Miniflux";
