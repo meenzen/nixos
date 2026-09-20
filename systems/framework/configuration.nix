@@ -36,7 +36,8 @@
       ];
     };
     printing.enable = true;
-    plymouth.enable = true;
+    # temporary workaround: stylix plymouth theme is currently broken, disable for now
+    #plymouth.enable = true;
     remote-desktop.enable = true;
     winboat.enable = false;
     work.enable = true;
