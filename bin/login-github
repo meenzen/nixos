@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+set -eo pipefail
+
+source "$(dirname "$0")/lib.sh"
+
+print_start "Logging into GitHub"
+
+print_status "Authenticating gh CLI"
+gh auth login
+
+print_status "Authenticating nix"
+nix run nixpkgs#nix-auth -- login
+
+print_end "Success"
