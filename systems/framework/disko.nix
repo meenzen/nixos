@@ -1,8 +1,8 @@
 {
   # nixos-generate-config --root /tmp/config --no-filesystems
+  # cp /tmp/config/etc/nixos/hardware-configuration.nix systems/framework/hardware-configuration.nix
   # echo "<encryption-key>" > /tmp/secret.key
-  # sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode disko nixos/systems/framework/disko.nix
-  # sudo nixos-install --flake '.#framework'
+  # bin/disko-install-nixos framework
   disko.devices = {
     disk = {
       main = {
