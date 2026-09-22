@@ -18,6 +18,32 @@
   };
 
   meenzen = {
+    secure-boot.enable = true;
+    distributed-build.enable = false;
     desktop.enable = true;
+    plasma.tiling.enable = true;
+    hyprland.enable = false;
+    latest-kernel.enable = true;
+    virt-manager.enable = true;
+    beeper.enable = true;
+    hardware = {
+      bluetooth.enable = true;
+      uhk.enable = true;
+      esp32.enable = true;
+    };
+    home-manager.extraConfig = {
+      additionalPinnedApps = [
+        "applications:google-chrome.desktop"
+        "applications:rider.desktop"
+      ];
+      additionalShownSystemTrayItems = [
+        "org.kde.plasma.battery"
+      ];
+    };
+    printing.enable = true;
+    plymouth.enable = true;
+    remote-desktop.enable = true;
+    winboat.enable = false;
+    work.enable = true;
   };
 }
