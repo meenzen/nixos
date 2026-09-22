@@ -45,6 +45,7 @@
     ./postgresql
     ./printing
     ./remote-desktop
+    ./secure-boot
     ./security
     ./server
     ./services

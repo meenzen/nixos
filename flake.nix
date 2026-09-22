@@ -29,6 +29,12 @@
       url = "github:nix-community/disko/latest";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    lanzaboote = {
+      # todo: switch to stable release once v1.2.0 is available
+      # url = "github:nix-community/lanzaboote/v1.2.0";
+      url = "github:nix-community/lanzaboote/074c4938b829e745c878872fc165eea3a6b27399";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Home Manager
     home-manager = {
