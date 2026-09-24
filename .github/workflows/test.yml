@@ -14,7 +14,7 @@ jobs:
       - uses: DeterminateSystems/flake-checker-action@main
 
       - name: Setup Attic cache
-        uses: ryanccn/attic-action@v0.5.1
+        uses: ryanccn/attic-action@v0.5.2
         with:
           endpoint: https://attic.mnzn.dev
           cache: main
