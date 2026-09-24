@@ -19,7 +19,6 @@
     };
 
     # Deployment Tools
-    colmena.url = "github:nix-community/colmena";
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -185,7 +184,7 @@
             pkgs.statix
             pkgs.deadnix
             pkgs.uutils-coreutils-noprefix
-            inputs'.colmena.packages.colmena
+            pkgs.colmena
             inputs'.agenix.packages.default
           ];
           shellHook = ''
