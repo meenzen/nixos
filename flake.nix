@@ -91,7 +91,7 @@
           default = meenzen;
         };
 
-        nixosConfigurations = let
+        lib = {
           mkSystem = systemModule: let
             systemConfig = defaultConfig;
             pkgs-stable = import inputs.nixpkgs-stable {
@@ -112,6 +112,15 @@
                 systemModule
               ];
             };
+
+          mkServer = targetHost: systemModule: {
+            deployment.targetHost = targetHost;
+            imports = [systemModule];
+          };
+        };
+
+        nixosConfigurations = let
+          mkSystem = self.lib.mkSystem;
         in
           {
             framework = mkSystem ./systems/framework/configuration.nix;
@@ -126,10 +135,7 @@
         colmenaHive = inputs.colmena.lib.makeHive self.outputs.colmena;
 
         colmena = let
-          mkServer = targetHost: systemModule: {
-            deployment.targetHost = targetHost;
-            imports = [systemModule];
-          };
+          mkServer = self.lib.mkServer;
           pkgs-stable = import inputs.nixpkgs-stable {
             system = "x86_64-linux";
             config.allowUnfree = true;
