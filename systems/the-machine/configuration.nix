@@ -77,6 +77,7 @@
       wooting.enable = true;
     };
     gaming.enable = true;
+    latest-kernel.enable = true;
     virt-manager.enable = true;
     printing.enable = true;
     services.local-ai.enable = false;
