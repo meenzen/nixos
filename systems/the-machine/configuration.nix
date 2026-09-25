@@ -79,7 +79,7 @@
     gaming.enable = true;
     virt-manager.enable = true;
     printing.enable = true;
-    services.local-ai.enable = true;
+    services.local-ai.enable = false;
     home-manager.extraConfig = {
       additionalPinnedApps = [
         "applications:steam.desktop"
