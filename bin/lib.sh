@@ -119,7 +119,7 @@ nixos_rebuild () {
   print_status "Rebuilding NixOS"
   print_divider
   git add .
-  sudo nixos-rebuild $command --upgrade --verbose --flake $hostname $args
+  sudo nixos-rebuild $command --upgrade --verbose -L --flake $hostname $args
 
   # diff using nvd
   if [ "$command" = "build" ]; then
