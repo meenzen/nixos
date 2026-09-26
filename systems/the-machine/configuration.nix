@@ -76,7 +76,10 @@
       bluetooth.enable = true;
       wooting.enable = true;
     };
-    gaming.enable = true;
+    gaming = {
+      enable = true;
+      jovian.enable = true;
+    };
     latest-kernel.enable = true;
     virt-manager.enable = true;
     printing.enable = true;

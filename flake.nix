@@ -59,6 +59,10 @@
       inputs.nix-gaming.follows = "nix-gaming";
     };
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
+    jovian = {
+      url = "github:Jovian-Experiments/Jovian-NixOS";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Miscellaneous
     nixos-matrix-modules.url = "github:D4ndellion/nixos-matrix-modules";

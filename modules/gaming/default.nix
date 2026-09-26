@@ -14,6 +14,7 @@ in {
   imports = [
     # https://github.com/fufexan/nix-gaming
     inputs.nix-gaming.nixosModules.pipewireLowLatency
+    ./jovian.nix
     ./star-citizen.nix
   ];
 
@@ -68,7 +69,6 @@ in {
       remotePlay.openFirewall = true;
       dedicatedServer.openFirewall = true;
       localNetworkGameTransfers.openFirewall = true;
-      gamescopeSession.enable = true;
       extraCompatPackages = [
         pkgs.proton-ge-bin
       ];
