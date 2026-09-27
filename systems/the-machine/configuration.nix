@@ -65,6 +65,18 @@
   services.btrfs.autoScrub.enable = true;
   environment.systemPackages = [
     pkgs.compsize
+    (
+      pkgs.writeShellApplication {
+        name = "deduplicate-bigboi";
+        runtimeInputs = [
+          pkgs.duperemove
+        ];
+        text = ''
+          sudo duperemove -drh --hashfile /bigboi/duperemove.db --exclude "/bigboi/duperemove*" /bigboi
+          sudo compsize /bigboi
+        '';
+      }
+    )
   ];
 
   meenzen = {
