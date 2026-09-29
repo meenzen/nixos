@@ -198,7 +198,7 @@
           ];
           shellHook = ''
             set -euo pipefail
-            source "bin/lib.sh"
+            source "${./bin}/lib.sh"
             print_divider_basic
             echo "$(nix --version)"
             echo "$(git --version)"
