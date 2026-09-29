@@ -16,6 +16,7 @@
     networkmanager.enable = true;
     firewall.enable = true;
   };
+  boot.zfs.forceImportRoot = false;
 
   meenzen = {
     secure-boot.enable = true;
