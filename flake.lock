@@ -553,8 +553,8 @@
       },
       "original": {
         "owner": "nix-community",
+        "ref": "v1.2.0",
         "repo": "lanzaboote",
-        "rev": "c1c5edd31802d181c8aa2c71588995d93425d650",
         "type": "github"
       }
     },
