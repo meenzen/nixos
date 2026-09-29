@@ -8,7 +8,11 @@
     pkgs.onedrive
     pkgs.motrix # download manager
   ];
+
   services.nextcloud-client.enable = true;
+  # The gamescope session breaks graphical services, so don't start them without a display.
+  systemd.user.services.nextcloud-client.Unit.ConditionEnvironment = ["|DISPLAY" "|WAYLAND_DISPLAY"];
+
   programs.thunderbird = {
     enable = true;
     profiles.default = {
