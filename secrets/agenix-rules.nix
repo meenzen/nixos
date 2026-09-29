@@ -25,108 +25,112 @@ let
   mnzn-website = [neon];
   glitchtip = [neon];
   lauti = [neon];
-in {
-  # ACME
-  "acmeMnznEnvironment.age".publicKeys = users ++ [neon];
 
-  # Mastodon
-  "mastodonEmailPassword.age".publicKeys = users ++ mastodon;
-  "mastodonActiveRecordPrimaryKey.age".publicKeys = users ++ mastodon;
-  "mastodonActiveRecordDeterministicKey.age".publicKeys = users ++ mastodon;
-  "mastodonActiveRecordSalt.age".publicKeys = users ++ mastodon;
-  "mastodonSecretKeyBase.age".publicKeys = users ++ mastodon;
-  "mastodonVapidPublicKey.age".publicKeys = users ++ mastodon;
-  "mastodonVapidPrivateKey.age".publicKeys = users ++ mastodon;
-  "mastodonS3Config.age".publicKeys = users ++ mastodon;
+  # Save all secrets as plaintext files.
+  addArmor = builtins.mapAttrs (_: rule: rule // {armor = true;});
+in
+  addArmor {
+    # ACME
+    "acmeMnznEnvironment.age".publicKeys = users ++ [neon];
 
-  # Matrix
-  "synapseConfig.age".publicKeys = users ++ matrix;
-  "masSecretConfig.age".publicKeys = users ++ matrix;
-  "draupnirAccessToken.age".publicKeys = users ++ matrix;
-  "draupnirSynapseAntispamSecret.age".publicKeys = users ++ matrix;
+    # Mastodon
+    "mastodonEmailPassword.age".publicKeys = users ++ mastodon;
+    "mastodonActiveRecordPrimaryKey.age".publicKeys = users ++ mastodon;
+    "mastodonActiveRecordDeterministicKey.age".publicKeys = users ++ mastodon;
+    "mastodonActiveRecordSalt.age".publicKeys = users ++ mastodon;
+    "mastodonSecretKeyBase.age".publicKeys = users ++ mastodon;
+    "mastodonVapidPublicKey.age".publicKeys = users ++ mastodon;
+    "mastodonVapidPrivateKey.age".publicKeys = users ++ mastodon;
+    "mastodonS3Config.age".publicKeys = users ++ mastodon;
 
-  # Conduit
-  "conduitEnvironment.age".publicKeys = users ++ matrix;
+    # Matrix
+    "synapseConfig.age".publicKeys = users ++ matrix;
+    "masSecretConfig.age".publicKeys = users ++ matrix;
+    "draupnirAccessToken.age".publicKeys = users ++ matrix;
+    "draupnirSynapseAntispamSecret.age".publicKeys = users ++ matrix;
 
-  # Tuwunel
-  "tuwunelEnvironment.age".publicKeys = users ++ matrix;
+    # Conduit
+    "conduitEnvironment.age".publicKeys = users ++ matrix;
 
-  # Restic
-  "resticEnv.age".publicKeys = users ++ restic;
-  "resticRepository.age".publicKeys = users ++ restic;
-  "resticPassword.age".publicKeys = users ++ restic;
+    # Tuwunel
+    "tuwunelEnvironment.age".publicKeys = users ++ matrix;
 
-  # GitLab
-  "gitlabSecret.age".publicKeys = users ++ gitlab;
-  "gitlabOtpSecret.age".publicKeys = users ++ gitlab;
-  "gitlabDbSecret.age".publicKeys = users ++ gitlab;
-  "gitlabJwsSecret.age".publicKeys = users ++ gitlab;
-  "gitlabRootPassword.age".publicKeys = users ++ gitlab;
-  "gitlabDatabasePassword.age".publicKeys = users ++ gitlab;
-  "gitlabActiveRecordPrimaryKey.age".publicKeys = users ++ gitlab;
-  "gitlabActiveRecordDeterministicKey.age".publicKeys = users ++ gitlab;
-  "gitlabActiveRecordSalt.age".publicKeys = users ++ gitlab;
-  "gitlabRegistryEnvironment.age".publicKeys = users ++ gitlab;
+    # Restic
+    "resticEnv.age".publicKeys = users ++ restic;
+    "resticRepository.age".publicKeys = users ++ restic;
+    "resticPassword.age".publicKeys = users ++ restic;
 
-  # Collabora
-  "collaboraEnvironment.age".publicKeys = users ++ collabora;
+    # GitLab
+    "gitlabSecret.age".publicKeys = users ++ gitlab;
+    "gitlabOtpSecret.age".publicKeys = users ++ gitlab;
+    "gitlabDbSecret.age".publicKeys = users ++ gitlab;
+    "gitlabJwsSecret.age".publicKeys = users ++ gitlab;
+    "gitlabRootPassword.age".publicKeys = users ++ gitlab;
+    "gitlabDatabasePassword.age".publicKeys = users ++ gitlab;
+    "gitlabActiveRecordPrimaryKey.age".publicKeys = users ++ gitlab;
+    "gitlabActiveRecordDeterministicKey.age".publicKeys = users ++ gitlab;
+    "gitlabActiveRecordSalt.age".publicKeys = users ++ gitlab;
+    "gitlabRegistryEnvironment.age".publicKeys = users ++ gitlab;
 
-  # CheshBot
-  "cheshbotEnvironment.age".publicKeys = users ++ cheshbot;
-  "cheshbotPostgresPassword.age".publicKeys = users ++ cheshbot;
+    # Collabora
+    "collaboraEnvironment.age".publicKeys = users ++ collabora;
 
-  # GitHub Registry
-  "githubRegistryPassword.age".publicKeys = users ++ github;
+    # CheshBot
+    "cheshbotEnvironment.age".publicKeys = users ++ cheshbot;
+    "cheshbotPostgresPassword.age".publicKeys = users ++ cheshbot;
 
-  # Attic
-  "atticEnvironment.age".publicKeys = users ++ attic;
+    # GitHub Registry
+    "githubRegistryPassword.age".publicKeys = users ++ github;
 
-  # Grafana
-  "grafanaAdminPassword.age".publicKeys = users ++ grafana;
-  "grafanaSecretKey.age".publicKeys = users ++ grafana;
-  "prometheusAdminPassword.age".publicKeys = users ++ grafana;
-  "lokiAdminPassword.age".publicKeys = users ++ grafana;
+    # Attic
+    "atticEnvironment.age".publicKeys = users ++ attic;
 
-  # Fluent Bit
-  "fluentBitEnvironment.age".publicKeys = users ++ systems;
+    # Grafana
+    "grafanaAdminPassword.age".publicKeys = users ++ grafana;
+    "grafanaSecretKey.age".publicKeys = users ++ grafana;
+    "prometheusAdminPassword.age".publicKeys = users ++ grafana;
+    "lokiAdminPassword.age".publicKeys = users ++ grafana;
 
-  # Password
-  "hashedPassword.age".publicKeys = users ++ servers;
+    # Fluent Bit
+    "fluentBitEnvironment.age".publicKeys = users ++ systems;
 
-  # LiveKit
-  "livekitKeys.age".publicKeys = users ++ livekit;
-  "livekitServiceEnvironment.age".publicKeys = users ++ livekit;
+    # Password
+    "hashedPassword.age".publicKeys = users ++ servers;
 
-  # GitLab Runner
-  "gitlabRunnerLithiumNix.age".publicKeys = users ++ [lithium];
-  "gitlabRunnerLithiumDocker.age".publicKeys = users ++ [lithium];
+    # LiveKit
+    "livekitKeys.age".publicKeys = users ++ livekit;
+    "livekitServiceEnvironment.age".publicKeys = users ++ livekit;
 
-  # Miniflux
-  "minifluxEnvironment.age".publicKeys = users ++ [neon];
+    # GitLab Runner
+    "gitlabRunnerLithiumNix.age".publicKeys = users ++ [lithium];
+    "gitlabRunnerLithiumDocker.age".publicKeys = users ++ [lithium];
 
-  # Forgejo
-  "forgejoS3Key.age".publicKeys = users ++ forgejo;
-  "forgejoS3Secret.age".publicKeys = users ++ forgejo;
-  "forgejoEmailPassword.age".publicKeys = users ++ forgejo;
-  # Forgejo Runner
-  "forgejoRunnerToken.age".publicKeys = users ++ forgejo-runner;
+    # Miniflux
+    "minifluxEnvironment.age".publicKeys = users ++ [neon];
 
-  # Authelia
-  "autheliaStorageEncryptionKey.age".publicKeys = users ++ authelia;
-  "autheliaSessionSecret.age".publicKeys = users ++ authelia;
-  "autheliaOidcIssuerPrivateKey.age".publicKeys = users ++ authelia;
-  "autheliaOidcHmacSecret.age".publicKeys = users ++ authelia;
-  "autheliaJwtSecret.age".publicKeys = users ++ authelia;
-  "autheliaEmailConfiguration.age".publicKeys = users ++ authelia;
-  "autheliaOidcClientConfiguration.age".publicKeys = users ++ authelia;
+    # Forgejo
+    "forgejoS3Key.age".publicKeys = users ++ forgejo;
+    "forgejoS3Secret.age".publicKeys = users ++ forgejo;
+    "forgejoEmailPassword.age".publicKeys = users ++ forgejo;
+    # Forgejo Runner
+    "forgejoRunnerToken.age".publicKeys = users ++ forgejo-runner;
 
-  # mnzn.dev Website
-  "mnznWebsiteEnvironment.age".publicKeys = users ++ mnzn-website;
-  "mnznWebsitePostgresPassword.age".publicKeys = users ++ mnzn-website;
+    # Authelia
+    "autheliaStorageEncryptionKey.age".publicKeys = users ++ authelia;
+    "autheliaSessionSecret.age".publicKeys = users ++ authelia;
+    "autheliaOidcIssuerPrivateKey.age".publicKeys = users ++ authelia;
+    "autheliaOidcHmacSecret.age".publicKeys = users ++ authelia;
+    "autheliaJwtSecret.age".publicKeys = users ++ authelia;
+    "autheliaEmailConfiguration.age".publicKeys = users ++ authelia;
+    "autheliaOidcClientConfiguration.age".publicKeys = users ++ authelia;
 
-  # GlitchTip
-  "glitchtipEnvironment.age".publicKeys = users ++ glitchtip;
+    # mnzn.dev Website
+    "mnznWebsiteEnvironment.age".publicKeys = users ++ mnzn-website;
+    "mnznWebsitePostgresPassword.age".publicKeys = users ++ mnzn-website;
 
-  # LAUTI
-  "lautiEnvironment.age".publicKeys = users ++ lauti;
-}
+    # GlitchTip
+    "glitchtipEnvironment.age".publicKeys = users ++ glitchtip;
+
+    # LAUTI
+    "lautiEnvironment.age".publicKeys = users ++ lauti;
+  }
