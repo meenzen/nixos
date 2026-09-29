@@ -32,7 +32,7 @@
     lanzaboote = {
       # todo: switch to stable release once v1.2.0 is available
       # url = "github:nix-community/lanzaboote/v1.2.0";
-      url = "github:nix-community/lanzaboote/c1c5edd31802d181c8aa2c71588995d93425d650";
+      url = "github:nix-community/lanzaboote/39367cd07a19945644cb4f0c07cf506d2e090fab";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
