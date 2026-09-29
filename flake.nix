@@ -197,12 +197,20 @@
             inputs'.agenix.packages.default
           ];
           shellHook = ''
-            echo ""
+            set -euo pipefail
+            source "bin/lib.sh"
+            print_divider_basic
             echo "$(nix --version)"
             echo "$(git --version)"
             echo "$(nil --version)"
+            echo "nom $(nom version)"
+            echo "$(nvd --version)"
             echo "$(alejandra --version)"
-            echo ""
+            echo "statix $(which statix | grep -oP 'statix-\K[^/]+(?=/bin)')"
+            echo "$(deadnix --version)"
+            echo "$(colmena --version)"
+            echo "$(agenix --help | tail -n 3)"
+            print_divider_basic
           '';
         };
       };
