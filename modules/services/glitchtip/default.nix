@@ -65,7 +65,10 @@ in {
       };
     };
 
-    meenzen.backup.paths = [config.services.glitchtip.stateDir];
+    meenzen = {
+      backup.paths = [config.services.glitchtip.stateDir];
+      services.acme-mnzn.enable = true;
+    };
 
     services.glitchtip = {
       enable = true;

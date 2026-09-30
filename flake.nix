@@ -72,7 +72,7 @@
     ...
   }:
     flake-parts.lib.mkFlake {inherit inputs;} (_: let
-      defaultConfig = {
+      systemConfig = {
         user = {
           username = "meenzens";
           fullName = "Samuel Meenzen";
@@ -85,6 +85,17 @@
           extraGroups = [];
         };
       };
+      pkgs-stable = import inputs.nixpkgs-stable {
+        system = "x86_64-linux";
+        config.allowUnfree = true;
+      };
+      pkgs-review = import inputs.nixpkgs-review {
+        system = "x86_64-linux";
+        config.allowUnfree = true;
+      };
+      specialArgs = {
+        inherit inputs pkgs-stable pkgs-review systemConfig;
+      };
     in {
       imports = [];
       flake = {
@@ -94,21 +105,9 @@
         };
 
         lib = {
-          mkSystem = systemModule: let
-            systemConfig = defaultConfig;
-            pkgs-stable = import inputs.nixpkgs-stable {
-              system = "x86_64-linux";
-              config.allowUnfree = true;
-            };
-            pkgs-review = import inputs.nixpkgs-review {
-              system = "x86_64-linux";
-              config.allowUnfree = true;
-            };
-          in
+          mkSystem = systemModule:
             inputs.nixpkgs.lib.nixosSystem {
-              specialArgs = {
-                inherit inputs systemConfig pkgs-stable pkgs-review;
-              };
+              specialArgs = specialArgs;
               modules = [
                 self.nixosModules.default
                 systemModule
@@ -138,23 +137,12 @@
 
         colmena = let
           mkServer = self.lib.mkServer;
-          pkgs-stable = import inputs.nixpkgs-stable {
-            system = "x86_64-linux";
-            config.allowUnfree = true;
-          };
-          pkgs-review = import inputs.nixpkgs-review {
-            system = "x86_64-linux";
-            config.allowUnfree = true;
-          };
         in {
           meta = {
             nixpkgs = import inputs.nixpkgs {
               system = "x86_64-linux";
             };
-            specialArgs = {
-              inherit inputs pkgs-stable pkgs-review;
-              systemConfig = defaultConfig;
-            };
+            specialArgs = specialArgs;
           };
 
           defaults = {...}: {
@@ -174,15 +162,26 @@
       systems = [
         "aarch64-darwin"
         "aarch64-linux"
-        "x86_64-darwin"
         "x86_64-linux"
       ];
+
       perSystem = {
         inputs',
         pkgs,
         ...
       }: {
         formatter = pkgs.alejandra;
+        checks = let
+          modules = builtins.path {
+            path = ./modules;
+            name = "tests";
+          };
+          args = {
+            inherit pkgs modules specialArgs;
+          };
+        in {
+          glitchtip = import ./tests/glitchtip.nix args;
+        };
         devShells.default = pkgs.mkShell {
           nativeBuildInputs = [
             pkgs.git

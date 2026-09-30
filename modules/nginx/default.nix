@@ -64,6 +64,7 @@ in {
       description = "Hostname of the test page";
       example = "hostname.example.com";
     };
+    disableLetsEncrypt = lib.mkEnableOption "Disable Let's Encrypt";
     allowIndexing = lib.mkEnableOption "Allow search engines to crawl websites hosted on this server";
   };
 
@@ -81,17 +82,23 @@ in {
 
     security.acme = {
       acceptTerms = true;
-      defaults = {
-        email = systemConfig.user.email;
-        # Make sure to reload Nginx, this should happen automatically, but just in case
-        reloadServices = ["nginx.service"];
+      defaults =
+        if cfg.disableLetsEncrypt
+        then {
+          email = systemConfig.user.email;
+          server = lib.mkForce "https://127.0.0.1";
+        }
+        else {
+          email = systemConfig.user.email;
+          # Make sure to reload Nginx, this should happen automatically, but just in case
+          reloadServices = ["nginx.service"];
 
-        # Hell yeah, we absolutely want short-lived certs!
-        # https://letsencrypt.org/docs/profiles/#shortlived
-        profile = "shortlived";
-        renewInterval = "00/6:00:00";
-        renewJitter = "1h";
-      };
+          # Hell yeah, we absolutely want short-lived certs!
+          # https://letsencrypt.org/docs/profiles/#shortlived
+          profile = "shortlived";
+          renewInterval = "00/6:00:00";
+          renewJitter = "1h";
+        };
     };
     meenzen.backup.paths = [
       "/var/lib/acme"

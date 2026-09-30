@@ -51,6 +51,7 @@
     ./services
     ./stylix
     ./sudo-rs
+    ./test-setup
     ./users
     ./verapdf
     ./virt-manager
