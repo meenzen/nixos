@@ -45,6 +45,12 @@
     allow_guest_access = false;
     enable_registration = false;
     suppress_key_server_warning = true;
+    room_list_publication_rules = [
+      {
+        user_id = "@samuel:mnzn.dev";
+        action = "allow";
+      }
+    ];
 
     # Cleanup
     delete_stale_devices_after = "1y";
