@@ -65,6 +65,12 @@ in {
             MINIO_USE_SSL = true;
             SERVE_DIRECT = false;
           };
+          indexer = {
+            REPO_INDEXER_ENABLED = true;
+            REPO_INDEXER_FUZZY_ENABLED = true;
+            REPO_INDEXER_TYPE = "zoekt";
+            REPO_INDEXER_PATH = "indexers/repos.zoekt";
+          };
           "repository.signing".DEFAULT_TRUST_MODEL = "committer";
           picture.ENABLE_FEDERATED_AVATAR = true;
           federation.ENABLED = true;
