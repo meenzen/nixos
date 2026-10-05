@@ -69,7 +69,7 @@ in {
             REPO_INDEXER_ENABLED = true;
             REPO_INDEXER_FUZZY_ENABLED = true;
             REPO_INDEXER_TYPE = "zoekt";
-            REPO_INDEXER_PATH = "indexers/repos.zoekt";
+            REPO_INDEXER_PATH = "data/indexers/repos.zoekt";
           };
           "repository.signing".DEFAULT_TRUST_MODEL = "committer";
           picture.ENABLE_FEDERATED_AVATAR = true;
