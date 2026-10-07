@@ -1,3 +1,5 @@
+# shellcheck shell=bash
+
 COLOR_LIGHT_BLUE='\033[1;34m'
 COLOR_RED='\033[0;31m'
 COLOR_NONE='\033[0m'
@@ -67,6 +69,20 @@ alejandra_format () {
   fi
 }
 
+shellcheck_lint () {
+  print_status "Linting: shellcheck"
+  if ! shellcheck -x -P SCRIPTDIR bin/* >/dev/null 2>&1; then
+    print_error "shellcheck linting failed"
+
+    # Run shellcheck again so that the user can see the error message
+    print_divider_error
+    shellcheck -x -P SCRIPTDIR bin/* || true
+    print_divider_error
+
+    exit 1
+  fi
+}
+
 statix_lint () {
   print_status "Linting: statix"
   statix fix
@@ -97,6 +113,7 @@ deadnix_lint () {
 }
 
 lint () {
+  shellcheck_lint
   statix_lint
   deadnix_lint
   alejandra_format
@@ -114,12 +131,12 @@ nixos_rebuild () {
     exit 1
   fi
   local hostname="$2"
-  local args="$3"
+  shift 2
 
   print_status "Rebuilding NixOS"
   print_divider
   git add .
-  sudo nixos-rebuild $command --verbose -L --flake $hostname $args
+  sudo nixos-rebuild "$command" --verbose -L --flake "$hostname" "$@"
 
   # diff using nvd
   if [ "$command" = "build" ]; then

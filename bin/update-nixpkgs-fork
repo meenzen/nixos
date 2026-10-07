@@ -42,7 +42,7 @@ if [ ! -d "$NIXPKGS" ]; then
   exit 1
 fi
 
-cd $NIXPKGS
+cd "$NIXPKGS"
 
 if ! git remote | grep -q upstream; then
   print_error "Upstream remote not found in $NIXPKGS"

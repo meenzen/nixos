@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -ep pipefail
+set -eo pipefail
 
 source "$(dirname "$0")/lib.sh"
 

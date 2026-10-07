@@ -7,4 +7,4 @@ source "$(dirname "$0")/lib.sh"
 print_start "Installing NixOS Configuration"
 lint
 
-nixos_rebuild "switch" "--option substitute false" "--builders ''" "." "$@"
+nixos_rebuild "switch" "." --option substitute false --builders "" "$@"

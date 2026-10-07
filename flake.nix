@@ -191,6 +191,7 @@
             pkgs.alejandra
             pkgs.statix
             pkgs.deadnix
+            pkgs.shellcheck
             pkgs.uutils-coreutils-noprefix
             pkgs.colmena
             inputs'.agenix.packages.default
@@ -207,6 +208,7 @@
             echo "$(alejandra --version)"
             echo "statix $(which statix | grep -oP 'statix-\K[^/]+(?=/bin)')"
             echo "$(deadnix --version)"
+            echo "shellcheck $(shellcheck --version | grep -oP '^version: \K.*')"
             echo "$(colmena --version)"
             echo "$(agenix --help | tail -n 3)"
             print_divider_basic

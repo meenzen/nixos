@@ -11,4 +11,4 @@ print_status "Adding Changes to Git"
 git add .
 
 print_status "Running 'colmena apply'"
-colmena apply --verbose $@
+colmena apply --verbose "$@"
