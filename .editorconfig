@@ -27,3 +27,9 @@ indent_size = 2
 
 [*.{yaml,yml}]
 indent_size = 2
+
+[*.toml]
+indent_size = 2
+
+[{flake.lock,bin/*}]
+indent_size = 2
