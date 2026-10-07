@@ -8,12 +8,12 @@ jobs:
   tests:
     runs-on: nixos
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - name: Setup Nix
         run: "$SETUP_NIX_SCRIPT"
-      - uses: DeterminateSystems/flake-checker-action@main
+      - uses: DeterminateSystems/flake-checker-action@786422608c7bded2bbc9741ad9f91356842bf520 # main
       - name: Setup Attic cache
-        uses: ryanccn/attic-action@v0.5.2
+        uses: ryanccn/attic-action@dc99f5eb1d5c0495aa26f7b56337b30011fa153e # v0.5.2
         with:
           endpoint: https://attic.mnzn.dev
           cache: main
