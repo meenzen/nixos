@@ -204,6 +204,8 @@
               # Don't rewrite quoting style, only formatting
               simplify = false;
             };
+            # Configured in .github/actionlint.yaml
+            actionlint.enable = true;
           };
           settings.formatter = {
             # reformat nix files after they've been changed by statix

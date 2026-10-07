@@ -1,0 +1,4 @@
+self-hosted-runner:
+  # Forgejo runner label, see .forgejo/workflows/test.yml
+  labels:
+    - nixos
