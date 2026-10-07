@@ -13,6 +13,14 @@
     # Helper Libraries
     nixos-hardware.url = "github:nixos/nixos-hardware";
     flake-parts.url = "github:hercules-ci/flake-parts";
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    git-hooks-nix = {
+      url = "github:cachix/git-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL/main";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -97,7 +105,10 @@
         inherit inputs pkgs-stable pkgs-review systemConfig;
       };
     in {
-      imports = [];
+      imports = [
+        inputs.treefmt-nix.flakeModule
+        inputs.git-hooks-nix.flakeModule
+      ];
       flake = {
         nixosModules = rec {
           meenzen = import ./modules;
@@ -166,16 +177,44 @@
       ];
 
       perSystem = {
+        config,
         inputs',
         pkgs,
         ...
       }: {
-        formatter = pkgs.alejandra;
-        checks = let
-          modules = builtins.path {
-            path = ./modules;
-            name = "tests";
+        treefmt = {
+          # pre-commit runs treefmt, this would run it a second time
+          flakeCheck = false;
+          programs = {
+            alejandra.enable = true;
+            statix = {
+              enable = true;
+              # use statix.toml instead of the default configuration
+              disabled-lints = (builtins.fromTOML (builtins.readFile ./statix.toml)).disabled;
+            };
+            shellcheck = {
+              enable = true;
+              includes = ["bin/*"];
+              external-sources = true;
+              source-path = "SCRIPTDIR";
+            };
           };
+          settings.formatter = {
+            # reformat nix files after they've been changed by statix
+            statix.priority = 0;
+            alejandra.priority = 1;
+          };
+        };
+
+        pre-commit.settings.hooks = {
+          treefmt.enable = true;
+          deadnix.enable = true;
+          # treefmt only runs 'statix fix', this catches lints that can't be fixed automatically
+          statix.enable = true;
+        };
+
+        checks = let
+          modules = ./modules;
           args = {
             inherit pkgs modules specialArgs;
           };
@@ -188,15 +227,18 @@
             pkgs.nil
             pkgs.nom
             pkgs.nvd
-            pkgs.alejandra
-            pkgs.statix
-            pkgs.deadnix
-            pkgs.shellcheck
             pkgs.uutils-coreutils-noprefix
             pkgs.colmena
             inputs'.agenix.packages.default
+            config.pre-commit.settings.package
           ];
+
+          # treefmt and its formatters, plus the tools used by the git hooks
+          inputsFrom = [config.treefmt.build.devShell];
+          packages = config.pre-commit.settings.enabledPackages;
+
           shellHook = ''
+            ${config.pre-commit.installationScript}
             set -euo pipefail
             source "${./bin}/lib.sh"
             print_divider_basic
@@ -209,6 +251,8 @@
             echo "statix $(which statix | grep -oP 'statix-\K[^/]+(?=/bin)')"
             echo "$(deadnix --version)"
             echo "shellcheck $(shellcheck --version | grep -oP '^version: \K.*')"
+            echo "$(treefmt --version)"
+            echo "$(pre-commit --version)"
             echo "$(colmena --version)"
             echo "$(agenix --help | tail -n 3)"
             print_divider_basic

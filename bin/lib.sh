@@ -55,57 +55,28 @@ prompt_or_exit () {
   fi
 }
 
-alejandra_format () {
-  print_status "Formatting: alejandra"
-  if ! alejandra . >/dev/null 2>&1; then
-    print_error "Alejandra formatting failed"
+treefmt_format () {
+  print_status "Formatting: treefmt"
+  if ! treefmt >/dev/null 2>&1; then
+    print_error "treefmt formatting failed"
 
-    # Run alejandra again so that the user can see the error message
+    # Run treefmt again so that the user can see the error message
     print_divider_error
-    alejandra . || true
-    print_divider_error
-
-    exit 1
-  fi
-}
-
-shellcheck_lint () {
-  print_status "Linting: shellcheck"
-  if ! shellcheck -x -P SCRIPTDIR bin/* >/dev/null 2>&1; then
-    print_error "shellcheck linting failed"
-
-    # Run shellcheck again so that the user can see the error message
-    print_divider_error
-    shellcheck -x -P SCRIPTDIR bin/* || true
+    treefmt || true
     print_divider_error
 
     exit 1
   fi
 }
 
-statix_lint () {
-  print_status "Linting: statix"
-  statix fix
-  if ! statix check >/dev/null 2>&1; then
-    print_error "statix linting failed"
+pre_commit_lint () {
+  print_status "Linting: pre-commit"
+  if ! pre-commit run --all-files >/dev/null 2>&1; then
+    print_error "pre-commit linting failed"
 
-    # Run statix again so that the user can see the error message
+    # Run pre-commit again so that the user can see the error message
     print_divider_error
-    statix check || true
-    print_divider_error
-
-    exit 1
-  fi
-}
-
-deadnix_lint () {
-  print_status "Linting: deadnix"
-  if ! deadnix --fail >/dev/null 2>&1; then
-    print_error "deadnix linting failed"
-
-    # Run deadnix again so that the user can see the error message
-    print_divider_error
-    deadnix --fail || true
+    pre-commit run --all-files || true
     print_divider_error
 
     exit 1
@@ -113,10 +84,8 @@ deadnix_lint () {
 }
 
 lint () {
-  shellcheck_lint
-  statix_lint
-  deadnix_lint
-  alejandra_format
+  treefmt_format
+  pre_commit_lint
 }
 
 nixos_rebuild () {

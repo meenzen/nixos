@@ -2,3 +2,6 @@
 result
 result/
 *.qcow2
+
+# git-hooks.nix
+.pre-commit-config.yaml
