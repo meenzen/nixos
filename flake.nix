@@ -198,6 +198,12 @@
               external-sources = true;
               source-path = "SCRIPTDIR";
             };
+            shfmt = {
+              enable = true;
+              includes = ["bin/*"];
+              # Don't rewrite quoting style, only formatting
+              simplify = false;
+            };
           };
           settings.formatter = {
             # reformat nix files after they've been changed by statix

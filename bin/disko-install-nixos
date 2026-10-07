@@ -8,8 +8,8 @@ print_start "Installing NixOS"
 
 # check if hostname is passed as first argument
 if [ -z "$1" ]; then
-    print_error "No hostname provided. Usage: $0 <hostname>"
-    exit 1
+  print_error "No hostname provided. Usage: $0 <hostname>"
+  exit 1
 fi
 HOSTNAME="$1"
 
@@ -30,10 +30,10 @@ trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDS
 EOF
 
 if [[ "$*" == *"--skip-disko"* ]]; then
-    print_status "Skipping disko"
+  print_status "Skipping disko"
 else
-    print_status "Running disko to format and mount disks"
-    sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy,format,mount "systems/$HOSTNAME/disko.nix"
+  print_status "Running disko to format and mount disks"
+  sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy,format,mount "systems/$HOSTNAME/disko.nix"
 fi
 
 print_status "Installing NixOS with hostname: $HOSTNAME"

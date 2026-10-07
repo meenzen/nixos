@@ -19,11 +19,11 @@ if [ "$1" == "--force" ]; then
   FORCE=true
 fi
 
-git_ahead_of_origin () {
+git_ahead_of_origin() {
   [ -n "$(git log origin/$NIXPKGS_BRANCH..$NIXPKGS_BRANCH)" ]
 }
 
-git_uncommitted_changes () {
+git_uncommitted_changes() {
   [ -n "$(git status --porcelain)" ]
 }
 
@@ -89,14 +89,14 @@ else
   cd "$DOTNET_DIRECTORY"
 
   for version in "${DOTNET_VERSIONS[@]}"; do
-  print_status "Updating .NET $version"
-  ./update.sh "$version"
+    print_status "Updating .NET $version"
+    ./update.sh "$version"
 
-  if git_uncommitted_changes; then
+    if git_uncommitted_changes; then
       print_status "Changes detected, committing"
       git add .
       git commit -m "dotnet-sdk $version: update to latest version"
-  fi
+    fi
   done
 fi
 

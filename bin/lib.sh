@@ -4,50 +4,50 @@ COLOR_LIGHT_BLUE='\033[1;34m'
 COLOR_RED='\033[0;31m'
 COLOR_NONE='\033[0m'
 
-print () {
+print() {
   echo -e "${COLOR_LIGHT_BLUE}$1${COLOR_NONE}"
 }
 
-print_start () {
+print_start() {
   print "=> $1"
 }
 
-print_end () {
+print_end() {
   print "=> $1"
 }
 
-print_status () {
+print_status() {
   print "==> $1"
 }
 
-print_warning () {
+print_warning() {
   echo -e "Warning: ${COLOR_RED}$1${COLOR_NONE}"
 }
 
-print_error () {
+print_error() {
   echo -e "${COLOR_RED}==> Error:${COLOR_NONE} $1"
 }
 
-print_divider () {
+print_divider() {
   local columns=${COLUMNS:-80}
   local divider_char="${1:-─}"
   local color="${2:-$COLOR_LIGHT_BLUE}"
   local divider_line=""
-  for ((i=0; i<columns; i++)); do
+  for ((i = 0; i < columns; i++)); do
     divider_line+="$divider_char"
   done
   echo -e "${color}${divider_line}${COLOR_NONE}"
 }
 
-print_divider_error () {
+print_divider_error() {
   print_divider "" "$COLOR_RED"
 }
 
-print_divider_basic () {
+print_divider_basic() {
   print_divider "" "$COLOR_NONE"
 }
 
-prompt_or_exit () {
+prompt_or_exit() {
   echo "$1 [y/N]"
   read -r response
   if [ "$response" != "y" ]; then
@@ -55,7 +55,7 @@ prompt_or_exit () {
   fi
 }
 
-treefmt_format () {
+treefmt_format() {
   print_status "Formatting: treefmt"
   if ! treefmt >/dev/null 2>&1; then
     print_error "treefmt formatting failed"
@@ -69,7 +69,7 @@ treefmt_format () {
   fi
 }
 
-pre_commit_lint () {
+pre_commit_lint() {
   print_status "Linting: pre-commit"
   if ! pre-commit run --all-files >/dev/null 2>&1; then
     print_error "pre-commit linting failed"
@@ -83,12 +83,12 @@ pre_commit_lint () {
   fi
 }
 
-lint () {
+lint() {
   treefmt_format
   pre_commit_lint
 }
 
-nixos_rebuild () {
+nixos_rebuild() {
   if [ -z "$1" ]; then
     print_error "No command provided for nixos_rebuild."
     exit 1
