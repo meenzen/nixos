@@ -1,9 +1,5 @@
 [files]
-extend-exclude = [
-  "*.age",
-  "*.patch",
-  "flake.lock",
-]
+extend-exclude = ["*.age", "*.patch", "flake.lock"]
 
 [default]
 extend-ignore-re = [

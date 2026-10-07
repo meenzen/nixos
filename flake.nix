@@ -206,6 +206,7 @@
             };
             # Configured in .github/actionlint.yaml
             actionlint.enable = true;
+            taplo.enable = true;
           };
           settings.formatter = {
             # reformat nix files after they've been changed by statix
