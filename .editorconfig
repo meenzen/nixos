@@ -33,3 +33,8 @@ indent_size = 2
 
 [{flake.lock,bin/*}]
 indent_size = 2
+
+# Contains an inline kernel patch, the tabs are part of the diff
+[modules/workarounds/zfs.nix]
+indent_style = unset
+indent_size = unset
