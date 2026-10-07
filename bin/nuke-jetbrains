@@ -18,5 +18,5 @@ rm -rf ~/.cache/JetBrains
 echo "Removing JetBrains local files..."
 rm -rf ~/.local/share/JetBrains
 
-echo "Removeing JetBrains desktop files..."
+echo "Removing JetBrains desktop files..."
 rm -rf ~/.local/share/applications/jetbrains-*.desktop

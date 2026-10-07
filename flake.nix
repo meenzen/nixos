@@ -211,6 +211,8 @@
           deadnix.enable = true;
           # treefmt only runs 'statix fix', this catches lints that can't be fixed automatically
           statix.enable = true;
+          # Configured in typos.toml, check-only because auto-fixes can break config values
+          typos.enable = true;
           # Configured in .editorconfig
           editorconfig-checker.enable = true;
         };

@@ -41,8 +41,8 @@
 
     pkgs.nnn # terminal file manager
     pkgs.ripgrep # grep alternative
-    pkgs.jq # json processer
-    pkgs.yq-go # yaml processer
+    pkgs.jq # json processor
+    pkgs.yq-go # yaml processor
     pkgs.eza # ls alternative
     pkgs.fzf # fuzzy finder
     pkgs.bat # cat alternative

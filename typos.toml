@@ -1,0 +1,18 @@
+[files]
+extend-exclude = [
+  "*.age",
+  "*.patch",
+  "flake.lock",
+]
+
+[default]
+extend-ignore-re = [
+  # Keymap mnemonics like "[h]unk [s]tage"
+  "\\[\\w\\]\\w+",
+]
+
+[default.extend-words]
+# Hetzner Helsinki region (hel1)
+hel = "hel"
+# noice.nvim
+noice = "noice"
