@@ -233,6 +233,8 @@
           };
         in {
           glitchtip = import ./tests/glitchtip.nix args;
+          module-dependencies = import ./tests/module-dependencies.nix {inherit pkgs self;};
+          secrets = import ./tests/secrets.nix {inherit pkgs self;};
         };
         devShells.default = pkgs.mkShell {
           nativeBuildInputs = [
