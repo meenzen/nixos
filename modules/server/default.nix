@@ -1,8 +1,8 @@
 {
   config,
   lib,
-  inputs,
   systemConfig,
+  secrets,
   ...
 }: let
   cfg = config.meenzen.server;
@@ -13,7 +13,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     age.secrets = {
-      hashedPassword.file = "${inputs.self}/secrets/hashedPassword.age";
+      hashedPassword.file = "${secrets}/hashedPassword.age";
     };
 
     networking.firewall.enable = lib.mkForce true;

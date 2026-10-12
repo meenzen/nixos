@@ -1,8 +1,14 @@
 {
+  lib,
   pkgs,
-  inputs,
   ...
-}: {
+}: let
+  # optimize sources lib.sh from its own directory. Only copy these two files to the store, not the whole repository.
+  scripts = lib.fileset.toSource {
+    root = ../../bin;
+    fileset = lib.fileset.unions [../../bin/optimize ../../bin/lib.sh];
+  };
+in {
   # Automatic garbage collection
   nix.gc = {
     automatic = true;
@@ -18,7 +24,7 @@
       pkgs.writeShellApplication {
         name = "cleanup-nix-store";
         text = ''
-          ${inputs.self}/bin/optimize
+          ${scripts}/optimize
         '';
       }
     )

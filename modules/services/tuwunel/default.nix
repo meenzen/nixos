@@ -1,7 +1,7 @@
 {
   config,
   lib,
-  inputs,
+  secrets,
   ...
 }: let
   cfg = config.meenzen.services.tuwunel;
@@ -28,7 +28,7 @@ in {
 
     age.secrets = {
       tuwunelEnvironment = {
-        file = "${inputs.self}/secrets/tuwunelEnvironment.age";
+        file = "${secrets}/tuwunelEnvironment.age";
         restartUnits = ["tuwunel.service"];
       };
     };

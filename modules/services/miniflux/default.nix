@@ -1,7 +1,7 @@
 {
   config,
   lib,
-  inputs,
+  secrets,
   ...
 }: let
   cfg = config.meenzen.services.miniflux;
@@ -28,7 +28,7 @@ in {
 
     age.secrets = {
       minifluxEnvironment = {
-        file = "${inputs.self}/secrets/minifluxEnvironment.age";
+        file = "${secrets}/minifluxEnvironment.age";
         restartUnits = ["miniflux.service"];
       };
     };

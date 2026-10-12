@@ -2,7 +2,7 @@
   config,
   lib,
   pkgs,
-  inputs,
+  secrets,
   ...
 }: let
   cfg = config.meenzen.services.forgejo-runner;
@@ -51,7 +51,7 @@ in {
   config = lib.mkIf cfg.enable {
     age.secrets = {
       forgejoRunnerToken = {
-        file = "${inputs.self}/secrets/forgejoRunnerToken.age";
+        file = "${secrets}/forgejoRunnerToken.age";
         restartUnits = ["gitea-runner-default.service"];
       };
     };

@@ -1,8 +1,8 @@
 {
-  inputs,
   config,
   lib,
   pkgs,
+  secrets,
   ...
 }: let
   cfg = config.meenzen.matrix.mas;
@@ -105,7 +105,7 @@ in {
 
     age.secrets = {
       masSecretConfig = {
-        file = "${inputs.self}/secrets/masSecretConfig.age";
+        file = "${secrets}/masSecretConfig.age";
         restartUnits = ["matrix-authentication-service.service"];
         owner = serviceName;
         group = serviceName;

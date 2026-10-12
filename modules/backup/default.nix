@@ -1,7 +1,7 @@
 {
   config,
   lib,
-  inputs,
+  secrets,
   ...
 }: let
   cfg = config.meenzen.backup;
@@ -20,9 +20,9 @@ in {
 
   config = lib.mkIf cfg.enable {
     age.secrets = {
-      resticEnv.file = "${inputs.self}/secrets/resticEnv.age";
-      resticRepository.file = "${inputs.self}/secrets/resticRepository.age";
-      resticPassword.file = "${inputs.self}/secrets/resticPassword.age";
+      resticEnv.file = "${secrets}/resticEnv.age";
+      resticRepository.file = "${secrets}/resticRepository.age";
+      resticPassword.file = "${secrets}/resticPassword.age";
     };
 
     services.restic.backups = {

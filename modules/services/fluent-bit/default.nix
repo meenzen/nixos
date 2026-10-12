@@ -1,7 +1,7 @@
 {
   config,
   lib,
-  inputs,
+  secrets,
   ...
 }: let
   serviceName = "fluent-bit";
@@ -44,7 +44,7 @@ in {
   config = lib.mkIf cfg.enable {
     age.secrets = {
       fluentBitEnvironment = {
-        file = "${inputs.self}/secrets/fluentBitEnvironment.age";
+        file = "${secrets}/fluentBitEnvironment.age";
         restartUnits = ["fluent-bit.service"];
       };
     };

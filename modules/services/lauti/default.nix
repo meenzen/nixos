@@ -1,7 +1,7 @@
 {
   config,
   lib,
-  inputs,
+  secrets,
   ...
 }: let
   cfg = config.meenzen.services.lauti;
@@ -28,7 +28,7 @@ in {
 
     age.secrets = {
       lautiEnvironment = {
-        file = "${inputs.self}/secrets/lautiEnvironment.age";
+        file = "${secrets}/lautiEnvironment.age";
         restartUnits = ["lauti.service"];
       };
     };

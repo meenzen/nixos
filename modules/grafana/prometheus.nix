@@ -1,7 +1,7 @@
 {
   config,
   lib,
-  inputs,
+  secrets,
   ...
 }: let
   cfg = config.meenzen.prometheus;
@@ -27,7 +27,7 @@ in {
 
     age.secrets = {
       prometheusAdminPassword = {
-        file = "${inputs.self}/secrets/prometheusAdminPassword.age";
+        file = "${secrets}/prometheusAdminPassword.age";
         owner = "nginx";
         group = "nginx";
       };

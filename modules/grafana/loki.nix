@@ -1,7 +1,7 @@
 {
   config,
   lib,
-  inputs,
+  secrets,
   ...
 }: let
   cfg = config.meenzen.loki;
@@ -39,7 +39,7 @@ in {
 
     age.secrets = {
       lokiAdminPassword = {
-        file = "${inputs.self}/secrets/lokiAdminPassword.age";
+        file = "${secrets}/lokiAdminPassword.age";
         owner = "nginx";
         group = "nginx";
       };

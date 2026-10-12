@@ -1,7 +1,7 @@
 {
   config,
   lib,
-  inputs,
+  secrets,
   ...
 }: let
   cfg = config.meenzen.grafana;
@@ -43,13 +43,13 @@ in {
 
     age.secrets = {
       grafanaAdminPassword = {
-        file = "${inputs.self}/secrets/grafanaAdminPassword.age";
+        file = "${secrets}/grafanaAdminPassword.age";
         restartUnits = ["grafana.service"];
         owner = serviceName;
         group = serviceName;
       };
       grafanaSecretKey = {
-        file = "${inputs.self}/secrets/grafanaSecretKey.age";
+        file = "${secrets}/grafanaSecretKey.age";
         restartUnits = ["grafana.service"];
         owner = serviceName;
         group = serviceName;

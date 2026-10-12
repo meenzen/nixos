@@ -1,8 +1,8 @@
 {
   config,
   lib,
-  inputs,
   systemConfig,
+  secrets,
   ...
 }: let
   cfg = config.meenzen.services.acme-mnzn;
@@ -19,7 +19,7 @@ in {
   config = lib.mkIf cfg.enable {
     age.secrets = {
       acmeMnznEnvironment = {
-        file = "${inputs.self}/secrets/acmeMnznEnvironment.age";
+        file = "${secrets}/acmeMnznEnvironment.age";
       };
     };
 

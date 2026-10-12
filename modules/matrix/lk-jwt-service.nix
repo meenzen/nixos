@@ -2,7 +2,7 @@
   config,
   lib,
   pkgs,
-  inputs,
+  secrets,
   ...
 }: let
   cfg = config.meenzen.lk-jwt-service;
@@ -30,7 +30,7 @@ in {
 
     age.secrets = {
       livekitServiceEnvironment = {
-        file = "${inputs.self}/secrets/livekitServiceEnvironment.age";
+        file = "${secrets}/livekitServiceEnvironment.age";
         restartUnits = ["lk-jwt-service.service"];
         owner = "lk-jwt-service";
         group = "lk-jwt-service";

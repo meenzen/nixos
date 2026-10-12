@@ -1,7 +1,7 @@
 {
   config,
   lib,
-  inputs,
+  secrets,
   ...
 }: let
   cfg = config.meenzen.attic;
@@ -39,7 +39,7 @@ in {
 
     age.secrets = {
       atticEnvironment = {
-        file = "${inputs.self}/secrets/atticEnvironment.age";
+        file = "${secrets}/atticEnvironment.age";
         restartUnits = ["atticd.service"];
       };
     };

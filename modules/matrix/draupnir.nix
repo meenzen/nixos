@@ -1,7 +1,7 @@
 {
   config,
   lib,
-  inputs,
+  secrets,
   ...
 }: let
   cfg = config.meenzen.matrix.draupnir;
@@ -24,11 +24,11 @@ in {
     meenzen.backup.paths = [config.services.draupnir.settings.dataPath];
     age.secrets = {
       draupnirAccessToken = {
-        file = "${inputs.self}/secrets/draupnirAccessToken.age";
+        file = "${secrets}/draupnirAccessToken.age";
         restartUnits = ["draupnir.service"];
       };
       draupnirSynapseAntispamSecret = {
-        file = "${inputs.self}/secrets/draupnirSynapseAntispamSecret.age";
+        file = "${secrets}/draupnirSynapseAntispamSecret.age";
         restartUnits = ["draupnir.service"];
       };
     };

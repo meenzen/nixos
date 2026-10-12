@@ -1,7 +1,7 @@
 {
   config,
   lib,
-  inputs,
+  secrets,
   ...
 }: let
   cfg = config.meenzen.services.mnzn-website;
@@ -33,11 +33,11 @@ in {
 
     age.secrets = {
       mnznWebsiteEnvironment = {
-        file = "${inputs.self}/secrets/mnznWebsiteEnvironment.age";
+        file = "${secrets}/mnznWebsiteEnvironment.age";
         restartUnits = ["${config.virtualisation.oci-containers.containers.${serviceName}.serviceName}.service"];
       };
       mnznWebsitePostgresPassword = {
-        file = "${inputs.self}/secrets/mnznWebsitePostgresPassword.age";
+        file = "${secrets}/mnznWebsitePostgresPassword.age";
         restartUnits = ["postgresql-setup.service"];
         owner = "postgres";
         group = "postgres";

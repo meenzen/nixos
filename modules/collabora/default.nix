@@ -1,7 +1,7 @@
 {
   config,
   lib,
-  inputs,
+  secrets,
   ...
 }: let
   cfg = config.meenzen.collabora;
@@ -37,7 +37,7 @@ in {
 
     age.secrets = {
       collaboraEnvironment = {
-        file = "${inputs.self}/secrets/collaboraEnvironment.age";
+        file = "${secrets}/collaboraEnvironment.age";
         restartUnits = ["${config.virtualisation.oci-containers.containers.${serviceName}.serviceName}.service"];
       };
     };

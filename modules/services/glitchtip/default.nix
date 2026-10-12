@@ -2,7 +2,7 @@
   config,
   lib,
   pkgs,
-  inputs,
+  secrets,
   ...
 }: let
   cfg = config.meenzen.services.glitchtip;
@@ -61,7 +61,7 @@ in {
   config = lib.mkIf cfg.enable {
     age.secrets = {
       glitchtipEnvironment = {
-        file = "${inputs.self}/secrets/glitchtipEnvironment.age";
+        file = "${secrets}/glitchtipEnvironment.age";
         restartUnits = ["glitchtip.service" "glitchtip-worker.service"];
       };
     };

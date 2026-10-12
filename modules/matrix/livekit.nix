@@ -2,7 +2,7 @@
   config,
   lib,
   pkgs,
-  inputs,
+  secrets,
   ...
 }: let
   cfg = config.meenzen.livekit;
@@ -76,7 +76,7 @@ in {
 
     age.secrets = {
       livekitKeys = {
-        file = "${inputs.self}/secrets/livekitKeys.age";
+        file = "${secrets}/livekitKeys.age";
         restartUnits = ["livekit.service"];
         owner = "livekit";
         group = "livekit";

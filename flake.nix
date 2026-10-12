@@ -103,6 +103,9 @@
       };
       specialArgs = {
         inherit inputs pkgs-stable pkgs-review systemConfig;
+        # Only the secrets directory is copied to the store, so changes elsewhere in the repository don't change the
+        # systems.
+        secrets = ./secrets;
       };
     in {
       imports = [

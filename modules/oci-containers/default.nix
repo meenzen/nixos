@@ -2,7 +2,7 @@
   config,
   lib,
   pkgs,
-  inputs,
+  secrets,
   ...
 }: let
   cfg = config.meenzen.oci-containers;
@@ -78,7 +78,7 @@ in {
 
       age.secrets = lib.mkIf cfg.github.enable {
         githubRegistryPassword = {
-          file = "${inputs.self}/secrets/githubRegistryPassword.age";
+          file = "${secrets}/githubRegistryPassword.age";
         };
       };
     })

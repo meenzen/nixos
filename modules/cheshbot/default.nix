@@ -1,7 +1,7 @@
 {
   config,
   lib,
-  inputs,
+  secrets,
   ...
 }: let
   cfg = config.meenzen.cheshbot;
@@ -33,11 +33,11 @@ in {
 
     age.secrets = {
       cheshbotEnvironment = {
-        file = "${inputs.self}/secrets/cheshbotEnvironment.age";
+        file = "${secrets}/cheshbotEnvironment.age";
         restartUnits = ["${config.virtualisation.oci-containers.containers.${serviceName}.serviceName}.service"];
       };
       cheshbotPostgresPassword = {
-        file = "${inputs.self}/secrets/cheshbotPostgresPassword.age";
+        file = "${secrets}/cheshbotPostgresPassword.age";
         restartUnits = ["postgresql-setup.service"];
         owner = "postgres";
         group = "postgres";

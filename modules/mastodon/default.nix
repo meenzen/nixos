@@ -2,7 +2,7 @@
   config,
   lib,
   pkgs,
-  inputs,
+  secrets,
   ...
 }: let
   cfg = config.meenzen.mastodon;
@@ -85,49 +85,49 @@ in {
 
     age.secrets = {
       mastodonEmailPassword = {
-        file = "${inputs.self}/secrets/mastodonEmailPassword.age";
+        file = "${secrets}/mastodonEmailPassword.age";
         restartUnits = secretUnits;
         owner = "mastodon";
         group = "mastodon";
       };
       mastodonSecretKeyBase = {
-        file = "${inputs.self}/secrets/mastodonSecretKeyBase.age";
+        file = "${secrets}/mastodonSecretKeyBase.age";
         restartUnits = secretUnits;
         owner = "mastodon";
         group = "mastodon";
       };
       mastodonVapidPublicKey = {
-        file = "${inputs.self}/secrets/mastodonVapidPublicKey.age";
+        file = "${secrets}/mastodonVapidPublicKey.age";
         restartUnits = secretUnits;
         owner = "mastodon";
         group = "mastodon";
       };
       mastodonVapidPrivateKey = {
-        file = "${inputs.self}/secrets/mastodonVapidPrivateKey.age";
+        file = "${secrets}/mastodonVapidPrivateKey.age";
         restartUnits = secretUnits;
         owner = "mastodon";
         group = "mastodon";
       };
       mastodonActiveRecordPrimaryKey = {
-        file = "${inputs.self}/secrets/mastodonActiveRecordPrimaryKey.age";
+        file = "${secrets}/mastodonActiveRecordPrimaryKey.age";
         restartUnits = secretUnits;
         owner = "mastodon";
         group = "mastodon";
       };
       mastodonActiveRecordDeterministicKey = {
-        file = "${inputs.self}/secrets/mastodonActiveRecordDeterministicKey.age";
+        file = "${secrets}/mastodonActiveRecordDeterministicKey.age";
         restartUnits = secretUnits;
         owner = "mastodon";
         group = "mastodon";
       };
       mastodonActiveRecordSalt = {
-        file = "${inputs.self}/secrets/mastodonActiveRecordSalt.age";
+        file = "${secrets}/mastodonActiveRecordSalt.age";
         restartUnits = secretUnits;
         owner = "mastodon";
         group = "mastodon";
       };
       mastodonS3Config = {
-        file = "${inputs.self}/secrets/mastodonS3Config.age";
+        file = "${secrets}/mastodonS3Config.age";
         restartUnits = secretUnits;
         owner = "mastodon";
         group = "mastodon";

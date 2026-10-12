@@ -2,7 +2,7 @@
   config,
   lib,
   pkgs,
-  inputs,
+  secrets,
   ...
 }: let
   cfg = config.meenzen.services.forgejo;
@@ -30,15 +30,15 @@ in {
 
     age.secrets = {
       forgejoS3Key = {
-        file = "${inputs.self}/secrets/forgejoS3Key.age";
+        file = "${secrets}/forgejoS3Key.age";
         restartUnits = ["forgejo.service"];
       };
       forgejoS3Secret = {
-        file = "${inputs.self}/secrets/forgejoS3Secret.age";
+        file = "${secrets}/forgejoS3Secret.age";
         restartUnits = ["forgejo.service"];
       };
       forgejoEmailPassword = {
-        file = "${inputs.self}/secrets/forgejoEmailPassword.age";
+        file = "${secrets}/forgejoEmailPassword.age";
         restartUnits = ["forgejo.service"];
       };
     };

@@ -3,6 +3,7 @@
   lib,
   pkgs,
   inputs,
+  secrets,
   ...
 }: let
   cfg = config.meenzen.matrix.synapse;
@@ -170,7 +171,7 @@ in {
 
     age.secrets = {
       synapseConfig = {
-        file = "${inputs.self}/secrets/synapseConfig.age";
+        file = "${secrets}/synapseConfig.age";
         restartUnits = secretUnits;
         owner = serviceName;
         group = serviceName;

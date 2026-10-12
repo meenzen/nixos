@@ -1,7 +1,7 @@
 {
   config,
   lib,
-  inputs,
+  secrets,
   ...
 }: let
   cfg = config.meenzen.services.authelia;
@@ -32,37 +32,37 @@ in {
   config = lib.mkIf cfg.enable {
     age.secrets = {
       autheliaStorageEncryptionKey = {
-        file = "${inputs.self}/secrets/autheliaStorageEncryptionKey.age";
+        file = "${secrets}/autheliaStorageEncryptionKey.age";
         restartUnits = ["authelia-main.service"];
         owner = user;
       };
       autheliaSessionSecret = {
-        file = "${inputs.self}/secrets/autheliaSessionSecret.age";
+        file = "${secrets}/autheliaSessionSecret.age";
         restartUnits = ["authelia-main.service"];
         owner = user;
       };
       autheliaOidcIssuerPrivateKey = {
-        file = "${inputs.self}/secrets/autheliaOidcIssuerPrivateKey.age";
+        file = "${secrets}/autheliaOidcIssuerPrivateKey.age";
         restartUnits = ["authelia-main.service"];
         owner = user;
       };
       autheliaOidcHmacSecret = {
-        file = "${inputs.self}/secrets/autheliaOidcHmacSecret.age";
+        file = "${secrets}/autheliaOidcHmacSecret.age";
         restartUnits = ["authelia-main.service"];
         owner = user;
       };
       autheliaJwtSecret = {
-        file = "${inputs.self}/secrets/autheliaJwtSecret.age";
+        file = "${secrets}/autheliaJwtSecret.age";
         restartUnits = ["authelia-main.service"];
         owner = user;
       };
       autheliaEmailConfiguration = {
-        file = "${inputs.self}/secrets/autheliaEmailConfiguration.age";
+        file = "${secrets}/autheliaEmailConfiguration.age";
         restartUnits = ["authelia-main.service"];
         owner = user;
       };
       autheliaOidcClientConfiguration = {
-        file = "${inputs.self}/secrets/autheliaOidcClientConfiguration.age";
+        file = "${secrets}/autheliaOidcClientConfiguration.age";
         restartUnits = ["authelia-main.service"];
         owner = user;
       };
