@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   secrets,
   ...
 }: let
@@ -86,6 +87,14 @@ in {
         END $$;
       EOF
     '';
+
+    # The image has no HEALTHCHECK and no curl, so wait for the health endpoint from the host. The unit only counts as
+    # started, and the deployment only succeeds, once the application is serving requests.
+    systemd.services.${config.virtualisation.oci-containers.containers.${serviceName}.serviceName}.serviceConfig = {
+      ExecStartPost = "${lib.getExe pkgs.curl} --fail --silent --show-error --output /dev/null --max-time 5 --retry 25 --retry-delay 5 --retry-all-errors http://127.0.0.1:${toString cfg.port}/health";
+      # The upstream module disables the start timeout, which would block deployments forever.
+      TimeoutStartSec = lib.mkForce "5min";
+    };
 
     services.nginx.virtualHosts."${cfg.domain}" = {
       forceSSL = true;
