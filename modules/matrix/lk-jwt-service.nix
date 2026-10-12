@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   secrets,
   ...
 }: let
@@ -30,43 +29,18 @@ in {
       services.acme-mnzn.enable = true;
     };
 
-    age.secrets = {
-      livekitServiceEnvironment = {
-        file = "${secrets}/livekitServiceEnvironment.age";
-        restartUnits = ["lk-jwt-service.service"];
-        owner = "lk-jwt-service";
-        group = "lk-jwt-service";
-      };
+    # Same key file as LiveKit, loaded via LoadCredential. lk-jwt-service only accepts a single key in it.
+    age.secrets.livekitKeys = {
+      file = "${secrets}/livekitKeys.age";
+      restartUnits = ["lk-jwt-service.service"];
     };
 
-    systemd.services.lk-jwt-service = {
-      description = "Minimal service to issue LiveKit JWTs for MatrixRTC";
-      after = ["network.target"];
-      wantedBy = ["multi-user.target"];
-
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = "${pkgs.lk-jwt-service}/bin/lk-jwt-service";
-        Restart = "always";
-        RestartSec = "5";
-        User = "lk-jwt-service";
-        Group = "lk-jwt-service";
-        EnvironmentFile = config.age.secrets.livekitServiceEnvironment.path;
-      };
-
-      environment = {
-        LIVEKIT_URL = "wss://${config.meenzen.livekit.domain}";
-        LIVEKIT_JWT_PORT = toString cfg.port;
-      };
+    services.lk-jwt-service = {
+      enable = true;
+      livekitUrl = "wss://${config.meenzen.livekit.domain}";
+      keyFile = config.age.secrets.livekitKeys.path;
+      port = cfg.port;
     };
-
-    users.users.lk-jwt-service = {
-      isSystemUser = true;
-      group = "lk-jwt-service";
-      description = "lk-jwt-service service user";
-    };
-
-    users.groups.lk-jwt-service = {};
 
     services.nginx.virtualHosts.${cfg.domain} = {
       useACMEHost = "mnzn.dev";

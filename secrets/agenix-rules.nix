@@ -81,7 +81,6 @@ in
 
     # LiveKit
     "livekitKeys.age".publicKeys = users ++ livekit;
-    "livekitServiceEnvironment.age".publicKeys = users ++ livekit;
 
     # Miniflux
     "minifluxEnvironment.age".publicKeys = users ++ [neon];
