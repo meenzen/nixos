@@ -1,9 +1,4 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
-}: {
+{pkgs, ...}: {
   home.packages = [
     pkgs.onedrive
     pkgs.motrix # download manager
@@ -19,7 +14,4 @@
       isDefault = true;
     };
   };
-
-  # temporary workaround for stylix issue
-  gtk.gtk4.theme = lib.mkForce config.gtk.theme;
 }

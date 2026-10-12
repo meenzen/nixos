@@ -154,11 +154,5 @@ in {
         };
       };
     };
-
-    # fix startup, see https://github.com/NixOS/nixpkgs/pull/352485
-    systemd.services.loki = {
-      requires = ["network-online.target"];
-      wantedBy = ["multi-user.target"];
-    };
   };
 }
