@@ -5,6 +5,7 @@
   ...
 }: let
   cfg = config.meenzen.postgresql;
+  privateNetworks = ["10.0.0.0/8" "172.16.0.0/12" "192.168.0.0/16"];
 in {
   options.meenzen.postgresql = {
     enable = lib.mkEnableOption "Enable PostgreSQL";
@@ -15,6 +16,13 @@ in {
   imports = [./scripts.nix];
 
   config = lib.mkIf cfg.enable {
+    assertions = [
+      {
+        assertion = cfg.enableLocalNetwork -> !config.networking.nftables.enable;
+        message = "meenzen.postgresql.enableLocalNetwork opens port 5432 with iptables rules, which don't apply with networking.nftables.enable.";
+      }
+    ];
+
     services.postgresql =
       {
         enable = true;
@@ -52,14 +60,17 @@ in {
       }
       // lib.optionalAttrs cfg.enableLocalNetwork {
         enableTCPIP = true;
-        authentication = ''
-          # Allow password-based authentication for private networks
-          host  all all 10.0.0.0/8 md5
-          host  all all 172.16.0.0/12 md5
-          host  all all 192.168.0.0/16 md5
-        '';
+        authentication =
+          ''
+            # Allow password-based authentication for private networks
+          ''
+          + lib.concatMapStrings (network: "host  all all ${network} md5\n") privateNetworks;
       };
-    networking.firewall.allowedTCPPorts = lib.mkIf cfg.enableLocalNetwork [5432];
+    # Only open the port to the same private networks, not to the public internet.
+    networking.firewall.extraCommands = lib.mkIf cfg.enableLocalNetwork (lib.concatMapStrings (network: ''
+        iptables -A nixos-fw -p tcp -s ${network} --dport 5432 -j nixos-fw-accept
+      '')
+      privateNetworks);
 
     # Raise the open file limit for the PostgreSQL service
     # This is required with io_uring, otherwise 'could not setup io_uring queue: Too many open files' errors may occur
