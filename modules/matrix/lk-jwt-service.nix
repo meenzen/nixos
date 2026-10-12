@@ -20,6 +20,15 @@ in {
       default = 8083;
       description = "Port for lk-jwt-service";
     };
+
+    fullAccessHomeservers = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [];
+      description = ''
+        Server names whose users may create new LiveKit rooms. Users of other homeservers can only join calls that
+        already exist. The Synapse domain is always included.
+      '';
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -27,6 +36,7 @@ in {
       nginx.enable = true;
       # Provides the mnzn.dev certificate used by useACMEHost.
       services.acme-mnzn.enable = true;
+      lk-jwt-service.fullAccessHomeservers = [config.meenzen.matrix.synapse.domain];
     };
 
     # Same key file as LiveKit, loaded via LoadCredential. lk-jwt-service only accepts a single key in it.
@@ -41,6 +51,10 @@ in {
       keyFile = config.age.secrets.livekitKeys.path;
       port = cfg.port;
     };
+
+    # Not exposed by the upstream module, defaults to * (any homeserver)
+    systemd.services.lk-jwt-service.environment.LIVEKIT_FULL_ACCESS_HOMESERVERS =
+      lib.concatStringsSep "," cfg.fullAccessHomeservers;
 
     services.nginx.virtualHosts.${cfg.domain} = {
       useACMEHost = "mnzn.dev";

@@ -26,6 +26,8 @@ in {
       # Provides the mnzn.dev certificate used by useACMEHost.
       services.acme-mnzn.enable = true;
       backup.paths = ["/var/lib/tuwunel"];
+      # well_known.livekit_url points Tuwunel's users at this service
+      lk-jwt-service.fullAccessHomeservers = [cfg.domain];
     };
 
     age.secrets = {
