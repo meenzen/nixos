@@ -10,6 +10,12 @@
   tootctl = "/run/current-system/sw/bin/mastodon-tootctl";
   cleanupScriptName = "mastodon-cleanup";
 
+  # mastodon-init-dirs writes the secrets to /var/lib/mastodon/.secrets_env, which the other units load.
+  secretUnits =
+    ["mastodon-init-dirs.service" "mastodon-web.service"]
+    ++ map (name: "mastodon-sidekiq-${name}.service") (lib.attrNames config.services.mastodon.sidekiqProcesses)
+    ++ map (i: "mastodon-streaming-${toString i}.service") (lib.range 1 config.services.mastodon.streamingProcesses);
+
   cleanupScript = pkgs.writeShellApplication {
     name = cleanupScriptName;
     text = ''
@@ -75,41 +81,49 @@ in {
     age.secrets = {
       mastodonEmailPassword = {
         file = "${inputs.self}/secrets/mastodonEmailPassword.age";
+        restartUnits = secretUnits;
         owner = "mastodon";
         group = "mastodon";
       };
       mastodonSecretKeyBase = {
         file = "${inputs.self}/secrets/mastodonSecretKeyBase.age";
+        restartUnits = secretUnits;
         owner = "mastodon";
         group = "mastodon";
       };
       mastodonVapidPublicKey = {
         file = "${inputs.self}/secrets/mastodonVapidPublicKey.age";
+        restartUnits = secretUnits;
         owner = "mastodon";
         group = "mastodon";
       };
       mastodonVapidPrivateKey = {
         file = "${inputs.self}/secrets/mastodonVapidPrivateKey.age";
+        restartUnits = secretUnits;
         owner = "mastodon";
         group = "mastodon";
       };
       mastodonActiveRecordPrimaryKey = {
         file = "${inputs.self}/secrets/mastodonActiveRecordPrimaryKey.age";
+        restartUnits = secretUnits;
         owner = "mastodon";
         group = "mastodon";
       };
       mastodonActiveRecordDeterministicKey = {
         file = "${inputs.self}/secrets/mastodonActiveRecordDeterministicKey.age";
+        restartUnits = secretUnits;
         owner = "mastodon";
         group = "mastodon";
       };
       mastodonActiveRecordSalt = {
         file = "${inputs.self}/secrets/mastodonActiveRecordSalt.age";
+        restartUnits = secretUnits;
         owner = "mastodon";
         group = "mastodon";
       };
       mastodonS3Config = {
         file = "${inputs.self}/secrets/mastodonS3Config.age";
+        restartUnits = secretUnits;
         owner = "mastodon";
         group = "mastodon";
       };

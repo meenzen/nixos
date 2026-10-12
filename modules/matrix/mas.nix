@@ -35,6 +35,7 @@ in {
     age.secrets = {
       masSecretConfig = {
         file = "${inputs.self}/secrets/masSecretConfig.age";
+        restartUnits = ["matrix-authentication-service.service"];
         owner = serviceName;
         group = serviceName;
       };

@@ -25,9 +25,11 @@ in {
     age.secrets = {
       cheshbotEnvironment = {
         file = "${inputs.self}/secrets/cheshbotEnvironment.age";
+        restartUnits = ["${config.virtualisation.oci-containers.containers.${serviceName}.serviceName}.service"];
       };
       cheshbotPostgresPassword = {
         file = "${inputs.self}/secrets/cheshbotPostgresPassword.age";
+        restartUnits = ["postgresql-setup.service"];
         owner = "postgres";
         group = "postgres";
       };

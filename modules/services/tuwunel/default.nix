@@ -24,6 +24,7 @@ in {
     age.secrets = {
       tuwunelEnvironment = {
         file = "${inputs.self}/secrets/tuwunelEnvironment.age";
+        restartUnits = ["tuwunel.service"];
       };
     };
 

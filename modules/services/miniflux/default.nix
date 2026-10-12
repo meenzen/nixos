@@ -24,6 +24,7 @@ in {
     age.secrets = {
       minifluxEnvironment = {
         file = "${inputs.self}/secrets/minifluxEnvironment.age";
+        restartUnits = ["miniflux.service"];
       };
     };
 

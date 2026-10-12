@@ -45,6 +45,7 @@ in {
     age.secrets = {
       fluentBitEnvironment = {
         file = "${inputs.self}/secrets/fluentBitEnvironment.age";
+        restartUnits = ["fluent-bit.service"];
       };
     };
 

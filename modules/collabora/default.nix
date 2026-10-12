@@ -33,6 +33,7 @@ in {
     age.secrets = {
       collaboraEnvironment = {
         file = "${inputs.self}/secrets/collaboraEnvironment.age";
+        restartUnits = ["${config.virtualisation.oci-containers.containers.${serviceName}.serviceName}.service"];
       };
     };
 

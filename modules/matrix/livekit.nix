@@ -58,6 +58,7 @@ in {
     age.secrets = {
       livekitKeys = {
         file = "${inputs.self}/secrets/livekitKeys.age";
+        restartUnits = ["livekit.service"];
         owner = "livekit";
         group = "livekit";
       };

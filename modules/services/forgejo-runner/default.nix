@@ -52,6 +52,7 @@ in {
     age.secrets = {
       forgejoRunnerToken = {
         file = "${inputs.self}/secrets/forgejoRunnerToken.age";
+        restartUnits = ["gitea-runner-default.service"];
       };
     };
 

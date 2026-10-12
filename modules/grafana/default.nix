@@ -43,11 +43,13 @@ in {
     age.secrets = {
       grafanaAdminPassword = {
         file = "${inputs.self}/secrets/grafanaAdminPassword.age";
+        restartUnits = ["grafana.service"];
         owner = serviceName;
         group = serviceName;
       };
       grafanaSecretKey = {
         file = "${inputs.self}/secrets/grafanaSecretKey.age";
+        restartUnits = ["grafana.service"];
         owner = serviceName;
         group = serviceName;
       };

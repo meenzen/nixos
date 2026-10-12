@@ -27,6 +27,7 @@ in {
     age.secrets = {
       livekitServiceEnvironment = {
         file = "${inputs.self}/secrets/livekitServiceEnvironment.age";
+        restartUnits = ["lk-jwt-service.service"];
         owner = "lk-jwt-service";
         group = "lk-jwt-service";
       };

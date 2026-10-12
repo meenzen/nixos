@@ -24,6 +24,7 @@ in {
     age.secrets = {
       lautiEnvironment = {
         file = "${inputs.self}/secrets/lautiEnvironment.age";
+        restartUnits = ["lauti.service"];
       };
     };
 

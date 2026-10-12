@@ -25,9 +25,11 @@ in {
     age.secrets = {
       draupnirAccessToken = {
         file = "${inputs.self}/secrets/draupnirAccessToken.age";
+        restartUnits = ["draupnir.service"];
       };
       draupnirSynapseAntispamSecret = {
         file = "${inputs.self}/secrets/draupnirSynapseAntispamSecret.age";
+        restartUnits = ["draupnir.service"];
       };
     };
 

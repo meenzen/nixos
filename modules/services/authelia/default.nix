@@ -33,30 +33,37 @@ in {
     age.secrets = {
       autheliaStorageEncryptionKey = {
         file = "${inputs.self}/secrets/autheliaStorageEncryptionKey.age";
+        restartUnits = ["authelia-main.service"];
         owner = user;
       };
       autheliaSessionSecret = {
         file = "${inputs.self}/secrets/autheliaSessionSecret.age";
+        restartUnits = ["authelia-main.service"];
         owner = user;
       };
       autheliaOidcIssuerPrivateKey = {
         file = "${inputs.self}/secrets/autheliaOidcIssuerPrivateKey.age";
+        restartUnits = ["authelia-main.service"];
         owner = user;
       };
       autheliaOidcHmacSecret = {
         file = "${inputs.self}/secrets/autheliaOidcHmacSecret.age";
+        restartUnits = ["authelia-main.service"];
         owner = user;
       };
       autheliaJwtSecret = {
         file = "${inputs.self}/secrets/autheliaJwtSecret.age";
+        restartUnits = ["authelia-main.service"];
         owner = user;
       };
       autheliaEmailConfiguration = {
         file = "${inputs.self}/secrets/autheliaEmailConfiguration.age";
+        restartUnits = ["authelia-main.service"];
         owner = user;
       };
       autheliaOidcClientConfiguration = {
         file = "${inputs.self}/secrets/autheliaOidcClientConfiguration.age";
+        restartUnits = ["authelia-main.service"];
         owner = user;
       };
     };

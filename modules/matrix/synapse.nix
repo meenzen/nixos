@@ -8,6 +8,12 @@
   cfg = config.meenzen.matrix.synapse;
   serviceName = "matrix-synapse";
 
+  # The workers load the same extraConfigFiles as the main process.
+  secretUnits =
+    ["${serviceName}.service"]
+    ++ lib.optionals cfg.enableWorkers (map (name: "${serviceName}-worker-${name}.service")
+      (lib.attrNames config.services.matrix-synapse-next.workers.instances));
+
   dashboards = pkgs.fetchFromGitHub {
     owner = "element-hq";
     repo = "synapse";
@@ -159,6 +165,7 @@ in {
     age.secrets = {
       synapseConfig = {
         file = "${inputs.self}/secrets/synapseConfig.age";
+        restartUnits = secretUnits;
         owner = serviceName;
         group = serviceName;
       };

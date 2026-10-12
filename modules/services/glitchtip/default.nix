@@ -62,6 +62,7 @@ in {
     age.secrets = {
       glitchtipEnvironment = {
         file = "${inputs.self}/secrets/glitchtipEnvironment.age";
+        restartUnits = ["glitchtip.service" "glitchtip-worker.service"];
       };
     };
 

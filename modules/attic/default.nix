@@ -36,6 +36,7 @@ in {
     age.secrets = {
       atticEnvironment = {
         file = "${inputs.self}/secrets/atticEnvironment.age";
+        restartUnits = ["atticd.service"];
       };
     };
 

@@ -25,12 +25,15 @@ in {
     age.secrets = {
       forgejoS3Key = {
         file = "${inputs.self}/secrets/forgejoS3Key.age";
+        restartUnits = ["forgejo.service"];
       };
       forgejoS3Secret = {
         file = "${inputs.self}/secrets/forgejoS3Secret.age";
+        restartUnits = ["forgejo.service"];
       };
       forgejoEmailPassword = {
         file = "${inputs.self}/secrets/forgejoEmailPassword.age";
+        restartUnits = ["forgejo.service"];
       };
     };
 
