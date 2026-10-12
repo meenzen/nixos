@@ -10,7 +10,6 @@ let
   mastodon = [neon];
   matrix = [neon];
   restic = [neon];
-  gitlab = [neon];
   collabora = [neon];
   cheshbot = [neon];
   attic = [neon];
@@ -47,9 +46,6 @@ in
     "draupnirAccessToken.age".publicKeys = users ++ matrix;
     "draupnirSynapseAntispamSecret.age".publicKeys = users ++ matrix;
 
-    # Conduit
-    "conduitEnvironment.age".publicKeys = users ++ matrix;
-
     # Tuwunel
     "tuwunelEnvironment.age".publicKeys = users ++ matrix;
 
@@ -57,18 +53,6 @@ in
     "resticEnv.age".publicKeys = users ++ restic;
     "resticRepository.age".publicKeys = users ++ restic;
     "resticPassword.age".publicKeys = users ++ restic;
-
-    # GitLab
-    "gitlabSecret.age".publicKeys = users ++ gitlab;
-    "gitlabOtpSecret.age".publicKeys = users ++ gitlab;
-    "gitlabDbSecret.age".publicKeys = users ++ gitlab;
-    "gitlabJwsSecret.age".publicKeys = users ++ gitlab;
-    "gitlabRootPassword.age".publicKeys = users ++ gitlab;
-    "gitlabDatabasePassword.age".publicKeys = users ++ gitlab;
-    "gitlabActiveRecordPrimaryKey.age".publicKeys = users ++ gitlab;
-    "gitlabActiveRecordDeterministicKey.age".publicKeys = users ++ gitlab;
-    "gitlabActiveRecordSalt.age".publicKeys = users ++ gitlab;
-    "gitlabRegistryEnvironment.age".publicKeys = users ++ gitlab;
 
     # Collabora
     "collaboraEnvironment.age".publicKeys = users ++ collabora;

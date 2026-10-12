@@ -31,7 +31,6 @@
     ./locale
     ./mastodon
     ./matrix
-    ./mudblazor-docs
     ./networking-tools
     ./nginx
     ./nix

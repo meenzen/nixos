@@ -3,11 +3,9 @@
     ./acme-mnzn
     ./anubis
     ./authelia
-    ./conduit
     ./fluent-bit
     ./forgejo
     ./forgejo-runner
-    ./gitlab
     ./glitchtip
     ./lauti
     ./local-ai
