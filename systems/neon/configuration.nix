@@ -38,7 +38,14 @@
     backup.enable = true;
     hetzner.enable = true;
     grafana.enable = true;
-    postgresql.enable = true;
+    postgresql = {
+      enable = true;
+      tuning = {
+        memoryGB = 16;
+        cpus = 8;
+        maxConnections = 500;
+      };
+    };
     oci-containers.enable = true;
     mastodon = {
       enable = true;

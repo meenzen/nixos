@@ -6,11 +6,64 @@
 }: let
   cfg = config.meenzen.postgresql;
   privateNetworks = ["10.0.0.0/8" "172.16.0.0/12" "192.168.0.0/16"];
+
+  # Formats a size in kB the way pgtune does, using the largest unit that divides it.
+  formatKB = kb:
+    if lib.mod kb (1024 * 1024) == 0
+    then "${toString (kb / (1024 * 1024))}GB"
+    else if lib.mod kb 1024 == 0
+    then "${toString (kb / 1024)}MB"
+    else "${toString kb}kB";
+
+  # https://pgtune.leopard.in.ua/ with DB Type "web", OS Type "linux" and Data Storage "ssd".
+  tuning = let
+    inherit (cfg.tuning) memoryGB cpus maxConnections;
+    memoryKB = memoryGB * 1024 * 1024;
+    sharedBuffersKB = memoryKB / 4;
+    halfCpus = lib.min 4 ((cpus + 1) / 2);
+  in
+    {
+      max_connections = maxConnections;
+      shared_buffers = formatKB sharedBuffersKB;
+      effective_cache_size = formatKB (memoryKB * 3 / 4);
+      maintenance_work_mem = formatKB (lib.min (2 * 1024 * 1024) (memoryKB / 16));
+      wal_buffers = formatKB (lib.max 32 (lib.min (16 * 1024) (sharedBuffersKB * 3 / 100)));
+      work_mem = formatKB (lib.max 64 ((memoryKB - sharedBuffersKB) / ((maxConnections + cpus) * 3)));
+      huge_pages =
+        if memoryGB >= 32
+        then "try"
+        else "off";
+    }
+    # pgtune only configures parallel workers with at least 4 CPUs.
+    // lib.optionalAttrs (cpus >= 4) {
+      max_worker_processes = cpus;
+      max_parallel_workers_per_gather = halfCpus;
+      max_parallel_workers = cpus;
+      max_parallel_maintenance_workers = halfCpus;
+    };
 in {
   options.meenzen.postgresql = {
     enable = lib.mkEnableOption "Enable PostgreSQL";
     enableMajorUpgrade = lib.mkEnableOption "Enable Major Upgrade";
     enableLocalNetwork = lib.mkEnableOption "Allow password-based authentication for private networks";
+    tuning = {
+      memoryGB = lib.mkOption {
+        type = lib.types.nullOr lib.types.ints.positive;
+        default = null;
+        example = 16;
+        description = "Memory available to PostgreSQL in GB. If null, the memory and CPU related settings keep PostgreSQL's defaults.";
+      };
+      cpus = lib.mkOption {
+        type = lib.types.ints.positive;
+        default = 4;
+        description = "Number of CPUs available to PostgreSQL.";
+      };
+      maxConnections = lib.mkOption {
+        type = lib.types.ints.positive;
+        default = 100;
+        description = "Maximum number of client connections.";
+      };
+    };
   };
 
   imports = [./scripts.nix];
@@ -27,36 +80,20 @@ in {
       {
         enable = true;
         package = pkgs.postgresql_18;
-        settings = {
-          # Make it go fast
-          io_method = "io_uring";
+        settings =
+          {
+            # Make it go fast
+            io_method = "io_uring";
 
-          # https://pgtune.leopard.in.ua/
-          # DB Version: 18
-          # OS Type: linux
-          # DB Type: web
-          # Total Memory (RAM): 16 GB
-          # CPUs num: 8
-          # Connections num: 500
-          # Data Storage: ssd
-          max_connections = 500;
-          shared_buffers = "4GB";
-          effective_cache_size = "12GB";
-          maintenance_work_mem = "1GB";
-          checkpoint_completion_target = 0.9;
-          wal_buffers = "16MB";
-          default_statistics_target = 100;
-          random_page_cost = 1.1;
-          effective_io_concurrency = 200;
-          work_mem = "8256kB";
-          huge_pages = "off";
-          min_wal_size = "1GB";
-          max_wal_size = "4GB";
-          max_worker_processes = 8;
-          max_parallel_workers_per_gather = 4;
-          max_parallel_workers = 8;
-          max_parallel_maintenance_workers = 4;
-        };
+            # https://pgtune.leopard.in.ua/, the settings that don't depend on the hardware
+            checkpoint_completion_target = 0.9;
+            default_statistics_target = 100;
+            random_page_cost = 1.1;
+            effective_io_concurrency = 200;
+            min_wal_size = "1GB";
+            max_wal_size = "4GB";
+          }
+          // lib.optionalAttrs (cfg.tuning.memoryGB != null) tuning;
       }
       // lib.optionalAttrs cfg.enableLocalNetwork {
         enableTCPIP = true;
