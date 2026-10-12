@@ -100,6 +100,18 @@ in {
           renewJitter = "1h";
         };
     };
+
+    # Without Let's Encrypt, only the self-signed placeholder certificates from acme-<cert>.service are
+    # used. Don't try to order real certificates, as that always fails and leaves failed units behind.
+    systemd.services = lib.mkIf cfg.disableLetsEncrypt (lib.mapAttrs' (
+        cert: _: lib.nameValuePair "acme-order-renew-${cert}" {enable = false;}
+      )
+      config.security.acme.certs);
+    systemd.timers = lib.mkIf cfg.disableLetsEncrypt (lib.mapAttrs' (
+        cert: _: lib.nameValuePair "acme-renew-${cert}" {enable = false;}
+      )
+      config.security.acme.certs);
+
     meenzen.backup.paths = [
       "/var/lib/acme"
     ];
