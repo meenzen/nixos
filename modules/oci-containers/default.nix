@@ -38,35 +38,49 @@ in {
     };
   };
 
-  config = lib.mkIf cfg.enable {
-    environment.systemPackages =
-      [
-        pkgs.dive # look into docker image layers
-        pkgs.podman-tui # status of containers in the terminal
-      ]
-      ++ lib.optional cfg.enableDockerCompat pkgs.podman-compose;
-    environment.sessionVariables.PODMAN_COMPOSE_WARNING_LOGS = "false";
+  config = lib.mkMerge [
+    {
+      # The upstream module disables the start timeout. With sdnotify = "healthy", a container that never becomes
+      # healthy would block the deployment forever.
+      assertions =
+        lib.mapAttrsToList (name: container: let
+          timeout = config.systemd.services.${container.serviceName}.serviceConfig.TimeoutStartSec or 0;
+        in {
+          assertion = container.podman.sdnotify or null != "healthy" || !lib.elem timeout [0 "0" "infinity"];
+          message = "virtualisation.oci-containers.containers.${name}.podman.sdnotify is \"healthy\", so systemd.services.${container.serviceName}.serviceConfig.TimeoutStartSec must be finite, but is `${toString timeout}`.";
+        })
+        config.virtualisation.oci-containers.containers;
+    }
+    (lib.mkIf cfg.enable {
+      environment.systemPackages =
+        [
+          pkgs.dive # look into docker image layers
+          pkgs.podman-tui # status of containers in the terminal
+        ]
+        ++ lib.optional cfg.enableDockerCompat pkgs.podman-compose;
+      environment.sessionVariables.PODMAN_COMPOSE_WARNING_LOGS = "false";
 
-    virtualisation.docker.enable = false;
-    virtualisation.podman = {
-      enable = true;
-      dockerCompat = cfg.enableDockerCompat;
-      dockerSocket.enable = true;
-      defaultNetwork.settings.dns_enabled = true;
-      autoPrune = {
-        enable = cfg.autoPrune;
-        dates = "daily";
-        flags = ["--all"];
+      virtualisation.docker.enable = false;
+      virtualisation.podman = {
+        enable = true;
+        dockerCompat = cfg.enableDockerCompat;
+        dockerSocket.enable = true;
+        defaultNetwork.settings.dns_enabled = true;
+        autoPrune = {
+          enable = cfg.autoPrune;
+          dates = "daily";
+          flags = ["--all"];
+        };
       };
-    };
 
-    # Allow DNS and mDNS so that containers can resolve hostnames
-    networking.firewall.interfaces."podman+".allowedUDPPorts = [53 5353];
+      # Allow DNS and mDNS so that containers can resolve hostnames
+      networking.firewall.interfaces."podman+".allowedUDPPorts = [53 5353];
 
-    age.secrets = lib.mkIf cfg.github.enable {
-      githubRegistryPassword = {
-        file = "${inputs.self}/secrets/githubRegistryPassword.age";
+      age.secrets = lib.mkIf cfg.github.enable {
+        githubRegistryPassword = {
+          file = "${inputs.self}/secrets/githubRegistryPassword.age";
+        };
       };
-    };
-  };
+    })
+  ];
 }
