@@ -54,7 +54,14 @@ in {
       environmentFiles = [
         config.age.secrets.collaboraEnvironment.path
       ];
+      # The image defines a HEALTHCHECK. Only report the unit as started once it passes, otherwise the health check's
+      # transient systemd unit fails while coolwsd is still starting and the deployment is reported as failed.
+      podman.sdnotify = "healthy";
     };
+
+    # The upstream module disables the start timeout, which would block deployments forever if the container never
+    # becomes healthy. The health check has a start period of 2 minutes and runs every 30 seconds.
+    systemd.services.${config.virtualisation.oci-containers.containers.${serviceName}.serviceName}.serviceConfig.TimeoutStartSec = lib.mkForce "5min";
 
     services.nginx.virtualHosts."${cfg.domain}" = {
       forceSSL = true;
