@@ -8,7 +8,6 @@
     ./forgejo
     ./forgejo-runner
     ./gitlab
-    ./gitlab-runner
     ./glitchtip
     ./lauti
     ./local-ai

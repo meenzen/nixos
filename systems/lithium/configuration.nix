@@ -26,13 +26,4 @@
     minecraft.enable = false;
     services.forgejo-runner.enable = true;
   };
-
-  age.secrets = {
-    gitlabRunnerLithiumNix = {
-      file = "${inputs.self}/secrets/gitlabRunnerLithiumNix.age";
-    };
-    gitlabRunnerLithiumDocker = {
-      file = "${inputs.self}/secrets/gitlabRunnerLithiumDocker.age";
-    };
-  };
 }

@@ -101,10 +101,6 @@ in
     "livekitKeys.age".publicKeys = users ++ livekit;
     "livekitServiceEnvironment.age".publicKeys = users ++ livekit;
 
-    # GitLab Runner
-    "gitlabRunnerLithiumNix.age".publicKeys = users ++ [lithium];
-    "gitlabRunnerLithiumDocker.age".publicKeys = users ++ [lithium];
-
     # Miniflux
     "minifluxEnvironment.age".publicKeys = users ++ [neon];
 
