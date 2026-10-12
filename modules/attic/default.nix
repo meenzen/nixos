@@ -33,6 +33,10 @@ in {
   ];
 
   config = lib.mkIf cfg.enable {
+    meenzen = {
+      nginx.enable = true;
+    };
+
     age.secrets = {
       atticEnvironment = {
         file = "${inputs.self}/secrets/atticEnvironment.age";

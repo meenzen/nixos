@@ -22,6 +22,12 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    meenzen = {
+      nginx.enable = true;
+      postgresql.enable = true;
+      backup.paths = [config.services.forgejo.stateDir];
+    };
+
     age.secrets = {
       forgejoS3Key = {
         file = "${inputs.self}/secrets/forgejoS3Key.age";
@@ -36,8 +42,6 @@ in {
         restartUnits = ["forgejo.service"];
       };
     };
-
-    meenzen.backup.paths = [config.services.forgejo.stateDir];
 
     services = {
       forgejo = {

@@ -69,6 +69,7 @@ in {
     };
 
     meenzen = {
+      nginx.enable = true;
       backup.paths = [directory];
       postgresql.enable = true;
     };

@@ -55,6 +55,25 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    meenzen = {
+      nginx.enable = true;
+      livekit.configFile = lib.mkDefault (
+        pkgs.writeTextFile {
+          name = "livekit-config.yaml";
+          text = builtins.toJSON {
+            port = cfg.port;
+            log_level = "info";
+            rtc = {
+              tcp_port = cfg.rtc.tcp_port;
+              port_range_start = cfg.rtc.port_range_start;
+              port_range_end = cfg.rtc.port_range_end;
+              use_external_ip = false;
+            };
+          };
+        }
+      );
+    };
+
     age.secrets = {
       livekitKeys = {
         file = "${inputs.self}/secrets/livekitKeys.age";
@@ -63,22 +82,6 @@ in {
         group = "livekit";
       };
     };
-
-    meenzen.livekit.configFile = lib.mkDefault (
-      pkgs.writeTextFile {
-        name = "livekit-config.yaml";
-        text = builtins.toJSON {
-          port = cfg.port;
-          log_level = "info";
-          rtc = {
-            tcp_port = cfg.rtc.tcp_port;
-            port_range_start = cfg.rtc.port_range_start;
-            port_range_end = cfg.rtc.port_range_end;
-            use_external_ip = false;
-          };
-        };
-      }
-    );
 
     systemd.services.livekit = {
       description = "LiveKit SFU server";

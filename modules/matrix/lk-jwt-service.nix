@@ -24,6 +24,10 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    meenzen = {
+      nginx.enable = true;
+    };
+
     age.secrets = {
       livekitServiceEnvironment = {
         file = "${inputs.self}/secrets/livekitServiceEnvironment.age";

@@ -21,14 +21,17 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    meenzen = {
+      nginx.enable = true;
+      backup.paths = ["/var/lib/tuwunel"];
+    };
+
     age.secrets = {
       tuwunelEnvironment = {
         file = "${inputs.self}/secrets/tuwunelEnvironment.age";
         restartUnits = ["tuwunel.service"];
       };
     };
-
-    meenzen.backup.paths = ["/var/lib/tuwunel"];
 
     services.matrix-tuwunel = {
       enable = true;

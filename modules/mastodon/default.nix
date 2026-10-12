@@ -60,8 +60,13 @@ in {
     };
   };
   config = lib.mkIf cfg.enable {
-    # sudo-rs currently breaks mastodon-tootctl, see https://github.com/NixOS/nixpkgs/issues/435839
-    meenzen.sudo-rs.enable = lib.mkForce false;
+    meenzen = {
+      nginx.enable = true;
+      postgresql.enable = true;
+      # sudo-rs currently breaks mastodon-tootctl, see https://github.com/NixOS/nixpkgs/issues/435839
+      sudo-rs.enable = lib.mkForce false;
+      backup.paths = ["/var/lib/mastodon"];
+    };
 
     nixpkgs.overlays = [
       (
@@ -128,8 +133,6 @@ in {
         group = "mastodon";
       };
     };
-
-    meenzen.backup.paths = ["/var/lib/mastodon"];
 
     services = {
       mastodon = {

@@ -21,6 +21,11 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    meenzen = {
+      nginx.enable = true;
+      oci-containers.enable = true;
+    };
+
     virtualisation.oci-containers.containers."${serviceName}" = {
       image = "ghcr.io/meenzen/mudblazor-docs@sha256:637fc5857952499831c30850f72f5a65f4c0e667f2a054f62c9c884a6ba563c7";
       ports = ["127.0.0.1:${toString cfg.port}:8080"];

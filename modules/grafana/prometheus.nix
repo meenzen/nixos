@@ -21,6 +21,10 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    meenzen = {
+      nginx.enable = true;
+    };
+
     age.secrets = {
       prometheusAdminPassword = {
         file = "${inputs.self}/secrets/prometheusAdminPassword.age";

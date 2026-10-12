@@ -162,6 +162,12 @@ in {
   ];
 
   config = lib.mkIf cfg.enable {
+    meenzen = {
+      nginx.enable = true;
+      postgresql.enable = true;
+      backup.paths = [config.services.matrix-synapse.dataDir];
+    };
+
     age.secrets = {
       synapseConfig = {
         file = "${inputs.self}/secrets/synapseConfig.age";
@@ -170,8 +176,6 @@ in {
         group = serviceName;
       };
     };
-
-    meenzen.backup.paths = [config.services.matrix-synapse.dataDir];
 
     services = {
       # Synapse with Workers

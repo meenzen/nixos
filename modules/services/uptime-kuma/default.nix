@@ -42,14 +42,17 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    meenzen = {
+      nginx.enable = true;
+      backup.paths = [config.services.uptime-kuma.settings.DATA_DIR];
+    };
+
     services.uptime-kuma = {
       enable = true;
       settings = {
         PORT = toString cfg.port;
       };
     };
-
-    meenzen.backup.paths = [config.services.uptime-kuma.settings.DATA_DIR];
 
     services.nginx.virtualHosts = virtualHosts;
   };

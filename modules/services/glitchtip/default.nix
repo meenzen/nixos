@@ -67,6 +67,8 @@ in {
     };
 
     meenzen = {
+      nginx.enable = true;
+      postgresql.enable = true;
       backup.paths = [config.services.glitchtip.stateDir];
       services.acme-mnzn.enable = true;
     };

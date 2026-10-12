@@ -32,6 +32,77 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    meenzen = {
+      nginx.enable = true;
+      matrix.mas.configFile = lib.mkDefault (
+        pkgs.writeTextFile {
+          name = "mas-config.yaml";
+          text = builtins.toJSON {
+            http = {
+              listeners = [
+                {
+                  name = "web";
+                  resources = [
+                    {name = "discovery";}
+                    {name = "human";}
+                    {name = "oauth";}
+                    {name = "compat";}
+                    {name = "graphql";}
+                    {name = "adminapi";}
+                  ];
+                  binds = [
+                    {address = "[::]:${toString cfg.port}";}
+                  ];
+                  proxy_protocol = false;
+                }
+              ];
+              trusted_proxies = [
+                "192.168.0.0/16"
+                "172.16.0.0/12"
+                "10.0.0.0/10"
+                "127.0.0.1/8"
+                "fd00::/8"
+                "::1/128"
+              ];
+              public_base = "https://${cfg.domain}/";
+              issuer = "https://${cfg.domain}/";
+            };
+            database = {
+              host = "/run/postgresql";
+              username = serviceName;
+              database = serviceName;
+              max_connections = 10;
+              min_connections = 0;
+              connect_timeout = 30;
+              idle_timeout = 600;
+              max_lifetime = 1800;
+            };
+            passwords = {
+              enabled = true;
+              schemes = [
+                {
+                  version = 1;
+                  algorithm = "bcrypt";
+                }
+                {
+                  version = 2;
+                  algorithm = "argon2id";
+                }
+              ];
+              minimum_complexity = 3;
+            };
+            matrix = {
+              homeserver = config.meenzen.matrix.synapse.domain;
+              endpoint =
+                if config.meenzen.matrix.synapse.enableWorkers
+                then "https://${config.meenzen.matrix.synapse.matrixDomain}"
+                else "http://[::1]:${toString config.meenzen.matrix.synapse.port}";
+            };
+          };
+        }
+      );
+    };
+
     age.secrets = {
       masSecretConfig = {
         file = "${inputs.self}/secrets/masSecretConfig.age";
@@ -40,74 +111,6 @@ in {
         group = serviceName;
       };
     };
-
-    meenzen.matrix.mas.configFile = lib.mkDefault (
-      pkgs.writeTextFile {
-        name = "mas-config.yaml";
-        text = builtins.toJSON {
-          http = {
-            listeners = [
-              {
-                name = "web";
-                resources = [
-                  {name = "discovery";}
-                  {name = "human";}
-                  {name = "oauth";}
-                  {name = "compat";}
-                  {name = "graphql";}
-                  {name = "adminapi";}
-                ];
-                binds = [
-                  {address = "[::]:${toString cfg.port}";}
-                ];
-                proxy_protocol = false;
-              }
-            ];
-            trusted_proxies = [
-              "192.168.0.0/16"
-              "172.16.0.0/12"
-              "10.0.0.0/10"
-              "127.0.0.1/8"
-              "fd00::/8"
-              "::1/128"
-            ];
-            public_base = "https://${cfg.domain}/";
-            issuer = "https://${cfg.domain}/";
-          };
-          database = {
-            host = "/run/postgresql";
-            username = serviceName;
-            database = serviceName;
-            max_connections = 10;
-            min_connections = 0;
-            connect_timeout = 30;
-            idle_timeout = 600;
-            max_lifetime = 1800;
-          };
-          passwords = {
-            enabled = true;
-            schemes = [
-              {
-                version = 1;
-                algorithm = "bcrypt";
-              }
-              {
-                version = 2;
-                algorithm = "argon2id";
-              }
-            ];
-            minimum_complexity = 3;
-          };
-          matrix = {
-            homeserver = config.meenzen.matrix.synapse.domain;
-            endpoint =
-              if config.meenzen.matrix.synapse.enableWorkers
-              then "https://${config.meenzen.matrix.synapse.matrixDomain}"
-              else "http://[::1]:${toString config.meenzen.matrix.synapse.port}";
-          };
-        };
-      }
-    );
 
     environment.systemPackages = [
       cfg.package

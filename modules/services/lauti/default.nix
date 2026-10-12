@@ -21,14 +21,17 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    meenzen = {
+      nginx.enable = true;
+      backup.paths = [config.services.lauti.dataDir];
+    };
+
     age.secrets = {
       lautiEnvironment = {
         file = "${inputs.self}/secrets/lautiEnvironment.age";
         restartUnits = ["lauti.service"];
       };
     };
-
-    meenzen.backup.paths = [config.services.lauti.dataDir];
 
     services.lauti = {
       enable = true;

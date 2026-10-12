@@ -46,6 +46,10 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    meenzen = {
+      nginx.enable = true;
+    };
+
     services.minecraft-servers.servers.flip = {
       enable = true;
       jvmOpts = "-Xmx8G -Xms2G";

@@ -30,6 +30,11 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    meenzen = {
+      nginx.enable = true;
+      oci-containers.enable = true;
+    };
+
     age.secrets = {
       collaboraEnvironment = {
         file = "${inputs.self}/secrets/collaboraEnvironment.age";

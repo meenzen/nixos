@@ -26,20 +26,23 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    meenzen = {
+      nginx.enable = true;
+      # override Fluent Bit to use local instance
+      services.fluent-bit = {
+        lokiHost = "127.0.0.1";
+        lokiUri = "/loki/api/v1/push";
+        lokiPort = cfg.port;
+        lokiTls = false;
+      };
+    };
+
     age.secrets = {
       lokiAdminPassword = {
         file = "${inputs.self}/secrets/lokiAdminPassword.age";
         owner = "nginx";
         group = "nginx";
       };
-    };
-
-    # override Fluent Bit to use local instance
-    meenzen.services.fluent-bit = {
-      lokiHost = "127.0.0.1";
-      lokiUri = "/loki/api/v1/push";
-      lokiPort = cfg.port;
-      lokiTls = false;
     };
 
     services = {

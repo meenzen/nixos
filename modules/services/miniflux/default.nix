@@ -21,6 +21,11 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    meenzen = {
+      nginx.enable = true;
+      postgresql.enable = true;
+    };
+
     age.secrets = {
       minifluxEnvironment = {
         file = "${inputs.self}/secrets/minifluxEnvironment.age";

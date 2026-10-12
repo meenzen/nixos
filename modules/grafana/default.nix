@@ -32,6 +32,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     meenzen = {
+      nginx.enable = true;
       loki.enable = true;
       nginx-exporter.enable = true;
       node-exporter.enable = true;

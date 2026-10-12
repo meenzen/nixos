@@ -21,7 +21,12 @@ in {
   ];
 
   config = lib.mkIf cfg.enable {
-    meenzen.services.gitlab.registry.enable = true;
+    meenzen = {
+      nginx.enable = true;
+      postgresql.enable = true;
+      services.gitlab.registry.enable = true;
+      backup.paths = ["/var/gitlab/state"];
+    };
 
     age.secrets = {
       gitlabSecret = {
@@ -70,8 +75,6 @@ in {
         group = serviceName;
       };
     };
-
-    meenzen.backup.paths = ["/var/gitlab/state"];
 
     services.gitlab = {
       enable = true;

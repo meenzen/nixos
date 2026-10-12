@@ -22,6 +22,15 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    meenzen = {
+      nginx.enable = true;
+      oci-containers.enable = true;
+      postgresql = {
+        enable = true;
+        enableLocalNetwork = true;
+      };
+    };
+
     age.secrets = {
       cheshbotEnvironment = {
         file = "${inputs.self}/secrets/cheshbotEnvironment.age";
@@ -70,10 +79,6 @@ in {
       '';
     };
 
-    meenzen.postgresql = {
-      enable = true;
-      enableLocalNetwork = true;
-    };
     services.postgresql = {
       ensureUsers = [
         {

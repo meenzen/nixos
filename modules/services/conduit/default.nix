@@ -21,13 +21,16 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    meenzen = {
+      nginx.enable = true;
+      backup.paths = [config.services.matrix-conduit.settings.global.database_path];
+    };
+
     age.secrets = {
       conduitEnvironment = {
         file = "${inputs.self}/secrets/conduitEnvironment.age";
       };
     };
-
-    meenzen.backup.paths = [config.services.matrix-conduit.settings.global.database_path];
 
     services.matrix-conduit = {
       enable = true;
