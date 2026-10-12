@@ -7,6 +7,13 @@
 }: let
   cfg = config.meenzen.matrix.mas;
   serviceName = "matrix-authentication-service";
+  masCfg = config.services.matrix-authentication-service;
+
+  # The upstream module doesn't expose its generated config, so build the same file for mas-cli-wrapper. Like
+  # upstream, drop the null defaults (e.g. upstream_oauth2.providers) the module adds to settings.
+  configFile = (pkgs.formats.yaml {}).generate "mas-config.yaml" (
+    lib.filterAttrsRecursive (_: v: v != null) (builtins.removeAttrs masCfg.settings ["upstream_oauth2"])
+  );
 in {
   options.meenzen.matrix.mas = {
     enable = lib.mkEnableOption "Enable Matrix Authentication Service (MAS)";
@@ -16,18 +23,9 @@ in {
       description = "Domain for MAS";
     };
     port = lib.mkOption {
-      type = lib.types.int;
+      type = lib.types.port;
       default = 8009;
       description = "Local port for MAS";
-    };
-    package = lib.mkOption {
-      type = lib.types.package;
-      default = pkgs.matrix-authentication-service;
-      description = "MAS package";
-    };
-    configFile = lib.mkOption {
-      type = lib.types.path;
-      description = "MAS configuration file";
     };
   };
 
@@ -36,86 +34,21 @@ in {
       nginx.enable = true;
       # Provides the mnzn.dev certificate used by useACMEHost.
       services.acme-mnzn.enable = true;
-      matrix.mas.configFile = lib.mkDefault (
-        pkgs.writeTextFile {
-          name = "mas-config.yaml";
-          text = builtins.toJSON {
-            http = {
-              listeners = [
-                {
-                  name = "web";
-                  resources = [
-                    {name = "discovery";}
-                    {name = "human";}
-                    {name = "oauth";}
-                    {name = "compat";}
-                    {name = "graphql";}
-                    {name = "adminapi";}
-                  ];
-                  binds = [
-                    {address = "[::]:${toString cfg.port}";}
-                  ];
-                  proxy_protocol = false;
-                }
-              ];
-              trusted_proxies = [
-                "192.168.0.0/16"
-                "172.16.0.0/12"
-                "10.0.0.0/10"
-                "127.0.0.1/8"
-                "fd00::/8"
-                "::1/128"
-              ];
-              public_base = "https://${cfg.domain}/";
-              issuer = "https://${cfg.domain}/";
-            };
-            database = {
-              host = "/run/postgresql";
-              username = serviceName;
-              database = serviceName;
-              max_connections = 10;
-              min_connections = 0;
-              connect_timeout = 30;
-              idle_timeout = 600;
-              max_lifetime = 1800;
-            };
-            passwords = {
-              enabled = true;
-              schemes = [
-                {
-                  version = 1;
-                  algorithm = "bcrypt";
-                }
-                {
-                  version = 2;
-                  algorithm = "argon2id";
-                }
-              ];
-              minimum_complexity = 3;
-            };
-            matrix = {
-              homeserver = config.meenzen.matrix.synapse.domain;
-              endpoint =
-                if config.meenzen.matrix.synapse.enableWorkers
-                then "https://${config.meenzen.matrix.synapse.matrixDomain}"
-                else "http://[::1]:${toString config.meenzen.matrix.synapse.port}";
-            };
-          };
-        }
-      );
+      postgresql.enable = true;
     };
 
     age.secrets = {
+      # Owned by the service user because mas-cli-wrapper reads it directly, the service gets it via LoadCredential.
       masSecretConfig = {
         file = "${secrets}/masSecretConfig.age";
-        restartUnits = ["matrix-authentication-service.service"];
+        restartUnits = ["${serviceName}.service"];
         owner = serviceName;
         group = serviceName;
       };
     };
 
     environment.systemPackages = [
-      cfg.package
+      masCfg.package
       (
         pkgs.writeShellApplication {
           name = "mas-cli-wrapper";
@@ -123,48 +56,87 @@ in {
             if [ -z "''${1-}" ]; then
               set -- --help
             fi
-            sudo -u ${serviceName} ${cfg.package}/bin/mas-cli --config=${cfg.configFile} --config=${config.age.secrets.masSecretConfig.path} "$@"
+            sudo -u ${serviceName} ${masCfg.package}/bin/mas-cli --config=${configFile} --config=${config.age.secrets.masSecretConfig.path} "$@"
           '';
         }
       )
     ];
 
+    # Static user for mas-cli-wrapper and PostgreSQL peer auth. The service uses DynamicUser, which picks up an
+    # existing user of the same name.
     users = {
-      users."${serviceName}" = {
+      users.${serviceName} = {
         isSystemUser = true;
         group = serviceName;
         description = "MAS service user";
       };
-      groups."${serviceName}" = {};
-    };
-
-    systemd.services."${serviceName}" = {
-      enable = true;
-      description = "MAS";
-      wants = ["network-online.target"];
-      after = ["network-online.target" "postgresql.target"];
-      requires = ["postgresql.target"];
-      wantedBy = ["multi-user.target"];
-      serviceConfig = {
-        ExecStart = "${cfg.package}/bin/mas-cli --config=${cfg.configFile} --config=${config.age.secrets.masSecretConfig.path} server";
-        User = serviceName;
-        Group = serviceName;
-        Restart = "on-failure";
-      };
+      groups.${serviceName} = {};
     };
 
     services = {
-      matrix-synapse.extras = ["oidc"];
-
-      postgresql = {
-        ensureUsers = [
-          {
-            name = serviceName;
-            ensureDBOwnership = true;
-          }
-        ];
-        ensureDatabases = [serviceName];
+      matrix-authentication-service = {
+        enable = true;
+        createDatabase = true;
+        extraConfigFiles = [config.age.secrets.masSecretConfig.path];
+        settings = {
+          http = {
+            listeners = [
+              {
+                name = "web";
+                resources = [
+                  {name = "discovery";}
+                  {name = "human";}
+                  {name = "oauth";}
+                  {name = "compat";}
+                  {name = "graphql";}
+                  {name = "adminapi";}
+                ];
+                binds = [
+                  {
+                    host = "::";
+                    port = cfg.port;
+                  }
+                ];
+                proxy_protocol = false;
+              }
+            ];
+            trusted_proxies = [
+              "192.168.0.0/16"
+              "172.16.0.0/12"
+              "10.0.0.0/10"
+              "127.0.0.1/8"
+              "fd00::/8"
+              "::1/128"
+            ];
+            public_base = "https://${cfg.domain}/";
+            issuer = "https://${cfg.domain}/";
+          };
+          passwords = {
+            enabled = true;
+            # Must match the existing hashes, upstream defaults to argon2id as version 1.
+            schemes = [
+              {
+                version = 1;
+                algorithm = "bcrypt";
+              }
+              {
+                version = 2;
+                algorithm = "argon2id";
+              }
+            ];
+            minimum_complexity = 3;
+          };
+          matrix = {
+            homeserver = config.meenzen.matrix.synapse.domain;
+            endpoint =
+              if config.meenzen.matrix.synapse.enableWorkers
+              then "https://${config.meenzen.matrix.synapse.matrixDomain}"
+              else "http://[::1]:${toString config.meenzen.matrix.synapse.port}";
+          };
+        };
       };
+
+      matrix-synapse.extras = ["oidc"];
 
       nginx.virtualHosts = {
         "${cfg.domain}" = {
@@ -173,7 +145,7 @@ in {
           locations = {
             "/".proxyPass = "http://[::1]:${toString cfg.port}";
             "/assets" = {
-              root = "${cfg.package}/share/matrix-authentication-service";
+              root = "${masCfg.package}/share/matrix-authentication-service";
               extraConfig = ''
                 add_header Cache-Control "public, immutable, max-age=31536000";
               '';
