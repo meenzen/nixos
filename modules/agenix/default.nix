@@ -40,6 +40,26 @@
 
   isId = value: builtins.match "[0-9]+" value != null;
 
+  rules = import "${inputs.self}/secrets/agenix-rules.nix";
+  hostKey = (import "${inputs.self}/secrets/hosts.nix").${config.networking.hostName} or null;
+
+  # Otherwise agenix fails to decrypt the secrets during activation. Tests use their own secret files.
+  decryptAssertions = lib.optionals (!config.meenzen.test-setup.enable && secrets != {}) (
+    [
+      {
+        assertion = hostKey != null;
+        message = "secrets/hosts.nix has no host key for ${config.networking.hostName}, which uses age secrets.";
+      }
+    ]
+    ++ lib.mapAttrsToList (secretName: secret: let
+      file = builtins.unsafeDiscardStringContext (baseNameOf (toString secret.file));
+    in {
+      assertion = hostKey == null || lib.elem hostKey (rules.${file}.publicKeys or []);
+      message = "age.secrets.${secretName}.file is `${file}`, which secrets/agenix-rules.nix does not encrypt for ${config.networking.hostName}.";
+    })
+    secrets
+  );
+
   # The triggers above define every listed service, so a typo would silently create an empty unit instead of failing.
   hasServiceConfig = key: unit: let
     name = lib.removeSuffix ".service" unit;
@@ -72,6 +92,7 @@ in {
     assertions =
       unitAssertions "restartUnits" "ExecStart"
       ++ unitAssertions "reloadUnits" "ExecReload"
+      ++ decryptAssertions
       # Outside the store the trigger is the constant path, so the units would never be restarted or reloaded.
       ++ lib.mapAttrsToList (secretName: secret: {
         assertion = config.meenzen.test-setup.enable || isInStore secret || secret.restartUnits ++ secret.reloadUnits == [];

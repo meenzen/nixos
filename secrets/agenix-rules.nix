@@ -3,10 +3,8 @@ let
   meenzens1 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMa9vjZasAelcVAdtLa+vI0dYvx4hba2z6z+J+u39irB"; # meenzens@framework
   users = [meenzens meenzens1];
 
-  # ssh-keyscan -t ed25519 <host>
-  neon = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMdUsfwRNDJCe4DTStnmP6Se+Af8V5+Lqp1iSBSGWBKD";
-  framework = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILK3+4hV7Nt878acFUZkA/+TP1/l3gBQ/k1EHY4V94IF";
-  lithium = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINLYEzntiA+6Fe8j2wKmwOgXxKA3lqBVf1kz7L4dQPmt";
+  # Hosts, see hosts.nix
+  inherit (import ./hosts.nix) neon framework lithium;
   systems = [neon lithium framework];
   servers = [neon lithium];
   mastodon = [neon];
