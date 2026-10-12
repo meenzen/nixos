@@ -28,6 +28,8 @@ in {
   config = lib.mkIf cfg.enable {
     meenzen = {
       nginx.enable = true;
+      # Provides the mnzn.dev certificate used by useACMEHost.
+      services.acme-mnzn.enable = true;
       # override Fluent Bit to use local instance
       services.fluent-bit = {
         lokiHost = "127.0.0.1";

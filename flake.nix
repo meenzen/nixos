@@ -235,6 +235,7 @@
             inherit pkgs modules specialArgs;
           };
         in {
+          authelia = import ./tests/authelia.nix args;
           glitchtip = import ./tests/glitchtip.nix args;
           module-dependencies = import ./tests/module-dependencies.nix {inherit pkgs self;};
           secrets = import ./tests/secrets.nix {inherit pkgs self;};

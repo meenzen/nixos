@@ -34,6 +34,8 @@ in {
   config = lib.mkIf cfg.enable {
     meenzen = {
       nginx.enable = true;
+      # Provides the mnzn.dev certificate used by useACMEHost.
+      services.acme-mnzn.enable = true;
       matrix.mas.configFile = lib.mkDefault (
         pkgs.writeTextFile {
           name = "mas-config.yaml";

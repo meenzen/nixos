@@ -1,6 +1,7 @@
 # Enables every meenzen.*.enable option on its own in an otherwise empty system and fails if the module uses nginx,
 # PostgreSQL or OCI containers without enabling the corresponding meenzen module, which configures firewall, ACME,
-# backups, tuning and so on. Hosts that happen to enable those modules themselves would hide the missing dependency.
+# backups, tuning and so on, or uses an ACME certificate that no enabled module defines. Hosts that happen to enable
+# those modules themselves would hide the missing dependency.
 {
   pkgs,
   self,
@@ -24,6 +25,9 @@
       else [])
     options);
 
+  hasChallenge = config: cert:
+    lib.any (option: config.security.acme.certs.${cert}.${option} != null) ["dnsProvider" "webroot" "listenHTTP" "s3Bucket"];
+
   missingDependencies = path: let
     inherit ((base.extendModules {modules = [{meenzen = lib.setAttrByPath (path ++ ["enable"]) true;}];})) config;
   in
@@ -34,7 +38,11 @@
     "meenzen.nginx"
     ++ lib.optional (config.services.postgresql.enable && !config.meenzen.postgresql.enable) "meenzen.postgresql"
     ++ lib.optional (config.virtualisation.oci-containers.containers != {} && !config.meenzen.oci-containers.enable)
-    "meenzen.oci-containers";
+    "meenzen.oci-containers"
+    # useACMEHost only refers to a certificate, some other module has to define how to obtain it. The nginx module
+    # creates an entry for it either way.
+    ++ map (cert: "the ACME certificate ${cert}") (lib.unique (lib.filter (cert: cert != null && !hasChallenge config cert)
+        (lib.mapAttrsToList (_: vhost: vhost.useACMEHost) config.services.nginx.virtualHosts)));
 
   failures = lib.concatMap (path: let
     missing = missingDependencies path;

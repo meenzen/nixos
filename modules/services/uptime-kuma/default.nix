@@ -44,6 +44,8 @@ in {
   config = lib.mkIf cfg.enable {
     meenzen = {
       nginx.enable = true;
+      # Provides the mnzn.dev certificate used by useACMEHost.
+      services.acme-mnzn.enable = true;
       backup.paths = [config.services.uptime-kuma.settings.DATA_DIR];
     };
 

@@ -70,6 +70,8 @@ in {
 
     meenzen = {
       nginx.enable = true;
+      # Provides the mnzn.dev certificate used by useACMEHost.
+      services.acme-mnzn.enable = true;
       backup.paths = [directory];
       postgresql.enable = true;
     };
