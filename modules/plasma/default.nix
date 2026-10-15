@@ -52,6 +52,12 @@ in {
     # Fix GTK apps in KDE
     programs.dconf.enable = true;
 
+    # SSH agent with ksshaskpass prompts, e.g. for security key touch confirmation
+    programs.ssh = {
+      startAgent = true;
+      enableAskPassword = true;
+    };
+
     # Force KDE file picker
     xdg.portal = {
       enable = true;
