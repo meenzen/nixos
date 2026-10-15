@@ -31,6 +31,7 @@
     zpool = {
       zroot = {
         type = "zpool";
+        options.autotrim = "on";
         # Workaround: cannot import 'zroot': I/O error in disko tests
         options.cachefile = "none";
         rootFsOptions = {

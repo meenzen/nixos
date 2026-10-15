@@ -61,6 +61,7 @@
     ./work
     ./workarounds
     ./yubikey
+    ./zfs
     ./zsh
   ];
 }

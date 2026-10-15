@@ -42,6 +42,7 @@
         mountpoint = "/";
         options = {
           cachefile = "none";
+          autotrim = "on";
         };
         postCreateHook = ''
           zfs set keylocation="prompt" "zroot";
