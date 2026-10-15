@@ -147,7 +147,6 @@ in {
               "org.kde.polkit-kde-authentication-agent-1"
               "qalculate-qt"
               "spectacle"
-              "xwaylandvideobridge"
               "yakuake"
             ];
             ignoreTitle = lib.concatStringsSep "," [

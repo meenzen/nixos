@@ -17,7 +17,7 @@
     LC_TIME = "de_DE.UTF-8";
   };
 
-  # Configure keymap in X11
+  # Configure keyboard layout (used by Wayland compositors)
   services.xserver.xkb = {
     layout = "de";
     variant = "nodeadkeys";

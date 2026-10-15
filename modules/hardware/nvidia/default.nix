@@ -11,7 +11,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    # Load nvidia driver for Xorg and Wayland
+    # Load nvidia driver (option name is X11-specific, but also enables the kernel driver for Wayland)
     services.xserver.videoDrivers = ["nvidia"];
 
     hardware.nvidia = {

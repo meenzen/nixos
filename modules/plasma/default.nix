@@ -13,9 +13,6 @@ in {
   imports = [./tiling.nix];
 
   config = lib.mkIf cfg.enable {
-    # Enable the X11 windowing system.
-    services.xserver.enable = true;
-
     # KDE Plasma Desktop
     services = {
       displayManager.plasma-login-manager.enable = true;
@@ -46,6 +43,9 @@ in {
       plasma6.excludePackages = [
         # disable baloo https://github.com/NixOS/nixpkgs/issues/63489#issuecomment-2046058993
         pkgs.kdePackages.baloo
+
+        # Wayland only, no Plasma X11 session
+        pkgs.kdePackages.kwin-x11
       ];
     };
 
