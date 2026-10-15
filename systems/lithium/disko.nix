@@ -35,6 +35,7 @@
         options.cachefile = "none";
         rootFsOptions = {
           compression = "zstd";
+          atime = "off";
           "com.sun:auto-snapshot" = "false";
         };
         mountpoint = "/";

@@ -37,6 +37,7 @@
         type = "zpool";
         rootFsOptions = {
           compression = "zstd";
+          atime = "off";
           "com.sun:auto-snapshot" = "false";
           encryption = "on";
           keyformat = "passphrase";
