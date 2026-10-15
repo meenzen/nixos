@@ -25,5 +25,6 @@
     server.enable = true;
     minecraft.enable = false;
     services.forgejo-runner.enable = true;
+    libvirt.enable = true;
   };
 }

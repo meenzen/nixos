@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  systemConfig,
   ...
 }: let
   cfg = config.meenzen.virt-manager;
@@ -11,18 +10,8 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    meenzen.libvirt.enable = true;
     programs.virt-manager.enable = true;
-    users.groups = {
-      libvirtd.members = [systemConfig.user.username];
-      kvm.members = [systemConfig.user.username];
-    };
-    virtualisation.libvirtd = {
-      enable = true;
-      qemu.swtpm.enable = true;
-    };
     virtualisation.spiceUSBRedirection.enable = true;
-    networking.firewall.trustedInterfaces = [
-      "virbr0"
-    ];
   };
 }

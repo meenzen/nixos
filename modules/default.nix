@@ -28,6 +28,7 @@
     ./home-manager
     ./hyprland
     ./latest-kernel
+    ./libvirt
     ./locale
     ./mastodon
     ./matrix
