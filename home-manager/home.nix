@@ -1,26 +1,17 @@
 {
+  # CLI tools plus desktop applications
   imports = [
-    ./common
+    ./cli.nix
     ./modules/browsers
-    ./modules/cleanup
     ./modules/code-editors
     ./modules/communication
     ./modules/desktop
-    ./modules/dev-tools
-    ./modules/fun
     ./modules/gaming
-    ./modules/git
     ./modules/hyprland
     ./modules/keepass
     ./modules/media-player
-    ./modules/neovim
-    ./modules/nix-tools
     ./modules/office
     ./modules/plasma
-    ./modules/shells
-    ./modules/ssh
-    ./modules/starship
-    ./modules/system-tools
     ./modules/virt-manager
     ./modules/wezterm
   ];

@@ -1,9 +1,6 @@
-{osConfig, ...}: {
+{
   home = {
-    username = osConfig.meenzen.user.username;
-    homeDirectory = "/home/${osConfig.meenzen.user.username}";
-
-    # Environt Variables
+    # Environment Variables
     sessionVariables = {
       GITLAB_HOST = "https://git.human.de";
       ANSIBLE_NOCOWS = "1";
