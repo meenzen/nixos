@@ -6,6 +6,10 @@
 }: let
   cfg = config.meenzen.nginx;
 
+  noIndexHeader = ''
+    add_header X-Robots-Tag "noindex, nofollow, nosnippet, noarchive";
+  '';
+
   nginxConfig =
     {
       enable = true;
@@ -37,9 +41,7 @@
       '';
     }
     // lib.optionalAttrs (!cfg.allowIndexing) {
-      appendHttpConfig = ''
-        add_header X-Robots-Tag "noindex, nofollow, nosnippet, noarchive";
-      '';
+      appendHttpConfig = noIndexHeader;
     }
     // lib.optionalAttrs (cfg.testPage != "") {
       virtualHosts = {
@@ -47,9 +49,7 @@
           enableACME = true;
           forceSSL = true;
           default = true;
-          extraConfig = ''
-            add_header X-Robots-Tag "noindex, nofollow, nosnippet, noarchive";
-          '';
+          meenzen.noIndex = true;
         };
       };
     };
@@ -65,6 +65,14 @@ in {
     };
     disableLetsEncrypt = lib.mkEnableOption "self-signed placeholder certificates instead of Let's Encrypt";
     allowIndexing = lib.mkEnableOption "search engine indexing of websites hosted on this server";
+  };
+
+  # Adds a per virtual host switch, needed on servers with allowIndexing for hosts that shouldn't be indexed
+  options.services.nginx.virtualHosts = lib.mkOption {
+    type = lib.types.attrsOf (lib.types.submodule ({config, ...}: {
+      options.meenzen.noIndex = lib.mkEnableOption "asking search engines not to index this virtual host";
+      config.extraConfig = lib.mkIf config.meenzen.noIndex noIndexHeader;
+    }));
   };
 
   imports = [

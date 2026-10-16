@@ -78,9 +78,7 @@ in {
         proxyPass = "http://127.0.0.1:${toString cfg.port}";
         proxyWebsockets = true;
       };
-      extraConfig = ''
-        add_header X-Robots-Tag "noindex, nofollow, nosnippet, noarchive";
-      '';
+      meenzen.noIndex = true;
     };
   };
 }

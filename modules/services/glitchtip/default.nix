@@ -97,9 +97,7 @@ in {
     services.nginx.virtualHosts.${cfg.domain} = {
       useACMEHost = "mnzn.dev";
       forceSSL = true;
-      extraConfig = ''
-        add_header X-Robots-Tag "noindex, nofollow, nosnippet, noarchive";
-      '';
+      meenzen.noIndex = true;
     };
   };
 }

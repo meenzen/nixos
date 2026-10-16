@@ -148,9 +148,7 @@ in {
             proxyWebsockets = true;
           };
           basicAuthFile = config.age.secrets.lokiAdminPassword.path;
-          extraConfig = ''
-            add_header X-Robots-Tag "noindex, nofollow, nosnippet, noarchive";
-          '';
+          meenzen.noIndex = true;
         };
       };
     };

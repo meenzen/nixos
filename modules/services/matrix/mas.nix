@@ -151,9 +151,7 @@ in {
               '';
             };
           };
-          extraConfig = ''
-            add_header X-Robots-Tag "noindex, nofollow, nosnippet, noarchive";
-          '';
+          meenzen.noIndex = true;
         };
         "${config.meenzen.services.matrix.synapse.matrixDomain}" = {
           locations."~ ^/_matrix/client/(.*)/(login|logout|refresh)".proxyPass = "http://[::1]:${toString cfg.port}";

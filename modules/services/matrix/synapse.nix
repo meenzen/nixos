@@ -385,9 +385,7 @@ in {
           locations."/_synapse/mas" = {
             proxyPass = "http://$synapse_backend";
           };
-          extraConfig = ''
-            add_header X-Robots-Tag "noindex, nofollow, nosnippet, noarchive";
-          '';
+          meenzen.noIndex = true;
         }
         else {
           useACMEHost = "mnzn.dev";
@@ -400,9 +398,7 @@ in {
             "/_synapse/client".proxyPass = "http://[::1]:${toString cfg.port}";
             "/_synapse/admin".proxyPass = "http://[::1]:${toString cfg.port}";
           };
-          extraConfig = ''
-            add_header X-Robots-Tag "noindex, nofollow, nosnippet, noarchive";
-          '';
+          meenzen.noIndex = true;
         };
 
       synapse-auto-compressor = {
