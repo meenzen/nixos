@@ -22,15 +22,6 @@ in {
   config = lib.mkIf cfg.enable {
     nix = {
       buildMachines = [
-        #{
-        #  hostName = "neon.mnzn.dev";
-        #  sshUser = cfg.user;
-        #  system = "x86_64-linux";
-        #  protocol = "ssh-ng";
-        #  maxJobs = 4;
-        #  speedFactor = 2;
-        #  supportedFeatures = ["nixos-test" "benchmark" "big-parallel" "kvm"];
-        #}
         {
           hostName = "mergeatron.human-dev.io";
           sshUser = cfg.user;
