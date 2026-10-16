@@ -4,9 +4,9 @@
   secrets,
   ...
 }: let
-  cfg = config.meenzen.livekit;
+  cfg = config.meenzen.services.matrix.livekit;
 in {
-  options.meenzen.livekit = {
+  options.meenzen.services.matrix.livekit = {
     enable = lib.mkEnableOption "LiveKit SFU";
 
     domain = lib.mkOption {

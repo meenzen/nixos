@@ -27,7 +27,7 @@ in {
       services.acme-mnzn.enable = true;
       backup.paths = ["/var/lib/tuwunel"];
       # well_known.livekit_url points Tuwunel's users at this service
-      lk-jwt-service.fullAccessHomeservers = [cfg.domain];
+      services.matrix.lk-jwt-service.fullAccessHomeservers = [cfg.domain];
     };
 
     age.secrets = {
@@ -51,7 +51,7 @@ in {
         well_known = {
           client = "https://${cfg.domain}";
           server = "${cfg.domain}:443";
-          livekit_url = "https://${config.meenzen.lk-jwt-service.domain}";
+          livekit_url = "https://${config.meenzen.services.matrix.lk-jwt-service.domain}";
         };
       };
     };

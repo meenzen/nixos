@@ -26,7 +26,6 @@
     ./latest-kernel
     ./libvirt
     ./locale
-    ./matrix
     ./networking-tools
     ./nginx
     ./nix

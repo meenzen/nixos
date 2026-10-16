@@ -6,7 +6,7 @@
   secrets,
   ...
 }: let
-  cfg = config.meenzen.matrix.synapse;
+  cfg = config.meenzen.services.matrix.synapse;
   serviceName = "matrix-synapse";
 
   # The workers load the same extraConfigFiles as the main process.
@@ -123,7 +123,7 @@
       '';
     };
 in {
-  options.meenzen.matrix.synapse = {
+  options.meenzen.services.matrix.synapse = {
     enable = lib.mkEnableOption "Enable Matrix Server";
     enableWorkers = lib.mkEnableOption "Enable Synapse Workers";
     domain = lib.mkOption {

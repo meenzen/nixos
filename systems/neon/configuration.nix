@@ -47,7 +47,6 @@
       };
     };
     oci-containers.enable = true;
-    matrix.enable = true;
     distributed-build.enableHost = true;
     nginx = {
       enable = true;
@@ -71,6 +70,7 @@
       minecraft.flip.enable = true;
       glitchtip.enable = true;
       lauti.enable = true;
+      matrix.enable = true;
       mastodon = {
         enable = true;
         enableSearch = true;

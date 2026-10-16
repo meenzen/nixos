@@ -3,9 +3,9 @@
   lib,
   ...
 }: let
-  cfg = config.meenzen.matrix;
+  cfg = config.meenzen.services.matrix;
 in {
-  options.meenzen.matrix = {
+  options.meenzen.services.matrix = {
     enable = lib.mkEnableOption "Enable Matrix Server";
   };
 
@@ -17,7 +17,7 @@ in {
   ];
 
   config = lib.mkIf cfg.enable {
-    meenzen.matrix = {
+    meenzen.services.matrix = {
       draupnir.enable = true;
       mas.enable = true;
       rtc.enable = true;

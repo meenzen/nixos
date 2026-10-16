@@ -4,9 +4,9 @@
   secrets,
   ...
 }: let
-  cfg = config.meenzen.matrix.draupnir;
+  cfg = config.meenzen.services.matrix.draupnir;
 in {
-  options.meenzen.matrix.draupnir = {
+  options.meenzen.services.matrix.draupnir = {
     enable = lib.mkEnableOption "Enable Draupnir";
     port = lib.mkOption {
       type = lib.types.int;
@@ -37,7 +37,7 @@ in {
       draupnir = {
         enable = true;
         settings = {
-          homeserverUrl = "https://${config.meenzen.matrix.synapse.matrixDomain}";
+          homeserverUrl = "https://${config.meenzen.services.matrix.synapse.matrixDomain}";
           managementRoom = cfg.managementRoom;
           autojoinOnlyIfManager = true;
           automaticallyRedactForReasons = ["spam" "advertising"];

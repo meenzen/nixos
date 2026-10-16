@@ -13,6 +13,7 @@
     ./lauti
     ./local-ai
     ./mastodon
+    ./matrix
     ./minecraft
     ./miniflux
     ./mnzn-website

@@ -4,9 +4,9 @@
   secrets,
   ...
 }: let
-  cfg = config.meenzen.lk-jwt-service;
+  cfg = config.meenzen.services.matrix.lk-jwt-service;
 in {
-  options.meenzen.lk-jwt-service = {
+  options.meenzen.services.matrix.lk-jwt-service = {
     enable = lib.mkEnableOption "Enable lk-jwt-service";
 
     domain = lib.mkOption {
@@ -36,7 +36,7 @@ in {
       nginx.enable = true;
       # Provides the mnzn.dev certificate used by useACMEHost.
       services.acme-mnzn.enable = true;
-      lk-jwt-service.fullAccessHomeservers = [config.meenzen.matrix.synapse.domain];
+      services.matrix.lk-jwt-service.fullAccessHomeservers = [config.meenzen.services.matrix.synapse.domain];
     };
 
     # Same key file as LiveKit, loaded via LoadCredential. lk-jwt-service only accepts a single key in it.
@@ -47,7 +47,7 @@ in {
 
     services.lk-jwt-service = {
       enable = true;
-      livekitUrl = "wss://${config.meenzen.livekit.domain}";
+      livekitUrl = "wss://${config.meenzen.services.matrix.livekit.domain}";
       keyFile = config.age.secrets.livekitKeys.path;
       port = cfg.port;
     };

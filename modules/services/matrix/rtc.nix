@@ -3,7 +3,7 @@
   lib,
   ...
 }: let
-  cfg = config.meenzen.matrix.rtc;
+  cfg = config.meenzen.services.matrix.rtc;
 
   synapseSettings = {
     # The maximum allowed duration by which sent events can be delayed, as
@@ -29,12 +29,12 @@
         type = "livekit";
         # Clients fetch LiveKit tokens from lk-jwt-service directly. Running it as an appservice behind Synapse depends
         # on the experimental MSC4502 and MSC4512, see https://github.com/element-hq/lk-jwt-service
-        livekit_service_url = "https://${config.meenzen.lk-jwt-service.domain}/livekit/jwt";
+        livekit_service_url = "https://${config.meenzen.services.matrix.lk-jwt-service.domain}/livekit/jwt";
       }
     ];
   };
 in {
-  options.meenzen.matrix.rtc = {
+  options.meenzen.services.matrix.rtc = {
     enable = lib.mkEnableOption "Enable Matrix RTC";
   };
 
@@ -45,8 +45,10 @@ in {
 
   config = lib.mkIf cfg.enable {
     meenzen = {
-      livekit.enable = true;
-      lk-jwt-service.enable = true;
+      services.matrix = {
+        livekit.enable = true;
+        lk-jwt-service.enable = true;
+      };
     };
 
     services = {

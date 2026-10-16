@@ -5,7 +5,7 @@
   secrets,
   ...
 }: let
-  cfg = config.meenzen.matrix.mas;
+  cfg = config.meenzen.services.matrix.mas;
   serviceName = "matrix-authentication-service";
   masCfg = config.services.matrix-authentication-service;
 
@@ -15,7 +15,7 @@
     lib.filterAttrsRecursive (_: v: v != null) (builtins.removeAttrs masCfg.settings ["upstream_oauth2"])
   );
 in {
-  options.meenzen.matrix.mas = {
+  options.meenzen.services.matrix.mas = {
     enable = lib.mkEnableOption "Enable Matrix Authentication Service (MAS)";
     domain = lib.mkOption {
       type = lib.types.str;
@@ -127,11 +127,11 @@ in {
             minimum_complexity = 3;
           };
           matrix = {
-            homeserver = config.meenzen.matrix.synapse.domain;
+            homeserver = config.meenzen.services.matrix.synapse.domain;
             endpoint =
-              if config.meenzen.matrix.synapse.enableWorkers
-              then "https://${config.meenzen.matrix.synapse.matrixDomain}"
-              else "http://[::1]:${toString config.meenzen.matrix.synapse.port}";
+              if config.meenzen.services.matrix.synapse.enableWorkers
+              then "https://${config.meenzen.services.matrix.synapse.matrixDomain}"
+              else "http://[::1]:${toString config.meenzen.services.matrix.synapse.port}";
           };
         };
       };
@@ -155,7 +155,7 @@ in {
             add_header X-Robots-Tag "noindex, nofollow, nosnippet, noarchive";
           '';
         };
-        "${config.meenzen.matrix.synapse.matrixDomain}" = {
+        "${config.meenzen.services.matrix.synapse.matrixDomain}" = {
           locations."~ ^/_matrix/client/(.*)/(login|logout|refresh)".proxyPass = "http://[::1]:${toString cfg.port}";
         };
       };
