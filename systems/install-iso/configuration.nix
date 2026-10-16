@@ -1,8 +1,8 @@
 {
+  config,
   inputs,
   lib,
   pkgs,
-  systemConfig,
   ...
 }: {
   imports = [
@@ -24,8 +24,8 @@
   # Enable the OpenSSH server so we can install the system remotely
   systemd.services.sshd.wantedBy = pkgs.lib.mkForce ["multi-user.target"];
   users.users = {
-    root.openssh.authorizedKeys.keys = systemConfig.user.authorizedKeys;
-    nixos.openssh.authorizedKeys.keys = systemConfig.user.authorizedKeys;
+    root.openssh.authorizedKeys.keys = config.meenzen.user.authorizedKeys;
+    nixos.openssh.authorizedKeys.keys = config.meenzen.user.authorizedKeys;
   };
 
   # force conflicting options

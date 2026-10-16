@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  systemConfig,
   ...
 }: let
   cfg = config.meenzen.docker;
@@ -17,7 +16,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    users.users."${systemConfig.user.username}".extraGroups = ["docker" "podman"];
+    users.users."${config.meenzen.user.username}".extraGroups = ["docker" "podman"];
 
     meenzen.oci-containers = {
       enable = cfg.enablePodman;

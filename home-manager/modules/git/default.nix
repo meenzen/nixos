@@ -1,6 +1,6 @@
 {
+  osConfig,
   pkgs,
-  systemConfig,
   ...
 }: {
   programs = {
@@ -11,9 +11,9 @@
       signing.format = "openpgp";
       settings = {
         user = {
-          name = systemConfig.user.fullName;
-          email = systemConfig.user.email;
-          signingkey = "/home/${systemConfig.user.username}/.ssh/id_ed25519_sk";
+          name = osConfig.meenzen.user.fullName;
+          email = osConfig.meenzen.user.email;
+          signingkey = "/home/${osConfig.meenzen.user.username}/.ssh/id_ed25519_sk";
         };
         init.defaultBranch = "main";
         core.autocrlf = false;

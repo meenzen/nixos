@@ -1,4 +1,4 @@
-{systemConfig, ...}: {
+{config, ...}: {
   services.openssh = {
     enable = true;
     openFirewall = true;
@@ -8,7 +8,7 @@
     };
   };
 
-  users.users.root.openssh.authorizedKeys.keys = systemConfig.user.authorizedKeys;
+  users.users.root.openssh.authorizedKeys.keys = config.meenzen.user.authorizedKeys;
 
   services.fail2ban = {
     enable = true;

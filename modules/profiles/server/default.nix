@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  systemConfig,
   secrets,
   ...
 }: let
@@ -27,7 +26,7 @@ in {
       mutableUsers = lib.mkForce false;
       users = {
         root.hashedPasswordFile = lib.mkForce config.age.secrets.hashedPassword.path;
-        "${systemConfig.user.username}" = {
+        "${config.meenzen.user.username}" = {
           initialPassword = lib.mkForce null;
           hashedPassword = lib.mkForce "!";
         };

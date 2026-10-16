@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  systemConfig,
   secrets,
   ...
 }: let
@@ -26,7 +25,7 @@ in {
     security.acme = {
       acceptTerms = true;
       defaults = {
-        email = systemConfig.user.email;
+        email = config.meenzen.user.email;
         # Hell yeah, we absolutely want short-lived certs!
         # https://letsencrypt.org/docs/profiles/#shortlived
         profile = "shortlived";

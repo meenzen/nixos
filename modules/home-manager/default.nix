@@ -4,7 +4,6 @@
   lib,
   inputs,
   outputs,
-  systemConfig,
   ...
 }: let
   cfg = config.meenzen.home-manager;
@@ -43,13 +42,13 @@ in {
   config = lib.mkIf cfg.enable {
     home-manager = {
       extraSpecialArgs = {
-        inherit inputs outputs systemConfig pkgs-review;
+        inherit inputs outputs pkgs-review;
         extraConfig = cfg.extraConfig;
       };
       useGlobalPkgs = true;
       useUserPackages = true;
       backupFileExtension = "backup";
-      users."${systemConfig.user.username}" = import cfg.homeModule;
+      users."${config.meenzen.user.username}" = import cfg.homeModule;
       sharedModules = [inputs.plasma-manager.homeModules.plasma-manager];
     };
   };

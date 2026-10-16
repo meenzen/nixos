@@ -80,19 +80,6 @@
     ...
   }:
     flake-parts.lib.mkFlake {inherit inputs;} (_: let
-      systemConfig = {
-        user = {
-          username = "meenzens";
-          fullName = "Samuel Meenzen";
-          email = "samuel@meenzen.net";
-          initialPassword = "password";
-          authorizedKeys = [
-            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMa9vjZasAelcVAdtLa+vI0dYvx4hba2z6z+J+u39irB meenzens@framework"
-            "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIDOHTWbt687mGfFsdxrgSyCtyrb547mw5+SL3FdAT5KeAAAABHNzaDo= YubiKey C"
-          ];
-          extraGroups = [];
-        };
-      };
       pkgs-stable = import inputs.nixpkgs-stable {
         system = "x86_64-linux";
         config.allowUnfree = true;
@@ -102,7 +89,7 @@
         config.allowUnfree = true;
       };
       specialArgs = {
-        inherit inputs pkgs-stable pkgs-review systemConfig;
+        inherit inputs pkgs-stable pkgs-review;
         # Only the secrets directory is copied to the store, so changes elsewhere in the repository don't change the
         # systems.
         secrets = ./secrets;

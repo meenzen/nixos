@@ -1,7 +1,7 @@
 {
+  config,
   inputs,
   lib,
-  systemConfig,
   ...
 }: {
   imports = [
@@ -14,7 +14,7 @@
 
   wsl = {
     enable = true;
-    defaultUser = systemConfig.user.username;
+    defaultUser = config.meenzen.user.username;
   };
 
   meenzen.home-manager = {

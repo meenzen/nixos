@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  systemConfig,
   ...
 }: let
   cfg = config.meenzen.fish;
@@ -15,7 +14,7 @@ in {
   config = lib.mkIf cfg.enable {
     programs.fish.enable = true;
     users.users = lib.mkIf cfg.default {
-      "${systemConfig.user.username}" = {
+      "${config.meenzen.user.username}" = {
         shell = pkgs.fish;
       };
     };

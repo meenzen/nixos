@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  systemConfig,
   ...
 }: let
   cfg = config.meenzen.nginx;
@@ -85,11 +84,11 @@ in {
       defaults =
         if cfg.disableLetsEncrypt
         then {
-          email = systemConfig.user.email;
+          email = config.meenzen.user.email;
           server = lib.mkForce "https://127.0.0.1";
         }
         else {
-          email = systemConfig.user.email;
+          email = config.meenzen.user.email;
           # Make sure to reload Nginx, this should happen automatically, but just in case
           reloadServices = ["nginx.service"];
 

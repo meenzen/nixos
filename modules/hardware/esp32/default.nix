@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  systemConfig,
   ...
 }: let
   cfg = config.meenzen.hardware.esp32;
@@ -16,6 +15,6 @@ in {
       SUBSYSTEM=="tty", ATTRS{idVendor}=="303a", ATTRS{idProduct}=="1001", MODE="0660", TAG+="uaccess"
     '';
 
-    users.users."${systemConfig.user.username}".extraGroups = ["dialout"];
+    users.users."${config.meenzen.user.username}".extraGroups = ["dialout"];
   };
 }

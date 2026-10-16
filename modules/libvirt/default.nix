@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  systemConfig,
   ...
 }: let
   cfg = config.meenzen.libvirt;
@@ -12,8 +11,8 @@ in {
 
   config = lib.mkIf cfg.enable {
     users.groups = {
-      libvirtd.members = [systemConfig.user.username];
-      kvm.members = [systemConfig.user.username];
+      libvirtd.members = [config.meenzen.user.username];
+      kvm.members = [config.meenzen.user.username];
     };
     virtualisation.libvirtd = {
       enable = true;
