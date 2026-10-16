@@ -31,7 +31,6 @@
     ./openfortivpn
     ./openssh
     ./optimization
-    ./overlays
     ./plasma
     ./plymouth
     ./postgresql
