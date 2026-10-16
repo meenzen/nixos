@@ -4,23 +4,15 @@
   pkgs,
   ...
 }: {
-  options.meenzen.desktop.enable = lib.mkEnableOption "cloud sync, mail and download apps";
+  options.meenzen.cloud-sync.enable = lib.mkEnableOption "cloud storage sync clients";
 
-  config = lib.mkIf config.meenzen.desktop.enable {
+  config = lib.mkIf config.meenzen.cloud-sync.enable {
     home.packages = [
       pkgs.onedrive
-      pkgs.motrix # download manager
     ];
 
     services.nextcloud-client.enable = true;
     # The gamescope session breaks graphical services, so don't start them without a display.
     systemd.user.services.nextcloud-client.Unit.ConditionEnvironment = ["|DISPLAY" "|WAYLAND_DISPLAY"];
-
-    programs.thunderbird = {
-      enable = true;
-      profiles.default = {
-        isDefault = true;
-      };
-    };
   };
 }

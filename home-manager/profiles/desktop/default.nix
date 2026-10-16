@@ -16,9 +16,9 @@ in {
     meenzen = {
       profiles.cli.enable = true;
       browsers.enable = true;
+      cloud-sync.enable = true;
       code-editors.enable = true;
       communication.enable = true;
-      desktop.enable = true;
       keepass.enable = true;
       media-player.enable = true;
       office.enable = true;

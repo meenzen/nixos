@@ -20,6 +20,8 @@ in {
       (pkgs.google-chrome.override {
         commandLineArgs = args;
       })
+
+      pkgs.motrix # download manager
     ];
 
     programs.chromium = {

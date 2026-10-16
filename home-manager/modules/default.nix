@@ -2,9 +2,9 @@
   imports = [
     ./browsers
     ./cleanup
+    ./cloud-sync
     ./code-editors
     ./communication
-    ./desktop
     ./dev-tools
     ./fun
     ./gaming
