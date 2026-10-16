@@ -40,7 +40,6 @@
     beeper.enable = true;
     hardware = {
       bluetooth.enable = true;
-      uhk.enable = true;
       esp32.enable = true;
     };
     printing.enable = true;
