@@ -5,7 +5,7 @@
   secrets,
   ...
 }: let
-  cfg = config.meenzen.mastodon;
+  cfg = config.meenzen.services.mastodon;
 
   tootctl = "/run/current-system/sw/bin/mastodon-tootctl";
   cleanupScriptName = "mastodon-cleanup";
@@ -30,7 +30,7 @@
     '';
   };
 in {
-  options.meenzen.mastodon = {
+  options.meenzen.services.mastodon = {
     enable = lib.mkEnableOption "Enable Mastodon Server";
     enableSearch = lib.mkEnableOption "Enable Search, run 'mastodon-tootctl search deploy' after enabling";
     domain = lib.mkOption {

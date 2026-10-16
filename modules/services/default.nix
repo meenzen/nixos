@@ -12,6 +12,7 @@
     ./glitchtip
     ./lauti
     ./local-ai
+    ./mastodon
     ./minecraft
     ./miniflux
     ./mnzn-website

@@ -26,7 +26,6 @@
     ./latest-kernel
     ./libvirt
     ./locale
-    ./mastodon
     ./matrix
     ./networking-tools
     ./nginx
