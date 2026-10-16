@@ -59,6 +59,9 @@ in {
         # command autocorrect
         pay-respects.enable = true;
 
+        # run commands without installing them, e.g. `, cowsay hello`
+        nix-index-database.comma.enable = true;
+
         # direnv / devenv
         direnv.enable = true;
         direnv.nix-direnv.enable = true;
