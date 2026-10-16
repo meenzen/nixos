@@ -4,6 +4,7 @@
     ./anubis
     ./authelia
     ./cheshbot
+    ./collabora
     ./fluent-bit
     ./forgejo
     ./forgejo-runner

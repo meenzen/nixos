@@ -12,7 +12,6 @@
     ./build-vm
     ./cleanup
     ./cloudflare-warp
-    ./collabora
     ./desktop
     ./determinate-nix
     ./distributed-build

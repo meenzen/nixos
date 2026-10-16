@@ -4,10 +4,10 @@
   secrets,
   ...
 }: let
-  cfg = config.meenzen.collabora;
+  cfg = config.meenzen.services.collabora;
   serviceName = "collabora";
 in {
-  options.meenzen.collabora = {
+  options.meenzen.services.collabora = {
     enable = lib.mkEnableOption "Enable Collabora Server";
     domain = lib.mkOption {
       type = lib.types.str;
