@@ -4,21 +4,18 @@
   config,
   ...
 }: {
-  nixpkgs = {
-    config = {
-      # Allow installing unfree packages
-      allowUnfree = lib.mkForce true;
-      # see https://github.com/nix-community/home-manager/issues/2942
-      allowUnfreePredicate = _: true;
-    };
-  };
+  # Allow installing unfree packages
+  nixpkgs.config.allowUnfree = lib.mkForce true;
 
   nix = {
-    # Additional Binary Cache
     settings = {
+      # Additional Binary Cache
       substituters = ["https://nix-community.cachix.org"];
       trusted-public-keys = ["nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="];
       trusted-users = ["root" "@wheel"];
+
+      # Enable Flakes
+      experimental-features = ["nix-command" "flakes"];
     };
 
     extraOptions = ''
@@ -33,9 +30,6 @@
       fallback = true
       connect-timeout = 5
     '';
-
-    # Enable Flakes
-    settings.experimental-features = ["nix-command" "flakes"];
   };
 
   # Print diff after rebuild
