@@ -27,12 +27,8 @@
     matrix_rtc.transports = [
       {
         type = "livekit";
-        # todo: set up lk-jwt-service as an appservice once 0.7 is available in nixpkgs
-        # see https://github.com/NixOS/nixpkgs/issues/562332
-        # see https://element-hq.github.io/synapse/latest/usage/configuration/config_documentation.html#matrix_rtc
-        #url = "wss://${config.meenzen.livekit.domain}";
-
-        # for now, use the legacy approach
+        # Clients fetch LiveKit tokens from lk-jwt-service directly. Running it as an appservice behind Synapse depends
+        # on the experimental MSC4502 and MSC4512, see https://github.com/element-hq/lk-jwt-service
         livekit_service_url = "https://${config.meenzen.lk-jwt-service.domain}/livekit/jwt";
       }
     ];
