@@ -22,5 +22,6 @@
     ./system-tools
     ./virt-manager
     ./wezterm
+    ./work
   ];
 }
