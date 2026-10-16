@@ -3,7 +3,6 @@
   pkgs-review,
   lib,
   inputs,
-  outputs,
   ...
 }: let
   cfg = config.meenzen.home-manager;
@@ -42,7 +41,7 @@ in {
   config = lib.mkIf cfg.enable {
     home-manager = {
       extraSpecialArgs = {
-        inherit inputs outputs pkgs-review;
+        inherit inputs pkgs-review;
         extraConfig = cfg.extraConfig;
       };
       useGlobalPkgs = true;
