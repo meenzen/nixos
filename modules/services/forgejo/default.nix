@@ -143,16 +143,10 @@ in {
       nginx.virtualHosts.${cfg.domain} = {
         useACMEHost = "mnzn.dev";
         forceSSL = true;
-        meenzen.noIndex = true;
+        meenzen.noIndex.enable = true;
         extraConfig = ''
           client_max_body_size 512M;
         '';
-        locations."/robots.txt" = {
-          extraConfig = ''
-            rewrite ^/(.*) $1;
-            return 200 "User-agent: *\nDisallow: /";
-          '';
-        };
         locations."/".proxyPass = "http://unix:${config.services.anubis.instances.forgejo.settings.BIND}";
       };
     };

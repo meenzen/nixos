@@ -91,7 +91,7 @@ in {
       locations."/FLiP.mrpack" = {
         return = "302 https://forge.mnzn.dev/api/packages/FLiP/generic/minecraft-modpack/${revision}/FLiP.mrpack";
       };
-      meenzen.noIndex = true;
+      meenzen.noIndex.enable = true;
     };
   };
 }

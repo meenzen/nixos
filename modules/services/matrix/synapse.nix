@@ -385,7 +385,7 @@ in {
           locations."/_synapse/mas" = {
             proxyPass = "http://$synapse_backend";
           };
-          meenzen.noIndex = true;
+          meenzen.noIndex.enable = true;
         }
         else {
           useACMEHost = "mnzn.dev";
@@ -398,7 +398,7 @@ in {
             "/_synapse/client".proxyPass = "http://[::1]:${toString cfg.port}";
             "/_synapse/admin".proxyPass = "http://[::1]:${toString cfg.port}";
           };
-          meenzen.noIndex = true;
+          meenzen.noIndex.enable = true;
         };
 
       synapse-auto-compressor = {

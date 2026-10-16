@@ -148,7 +148,7 @@ in {
             proxyWebsockets = true;
           };
           basicAuthFile = config.age.secrets.lokiAdminPassword.path;
-          meenzen.noIndex = true;
+          meenzen.noIndex.enable = true;
         };
       };
     };

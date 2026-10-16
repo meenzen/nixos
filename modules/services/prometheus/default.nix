@@ -72,7 +72,7 @@ in {
             proxyWebsockets = true;
           };
           basicAuthFile = config.age.secrets.prometheusAdminPassword.path;
-          meenzen.noIndex = true;
+          meenzen.noIndex.enable = true;
         };
       };
     };

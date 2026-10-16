@@ -213,7 +213,11 @@ in {
 
     services.nginx = {
       virtualHosts."${cfg.domain}" = {
-        meenzen.noIndex = true;
+        meenzen.noIndex = {
+          enable = true;
+          # Mastodon serves its own robots.txt, see robots.patch
+          robotsTxt = false;
+        };
       };
 
       # Adapted from this excellent guide: https://stanislas.blog/2018/05/moving-mastodon-media-files-to-wasabi-object-storage/
@@ -228,7 +232,7 @@ in {
       virtualHosts."${cfg.cdnDomain}" = {
         enableACME = true;
         forceSSL = true;
-        meenzen.noIndex = true;
+        meenzen.noIndex.enable = true;
         locations."/" = {
           recommendedProxySettings = false;
           proxyPass = "https://${cfg.cdnBucketName}.${cfg.cdnBucketDomain}/";

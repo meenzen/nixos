@@ -49,7 +49,7 @@
           enableACME = true;
           forceSSL = true;
           default = true;
-          meenzen.noIndex = true;
+          meenzen.noIndex.enable = true;
         };
       };
     };
@@ -69,9 +69,28 @@ in {
 
   # Adds a per virtual host switch, needed on servers with allowIndexing for hosts that shouldn't be indexed
   options.services.nginx.virtualHosts = lib.mkOption {
-    type = lib.types.attrsOf (lib.types.submodule ({config, ...}: {
-      options.meenzen.noIndex = lib.mkEnableOption "asking search engines not to index this virtual host";
-      config.extraConfig = lib.mkIf config.meenzen.noIndex noIndexHeader;
+    type = lib.types.attrsOf (lib.types.submodule ({config, ...}: let
+      noIndex = config.meenzen.noIndex;
+    in {
+      options.meenzen.noIndex = {
+        enable = lib.mkEnableOption "asking search engines not to index this virtual host";
+        robotsTxt = lib.mkOption {
+          type = lib.types.bool;
+          default = true;
+          description = "Whether to also serve a robots.txt that disallows crawling the whole virtual host.";
+        };
+      };
+
+      config = lib.mkIf noIndex.enable {
+        extraConfig = noIndexHeader;
+        # Exact match, so it takes precedence over the application's own robots.txt
+        locations."= /robots.txt" = lib.mkIf noIndex.robotsTxt {
+          extraConfig = ''
+            default_type text/plain;
+            return 200 "User-agent: *\nDisallow: /\n";
+          '';
+        };
+      };
     }));
   };
 

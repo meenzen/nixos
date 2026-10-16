@@ -62,7 +62,7 @@ in {
       locations."/" = {
         proxyPass = "http://[::1]:${toString cfg.port}";
       };
-      meenzen.noIndex = true;
+      meenzen.noIndex.enable = true;
     };
   };
 }

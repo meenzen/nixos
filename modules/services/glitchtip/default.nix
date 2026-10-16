@@ -97,7 +97,7 @@ in {
     services.nginx.virtualHosts.${cfg.domain} = {
       useACMEHost = "mnzn.dev";
       forceSSL = true;
-      meenzen.noIndex = true;
+      meenzen.noIndex.enable = true;
     };
   };
 }
