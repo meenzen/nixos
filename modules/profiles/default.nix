@@ -1,8 +1,8 @@
 {
   imports = [
-    ./desktop.nix
-    ./desktop-slim.nix
-    ./hetzner.nix
-    ./server.nix
+    ./desktop
+    ./desktop-slim
+    ./hetzner
+    ./server
   ];
 }
