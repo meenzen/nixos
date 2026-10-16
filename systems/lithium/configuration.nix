@@ -24,7 +24,10 @@
   meenzen = {
     server.enable = true;
     minecraft.enable = false;
-    services.forgejo-runner.enable = true;
+    services.forgejo-runner = {
+      enable = true;
+      uuid = "b01c0895-82fa-4e1a-ab63-4eb873a8645c";
+    };
     libvirt.enable = true;
   };
 }

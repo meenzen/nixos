@@ -36,6 +36,11 @@
 in {
   options.meenzen.services.forgejo-runner = {
     enable = lib.mkEnableOption "Enable Forgejo Runner";
+    uuid = lib.mkOption {
+      type = lib.types.str;
+      example = "c9e50be9-a7c3-4aee-ba35-624c4ff8c519";
+      description = "The UUID of the runner, the matching token is read from the forgejoRunnerToken secret";
+    };
     concurrency = lib.mkOption {
       type = lib.types.int;
       default = 4;
@@ -52,7 +57,7 @@ in {
     age.secrets = {
       forgejoRunnerToken = {
         file = "${secrets}/forgejoRunnerToken.age";
-        restartUnits = ["gitea-runner-default.service"];
+        restartUnits = ["forgejo-runner-default.service"];
       };
     };
 
@@ -75,21 +80,25 @@ in {
     networking.firewall.interfaces."docker+".allowedUDPPorts = [53 5353];
     networking.firewall.trustedInterfaces = ["docker0" "br-+"];
 
-    services.gitea-actions-runner = {
+    services.forgejo-runner = {
       package = pkgs.forgejo-runner;
       instances.default = {
         enable = true;
-        name = config.networking.hostName;
-        url = "https://${config.meenzen.services.forgejo.domain}/";
-        tokenFile = config.age.secrets.forgejoRunnerToken.path;
-        labels = [
-          "ubuntu-latest:docker://ghcr.io/catthehacker/ubuntu:act-latest"
-          "ubuntu-24.04:docker://ghcr.io/catthehacker/ubuntu:act-24.04"
-          "ubuntu-22.04:docker://ghcr.io/catthehacker/ubuntu:act-22.04"
-          "nixos:docker://ghcr.io/catthehacker/ubuntu:act-latest"
-        ];
+        secrets.server.connections.default.token_url = config.age.secrets.forgejoRunnerToken.path;
         settings = {
-          runner.capacity = cfg.concurrency;
+          server.connections.default = {
+            url = "https://${config.meenzen.services.forgejo.domain}/";
+            inherit (cfg) uuid;
+          };
+          runner = {
+            capacity = cfg.concurrency;
+            labels = [
+              "ubuntu-latest:docker://ghcr.io/catthehacker/ubuntu:act-latest"
+              "ubuntu-24.04:docker://ghcr.io/catthehacker/ubuntu:act-24.04"
+              "ubuntu-22.04:docker://ghcr.io/catthehacker/ubuntu:act-22.04"
+              "nixos:docker://ghcr.io/catthehacker/ubuntu:act-latest"
+            ];
+          };
           container = {
             enable_ipv6 = true;
             docker_host = "automount";
