@@ -44,7 +44,6 @@
     printing.enable = true;
     plymouth.enable = true;
     remote-desktop.enable = true;
-    winboat.enable = false;
     work.enable = true;
   };
 }

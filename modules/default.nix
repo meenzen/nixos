@@ -55,9 +55,7 @@
     ./users
     ./verapdf
     ./virt-manager
-    ./virtualbox
     ./vpn
-    ./winboat
     ./work
     ./workarounds
     ./yubikey
