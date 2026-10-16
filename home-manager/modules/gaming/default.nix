@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  osConfig,
   pkgs,
   ...
 }: {
@@ -8,7 +9,9 @@
     ./steam.nix
   ];
 
-  options.meenzen.gaming.enable = lib.mkEnableOption "gaming apps";
+  options.meenzen.gaming.enable =
+    lib.mkEnableOption "gaming apps"
+    // {default = osConfig.meenzen.gaming.enable;};
 
   config = lib.mkIf config.meenzen.gaming.enable {
     home.packages = [
