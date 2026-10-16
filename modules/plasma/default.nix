@@ -8,6 +8,20 @@
 in {
   options.meenzen.plasma = {
     enable = lib.mkEnableOption "Enable Plasma Desktop";
+    panel = {
+      extraPinnedApps = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+        default = [];
+        example = ["applications:steam.desktop"];
+        description = "Launchers pinned to the task manager in addition to the default ones";
+      };
+      extraShownTrayItems = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+        default = [];
+        example = ["org.kde.plasma.battery"];
+        description = "System tray items that are always shown in addition to the default ones";
+      };
+    };
   };
 
   imports = [./tiling.nix];

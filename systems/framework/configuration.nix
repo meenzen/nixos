@@ -22,7 +22,18 @@
     secure-boot.enable = true;
     distributed-build.enable = false;
     profiles.desktop.enable = true;
-    plasma.tiling.enable = true;
+    plasma = {
+      tiling.enable = true;
+      panel = {
+        extraPinnedApps = [
+          "applications:google-chrome.desktop"
+          "applications:rider.desktop"
+        ];
+        extraShownTrayItems = [
+          "org.kde.plasma.battery"
+        ];
+      };
+    };
     hyprland.enable = false;
     latest-kernel.enable = true;
     virt-manager.enable = true;
@@ -31,15 +42,6 @@
       bluetooth.enable = true;
       uhk.enable = true;
       esp32.enable = true;
-    };
-    home-manager.extraConfig = {
-      additionalPinnedApps = [
-        "applications:google-chrome.desktop"
-        "applications:rider.desktop"
-      ];
-      additionalShownSystemTrayItems = [
-        "org.kde.plasma.battery"
-      ];
     };
     printing.enable = true;
     plymouth.enable = true;

@@ -1,7 +1,6 @@
 {
   lib,
   osConfig,
-  extraConfig,
   ...
 }: {
   config = lib.mkIf osConfig.meenzen.plasma.enable {
@@ -27,7 +26,7 @@
                   "applications:org.wezfurlong.wezterm.desktop"
                   "applications:brave-origin.desktop"
                 ]
-                ++ extraConfig.additionalPinnedApps;
+                ++ osConfig.meenzen.plasma.panel.extraPinnedApps;
             };
           }
           "org.kde.plasma.marginsseparator"
@@ -39,7 +38,7 @@
                   "org.kde.plasma.networkmanagement"
                   "org.kde.plasma.volume"
                 ]
-                ++ extraConfig.additionalShownSystemTrayItems;
+                ++ osConfig.meenzen.plasma.panel.extraShownTrayItems;
             };
           }
           {

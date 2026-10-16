@@ -77,7 +77,13 @@
 
   meenzen = {
     profiles.desktop.enable = true;
-    plasma.tiling.enable = true;
+    plasma = {
+      tiling.enable = true;
+      panel.extraPinnedApps = [
+        "applications:steam.desktop"
+        "applications:com.heroicgameslauncher.hgl.desktop"
+      ];
+    };
     remote-desktop.enable = true;
     hardware = {
       nvidia.enable = true;
@@ -92,12 +98,6 @@
     virt-manager.enable = true;
     printing.enable = true;
     services.local-ai.enable = false;
-    home-manager.extraConfig = {
-      additionalPinnedApps = [
-        "applications:steam.desktop"
-        "applications:com.heroicgameslauncher.hgl.desktop"
-      ];
-    };
   };
 
   programs.ausweisapp = {

@@ -17,21 +17,6 @@ in {
         Path to the home-manager module of the main user.
       '';
     };
-
-    extraConfig = let
-      defaultExtraConfig = {
-        additionalPinnedApps = [];
-        additionalShownSystemTrayItems = [];
-      };
-    in
-      lib.mkOption {
-        type = lib.types.attrs;
-        default = defaultExtraConfig;
-        apply = x: lib.recursiveUpdate defaultExtraConfig x;
-        description = ''
-          Extra configuration to pass to the home-manager of the main user.
-        '';
-      };
   };
 
   imports = [
@@ -42,7 +27,6 @@ in {
     home-manager = {
       extraSpecialArgs = {
         inherit inputs pkgs-review;
-        extraConfig = cfg.extraConfig;
       };
       useGlobalPkgs = true;
       useUserPackages = true;
