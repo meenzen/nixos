@@ -28,10 +28,14 @@ in {
         # Provides the mnzn.dev certificate used by useACMEHost.
         acme-mnzn.enable = true;
         loki.enable = true;
-        nginx-exporter.enable = true;
-        node-exporter.enable = true;
-        postgres-exporter.enable = true;
-        prometheus.enable = true;
+        prometheus = {
+          enable = true;
+          exporters = {
+            nginx.enable = true;
+            node.enable = true;
+            postgres.enable = true;
+          };
+        };
         tempo.enable = true;
       };
     };

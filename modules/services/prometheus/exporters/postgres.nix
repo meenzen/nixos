@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  cfg = config.meenzen.services.postgres-exporter;
+  cfg = config.meenzen.services.prometheus.exporters.postgres;
 
   exporter = pkgs.fetchFromGitHub {
     owner = "prometheus-community";
@@ -25,7 +25,7 @@
     then config.networking.hostName
     else "${config.networking.hostName}.${config.networking.domain}";
 in {
-  options.meenzen.services.postgres-exporter = {
+  options.meenzen.services.prometheus.exporters.postgres = {
     enable = lib.mkEnableOption "Enable Postgres Exporter";
     port = lib.mkOption {
       type = lib.types.int;

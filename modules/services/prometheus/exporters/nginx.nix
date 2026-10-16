@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  cfg = config.meenzen.services.nginx-exporter;
+  cfg = config.meenzen.services.prometheus.exporters.nginx;
 
   exporter = pkgs.fetchFromGitHub {
     owner = "nginxinc";
@@ -18,7 +18,7 @@
     then config.networking.hostName
     else "${config.networking.hostName}.${config.networking.domain}";
 in {
-  options.meenzen.services.nginx-exporter = {
+  options.meenzen.services.prometheus.exporters.nginx = {
     enable = lib.mkEnableOption "Enable Nginx Exporter";
     port = lib.mkOption {
       type = lib.types.int;

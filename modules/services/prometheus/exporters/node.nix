@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  cfg = config.meenzen.services.node-exporter;
+  cfg = config.meenzen.services.prometheus.exporters.node;
 
   dashboards = pkgs.fetchFromGitHub {
     owner = "rfmoz";
@@ -18,7 +18,7 @@
     then config.networking.hostName
     else "${config.networking.hostName}.${config.networking.domain}";
 in {
-  options.meenzen.services.node-exporter = {
+  options.meenzen.services.prometheus.exporters.node = {
     enable = lib.mkEnableOption "Enable Node Exporter";
     port = lib.mkOption {
       type = lib.types.int;
