@@ -14,9 +14,6 @@
       pkgs.msedit
       pkgs.okteta
 
-      #pkgs.jetbrains-toolbox
-      #pkgs.jetbrains.rust-rover
-      #pkgs.jetbrains.webstorm
       pkgs.jetbrains.rider
       pkgs.jetbrains.phpstorm
     ];

@@ -20,8 +20,6 @@ in {
       (pkgs.google-chrome.override {
         commandLineArgs = args;
       })
-
-      # microsoft-edge # edge is totally borked right now
     ];
 
     programs.chromium = {
