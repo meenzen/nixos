@@ -4,9 +4,9 @@
   pkgs,
   ...
 }: let
-  cfg = config.meenzen.desktop;
+  cfg = config.meenzen.profiles.desktop;
 in {
-  options.meenzen.desktop = {
+  options.meenzen.profiles.desktop = {
     enable = lib.mkEnableOption "Enable desktop related options";
     slim = lib.mkEnableOption "Only enable essential desktop options";
   };

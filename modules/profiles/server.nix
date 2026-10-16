@@ -5,9 +5,9 @@
   secrets,
   ...
 }: let
-  cfg = config.meenzen.server;
+  cfg = config.meenzen.profiles.server;
 in {
-  options.meenzen.server = {
+  options.meenzen.profiles.server = {
     enable = lib.mkEnableOption "Enable Server Mode";
   };
 

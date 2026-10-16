@@ -11,18 +11,18 @@ in {
     enable = lib.mkEnableOption "Enable OCI container support";
     autoPrune = lib.mkOption {
       type = lib.types.bool;
-      default = config.meenzen.server.enable;
+      default = config.meenzen.profiles.server.enable;
       description = "Enable automatic pruning.";
     };
     enableDockerCompat = lib.mkOption {
       type = lib.types.bool;
-      default = config.meenzen.server.enable;
+      default = config.meenzen.profiles.server.enable;
       description = "Enable docker compatibility mode for Podman.";
     };
     github = {
       enable = lib.mkOption {
         type = lib.types.bool;
-        default = config.meenzen.server.enable;
+        default = config.meenzen.profiles.server.enable;
         description = "Enable GitHub registry support.";
       };
       registry = lib.mkOption {

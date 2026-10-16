@@ -22,7 +22,7 @@
   system.stateVersion = "26.05";
 
   meenzen = {
-    server.enable = true;
+    profiles.server.enable = true;
     minecraft.enable = false;
     services.forgejo-runner = {
       enable = true;

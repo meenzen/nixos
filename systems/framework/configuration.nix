@@ -21,7 +21,7 @@
   meenzen = {
     secure-boot.enable = true;
     distributed-build.enable = false;
-    desktop.enable = true;
+    profiles.desktop.enable = true;
     plasma.tiling.enable = true;
     hyprland.enable = false;
     latest-kernel.enable = true;

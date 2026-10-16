@@ -34,7 +34,7 @@
   };
 
   meenzen = {
-    server.enable = true;
+    profiles.server.enable = true;
     backup.enable = true;
     hetzner.enable = true;
     grafana.enable = true;

@@ -76,7 +76,7 @@
   ];
 
   meenzen = {
-    desktop.enable = true;
+    profiles.desktop.enable = true;
     plasma.tiling.enable = true;
     remote-desktop.enable = true;
     hardware = {

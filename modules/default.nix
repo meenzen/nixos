@@ -11,7 +11,6 @@
     ./build-vm
     ./cleanup
     ./cloudflare-warp
-    ./desktop
     ./determinate-nix
     ./distributed-build
     ./docker
@@ -41,10 +40,10 @@
     ./plymouth
     ./postgresql
     ./printing
+    ./profiles
     ./remote-desktop
     ./secure-boot
     ./security
-    ./server
     ./services
     ./stylix
     ./sudo-rs
