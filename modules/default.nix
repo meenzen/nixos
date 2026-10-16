@@ -19,7 +19,6 @@
     ./fonts
     ./gaming
     ./hardware
-    ./hetzner
     ./home-manager
     ./hyprland
     ./latest-kernel

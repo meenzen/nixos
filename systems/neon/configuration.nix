@@ -34,9 +34,11 @@
   };
 
   meenzen = {
-    profiles.server.enable = true;
+    profiles = {
+      server.enable = true;
+      hetzner.enable = true;
+    };
     backup.enable = true;
-    hetzner.enable = true;
     postgresql = {
       enable = true;
       tuning = {
