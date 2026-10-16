@@ -13,11 +13,14 @@
     ./grafana
     ./lauti
     ./local-ai
+    ./loki
     ./mastodon
     ./matrix
     ./minecraft
     ./miniflux
     ./mnzn-website
+    ./prometheus
+    ./tempo
     ./tuwunel
     ./uptime-kuma
   ];

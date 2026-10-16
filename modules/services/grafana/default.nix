@@ -21,15 +21,6 @@ in {
     };
   };
 
-  imports = [
-    ./loki.nix
-    ./nginx-exporter.nix
-    ./node-exporter.nix
-    ./postgres-exporter.nix
-    ./prometheus.nix
-    ./tempo.nix
-  ];
-
   config = lib.mkIf cfg.enable {
     meenzen = {
       nginx.enable = true;

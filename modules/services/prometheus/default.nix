@@ -20,6 +20,8 @@ in {
     };
   };
 
+  imports = [./exporters];
+
   config = lib.mkIf cfg.enable {
     meenzen = {
       nginx.enable = true;
