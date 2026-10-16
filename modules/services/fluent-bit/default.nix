@@ -35,7 +35,7 @@ in {
       description = "Whether to use TLS for Loki connection";
     };
     lokiPort = lib.mkOption {
-      type = lib.types.int;
+      type = lib.types.port;
       default = 443;
       description = "Loki port for Fluent Bit";
     };

@@ -21,7 +21,7 @@ in {
       description = "The Fortinet VPN host to connect to.";
     };
     port = lib.mkOption {
-      type = lib.types.int;
+      type = lib.types.port;
       default = 443;
       description = "The Fortinet VPN port to connect to.";
     };

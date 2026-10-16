@@ -28,7 +28,7 @@ in {
   options.meenzen.services.prometheus.exporters.postgres = {
     enable = lib.mkEnableOption "Enable Postgres Exporter";
     port = lib.mkOption {
-      type = lib.types.int;
+      type = lib.types.port;
       default = 9187;
       description = "Local port for Postgres Exporter";
     };

@@ -8,17 +8,17 @@ in {
   options.meenzen.services.tempo = {
     enable = lib.mkEnableOption "Enable Tempo";
     port = lib.mkOption {
-      type = lib.types.int;
+      type = lib.types.port;
       default = 3200;
       description = "Local Tempo port";
     };
     grpc-port = lib.mkOption {
-      type = lib.types.int;
+      type = lib.types.port;
       default = 3201;
       description = "Local Tempo gRPC ingest port";
     };
     otlp-port = lib.mkOption {
-      type = lib.types.int;
+      type = lib.types.port;
       default = 4317;
       description = "Local Tempo OTLP ingest port";
     };

@@ -30,14 +30,14 @@ in {
       description = "Domain for the FLiP Minecraft server";
     };
     voiceChatPort = lib.mkOption {
-      type = lib.types.int;
+      type = lib.types.port;
       default = 24454;
       description = ''
         The port for the Simple Voice Chat server.
       '';
     };
     bedrockPort = lib.mkOption {
-      type = lib.types.int;
+      type = lib.types.port;
       default = 19132;
       description = ''
         The port for the GeyserMC Bedrock proxy.

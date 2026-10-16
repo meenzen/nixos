@@ -9,7 +9,7 @@ in {
   options.meenzen.services.attic = {
     enable = lib.mkEnableOption "Enable Attic";
     port = lib.mkOption {
-      type = lib.types.int;
+      type = lib.types.port;
       default = 8082;
       description = "Local port for Attic";
     };

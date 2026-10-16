@@ -15,7 +15,7 @@ in {
       description = "Domain for Grafana";
     };
     port = lib.mkOption {
-      type = lib.types.int;
+      type = lib.types.port;
       default = 3000;
       description = "Local port for Grafana";
     };

@@ -15,7 +15,7 @@ in {
       description = "Domain for Collabora";
     };
     port = lib.mkOption {
-      type = lib.types.int;
+      type = lib.types.port;
       default = 9980;
       description = "Local port for Collabora";
     };

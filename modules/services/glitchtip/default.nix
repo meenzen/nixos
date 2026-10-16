@@ -52,7 +52,7 @@ in {
       description = "Domain for GlitchTip";
     };
     port = lib.mkOption {
-      type = lib.types.int;
+      type = lib.types.port;
       default = 8095;
       description = "Local port for GlitchTip";
     };

@@ -35,7 +35,7 @@ in {
       description = "Additional domains for Uptime Kuma";
     };
     port = lib.mkOption {
-      type = lib.types.int;
+      type = lib.types.port;
       default = 8094;
       description = "Local port for Uptime Kuma";
     };

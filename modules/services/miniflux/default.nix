@@ -14,7 +14,7 @@ in {
       description = "Domain for Miniflux";
     };
     port = lib.mkOption {
-      type = lib.types.int;
+      type = lib.types.port;
       default = 8085;
       description = "Local port for Miniflux";
     };

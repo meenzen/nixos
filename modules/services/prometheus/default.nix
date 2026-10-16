@@ -14,7 +14,7 @@ in {
       description = "Domain for Prometheus";
     };
     port = lib.mkOption {
-      type = lib.types.int;
+      type = lib.types.port;
       default = 9090;
       description = "Local port for Prometheus";
     };

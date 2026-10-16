@@ -9,7 +9,7 @@ in {
   options.meenzen.services.matrix.draupnir = {
     enable = lib.mkEnableOption "Enable Draupnir";
     port = lib.mkOption {
-      type = lib.types.int;
+      type = lib.types.port;
       default = 8010;
       description = "Local port for Draupnir web interface.";
     };

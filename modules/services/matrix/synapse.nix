@@ -137,7 +137,7 @@ in {
       description = "Matrix Domain";
     };
     port = lib.mkOption {
-      type = lib.types.int;
+      type = lib.types.port;
       default = 8008;
       description = "Local port for Matrix Server";
     };

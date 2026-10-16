@@ -14,7 +14,7 @@ in {
       description = "Domain for Tuwunel";
     };
     port = lib.mkOption {
-      type = lib.types.int;
+      type = lib.types.port;
       default = 6167;
       description = "Local port for Tuwunel";
     };

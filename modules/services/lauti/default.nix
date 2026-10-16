@@ -14,7 +14,7 @@ in {
       description = "Domain for LAUTI";
     };
     port = lib.mkOption {
-      type = lib.types.int;
+      type = lib.types.port;
       default = 8096;
       description = "Local port for LAUTI";
     };

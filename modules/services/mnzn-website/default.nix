@@ -16,7 +16,7 @@ in {
       description = "Domain for mnzn.dev Website";
     };
     port = lib.mkOption {
-      type = lib.types.int;
+      type = lib.types.port;
       default = 8093;
       description = "Local port for mnzn.dev Website";
     };

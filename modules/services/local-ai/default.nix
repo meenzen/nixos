@@ -9,12 +9,12 @@ in {
   options.meenzen.services.local-ai = {
     enable = lib.mkEnableOption "Enable Local AI";
     ollamaPort = lib.mkOption {
-      type = lib.types.int;
+      type = lib.types.port;
       default = 11434;
       description = "Port for the Ollama API";
     };
     uiPort = lib.mkOption {
-      type = lib.types.int;
+      type = lib.types.port;
       default = 8080;
       description = "Port for the Local AI web UI";
     };

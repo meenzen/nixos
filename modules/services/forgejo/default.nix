@@ -15,7 +15,7 @@ in {
       description = "Domain for Forgejo";
     };
     port = lib.mkOption {
-      type = lib.types.int;
+      type = lib.types.port;
       default = 8086;
       description = "Local port for Forgejo";
     };

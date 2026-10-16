@@ -21,7 +21,7 @@ in {
   options.meenzen.services.prometheus.exporters.nginx = {
     enable = lib.mkEnableOption "Enable Nginx Exporter";
     port = lib.mkOption {
-      type = lib.types.int;
+      type = lib.types.port;
       default = 9113;
       description = "Local port for Nginx Exporter";
     };

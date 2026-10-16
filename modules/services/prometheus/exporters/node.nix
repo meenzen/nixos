@@ -21,7 +21,7 @@ in {
   options.meenzen.services.prometheus.exporters.node = {
     enable = lib.mkEnableOption "Enable Node Exporter";
     port = lib.mkOption {
-      type = lib.types.int;
+      type = lib.types.port;
       default = 9100;
       description = "Local port for Node Exporter";
     };

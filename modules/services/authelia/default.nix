@@ -23,7 +23,7 @@ in {
       description = "Cookies domain for Authelia";
     };
     port = lib.mkOption {
-      type = lib.types.int;
+      type = lib.types.port;
       default = 9091;
       description = "Local port for Authelia";
     };

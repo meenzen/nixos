@@ -14,12 +14,12 @@ in {
       description = "Domain for Loki";
     };
     port = lib.mkOption {
-      type = lib.types.int;
+      type = lib.types.port;
       default = 3100;
       description = "Local port for Loki";
     };
     grpc-port = lib.mkOption {
-      type = lib.types.int;
+      type = lib.types.port;
       default = 3101;
       description = "Local port for Loki";
     };
