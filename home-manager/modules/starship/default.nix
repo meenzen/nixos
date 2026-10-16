@@ -1,6 +1,6 @@
 {
-  lib,
   config,
+  lib,
   ...
 }: {
   options.meenzen.starship.enable = lib.mkEnableOption "the Starship prompt";

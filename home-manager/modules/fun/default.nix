@@ -1,6 +1,6 @@
 {
-  lib,
   config,
+  lib,
   pkgs,
   ...
 }: {
@@ -13,7 +13,6 @@
     home.packages = [
       pkgs.cowsay
       pkgs.ponysay
-      pkgs.fastfetch
       pkgs.asciiquarium
       pkgs.clolcat
       pkgs.cmatrix
@@ -39,5 +38,7 @@
         }
       )
     ];
+
+    programs.fastfetch.enable = true;
   };
 }

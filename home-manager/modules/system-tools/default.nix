@@ -1,6 +1,6 @@
 {
-  lib,
   config,
+  lib,
   pkgs,
   ...
 }: {
@@ -19,9 +19,6 @@
       pkgs.usbutils # lsusb
       pkgs.cyme # better lsusb
       pkgs.smartmontools # smartctl
-
-      pkgs.htop
-      pkgs.btop
       pkgs.iotop-c
       pkgs.iftop
       pkgs.duf
@@ -46,14 +43,18 @@
       pkgs.gawk
       pkgs.gnupg
       pkgs.dos2unix
-
-      pkgs.nnn # terminal file manager
-      pkgs.ripgrep # grep alternative
-      pkgs.jq # json processor
       pkgs.yq-go # yaml processor
       pkgs.eza # ls alternative
       pkgs.fzf # fuzzy finder
-      pkgs.bat # cat alternative
     ];
+
+    programs = {
+      bat.enable = true; # cat alternative
+      btop.enable = true;
+      htop.enable = true;
+      jq.enable = true; # json processor
+      nnn.enable = true; # terminal file manager
+      ripgrep.enable = true; # grep alternative
+    };
   };
 }

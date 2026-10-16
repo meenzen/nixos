@@ -1,6 +1,6 @@
 {
-  lib,
   config,
+  lib,
   ...
 }: {
   options.meenzen.cleanup.enable = lib.mkEnableOption "automatic garbage collection of the user profile";

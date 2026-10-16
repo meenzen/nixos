@@ -1,7 +1,7 @@
 {
   config,
-  pkgs,
   lib,
+  pkgs,
   ...
 }: let
   dotnet = pkgs.dotnetCorePackages.combinePackages [
@@ -47,7 +47,6 @@ in {
         pkgs.hyperfine
         pkgs.glow
         pkgs.tokei
-        pkgs.difftastic
         pkgs.terraform
         pkgs.gh
         pkgs.glab

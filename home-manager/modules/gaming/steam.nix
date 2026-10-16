@@ -1,7 +1,7 @@
 {
   config,
-  osConfig,
   lib,
+  osConfig,
   ...
 }: {
   config = lib.mkIf (config.meenzen.gaming.enable && osConfig.programs.steam.enable) {

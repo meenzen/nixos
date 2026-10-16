@@ -1,7 +1,7 @@
 {
   config,
-  osConfig,
   lib,
+  osConfig,
   ...
 }: {
   options.meenzen.virt-manager.enable =

@@ -1,6 +1,6 @@
 {
-  lib,
   config,
+  lib,
   ...
 }: let
   cfg = config.meenzen.plasma.windowRules;
