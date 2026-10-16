@@ -34,9 +34,15 @@ in {
       };
     };
 
-    meenzen.auto-upgrade = {
-      enable = true;
-      allowReboot = true;
+    meenzen = {
+      auto-upgrade = {
+        enable = true;
+        allowReboot = true;
+      };
+      services.attic = {
+        client.enable = true;
+        substituters.enable = true;
+      };
     };
   };
 }

@@ -27,6 +27,10 @@ in {
       fish.default = !cfg.slim;
       hardware.logitech.enable = !cfg.slim;
       hardware.uhk.enable = !cfg.slim;
+      services.attic = {
+        client.enable = true;
+        substituters.enable = true;
+      };
     };
 
     # KDE Partition Manager

@@ -28,7 +28,7 @@ in {
   };
 
   imports = [
-    ./scripts.nix
+    ./client.nix
     ./substituters.nix
   ];
 
