@@ -7,6 +7,9 @@
   options.meenzen.fun.enable = lib.mkEnableOption "terminal toys";
 
   config = lib.mkIf config.meenzen.fun.enable {
+    # Ansible uses cowsay for its output when it's installed
+    home.sessionVariables.ANSIBLE_NOCOWS = "1";
+
     home.packages = [
       pkgs.cowsay
       pkgs.ponysay

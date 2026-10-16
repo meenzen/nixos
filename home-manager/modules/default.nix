@@ -9,6 +9,7 @@
     ./fun
     ./gaming
     ./git
+    ./home-manager
     ./hyprland
     ./keepass
     ./media-player

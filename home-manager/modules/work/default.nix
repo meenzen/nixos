@@ -43,6 +43,8 @@ in {
   options.meenzen.work.enable = lib.mkEnableOption "work SSH hosts";
 
   config = lib.mkIf config.meenzen.work.enable {
+    home.sessionVariables.GITLAB_HOST = "https://git.human.de";
+
     # cloudflared is required for tunneling through Cloudflare Zero Trust
     home.packages = [pkgs.cloudflared];
 
