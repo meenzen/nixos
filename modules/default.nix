@@ -51,6 +51,5 @@
     ./workarounds
     ./yubikey
     ./zfs
-    ./zsh
   ];
 }

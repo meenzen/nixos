@@ -2,7 +2,6 @@
   config,
   inputs,
   lib,
-  pkgs,
   ...
 }: let
   aliases = {
@@ -34,35 +33,6 @@ in {
           enable = true;
           enableCompletion = true;
           shellAliases = aliases;
-        };
-
-        zsh = {
-          enable = true;
-          autosuggestion.enable = true;
-          enableCompletion = true;
-          syntaxHighlighting = {
-            enable = true;
-          };
-          oh-my-zsh = {
-            plugins = ["git" "sudo" "docker"];
-          };
-          shellAliases = aliases;
-          plugins = [
-            {
-              name = "vi-mode";
-              src = pkgs.zsh-vi-mode;
-              file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
-            }
-          ];
-          initContent = ''
-            zstyle ':completion:*' menu select
-
-            bindkey "^[[1;5C" forward-word
-            bindkey "^[[1;5D" backward-word
-            bindkey "^H" backward-kill-word
-            bindkey "^[[OH" beginning-of-line
-            bindkey "^[[OF" end-of-line
-          '';
         };
 
         fish = {

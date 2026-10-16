@@ -18,7 +18,6 @@ in {
       home-manager.enable = true;
       stylix.enable = true;
       yubikey.enable = true;
-      zsh.enable = true;
       fish.enable = true;
       fish.default = true;
       hardware.logitech.enable = true;
