@@ -23,10 +23,10 @@ stdenv.mkDerivation rec {
     runHook postInstall
   '';
 
-  meta = with lib; {
+  meta = {
     homepage = "https://cloudfleet.ai/";
     description = "Cloudfleet CLI";
-    platforms = platforms.linux;
-    license = licenses.unfree;
+    platforms = lib.platforms.linux;
+    license = lib.licenses.unfree;
   };
 }

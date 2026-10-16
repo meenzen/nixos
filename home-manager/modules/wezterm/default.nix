@@ -1,6 +1,6 @@
 {
-  lib,
   config,
+  lib,
   ...
 }: {
   options.meenzen.wezterm.enable = lib.mkEnableOption "terminal emulators";

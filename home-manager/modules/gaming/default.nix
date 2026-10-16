@@ -1,6 +1,6 @@
 {
-  lib,
   config,
+  lib,
   osConfig,
   pkgs,
   ...
@@ -21,11 +21,11 @@
 
     programs.obs-studio = {
       enable = true;
-      plugins = with pkgs.obs-studio-plugins; [
-        obs-vaapi
-        obs-vkcapture
-        obs-pipewire-audio-capture
-        input-overlay
+      plugins = [
+        pkgs.obs-studio-plugins.obs-vaapi
+        pkgs.obs-studio-plugins.obs-vkcapture
+        pkgs.obs-studio-plugins.obs-pipewire-audio-capture
+        pkgs.obs-studio-plugins.input-overlay
       ];
     };
   };
