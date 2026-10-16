@@ -29,6 +29,7 @@ in {
       postgresql = {
         enable = true;
         enableLocalNetwork = true;
+        passwordFiles.${serviceName} = config.age.secrets.cheshbotPostgresPassword.path;
       };
     };
 
@@ -97,19 +98,5 @@ in {
       ];
       ensureDatabases = [serviceName];
     };
-
-    # workaround until https://github.com/NixOS/nixpkgs/pull/326306 is merged
-    systemd.services.postgresql-setup.postStart = let
-      password_file_path = config.age.secrets.cheshbotPostgresPassword.path;
-    in ''
-      psql -tA <<'EOF'
-        DO $$
-        DECLARE password TEXT;
-        BEGIN
-          password := trim(both from replace(pg_read_file('${password_file_path}'), E'\n', '''));
-          EXECUTE format('ALTER ROLE ${serviceName} WITH PASSWORD '''%s''';', password);
-        END $$;
-      EOF
-    '';
   };
 }

@@ -46,6 +46,12 @@ in {
     enable = lib.mkEnableOption "Enable PostgreSQL";
     enableMajorUpgrade = lib.mkEnableOption "Enable Major Upgrade";
     enableLocalNetwork = lib.mkEnableOption "Allow password-based authentication for private networks";
+    passwordFiles = lib.mkOption {
+      type = lib.types.attrsOf lib.types.path;
+      default = {};
+      example = lib.literalExpression ''{ myapp = config.age.secrets.myappPostgresPassword.path; }'';
+      description = "Files containing the password for each role, set on every start. The files must be readable by the postgres user.";
+    };
     tuning = {
       memoryGB = lib.mkOption {
         type = lib.types.nullOr lib.types.ints.positive;
@@ -108,6 +114,23 @@ in {
         iptables -A nixos-fw -p tcp -s ${network} --dport 5432 -j nixos-fw-accept
       '')
       privateNetworks);
+
+    # Replace with ensureUsers.*.passwordFile once https://github.com/NixOS/nixpkgs/pull/326306 is merged
+    systemd.services.postgresql-setup.postStart = let
+      setPassword = role: file: ''
+        password := trim(both from replace(pg_read_file('${file}'), E'\n', '''));
+        EXECUTE format('ALTER ROLE %I WITH PASSWORD %L', '${role}', password);
+      '';
+    in
+      lib.mkIf (cfg.passwordFiles != {}) ''
+        psql -tA <<'EOF'
+        DO $$
+        DECLARE password TEXT;
+        BEGIN
+        ${lib.concatStrings (lib.mapAttrsToList setPassword cfg.passwordFiles)}
+        END $$;
+        EOF
+      '';
 
     # Raise the open file limit for the PostgreSQL service
     # This is required with io_uring, otherwise 'could not setup io_uring queue: Too many open files' errors may occur
