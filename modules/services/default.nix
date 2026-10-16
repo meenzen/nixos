@@ -3,6 +3,7 @@
     ./acme-mnzn
     ./anubis
     ./authelia
+    ./cheshbot
     ./fluent-bit
     ./forgejo
     ./forgejo-runner

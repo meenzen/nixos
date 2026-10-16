@@ -53,7 +53,6 @@
     };
     matrix.enable = true;
     collabora.enable = true;
-    cheshbot.enable = true;
     attic.enable = true;
     distributed-build.enableHost = true;
     nginx = {
@@ -69,6 +68,7 @@
       miniflux.enable = true;
       forgejo.enable = true;
       authelia.enable = true;
+      cheshbot.enable = true;
       mnzn-website.enable = true;
       uptime-kuma.enable = true;
       minecraft.enable = true;

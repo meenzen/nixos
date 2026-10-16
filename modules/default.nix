@@ -10,7 +10,6 @@
     ./beeper
     ./bootloader
     ./build-vm
-    ./cheshbot
     ./cleanup
     ./cloudflare-warp
     ./collabora

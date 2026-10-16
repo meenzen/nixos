@@ -5,10 +5,10 @@
   secrets,
   ...
 }: let
-  cfg = config.meenzen.cheshbot;
+  cfg = config.meenzen.services.cheshbot;
   serviceName = "cheshbot";
 in {
-  options.meenzen.cheshbot = {
+  options.meenzen.services.cheshbot = {
     enable = lib.mkEnableOption "Enable CheshBot";
     domain = lib.mkOption {
       type = lib.types.str;
