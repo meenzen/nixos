@@ -1,9 +1,9 @@
 {
+  config,
   lib,
-  osConfig,
   ...
 }: {
-  config = lib.mkIf osConfig.meenzen.plasma.enable {
+  config = lib.mkIf config.meenzen.plasma.enable {
     programs.plasma.fonts = {
       general = {
         family = "Noto Sans";

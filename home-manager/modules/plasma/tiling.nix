@@ -1,12 +1,12 @@
 {
-  osConfig,
+  config,
   lib,
   ...
 }: let
   gap = 5;
 in {
   # adapted from https://github.com/nix-community/plasma-manager/pull/420/files#diff-6ff781eeeded28d1f35e8a6e5ecfb6325bff16c291f175d0d7a3490209b9f370
-  config = lib.mkIf osConfig.meenzen.plasma.tiling.enable {
+  config = lib.mkIf config.meenzen.plasma.tiling.enable {
     programs.plasma = {
       shortcuts = {
         plasmashell = {

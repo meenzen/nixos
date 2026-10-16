@@ -1,17 +1,26 @@
-{pkgs, ...}: {
-  home.packages = [
-    pkgs.onedrive
-    pkgs.motrix # download manager
-  ];
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}: {
+  options.meenzen.desktop.enable = lib.mkEnableOption "cloud sync, mail and download apps";
 
-  services.nextcloud-client.enable = true;
-  # The gamescope session breaks graphical services, so don't start them without a display.
-  systemd.user.services.nextcloud-client.Unit.ConditionEnvironment = ["|DISPLAY" "|WAYLAND_DISPLAY"];
+  config = lib.mkIf config.meenzen.desktop.enable {
+    home.packages = [
+      pkgs.onedrive
+      pkgs.motrix # download manager
+    ];
 
-  programs.thunderbird = {
-    enable = true;
-    profiles.default = {
-      isDefault = true;
+    services.nextcloud-client.enable = true;
+    # The gamescope session breaks graphical services, so don't start them without a display.
+    systemd.user.services.nextcloud-client.Unit.ConditionEnvironment = ["|DISPLAY" "|WAYLAND_DISPLAY"];
+
+    programs.thunderbird = {
+      enable = true;
+      profiles.default = {
+        isDefault = true;
+      };
     };
   };
 }

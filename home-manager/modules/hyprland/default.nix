@@ -5,7 +5,11 @@
   pkgs,
   ...
 }: {
-  config = lib.mkIf osConfig.meenzen.hyprland.enable {
+  options.meenzen.hyprland.enable =
+    lib.mkEnableOption "Hyprland configuration"
+    // {default = osConfig.meenzen.hyprland.enable;};
+
+  config = lib.mkIf config.meenzen.hyprland.enable {
     wayland.windowManager.hyprland = {
       enable = true;
 

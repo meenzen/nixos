@@ -1,9 +1,18 @@
-{pkgs, ...}: {
-  home.packages = [
-    pkgs.vlc
-    pkgs.strawberry
-    pkgs.pear-desktop
-  ];
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}: {
+  options.meenzen.media-player.enable = lib.mkEnableOption "media players";
 
-  programs.mpv.enable = true;
+  config = lib.mkIf config.meenzen.media-player.enable {
+    home.packages = [
+      pkgs.vlc
+      pkgs.strawberry
+      pkgs.pear-desktop
+    ];
+
+    programs.mpv.enable = true;
+  };
 }

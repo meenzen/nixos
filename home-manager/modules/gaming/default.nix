@@ -1,20 +1,29 @@
-{pkgs, ...}: {
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     ./steam.nix
   ];
 
-  home.packages = [
-    pkgs.prismlauncher
-    #pkgs.chiaki-ng
-  ];
+  options.meenzen.gaming.enable = lib.mkEnableOption "gaming apps";
 
-  programs.obs-studio = {
-    enable = true;
-    plugins = with pkgs.obs-studio-plugins; [
-      obs-vaapi
-      #obs-vkcapture
-      obs-pipewire-audio-capture
-      input-overlay
+  config = lib.mkIf config.meenzen.gaming.enable {
+    home.packages = [
+      pkgs.prismlauncher
+      #pkgs.chiaki-ng
     ];
+
+    programs.obs-studio = {
+      enable = true;
+      plugins = with pkgs.obs-studio-plugins; [
+        obs-vaapi
+        #obs-vkcapture
+        obs-pipewire-audio-capture
+        input-overlay
+      ];
+    };
   };
 }

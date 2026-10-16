@@ -1,4 +1,9 @@
-{pkgs, ...}: let
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}: let
   args = [
     "--enable-features=UseOzonePlatform,VaapiVideoDecodeLinuxGL"
     "--ozone-platform=wayland"
@@ -6,32 +11,36 @@
     "--enable-zero-copy"
   ];
 in {
-  home.packages = [
-    pkgs.firefox
+  options.meenzen.browsers.enable = lib.mkEnableOption "web browsers";
 
-    (pkgs.google-chrome.override {
-      commandLineArgs = args;
-    })
+  config = lib.mkIf config.meenzen.browsers.enable {
+    home.packages = [
+      pkgs.firefox
 
-    # microsoft-edge # edge is totally borked right now
-  ];
+      (pkgs.google-chrome.override {
+        commandLineArgs = args;
+      })
 
-  programs.chromium = {
-    enable = true;
-    package = pkgs.brave-origin.override {
-      commandLineArgs = args;
-    };
-    extensions = [
-      # Bypass Paywalls Chrome Clean
-      {
-        id = "lkbebcjgcmobigpeffafkodonchffocl";
-        updateUrl = "https://gitlab.com/magnolia1234/bypass-paywalls-chrome-clean/-/raw/master/updates.xml";
-      }
-      # AdNauseam
-      {
-        id = "dkoaabhijcomjinndlgbmfnmnjnmdeeb";
-        updateUrl = "https://rednoise.org/adnauseam/updates.xml";
-      }
+      # microsoft-edge # edge is totally borked right now
     ];
+
+    programs.chromium = {
+      enable = true;
+      package = pkgs.brave-origin.override {
+        commandLineArgs = args;
+      };
+      extensions = [
+        # Bypass Paywalls Chrome Clean
+        {
+          id = "lkbebcjgcmobigpeffafkodonchffocl";
+          updateUrl = "https://gitlab.com/magnolia1234/bypass-paywalls-chrome-clean/-/raw/master/updates.xml";
+        }
+        # AdNauseam
+        {
+          id = "dkoaabhijcomjinndlgbmfnmnjnmdeeb";
+          updateUrl = "https://rednoise.org/adnauseam/updates.xml";
+        }
+      ];
+    };
   };
 }

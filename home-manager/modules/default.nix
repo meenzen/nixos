@@ -1,0 +1,26 @@
+{
+  imports = [
+    ./browsers
+    ./cleanup
+    ./code-editors
+    ./communication
+    ./desktop
+    ./dev-tools
+    ./fun
+    ./gaming
+    ./git
+    ./hyprland
+    ./keepass
+    ./media-player
+    ./neovim
+    ./nix-tools
+    ./office
+    ./plasma
+    ./shells
+    ./ssh
+    ./starship
+    ./system-tools
+    ./virt-manager
+    ./wezterm
+  ];
+}

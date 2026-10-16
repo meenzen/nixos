@@ -1,4 +1,9 @@
-{inputs, ...}: {
+{
+  lib,
+  config,
+  inputs,
+  ...
+}: {
   imports = [
     inputs.nixvim.homeModules.nixvim
     ./completions.nix
@@ -14,11 +19,15 @@
     ./ui.nix
   ];
 
-  programs.nixvim = {
-    enable = true;
-    defaultEditor = true;
+  options.meenzen.neovim.enable = lib.mkEnableOption "Neovim";
 
-    # Build plugins and LSP servers from the system's nixpkgs instead of nixvim's own pinned instance
-    nixpkgs.useGlobalPackages = true;
+  config = lib.mkIf config.meenzen.neovim.enable {
+    programs.nixvim = {
+      enable = true;
+      defaultEditor = true;
+
+      # Build plugins and LSP servers from the system's nixpkgs instead of nixvim's own pinned instance
+      nixpkgs.useGlobalPackages = true;
+    };
   };
 }

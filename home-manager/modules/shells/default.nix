@@ -1,4 +1,9 @@
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   aliases = {
     nano = "nvim";
     vi = "nvim";
@@ -12,8 +17,10 @@ let
     neofetch = "fastfetch";
     fuck = "f";
   };
-in
-  {pkgs, ...}: {
+in {
+  options.meenzen.shells.enable = lib.mkEnableOption "shell configuration";
+
+  config = lib.mkIf config.meenzen.shells.enable {
     programs = {
       bash = {
         enable = true;
@@ -84,4 +91,5 @@ in
       # better pay-respects results
       pkgs.nix-index
     ];
-  }
+  };
+}

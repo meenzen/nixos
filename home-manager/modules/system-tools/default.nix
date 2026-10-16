@@ -1,50 +1,59 @@
-{pkgs, ...}: {
-  home.packages = [
-    pkgs.strace
-    pkgs.ltrace
-    pkgs.lsof
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}: {
+  options.meenzen.system-tools.enable = lib.mkEnableOption "system tools";
 
-    pkgs.sysstat
-    pkgs.lm_sensors # sensors
-    pkgs.ethtool
-    pkgs.pciutils # lspci
-    pkgs.usbutils # lsusb
-    pkgs.cyme # better lsusb
-    pkgs.smartmontools # smartctl
+  config = lib.mkIf config.meenzen.system-tools.enable {
+    home.packages = [
+      pkgs.strace
+      pkgs.ltrace
+      pkgs.lsof
 
-    pkgs.htop
-    pkgs.btop
-    pkgs.iotop-c
-    pkgs.iftop
-    pkgs.duf
-    pkgs.ncdu
+      pkgs.sysstat
+      pkgs.lm_sensors # sensors
+      pkgs.ethtool
+      pkgs.pciutils # lspci
+      pkgs.usbutils # lsusb
+      pkgs.cyme # better lsusb
+      pkgs.smartmontools # smartctl
 
-    # gpu related tools
-    pkgs.mesa-demos
-    pkgs.vulkan-tools
-    pkgs.gpu-viewer
+      pkgs.htop
+      pkgs.btop
+      pkgs.iotop-c
+      pkgs.iftop
+      pkgs.duf
+      pkgs.ncdu
 
-    pkgs.zip
-    pkgs.xz
-    pkgs.unzip
-    pkgs.p7zip
-    pkgs.zstd
+      # gpu related tools
+      pkgs.mesa-demos
+      pkgs.vulkan-tools
+      pkgs.gpu-viewer
 
-    pkgs.file
-    pkgs.which
-    pkgs.tree
-    pkgs.gnused
-    pkgs.gnutar
-    pkgs.gawk
-    pkgs.gnupg
-    pkgs.dos2unix
+      pkgs.zip
+      pkgs.xz
+      pkgs.unzip
+      pkgs.p7zip
+      pkgs.zstd
 
-    pkgs.nnn # terminal file manager
-    pkgs.ripgrep # grep alternative
-    pkgs.jq # json processor
-    pkgs.yq-go # yaml processor
-    pkgs.eza # ls alternative
-    pkgs.fzf # fuzzy finder
-    pkgs.bat # cat alternative
-  ];
+      pkgs.file
+      pkgs.which
+      pkgs.tree
+      pkgs.gnused
+      pkgs.gnutar
+      pkgs.gawk
+      pkgs.gnupg
+      pkgs.dos2unix
+
+      pkgs.nnn # terminal file manager
+      pkgs.ripgrep # grep alternative
+      pkgs.jq # json processor
+      pkgs.yq-go # yaml processor
+      pkgs.eza # ls alternative
+      pkgs.fzf # fuzzy finder
+      pkgs.bat # cat alternative
+    ];
+  };
 }

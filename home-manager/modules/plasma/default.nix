@@ -1,4 +1,5 @@
 {
+  config,
   lib,
   pkgs,
   osConfig,
@@ -12,7 +13,16 @@
     ./window-rules.nix
   ];
 
-  config = lib.mkIf osConfig.meenzen.plasma.enable {
+  options.meenzen.plasma = {
+    enable =
+      lib.mkEnableOption "Plasma configuration"
+      // {default = osConfig.meenzen.plasma.enable;};
+    tiling.enable =
+      lib.mkEnableOption "Plasma tiling shortcuts and rules"
+      // {default = osConfig.meenzen.plasma.tiling.enable;};
+  };
+
+  config = lib.mkIf config.meenzen.plasma.enable {
     services.gpg-agent.pinentry.package = pkgs.pinentry-qt;
 
     # reference: https://github.com/pjones/plasma-manager/tree/trunk/modules

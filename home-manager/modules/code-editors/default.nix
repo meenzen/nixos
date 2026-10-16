@@ -1,63 +1,72 @@
-{pkgs, ...}: {
-  home.packages = [
-    # Editors
-    pkgs.vscode
-    pkgs.kdePackages.kate
-    pkgs.msedit
-    pkgs.okteta
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}: {
+  options.meenzen.code-editors.enable = lib.mkEnableOption "code editors and IDEs";
 
-    #pkgs.jetbrains-toolbox
-    #pkgs.jetbrains.rust-rover
-    #pkgs.jetbrains.webstorm
-    pkgs.jetbrains.rider
-    pkgs.jetbrains.phpstorm
-  ];
+  config = lib.mkIf config.meenzen.code-editors.enable {
+    home.packages = [
+      # Editors
+      pkgs.vscode
+      pkgs.kdePackages.kate
+      pkgs.msedit
+      pkgs.okteta
 
-  home.file.".ideavimrc".text = ''
-    " .ideavimrc is a configuration file for IdeaVim plugin. It uses
-    "   the same commands as the original .vimrc configuration.
-    " You can find a list of commands here: https://jb.gg/h38q75
-    " Find more examples here: https://jb.gg/share-ideavimrc
+      #pkgs.jetbrains-toolbox
+      #pkgs.jetbrains.rust-rover
+      #pkgs.jetbrains.webstorm
+      pkgs.jetbrains.rider
+      pkgs.jetbrains.phpstorm
+    ];
 
-    "" -- Suggested options --
-    " Show a few lines of context around the cursor. Note that this makes the
-    " text scroll if you mouse-click near the start or end of the window.
-    set scrolloff=5
+    home.file.".ideavimrc".text = ''
+      " .ideavimrc is a configuration file for IdeaVim plugin. It uses
+      "   the same commands as the original .vimrc configuration.
+      " You can find a list of commands here: https://jb.gg/h38q75
+      " Find more examples here: https://jb.gg/share-ideavimrc
 
-    " Do incremental searching.
-    set incsearch
+      "" -- Suggested options --
+      " Show a few lines of context around the cursor. Note that this makes the
+      " text scroll if you mouse-click near the start or end of the window.
+      set scrolloff=5
 
-    " J - Join things.
-    set ideajoin
+      " Do incremental searching.
+      set incsearch
 
-    " Case-insensitive search.
-    set ignorecase smartcase
+      " J - Join things.
+      set ideajoin
 
-    " Don't use Ex mode, use Q for formatting.
-    map Q gq
+      " Case-insensitive search.
+      set ignorecase smartcase
 
-    " Use relative line numbers.
-    set relativenumber number
+      " Don't use Ex mode, use Q for formatting.
+      map Q gq
 
-    " --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
+      " Use relative line numbers.
+      set relativenumber number
 
-    " Highlight copied text
-    Plug 'machakann/vim-highlightedyank'
-    " Commentary plugin
-    Plug 'tpope/vim-commentary'
+      " --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
 
-    " Quickscope plugin (install IdeaVim-Quickscope in Settings | Plugins)
-    set quickscope
-    let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+      " Highlight copied text
+      Plug 'machakann/vim-highlightedyank'
+      " Commentary plugin
+      Plug 'tpope/vim-commentary'
 
-    "" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
-    "" Map \r to the Reformat Code action
-    map \r <Action>(ReformatCode)
+      " Quickscope plugin (install IdeaVim-Quickscope in Settings | Plugins)
+      set quickscope
+      let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
-    "" Map <leader>d to start debug
-    "map <leader>d <Action>(Debug)
+      "" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
+      "" Map \r to the Reformat Code action
+      map \r <Action>(ReformatCode)
 
-    "" Map \b to toggle the breakpoint on the current line
-    map \b <Action>(ToggleLineBreakpoint)
-  '';
+      "" Map <leader>d to start debug
+      "map <leader>d <Action>(Debug)
+
+      "" Map \b to toggle the breakpoint on the current line
+      map \b <Action>(ToggleLineBreakpoint)
+    '';
+  };
 }

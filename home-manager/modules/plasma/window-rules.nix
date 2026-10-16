@@ -1,7 +1,6 @@
 {
   lib,
   config,
-  osConfig,
   ...
 }: let
   cfg = config.meenzen.plasma.windowRules;
@@ -38,7 +37,7 @@ in {
     '';
   };
 
-  config = lib.mkIf osConfig.meenzen.plasma.enable {
+  config = lib.mkIf config.meenzen.plasma.enable {
     programs.plasma.configFile.kwinrulesrc =
       {
         General = {
