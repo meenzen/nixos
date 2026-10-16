@@ -5,7 +5,7 @@
   ...
 }: {
   # Allow installing unfree packages
-  nixpkgs.config.allowUnfree = lib.mkForce true;
+  nixpkgs.config.allowUnfree = true;
 
   nix = {
     settings = {
