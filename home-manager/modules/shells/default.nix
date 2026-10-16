@@ -8,7 +8,6 @@
     nano = "nvim";
     vi = "nvim";
     vim = "nvim";
-    ls = "exa";
     top = "htop";
     grep = "rg";
     cat = "bat";

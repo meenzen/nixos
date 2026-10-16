@@ -44,13 +44,13 @@
       pkgs.gnupg
       pkgs.dos2unix
       pkgs.yq-go # yaml processor
-      pkgs.eza # ls alternative
       pkgs.fzf # fuzzy finder
     ];
 
     programs = {
       bat.enable = true; # cat alternative
       btop.enable = true;
+      eza.enable = true; # ls alternative
       htop.enable = true;
       jq.enable = true; # json processor
       nnn.enable = true; # terminal file manager
