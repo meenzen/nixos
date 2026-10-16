@@ -52,7 +52,6 @@
       enableSearch = true;
     };
     matrix.enable = true;
-    attic.enable = true;
     distributed-build.enableHost = true;
     nginx = {
       enable = true;
@@ -66,6 +65,7 @@
       tuwunel.enable = true;
       miniflux.enable = true;
       forgejo.enable = true;
+      attic.enable = true;
       authelia.enable = true;
       collabora.enable = true;
       cheshbot.enable = true;

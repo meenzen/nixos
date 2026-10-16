@@ -2,6 +2,7 @@
   imports = [
     ./acme-mnzn
     ./anubis
+    ./attic
     ./authelia
     ./cheshbot
     ./collabora

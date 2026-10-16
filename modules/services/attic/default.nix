@@ -4,9 +4,9 @@
   secrets,
   ...
 }: let
-  cfg = config.meenzen.attic;
+  cfg = config.meenzen.services.attic;
 in {
-  options.meenzen.attic = {
+  options.meenzen.services.attic = {
     enable = lib.mkEnableOption "Enable Attic";
     port = lib.mkOption {
       type = lib.types.int;

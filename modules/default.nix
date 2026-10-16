@@ -2,7 +2,6 @@
   imports = [
     ./adb
     ./agenix
-    ./attic
     ./audio
     ./auto-upgrade
     ./backup
