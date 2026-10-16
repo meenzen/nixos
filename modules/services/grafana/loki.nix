@@ -4,9 +4,9 @@
   secrets,
   ...
 }: let
-  cfg = config.meenzen.loki;
+  cfg = config.meenzen.services.loki;
 in {
-  options.meenzen.loki = {
+  options.meenzen.services.loki = {
     enable = lib.mkEnableOption "Enable Loki";
     domain = lib.mkOption {
       type = lib.types.str;

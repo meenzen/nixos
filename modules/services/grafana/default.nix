@@ -4,10 +4,10 @@
   secrets,
   ...
 }: let
-  cfg = config.meenzen.grafana;
+  cfg = config.meenzen.services.grafana;
   serviceName = "grafana";
 in {
-  options.meenzen.grafana = {
+  options.meenzen.services.grafana = {
     enable = lib.mkEnableOption "Enable Grafana Stack";
     domain = lib.mkOption {
       type = lib.types.str;
@@ -33,14 +33,16 @@ in {
   config = lib.mkIf cfg.enable {
     meenzen = {
       nginx.enable = true;
-      # Provides the mnzn.dev certificate used by useACMEHost.
-      services.acme-mnzn.enable = true;
-      loki.enable = true;
-      nginx-exporter.enable = true;
-      node-exporter.enable = true;
-      postgres-exporter.enable = true;
-      prometheus.enable = true;
-      tempo.enable = true;
+      services = {
+        # Provides the mnzn.dev certificate used by useACMEHost.
+        acme-mnzn.enable = true;
+        loki.enable = true;
+        nginx-exporter.enable = true;
+        node-exporter.enable = true;
+        postgres-exporter.enable = true;
+        prometheus.enable = true;
+        tempo.enable = true;
+      };
     };
 
     age.secrets = {

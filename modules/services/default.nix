@@ -10,6 +10,7 @@
     ./forgejo
     ./forgejo-runner
     ./glitchtip
+    ./grafana
     ./lauti
     ./local-ai
     ./mastodon

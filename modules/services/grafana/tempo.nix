@@ -3,9 +3,9 @@
   lib,
   ...
 }: let
-  cfg = config.meenzen.tempo;
+  cfg = config.meenzen.services.tempo;
 in {
-  options.meenzen.tempo = {
+  options.meenzen.services.tempo = {
     enable = lib.mkEnableOption "Enable Tempo";
     port = lib.mkOption {
       type = lib.types.int;

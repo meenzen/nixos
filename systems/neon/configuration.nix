@@ -37,7 +37,6 @@
     profiles.server.enable = true;
     backup.enable = true;
     hetzner.enable = true;
-    grafana.enable = true;
     postgresql = {
       enable = true;
       tuning = {
@@ -69,6 +68,7 @@
       minecraft.enable = true;
       minecraft.flip.enable = true;
       glitchtip.enable = true;
+      grafana.enable = true;
       lauti.enable = true;
       matrix.enable = true;
       mastodon = {

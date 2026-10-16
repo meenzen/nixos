@@ -18,7 +18,6 @@
     ./fish
     ./fonts
     ./gaming
-    ./grafana
     ./hardware
     ./hetzner
     ./home-manager

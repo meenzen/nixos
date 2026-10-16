@@ -4,9 +4,9 @@
   secrets,
   ...
 }: let
-  cfg = config.meenzen.prometheus;
+  cfg = config.meenzen.services.prometheus;
 in {
-  options.meenzen.prometheus = {
+  options.meenzen.services.prometheus = {
     enable = lib.mkEnableOption "Enable Prometheus";
     domain = lib.mkOption {
       type = lib.types.str;

@@ -4,13 +4,13 @@
   pkgs,
   ...
 }: let
-  cfg = config.meenzen.node-exporter;
+  cfg = config.meenzen.services.nginx-exporter;
 
-  dashboards = pkgs.fetchFromGitHub {
-    owner = "rfmoz";
-    repo = "grafana-dashboards";
-    rev = "0d3a3c0118f27873342626a4ecb36d35acf0ad01";
-    sha256 = "1lf21fxqc96876izglspsskvwcfjdd9dx88m9mhbdks560797c4l";
+  exporter = pkgs.fetchFromGitHub {
+    owner = "nginxinc";
+    repo = "nginx-prometheus-exporter";
+    rev = "9237ce63146ab59b2c5562d28089a529536c5863";
+    sha256 = "03v8143485awvr2hb8gqijbgnl958mfi4b4xbw1aywvsc95jby7w";
   };
 
   fullHostname =
@@ -18,28 +18,29 @@
     then config.networking.hostName
     else "${config.networking.hostName}.${config.networking.domain}";
 in {
-  options.meenzen.node-exporter = {
-    enable = lib.mkEnableOption "Enable Node Exporter";
+  options.meenzen.services.nginx-exporter = {
+    enable = lib.mkEnableOption "Enable Nginx Exporter";
     port = lib.mkOption {
       type = lib.types.int;
-      default = 9100;
-      description = "Local port for Node Exporter";
+      default = 9113;
+      description = "Local port for Nginx Exporter";
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf (cfg.enable && config.services.nginx.enable) {
     services = {
+      nginx.statusPage = true;
+
       prometheus = {
         exporters = {
-          node = {
+          nginx = {
             enable = true;
-            enabledCollectors = ["systemd" "processes"];
             port = cfg.port;
           };
         };
         scrapeConfigs = [
           {
-            job_name = "node";
+            job_name = "nginx";
             static_configs = [
               {
                 targets = ["127.0.0.1:${toString cfg.port}"];
@@ -54,8 +55,8 @@ in {
 
       grafana.provision.dashboards.settings.providers = [
         {
-          name = "node-exporter-full";
-          options.path = "${dashboards}/prometheus/node-exporter-full.json";
+          name = "nginx-prometheus-exporter";
+          options.path = "${exporter}/grafana/dashboard.json";
         }
       ];
     };
