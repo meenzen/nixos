@@ -2,7 +2,6 @@
   config,
   lib,
   osConfig,
-  pkgs,
   ...
 }: {
   imports = [
@@ -23,8 +22,6 @@
   };
 
   config = lib.mkIf config.meenzen.plasma.enable {
-    services.gpg-agent.pinentry.package = pkgs.pinentry-qt;
-
     # reference: https://github.com/pjones/plasma-manager/tree/trunk/modules
     programs.plasma = {
       enable = true;
