@@ -18,7 +18,7 @@
     enable = true;
     defaultEditor = true;
 
-    # Fix infinite recursion: https://github.com/nix-community/nixvim/issues/4460
+    # Build plugins and LSP servers from the system's nixpkgs instead of nixvim's own pinned instance
     nixpkgs.useGlobalPackages = true;
   };
 }
