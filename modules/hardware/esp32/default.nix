@@ -6,7 +6,7 @@
   cfg = config.meenzen.hardware.esp32;
 in {
   options.meenzen.hardware.esp32 = {
-    enable = lib.mkEnableOption "Enable ESP32 support";
+    enable = lib.mkEnableOption "ESP32 support";
   };
 
   config = lib.mkIf cfg.enable {

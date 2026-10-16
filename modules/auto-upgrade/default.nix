@@ -8,9 +8,9 @@
   hostname = config.networking.hostName;
 in {
   options.meenzen.auto-upgrade = {
-    enable = lib.mkEnableOption "Enable NixOS Auto Upgrade";
-    boot = lib.mkEnableOption "Run 'nixos-rebuild boot' instead of 'nixos-rebuild switch'";
-    allowReboot = lib.mkEnableOption "Allow automatic reboots after upgrade";
+    enable = lib.mkEnableOption "NixOS Auto Upgrade";
+    boot = lib.mkEnableOption "running 'nixos-rebuild boot' instead of 'nixos-rebuild switch'";
+    allowReboot = lib.mkEnableOption "automatic reboots after upgrades";
   };
 
   config = lib.mkIf cfg.enable {

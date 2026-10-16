@@ -7,7 +7,7 @@
   cfg = config.meenzen.services.local-ai;
 in {
   options.meenzen.services.local-ai = {
-    enable = lib.mkEnableOption "Enable Local AI";
+    enable = lib.mkEnableOption "Local AI";
     ollamaPort = lib.mkOption {
       type = lib.types.port;
       default = 11434;

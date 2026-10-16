@@ -8,7 +8,7 @@
   cfg = config.meenzen.secure-boot;
 in {
   options.meenzen.secure-boot = {
-    enable = lib.mkEnableOption "Enable Secure Boot";
+    enable = lib.mkEnableOption "Secure Boot";
   };
 
   imports = [

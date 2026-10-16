@@ -7,7 +7,7 @@
   cfg = config.meenzen.printing;
 in {
   options.meenzen.printing = {
-    enable = lib.mkEnableOption "Enable printing";
+    enable = lib.mkEnableOption "printing";
   };
 
   config = lib.mkIf cfg.enable {

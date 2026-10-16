@@ -35,7 +35,7 @@
   };
 in {
   options.meenzen.services.matrix.rtc = {
-    enable = lib.mkEnableOption "Enable Matrix RTC";
+    enable = lib.mkEnableOption "Matrix RTC";
   };
 
   imports = [

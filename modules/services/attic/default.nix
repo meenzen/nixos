@@ -7,7 +7,7 @@
   cfg = config.meenzen.services.attic;
 in {
   options.meenzen.services.attic = {
-    enable = lib.mkEnableOption "Enable Attic";
+    enable = lib.mkEnableOption "Attic";
     port = lib.mkOption {
       type = lib.types.port;
       default = 8082;
@@ -23,8 +23,8 @@ in {
       default = "atticd";
       description = "User for Attic";
     };
-    chunking = lib.mkEnableOption "Enable chunking for Attic";
-    cleanup = lib.mkEnableOption "Enable cleanup for Attic";
+    chunking = lib.mkEnableOption "chunking for Attic";
+    cleanup = lib.mkEnableOption "cleanup for Attic";
   };
 
   imports = [

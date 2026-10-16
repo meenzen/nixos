@@ -7,7 +7,7 @@
   cfg = config.meenzen.services.minecraft;
 in {
   options.meenzen.services.minecraft = {
-    enable = lib.mkEnableOption "Enable Minecraft";
+    enable = lib.mkEnableOption "Minecraft";
   };
 
   imports = [

@@ -6,7 +6,7 @@
   cfg = config.meenzen.libvirt;
 in {
   options.meenzen.libvirt = {
-    enable = lib.mkEnableOption "Enable libvirt for local or remote management with virt-manager";
+    enable = lib.mkEnableOption "libvirt for local or remote management with virt-manager";
   };
 
   config = lib.mkIf cfg.enable {

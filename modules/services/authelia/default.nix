@@ -11,7 +11,7 @@
   directory = "/var/lib/${serviceName}-${instance}";
 in {
   options.meenzen.services.authelia = {
-    enable = lib.mkEnableOption "Enable Authelia";
+    enable = lib.mkEnableOption "Authelia";
     domain = lib.mkOption {
       type = lib.types.str;
       default = "login.mnzn.dev";

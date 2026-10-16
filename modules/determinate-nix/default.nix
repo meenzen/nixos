@@ -8,7 +8,7 @@
 in {
   options.meenzen.determinate-nix = {
     enable =
-      lib.mkEnableOption "Enable Determinate Nix"
+      lib.mkEnableOption "Determinate Nix"
       // {
         default = true;
       };

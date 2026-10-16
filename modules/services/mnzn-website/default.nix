@@ -9,7 +9,7 @@
   serviceName = "mnzn-website";
 in {
   options.meenzen.services.mnzn-website = {
-    enable = lib.mkEnableOption "Enable mnzn.dev Website";
+    enable = lib.mkEnableOption "mnzn.dev Website";
     domain = lib.mkOption {
       type = lib.types.str;
       default = "mnzn.dev";

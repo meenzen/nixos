@@ -7,7 +7,7 @@
   cfg = config.meenzen.gaming;
 in {
   options.meenzen.gaming.jovian = {
-    enable = lib.mkEnableOption "Enable Jovian";
+    enable = lib.mkEnableOption "Jovian";
   };
   imports = [inputs.jovian.nixosModules.jovian];
   config = lib.mkIf cfg.enable {

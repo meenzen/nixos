@@ -7,7 +7,7 @@
   cfg = config.meenzen.beeper;
 in {
   options.meenzen.beeper = {
-    enable = lib.mkEnableOption "Enable Beeper";
+    enable = lib.mkEnableOption "Beeper";
   };
 
   config = lib.mkIf cfg.enable {

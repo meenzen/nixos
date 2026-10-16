@@ -13,7 +13,7 @@
     else "${config.networking.hostName}.${config.networking.domain}";
 in {
   options.meenzen.services.fluent-bit = {
-    enable = lib.mkEnableOption "Enable Fluent Bit";
+    enable = lib.mkEnableOption "Fluent Bit";
     graceLimitSeconds = lib.mkOption {
       type = lib.types.int;
       default = 30;

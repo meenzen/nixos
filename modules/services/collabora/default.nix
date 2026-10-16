@@ -8,7 +8,7 @@
   serviceName = "collabora";
 in {
   options.meenzen.services.collabora = {
-    enable = lib.mkEnableOption "Enable Collabora Server";
+    enable = lib.mkEnableOption "Collabora Server";
     domain = lib.mkOption {
       type = lib.types.str;
       default = "office.mnzn.dev";

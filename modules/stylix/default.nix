@@ -8,7 +8,7 @@
   cfg = config.meenzen.stylix;
 in {
   options.meenzen.stylix = {
-    enable = lib.mkEnableOption "Enable Stylix";
+    enable = lib.mkEnableOption "Stylix";
   };
 
   imports = [

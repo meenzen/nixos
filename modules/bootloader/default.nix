@@ -6,7 +6,7 @@
   cfg = config.meenzen.bootloader;
 in {
   options.meenzen.bootloader = {
-    enable = lib.mkEnableOption "Enable Bootloader";
+    enable = lib.mkEnableOption "Bootloader";
   };
 
   config = lib.mkIf cfg.enable {

@@ -7,7 +7,7 @@
   cfg = config.meenzen.services.matrix.draupnir;
 in {
   options.meenzen.services.matrix.draupnir = {
-    enable = lib.mkEnableOption "Enable Draupnir";
+    enable = lib.mkEnableOption "Draupnir";
     port = lib.mkOption {
       type = lib.types.port;
       default = 8010;

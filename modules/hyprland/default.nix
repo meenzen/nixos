@@ -7,7 +7,7 @@
   cfg = config.meenzen.hyprland;
 in {
   options.meenzen.hyprland = {
-    enable = lib.mkEnableOption "Enable Hyprland";
+    enable = lib.mkEnableOption "Hyprland";
   };
 
   config = lib.mkIf cfg.enable {

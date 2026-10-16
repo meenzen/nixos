@@ -6,7 +6,7 @@
   cfg = config.meenzen.profiles.hetzner;
 in {
   options.meenzen.profiles.hetzner = {
-    enable = lib.mkEnableOption "Enable common Hetzner settings";
+    enable = lib.mkEnableOption "common Hetzner settings";
   };
 
   config = lib.mkIf cfg.enable {

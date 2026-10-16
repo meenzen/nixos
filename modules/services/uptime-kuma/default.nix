@@ -21,7 +21,7 @@
     domains);
 in {
   options.meenzen.services.uptime-kuma = {
-    enable = lib.mkEnableOption "Enable Uptime Kuma";
+    enable = lib.mkEnableOption "Uptime Kuma";
     domain = lib.mkOption {
       type = lib.types.str;
       default = "uptime.mnzn.dev";

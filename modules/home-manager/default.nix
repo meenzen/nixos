@@ -8,7 +8,7 @@
   cfg = config.meenzen.home-manager;
 in {
   options.meenzen.home-manager = {
-    enable = lib.mkEnableOption "Enable Home Manager";
+    enable = lib.mkEnableOption "Home Manager";
 
     homeModule = lib.mkOption {
       type = lib.types.path;

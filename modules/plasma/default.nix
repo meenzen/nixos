@@ -7,7 +7,7 @@
   cfg = config.meenzen.plasma;
 in {
   options.meenzen.plasma = {
-    enable = lib.mkEnableOption "Enable Plasma Desktop";
+    enable = lib.mkEnableOption "Plasma Desktop";
     panel = {
       extraPinnedApps = lib.mkOption {
         type = lib.types.listOf lib.types.str;

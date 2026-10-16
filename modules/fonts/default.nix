@@ -7,8 +7,8 @@
   cfg = config.meenzen.fonts;
 in {
   options.meenzen.fonts = {
-    enable = lib.mkEnableOption "Add Fonts";
-    enableFlatpakFix = lib.mkEnableOption "Enable Flatpak font fix";
+    enable = lib.mkEnableOption "fonts";
+    enableFlatpakFix = lib.mkEnableOption "Flatpak font fix";
   };
 
   config =

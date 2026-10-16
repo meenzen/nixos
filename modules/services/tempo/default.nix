@@ -6,7 +6,7 @@
   cfg = config.meenzen.services.tempo;
 in {
   options.meenzen.services.tempo = {
-    enable = lib.mkEnableOption "Enable Tempo";
+    enable = lib.mkEnableOption "Tempo";
     port = lib.mkOption {
       type = lib.types.port;
       default = 3200;

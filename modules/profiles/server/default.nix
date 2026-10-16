@@ -7,7 +7,7 @@
   cfg = config.meenzen.profiles.server;
 in {
   options.meenzen.profiles.server = {
-    enable = lib.mkEnableOption "Enable Server Mode";
+    enable = lib.mkEnableOption "Server Mode";
   };
 
   config = lib.mkIf cfg.enable {

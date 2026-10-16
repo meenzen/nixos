@@ -7,7 +7,7 @@
   cfg = config.meenzen.test-setup;
 in {
   options.meenzen.test-setup = {
-    enable = lib.mkEnableOption "Enable Test Setup";
+    enable = lib.mkEnableOption "Test Setup";
   };
 
   config = lib.mkIf cfg.enable {

@@ -7,7 +7,7 @@
   cfg = config.meenzen.hardware.nvidia;
 in {
   options.meenzen.hardware.nvidia = {
-    enable = lib.mkEnableOption "Enable Nvidia GPU support";
+    enable = lib.mkEnableOption "Nvidia GPU support";
   };
 
   config = lib.mkIf cfg.enable {

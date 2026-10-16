@@ -43,9 +43,9 @@
     };
 in {
   options.meenzen.postgresql = {
-    enable = lib.mkEnableOption "Enable PostgreSQL";
-    enableMajorUpgrade = lib.mkEnableOption "Enable Major Upgrade";
-    enableLocalNetwork = lib.mkEnableOption "Allow password-based authentication for private networks";
+    enable = lib.mkEnableOption "PostgreSQL";
+    enableMajorUpgrade = lib.mkEnableOption "Major Upgrade";
+    enableLocalNetwork = lib.mkEnableOption "password-based authentication for private networks";
     passwordFiles = lib.mkOption {
       type = lib.types.attrsOf lib.types.path;
       default = {};

@@ -43,9 +43,9 @@
   });
 in {
   options.meenzen.services.glitchtip = {
-    enable = lib.mkEnableOption "Enable GlitchTip";
+    enable = lib.mkEnableOption "GlitchTip";
     # GlitchTip currently breaks when using redis, so it its disabled for now.
-    enableRedis = lib.mkEnableOption "Enable Redis for GlitchTip";
+    enableRedis = lib.mkEnableOption "Redis for GlitchTip";
     domain = lib.mkOption {
       type = lib.types.str;
       default = "glitch.mnzn.dev";

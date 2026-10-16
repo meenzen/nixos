@@ -7,7 +7,7 @@
   cfg = config.meenzen.cloudflare-warp;
 in {
   options.meenzen.cloudflare-warp = {
-    enable = lib.mkEnableOption "Enable Cloudflare Warp Client";
+    enable = lib.mkEnableOption "Cloudflare Warp Client";
   };
 
   config = lib.mkIf cfg.enable {

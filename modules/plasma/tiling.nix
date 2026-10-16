@@ -7,7 +7,7 @@
   cfg = config.meenzen.plasma.tiling;
 in {
   options.meenzen.plasma.tiling = {
-    enable = lib.mkEnableOption "Enable Plasma Tiling";
+    enable = lib.mkEnableOption "Plasma Tiling";
   };
 
   config = lib.mkIf cfg.enable {

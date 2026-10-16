@@ -6,7 +6,7 @@
   cfg = config.meenzen.hardware.stadia-controller;
 in {
   options.meenzen.hardware.stadia-controller = {
-    enable = lib.mkEnableOption "Enable Stadia Controller support";
+    enable = lib.mkEnableOption "Stadia Controller support";
   };
 
   config = lib.mkIf cfg.enable {

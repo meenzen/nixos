@@ -45,7 +45,7 @@
   userAgentsCombined = lib.concatStringsSep "|" userAgentsEscaped;
 in {
   options.meenzen.nginx-badbots = {
-    enable = lib.mkEnableOption "Block Bad Crawlers";
+    enable = lib.mkEnableOption "blocking bad crawlers";
   };
 
   config = lib.mkIf cfg.enable {

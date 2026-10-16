@@ -7,7 +7,7 @@
   cfg = config.meenzen.verapdf;
 in {
   options.meenzen.verapdf = {
-    enable = lib.mkEnableOption "Enable veraPDF";
+    enable = lib.mkEnableOption "veraPDF";
   };
 
   config = lib.mkIf cfg.enable {

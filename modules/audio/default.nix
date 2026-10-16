@@ -6,7 +6,7 @@
   cfg = config.meenzen.audio;
 in {
   options.meenzen.audio = {
-    enable = lib.mkEnableOption "Enable Audio";
+    enable = lib.mkEnableOption "Audio";
   };
 
   config = lib.mkIf cfg.enable {

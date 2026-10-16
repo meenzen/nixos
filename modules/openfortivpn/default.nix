@@ -14,7 +14,7 @@
   });
 in {
   options.meenzen.openfortivpn = {
-    enable = lib.mkEnableOption "Enable Fortinet VPN support";
+    enable = lib.mkEnableOption "Fortinet VPN support";
     host = lib.mkOption {
       type = lib.types.str;
       default = "vpn.human.de";

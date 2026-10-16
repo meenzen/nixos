@@ -7,7 +7,7 @@
   cfg = config.meenzen.remote-desktop;
 in {
   options.meenzen.remote-desktop = {
-    enable = lib.mkEnableOption "Enable Remote Desktop";
+    enable = lib.mkEnableOption "Remote Desktop";
   };
 
   config = lib.mkIf cfg.enable {

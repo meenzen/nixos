@@ -7,7 +7,7 @@
   cfg = config.meenzen.services.loki;
 in {
   options.meenzen.services.loki = {
-    enable = lib.mkEnableOption "Enable Loki";
+    enable = lib.mkEnableOption "Loki";
     domain = lib.mkOption {
       type = lib.types.str;
       default = "loki.mnzn.dev";

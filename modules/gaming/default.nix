@@ -8,7 +8,7 @@
   cfg = config.meenzen.gaming;
 in {
   options.meenzen.gaming = {
-    enable = lib.mkEnableOption "Enable everything required for gaming";
+    enable = lib.mkEnableOption "everything required for gaming";
   };
 
   imports = [

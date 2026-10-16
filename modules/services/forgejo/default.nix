@@ -8,7 +8,7 @@
   cfg = config.meenzen.services.forgejo;
 in {
   options.meenzen.services.forgejo = {
-    enable = lib.mkEnableOption "Enable Forgejo";
+    enable = lib.mkEnableOption "Forgejo";
     domain = lib.mkOption {
       type = lib.types.str;
       default = "forge.mnzn.dev";

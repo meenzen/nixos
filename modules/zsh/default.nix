@@ -7,8 +7,8 @@
   cfg = config.meenzen.zsh;
 in {
   options.meenzen.zsh = {
-    enable = lib.mkEnableOption "Enable zsh";
-    default = lib.mkEnableOption "Make zsh the default shell";
+    enable = lib.mkEnableOption "zsh";
+    default = lib.mkEnableOption "zsh as the default shell";
   };
 
   config = lib.mkIf cfg.enable {

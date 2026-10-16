@@ -8,7 +8,7 @@
   cfg = config.meenzen.minecraft;
 in {
   options.meenzen.minecraft = {
-    enable = lib.mkEnableOption "Enable Minecraft server";
+    enable = lib.mkEnableOption "Minecraft server";
     bluemapPort = lib.mkOption {
       type = lib.types.int;
       default = 8100;

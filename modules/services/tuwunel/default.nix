@@ -7,7 +7,7 @@
   cfg = config.meenzen.services.tuwunel;
 in {
   options.meenzen.services.tuwunel = {
-    enable = lib.mkEnableOption "Enable Tuwunel Matrix Server";
+    enable = lib.mkEnableOption "Tuwunel Matrix Server";
     domain = lib.mkOption {
       type = lib.types.str;
       default = "conduit.mnzn.dev";

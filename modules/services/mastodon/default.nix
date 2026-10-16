@@ -31,8 +31,8 @@
   };
 in {
   options.meenzen.services.mastodon = {
-    enable = lib.mkEnableOption "Enable Mastodon Server";
-    enableSearch = lib.mkEnableOption "Enable Search, run 'mastodon-tootctl search deploy' after enabling";
+    enable = lib.mkEnableOption "Mastodon Server";
+    enableSearch = lib.mkEnableOption "Search, run 'mastodon-tootctl search deploy' after enabling";
     domain = lib.mkOption {
       type = lib.types.str;
       default = "social.meenzen.net";

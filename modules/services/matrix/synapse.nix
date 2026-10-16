@@ -124,8 +124,8 @@
     };
 in {
   options.meenzen.services.matrix.synapse = {
-    enable = lib.mkEnableOption "Enable Matrix Server";
-    enableWorkers = lib.mkEnableOption "Enable Synapse Workers";
+    enable = lib.mkEnableOption "Matrix Server";
+    enableWorkers = lib.mkEnableOption "Synapse Workers";
     domain = lib.mkOption {
       type = lib.types.str;
       default = "mnzn.dev";

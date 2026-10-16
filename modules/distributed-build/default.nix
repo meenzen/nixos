@@ -6,8 +6,8 @@
   cfg = config.meenzen.distributed-build;
 in {
   options.meenzen.distributed-build = {
-    enable = lib.mkEnableOption "Enable distributed build support";
-    enableHost = lib.mkEnableOption "Enable distributed build host";
+    enable = lib.mkEnableOption "distributed build support";
+    enableHost = lib.mkEnableOption "distributed build host";
     user = lib.mkOption {
       type = lib.types.str;
       default = "builder";

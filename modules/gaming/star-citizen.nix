@@ -8,7 +8,7 @@
   cfg = config.meenzen.gaming.star-citizen;
 in {
   options.meenzen.gaming.star-citizen = {
-    enable = lib.mkEnableOption "Enable Star Citizen";
+    enable = lib.mkEnableOption "Star Citizen";
   };
 
   imports = [

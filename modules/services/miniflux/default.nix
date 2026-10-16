@@ -7,7 +7,7 @@
   cfg = config.meenzen.services.miniflux;
 in {
   options.meenzen.services.miniflux = {
-    enable = lib.mkEnableOption "Enable Miniflux";
+    enable = lib.mkEnableOption "Miniflux";
     domain = lib.mkOption {
       type = lib.types.str;
       default = "newsreader.mnzn.dev";

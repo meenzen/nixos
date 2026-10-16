@@ -7,7 +7,7 @@
   cfg = config.meenzen.yubikey;
 in {
   options.meenzen.yubikey = {
-    enable = lib.mkEnableOption "Enable YubiKey Support";
+    enable = lib.mkEnableOption "YubiKey Support";
   };
 
   config = lib.mkIf cfg.enable {

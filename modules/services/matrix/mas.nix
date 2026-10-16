@@ -16,7 +16,7 @@
   );
 in {
   options.meenzen.services.matrix.mas = {
-    enable = lib.mkEnableOption "Enable Matrix Authentication Service (MAS)";
+    enable = lib.mkEnableOption "Matrix Authentication Service (MAS)";
     domain = lib.mkOption {
       type = lib.types.str;
       default = "auth.mnzn.dev";

@@ -8,7 +8,7 @@
   cfg = config.meenzen.oci-containers;
 in {
   options.meenzen.oci-containers = {
-    enable = lib.mkEnableOption "Enable OCI container support";
+    enable = lib.mkEnableOption "OCI container support";
     autoPrune = lib.mkOption {
       type = lib.types.bool;
       default = config.meenzen.profiles.server.enable;

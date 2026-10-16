@@ -19,7 +19,7 @@
     else "${config.networking.hostName}.${config.networking.domain}";
 in {
   options.meenzen.services.prometheus.exporters.node = {
-    enable = lib.mkEnableOption "Enable Node Exporter";
+    enable = lib.mkEnableOption "Node Exporter";
     port = lib.mkOption {
       type = lib.types.port;
       default = 9100;

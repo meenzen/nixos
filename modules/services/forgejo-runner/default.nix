@@ -35,7 +35,7 @@
   '';
 in {
   options.meenzen.services.forgejo-runner = {
-    enable = lib.mkEnableOption "Enable Forgejo Runner";
+    enable = lib.mkEnableOption "Forgejo Runner";
     uuid = lib.mkOption {
       type = lib.types.str;
       example = "c9e50be9-a7c3-4aee-ba35-624c4ff8c519";

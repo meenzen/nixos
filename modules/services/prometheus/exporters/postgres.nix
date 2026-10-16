@@ -26,7 +26,7 @@
     else "${config.networking.hostName}.${config.networking.domain}";
 in {
   options.meenzen.services.prometheus.exporters.postgres = {
-    enable = lib.mkEnableOption "Enable Postgres Exporter";
+    enable = lib.mkEnableOption "Postgres Exporter";
     port = lib.mkOption {
       type = lib.types.port;
       default = 9187;

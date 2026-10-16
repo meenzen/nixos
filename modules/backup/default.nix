@@ -7,7 +7,7 @@
   cfg = config.meenzen.backup;
 in {
   options.meenzen.backup = {
-    enable = lib.mkEnableOption "Enable backup";
+    enable = lib.mkEnableOption "backup";
     paths = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [];

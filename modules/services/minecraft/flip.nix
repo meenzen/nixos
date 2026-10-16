@@ -23,7 +23,7 @@
   '';
 in {
   options.meenzen.services.minecraft.flip = {
-    enable = lib.mkEnableOption "Enable FLiP Minecraft server";
+    enable = lib.mkEnableOption "FLiP Minecraft server";
     domain = lib.mkOption {
       type = lib.types.str;
       default = "flip.mnzn.dev";

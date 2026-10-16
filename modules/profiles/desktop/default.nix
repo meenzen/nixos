@@ -7,7 +7,7 @@
   cfg = config.meenzen.profiles.desktop;
 in {
   options.meenzen.profiles.desktop = {
-    enable = lib.mkEnableOption "Enable desktop related options";
+    enable = lib.mkEnableOption "desktop related options";
   };
 
   config = lib.mkIf cfg.enable {

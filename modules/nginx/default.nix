@@ -55,16 +55,16 @@
     };
 in {
   options.meenzen.nginx = {
-    enable = lib.mkEnableOption "Enable common Nginx settings";
-    enableCloudflare = lib.mkEnableOption "Enable Cloudflare settings";
+    enable = lib.mkEnableOption "common Nginx settings";
+    enableCloudflare = lib.mkEnableOption "Cloudflare settings";
     testPage = lib.mkOption {
       type = lib.types.str;
       default = "";
       description = "Hostname of the test page";
       example = "hostname.example.com";
     };
-    disableLetsEncrypt = lib.mkEnableOption "Disable Let's Encrypt";
-    allowIndexing = lib.mkEnableOption "Allow search engines to crawl websites hosted on this server";
+    disableLetsEncrypt = lib.mkEnableOption "self-signed placeholder certificates instead of Let's Encrypt";
+    allowIndexing = lib.mkEnableOption "search engine indexing of websites hosted on this server";
   };
 
   imports = [

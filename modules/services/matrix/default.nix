@@ -6,7 +6,7 @@
   cfg = config.meenzen.services.matrix;
 in {
   options.meenzen.services.matrix = {
-    enable = lib.mkEnableOption "Enable Matrix Server";
+    enable = lib.mkEnableOption "Matrix Server";
   };
 
   imports = [

@@ -7,7 +7,7 @@
   cfg = config.meenzen.docker;
 in {
   options.meenzen.docker = {
-    enable = lib.mkEnableOption "Enable Docker";
+    enable = lib.mkEnableOption "Docker";
     enablePodman = lib.mkOption {
       type = lib.types.bool;
       default = false;

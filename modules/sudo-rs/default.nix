@@ -6,7 +6,7 @@
   cfg = config.meenzen.sudo-rs;
 in {
   options.meenzen.sudo-rs = {
-    enable = lib.mkEnableOption "Use sudo-rs instead of sudo";
+    enable = lib.mkEnableOption "sudo-rs instead of sudo";
   };
 
   config = lib.mkIf cfg.enable {

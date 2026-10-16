@@ -8,7 +8,7 @@
   serviceName = "grafana";
 in {
   options.meenzen.services.grafana = {
-    enable = lib.mkEnableOption "Enable Grafana Stack";
+    enable = lib.mkEnableOption "Grafana Stack";
     domain = lib.mkOption {
       type = lib.types.str;
       default = "grafana.mnzn.dev";

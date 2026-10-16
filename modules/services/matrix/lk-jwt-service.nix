@@ -7,7 +7,7 @@
   cfg = config.meenzen.services.matrix.lk-jwt-service;
 in {
   options.meenzen.services.matrix.lk-jwt-service = {
-    enable = lib.mkEnableOption "Enable lk-jwt-service";
+    enable = lib.mkEnableOption "lk-jwt-service";
 
     domain = lib.mkOption {
       type = lib.types.str;

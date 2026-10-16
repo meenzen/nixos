@@ -7,7 +7,7 @@
   cfg = config.meenzen.services.acme-mnzn;
 in {
   options.meenzen.services.acme-mnzn = {
-    enable = lib.mkEnableOption "Enable ACME for mnzn.dev";
+    enable = lib.mkEnableOption "ACME for mnzn.dev";
     domain = lib.mkOption {
       type = lib.types.str;
       default = "mnzn.dev";

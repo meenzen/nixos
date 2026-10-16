@@ -7,7 +7,7 @@
   cfg = config.meenzen.profiles.desktop-slim;
 in {
   options.meenzen.profiles.desktop-slim = {
-    enable = lib.mkEnableOption "Enable essential desktop options";
+    enable = lib.mkEnableOption "essential desktop options";
   };
 
   config = lib.mkIf cfg.enable {

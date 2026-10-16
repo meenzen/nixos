@@ -6,7 +6,7 @@
   cfg = config.meenzen.hardware.bluetooth;
 in {
   options.meenzen.hardware.bluetooth = {
-    enable = lib.mkEnableOption "Enable bluetooth support";
+    enable = lib.mkEnableOption "bluetooth support";
   };
 
   config = lib.mkIf cfg.enable {

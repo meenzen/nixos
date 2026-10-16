@@ -6,7 +6,7 @@
   cfg = config.meenzen.virt-manager;
 in {
   options.meenzen.virt-manager = {
-    enable = lib.mkEnableOption "Enable virt-manager";
+    enable = lib.mkEnableOption "virt-manager";
   };
 
   config = lib.mkIf cfg.enable {

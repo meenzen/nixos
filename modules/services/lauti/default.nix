@@ -7,7 +7,7 @@
   cfg = config.meenzen.services.lauti;
 in {
   options.meenzen.services.lauti = {
-    enable = lib.mkEnableOption "Enable LAUTI";
+    enable = lib.mkEnableOption "LAUTI";
     domain = lib.mkOption {
       type = lib.types.str;
       default = "holzland-kiez.de";

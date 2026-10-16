@@ -9,7 +9,7 @@
   serviceName = "cheshbot";
 in {
   options.meenzen.services.cheshbot = {
-    enable = lib.mkEnableOption "Enable CheshBot";
+    enable = lib.mkEnableOption "CheshBot";
     domain = lib.mkOption {
       type = lib.types.str;
       default = "bot.cheshires-wonderland.com";

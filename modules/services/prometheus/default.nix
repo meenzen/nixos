@@ -7,7 +7,7 @@
   cfg = config.meenzen.services.prometheus;
 in {
   options.meenzen.services.prometheus = {
-    enable = lib.mkEnableOption "Enable Prometheus";
+    enable = lib.mkEnableOption "Prometheus";
     domain = lib.mkOption {
       type = lib.types.str;
       default = "prometheus.mnzn.dev";

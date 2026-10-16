@@ -7,7 +7,7 @@
   cfg = config.meenzen.latest-kernel;
 in {
   options.meenzen.latest-kernel = {
-    enable = lib.mkEnableOption "Enable Latest Kernel";
+    enable = lib.mkEnableOption "Latest Kernel";
   };
 
   config = {
