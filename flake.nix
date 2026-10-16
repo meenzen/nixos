@@ -72,6 +72,10 @@
 
     # Miscellaneous
     nixos-matrix-modules.url = "github:D4ndellion/nixos-matrix-modules";
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {

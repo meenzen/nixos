@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
@@ -17,78 +18,82 @@
     fuck = "f";
   };
 in {
+  imports = [inputs.nix-index-database.homeModules.nix-index];
+
   options.meenzen.shells.enable = lib.mkEnableOption "shell configuration";
 
-  config = lib.mkIf config.meenzen.shells.enable {
-    programs = {
-      bash = {
-        enable = true;
-        enableCompletion = true;
-        shellAliases = aliases;
-      };
-
-      zsh = {
-        enable = true;
-        autosuggestion.enable = true;
-        enableCompletion = true;
-        syntaxHighlighting = {
+  config = lib.mkMerge [
+    {
+      # Command-not-found handler and package suggestions for pay-respects, using the prebuilt nix-index-database.
+      # Importing nix-index-database enables nix-index by default, so follow this module instead.
+      programs.nix-index.enable = config.meenzen.shells.enable;
+    }
+    (lib.mkIf config.meenzen.shells.enable {
+      programs = {
+        bash = {
           enable = true;
+          enableCompletion = true;
+          shellAliases = aliases;
         };
-        oh-my-zsh = {
-          plugins = ["git" "sudo" "docker"];
+
+        zsh = {
+          enable = true;
+          autosuggestion.enable = true;
+          enableCompletion = true;
+          syntaxHighlighting = {
+            enable = true;
+          };
+          oh-my-zsh = {
+            plugins = ["git" "sudo" "docker"];
+          };
+          shellAliases = aliases;
+          plugins = [
+            {
+              name = "vi-mode";
+              src = pkgs.zsh-vi-mode;
+              file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
+            }
+          ];
+          initContent = ''
+            zstyle ':completion:*' menu select
+
+            bindkey "^[[1;5C" forward-word
+            bindkey "^[[1;5D" backward-word
+            bindkey "^H" backward-kill-word
+            bindkey "^[[OH" beginning-of-line
+            bindkey "^[[OF" end-of-line
+          '';
         };
-        shellAliases = aliases;
-        plugins = [
-          {
-            name = "vi-mode";
-            src = pkgs.zsh-vi-mode;
-            file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
-          }
-        ];
-        initContent = ''
-          zstyle ':completion:*' menu select
 
-          bindkey "^[[1;5C" forward-word
-          bindkey "^[[1;5D" backward-word
-          bindkey "^H" backward-kill-word
-          bindkey "^[[OH" beginning-of-line
-          bindkey "^[[OF" end-of-line
-        '';
-      };
-
-      fish = {
-        enable = true;
-        shellAliases = aliases;
-        binds = {
-          # Ctrl + Backspace to delete word
-          "ctrl-h".command = "backward-kill-word";
+        fish = {
+          enable = true;
+          shellAliases = aliases;
+          binds = {
+            # Ctrl + Backspace to delete word
+            "ctrl-h".command = "backward-kill-word";
+          };
+          interactiveShellInit = ''
+            # Disable default greeting message
+            set fish_greeting
+          '';
         };
-        interactiveShellInit = ''
-          # Disable default greeting message
-          set fish_greeting
-        '';
+
+        nushell.enable = true;
+
+        # smarter cd command
+        zoxide = {
+          enable = true;
+          options = ["--cmd cd"];
+        };
+
+        # command autocorrect
+        pay-respects.enable = true;
+
+        # direnv / devenv
+        direnv.enable = true;
+        direnv.nix-direnv.enable = true;
+        devenv.enable = true;
       };
-
-      nushell.enable = true;
-
-      # smarter cd command
-      zoxide = {
-        enable = true;
-        options = ["--cmd cd"];
-      };
-
-      # command autocorrect
-      pay-respects.enable = true;
-
-      # direnv / devenv
-      direnv.enable = true;
-      direnv.nix-direnv.enable = true;
-      devenv.enable = true;
-    };
-
-    home.packages = [
-      # better pay-respects results
-      pkgs.nix-index
-    ];
-  };
+    })
+  ];
 }
