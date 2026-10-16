@@ -63,13 +63,18 @@ in {
       ];
     };
 
-    # Fix GTK apps in KDE
-    programs.dconf.enable = true;
+    programs = {
+      # Fix GTK apps in KDE
+      dconf.enable = true;
 
-    # SSH agent with ksshaskpass prompts, e.g. for security key touch confirmation
-    programs.ssh = {
-      startAgent = true;
-      enableAskPassword = true;
+      # KMail, Kontact and Merkuro, enabled by default with Plasma
+      kde-pim.enable = false;
+
+      # SSH agent with ksshaskpass prompts, e.g. for security key touch confirmation
+      ssh = {
+        startAgent = true;
+        enableAskPassword = true;
+      };
     };
 
     # Force KDE file picker
